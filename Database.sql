@@ -21,3 +21,24 @@ CREATE TABLE article_ratings (
   Article_ID VARCHAR(50) NOT NULL,
   A_Rating INT NOT NULL
 );
+
+CREATE TABLE books (
+  ISBN INT NOT NULL PRIMARY KEY,
+  Book_image TEXT,
+  Book_title VARCHAR(255) NOT NULL,
+  Book_author VARCHAR(255) NOT NULL,
+  Book_genre VARCHAR(255) NOT NULL,
+  Book_description TEXT NOT NULL
+);
+
+CREATE TABLE book_comments (
+  User_ID INT NOT NULL,
+  ISBN INT NOT NULL,
+  B_comments TEXT
+);
+
+CREATE TABLE book_ratings (
+  User_ID INT NOT NULL,
+  ISBN INT NOT NULL,
+  B_Rating INT NOT NULL
+);
