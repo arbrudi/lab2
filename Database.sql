@@ -88,7 +88,6 @@ CREATE TABLE favorite_books (
   PRIMARY KEY (User_ID, ISBN)
 );
 
--- Table structure for table `news`
 CREATE TABLE news (
   News_ID INT PRIMARY KEY IDENTITY(1,1),
   News_title NVARCHAR(255) NOT NULL,
@@ -97,3 +96,22 @@ CREATE TABLE news (
   Publishing_date DATE NOT NULL,
   News_image NVARCHAR(MAX) NOT NULL
 );
+
+CREATE TABLE partners (
+  Partner_ID INT PRIMARY KEY,
+  Partner_image NVARCHAR(MAX),
+  Partner_name NVARCHAR(255),
+  Partner_description NVARCHAR(600)
+);
+
+CREATE TABLE reviews (
+  Reviews_ID INT PRIMARY KEY,
+  Reviewer_Name NVARCHAR(255),
+  Reviewer_Surname NVARCHAR(255),
+  Reviews_Comment NVARCHAR(600)
+);
+
+ALTER TABLE article_comments
+ADD CONSTRAINT FK_article_comments_User_ID FOREIGN KEY (User_ID) REFERENCES client(User_ID)
+ALTER TABLE article_comments
+ADD CONSTRAINT FK_article_comments_Article_ID FOREIGN KEY (Article_ID) REFERENCES articles(Article_ID);
