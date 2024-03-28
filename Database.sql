@@ -126,4 +126,18 @@ ADD CONSTRAINT FK_article_ratings_Article_ID FOREIGN KEY (Article_ID) REFERENCES
 ALTER TABLE book_comments
 ADD CONSTRAINT FK_book_comments_User_ID FOREIGN KEY (User_ID) REFERENCES client(User_ID)
 ALTER TABLE book_comments
-ADD CONSTRAINT FK_book_comments_ISBN FOREIGN KEY (ISBN) REFERENCES books(ISBN);
+ADD CONSTRAINT FK_book_comments_ISBN FOREIGN KEY (ISBN) REFERENCES books(ISBN); 
+
+
+
+-- Constraints for table `book_ratings`
+ALTER TABLE book_ratings
+ADD CONSTRAINT FK_book_ratings_User_ID FOREIGN KEY (User_ID) REFERENCES client(User_ID)
+ALTER TABLE book_ratings
+ADD CONSTRAINT FK_book_ratings_ISBN FOREIGN KEY (ISBN) REFERENCES books(ISBN);
+
+-- Constraints for table `event_participants`
+ALTER TABLE event_participants
+ADD CONSTRAINT FK_event_participants_User_ID FOREIGN KEY (User_ID) REFERENCES client(User_ID)
+ALTER TABLE event_participants
+ADD CONSTRAINT FK_event_participants_Event_ID FOREIGN KEY (Event_ID) REFERENCES events(Event_ID);
