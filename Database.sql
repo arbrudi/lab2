@@ -115,3 +115,15 @@ ALTER TABLE article_comments
 ADD CONSTRAINT FK_article_comments_User_ID FOREIGN KEY (User_ID) REFERENCES client(User_ID)
 ALTER TABLE article_comments
 ADD CONSTRAINT FK_article_comments_Article_ID FOREIGN KEY (Article_ID) REFERENCES articles(Article_ID);
+
+-- Constraints for table `article_ratings`
+ALTER TABLE article_ratings
+ADD CONSTRAINT FK_article_ratings_User_ID FOREIGN KEY (User_ID) REFERENCES client(User_ID)
+ALTER TABLE article_ratings
+ADD CONSTRAINT FK_article_ratings_Article_ID FOREIGN KEY (Article_ID) REFERENCES articles(Article_ID);
+
+-- Constraints for table `book_comments`
+ALTER TABLE book_comments
+ADD CONSTRAINT FK_book_comments_User_ID FOREIGN KEY (User_ID) REFERENCES client(User_ID)
+ALTER TABLE book_comments
+ADD CONSTRAINT FK_book_comments_ISBN FOREIGN KEY (ISBN) REFERENCES books(ISBN);
