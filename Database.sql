@@ -73,3 +73,27 @@ CREATE TABLE event_participants (
   User_ID INT NOT NULL,
   PRIMARY KEY (Event_ID, User_ID)
 );
+ 
+CREATE TABLE favorite_articles (
+  User_ID INT NOT NULL,
+  Article_ID VARCHAR(50) NOT NULL,
+  Article_list_name VARCHAR(255),
+  PRIMARY KEY (User_ID, Article_ID)
+);
+
+CREATE TABLE favorite_books (
+  User_ID INT NOT NULL,
+  ISBN INT NOT NULL,
+  Book_list_name VARCHAR(255),
+  PRIMARY KEY (User_ID, ISBN)
+);
+
+-- Table structure for table `news`
+CREATE TABLE news (
+  News_ID INT PRIMARY KEY IDENTITY(1,1),
+  News_title NVARCHAR(255) NOT NULL,
+  News_description NVARCHAR(2000) NOT NULL,
+  News_tags NVARCHAR(100) NOT NULL,
+  Publishing_date DATE NOT NULL,
+  News_image NVARCHAR(MAX) NOT NULL
+);
