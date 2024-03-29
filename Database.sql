@@ -141,3 +141,15 @@ ALTER TABLE event_participants
 ADD CONSTRAINT FK_event_participants_User_ID FOREIGN KEY (User_ID) REFERENCES client(User_ID)
 ALTER TABLE event_participants
 ADD CONSTRAINT FK_event_participants_Event_ID FOREIGN KEY (Event_ID) REFERENCES events(Event_ID);
+
+-- Constraints for table `favorite_articles`
+ALTER TABLE favorite_articles
+ADD CONSTRAINT FK_favorite_articles_User_ID FOREIGN KEY (User_ID) REFERENCES client(User_ID)
+ALTER TABLE favorite_articles
+ADD CONSTRAINT FK_favorite_articles_Article_ID FOREIGN KEY (Article_ID) REFERENCES articles(Article_ID);
+
+-- Constraints for table `favorite_books`
+ALTER TABLE favorite_books
+ADD CONSTRAINT FK_favorite_books_User_ID FOREIGN KEY (User_ID) REFERENCES client(User_ID)
+ALTER TABLE favorite_books
+ADD CONSTRAINT FK_favorite_books_ISBN FOREIGN KEY (ISBN) REFERENCES books(ISBN);
