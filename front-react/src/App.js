@@ -5,7 +5,7 @@ import AboutPage from "./pages/AboutPage";
 import BooksPage from "./pages/BooksPage"; 
 import ComicsPage from "./pages/ComicsPage";
 import EventsPage from "./pages/EventsPage";
-import LoginPage from './pages/LoginPage';
+import LoginPage from './pages/LoginPage'; 
 import NavBar from './components/NavBar/NavBar';
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} /> 
           <Route path="/books" element={<BooksPage />} /> 
           <Route path="/comics" element={<ComicsPage />} /> 
-          <Route path="/Eevents" element={<EventsPage />} /> 
+          <Route path="/events" element={<EventsPage />} /> 
           <Route path="/login" element={<LoginPage />} /> 
         </Routes>
       </div>

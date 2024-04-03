@@ -1,0 +1,36 @@
+
+.image img {
+    width: 1300px; 
+    height: 500px; 
+    margin-left:100px; 
+    justify-content: center;
+  }
+  
+
+  .slick-dots {
+    position: absolute; 
+    bottom: 20px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: auto; 
+    text-align: center; 
+  }
+  
+  .slick-dots li {
+    display: inline-block; /* Display dots inline */
+    margin: 0 5px; /* Adjust spacing between dots */
+    
+  }
+  
+  .slick-dots li button {
+    width: 15px; 
+    height: 15px; 
+    border: none; 
+    border-radius: 50%; 
+    background-color: #ccc; 
+    cursor: pointer; 
+  }
+  
+  .slick-dots li.slick-active button {
+    background-color: #000;
+  }
