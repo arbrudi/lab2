@@ -1,6 +1,4 @@
-Setting up the project
-
-
+Project set-up
 ------Front-end------
 
 npm install 
@@ -19,3 +17,5 @@ pip install flask
 pip install flask-sqlAlchemy or smth like this 
 
 .\backend\back-flask\Scripts\Activate
+
+python server.py
