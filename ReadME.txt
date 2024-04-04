@@ -14,7 +14,9 @@ Through cmd
 pip install flask
 
 # Database connection
-pip install flask-sqlAlchemy or smth like this 
+pip install Flask-SQLAlchemy
+
+pip install pyodbc
 
 .\backend\back-flask\Scripts\Activate
 
