@@ -7,6 +7,7 @@ import ComicsPage from "./pages/ComicsPage";
 import EventsPage from "./pages/EventsPage";
 import LoginPage from './pages/LoginPage'; 
 import NavBar from './components/NavBar/NavBar';
+import Footer from './components/NavBar/Footer';
 function App() {
   return (
     <BrowserRouter>
@@ -24,6 +25,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} /> 
         </Routes>
       </div>
+      <Footer />
     </BrowserRouter>
   );
 }
