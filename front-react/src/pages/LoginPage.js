@@ -59,7 +59,7 @@ const LoginPage = () => {
             ))}
         </ul>
         </div>
-        <li><Link to="/register">Register</Link></li>
+        <Link to="/register">Register</Link>
     </div>
   );
 };
