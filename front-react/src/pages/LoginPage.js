@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {Link} from 'react-router-dom';
 
 const LoginPage = () => {
  
@@ -58,6 +59,7 @@ const LoginPage = () => {
             ))}
         </ul>
         </div>
+        <li><Link to="/register">Register</Link></li>
     </div>
   );
 };

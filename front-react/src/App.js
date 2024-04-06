@@ -6,6 +6,7 @@ import BooksPage from "./pages/BooksPage";
 import ComicsPage from "./pages/ComicsPage";
 import EventsPage from "./pages/EventsPage";
 import LoginPage from './pages/LoginPage'; 
+import RegisterPage from './pages/RegisterPage';
 import NavBar from './components/NavBar/NavBar';
 import Footer from './components/NavBar/Footer';
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/comics" element={<ComicsPage />} /> 
           <Route path="/events" element={<EventsPage />} /> 
           <Route path="/login" element={<LoginPage />} /> 
+          <Route path="/register" element={<RegisterPage />} /> 
         </Routes>
       </div>
       <Footer />
