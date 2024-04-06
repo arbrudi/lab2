@@ -2,27 +2,29 @@ create database lab2
 
 use lab2
 
-CREATE TABLE articles (
-  Article_ID VARCHAR(50) NOT NULL PRIMARY KEY,
-  Article_image TEXT,
-  Article_title VARCHAR(255),
-  Article_type VARCHAR(50),
-  Article_Description TEXT
+-- DROP DATABASE lab2
+
+CREATE TABLE Comics (
+  Comic_ID VARCHAR(50) NOT NULL PRIMARY KEY,
+  Comic_image TEXT,
+  Comic_title VARCHAR(255),
+  Comic_type VARCHAR(50),
+  Comic_Description TEXT
 );
 
-CREATE TABLE article_comments (
+CREATE TABLE Comics_comments (
   User_ID INT NOT NULL,
-  Article_ID VARCHAR(50) NOT NULL,
-  A_comments TEXT
+  Comic_ID VARCHAR(50) NOT NULL,
+  Comic_comments TEXT
 );
 
-CREATE TABLE article_ratings (
+CREATE TABLE Comics_ratings (
   User_ID INT NOT NULL,
-  Article_ID VARCHAR(50) NOT NULL,
-  A_Rating INT NOT NULL
+  Comic_ID VARCHAR(50) NOT NULL,
+  Comic_Rating INT NOT NULL
 );
 
-CREATE TABLE books (
+CREATE TABLE Books (
   ISBN INT NOT NULL PRIMARY KEY,
   Book_image TEXT,
   Book_title VARCHAR(255) NOT NULL,
@@ -31,18 +33,18 @@ CREATE TABLE books (
   Book_description TEXT NOT NULL
 );
 
-CREATE TABLE book_comments (
+CREATE TABLE Book_comments (
   User_ID INT NOT NULL,
   ISBN INT NOT NULL,
   B_comments TEXT
 );
 
-CREATE TABLE book_ratings (
+CREATE TABLE Book_ratings (
   User_ID INT NOT NULL,
   ISBN INT NOT NULL,
   B_Rating INT NOT NULL
 ); 
-CREATE TABLE client (
+CREATE TABLE Users (
   User_ID INT NOT NULL PRIMARY KEY,
   Name VARCHAR(255) NOT NULL,
   Surname VARCHAR(255) NOT NULL,
@@ -74,11 +76,11 @@ CREATE TABLE event_participants (
   PRIMARY KEY (Event_ID, User_ID)
 );
  
-CREATE TABLE favorite_articles (
+CREATE TABLE favorite_comics (
   User_ID INT NOT NULL,
-  Article_ID VARCHAR(50) NOT NULL,
-  Article_list_name VARCHAR(255),
-  PRIMARY KEY (User_ID, Article_ID)
+  Comic_ID VARCHAR(50) NOT NULL,
+  Comic_list_name VARCHAR(255),
+  PRIMARY KEY (User_ID, Comic_ID)
 );
 
 CREATE TABLE favorite_books (
@@ -111,37 +113,37 @@ CREATE TABLE reviews (
   Reviews_Comment NVARCHAR(600)
 );
 
-ALTER TABLE article_comments
-ADD CONSTRAINT FK_article_comments_User_ID FOREIGN KEY (User_ID) REFERENCES client(User_ID)
-ALTER TABLE article_comments
-ADD CONSTRAINT FK_article_comments_Article_ID FOREIGN KEY (Article_ID) REFERENCES articles(Article_ID);
+ALTER TABLE Comics_comments
+ADD CONSTRAINT FK_Comic_comments_User_ID FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
+ALTER TABLE Comics_comments
+ADD CONSTRAINT FK_Comic_comments_Article_ID FOREIGN KEY (Comic_ID) REFERENCES Comics(Comic_ID);
 
-ALTER TABLE article_ratings
-ADD CONSTRAINT FK_article_ratings_User_ID FOREIGN KEY (User_ID) REFERENCES client(User_ID)
-ALTER TABLE article_ratings
-ADD CONSTRAINT FK_article_ratings_Article_ID FOREIGN KEY (Article_ID) REFERENCES articles(Article_ID);
+ALTER TABLE Comics_ratings
+ADD CONSTRAINT FK_Comic_ratings_User_ID FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
+ALTER TABLE Comics_ratings
+ADD CONSTRAINT FK_Comic_ratings_Article_ID FOREIGN KEY (Comic_ID) REFERENCES Comics(Comic_ID);
 
 ALTER TABLE book_comments
-ADD CONSTRAINT FK_book_comments_User_ID FOREIGN KEY (User_ID) REFERENCES client(User_ID)
+ADD CONSTRAINT FK_book_comments_User_ID FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
 ALTER TABLE book_comments
-ADD CONSTRAINT FK_book_comments_ISBN FOREIGN KEY (ISBN) REFERENCES books(ISBN); 
+ADD CONSTRAINT FK_book_comments_ISBN FOREIGN KEY (ISBN) REFERENCES Books(ISBN); 
 
 ALTER TABLE book_ratings
-ADD CONSTRAINT FK_book_ratings_User_ID FOREIGN KEY (User_ID) REFERENCES client(User_ID)
+ADD CONSTRAINT FK_book_ratings_User_ID FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
 ALTER TABLE book_ratings
-ADD CONSTRAINT FK_book_ratings_ISBN FOREIGN KEY (ISBN) REFERENCES books(ISBN);
+ADD CONSTRAINT FK_book_ratings_ISBN FOREIGN KEY (ISBN) REFERENCES Books(ISBN);
 
 ALTER TABLE event_participants
-ADD CONSTRAINT FK_event_participants_User_ID FOREIGN KEY (User_ID) REFERENCES client(User_ID)
+ADD CONSTRAINT FK_event_participants_User_ID FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
 ALTER TABLE event_participants
 ADD CONSTRAINT FK_event_participants_Event_ID FOREIGN KEY (Event_ID) REFERENCES events(Event_ID);
 
-ALTER TABLE favorite_articles
-ADD CONSTRAINT FK_favorite_articles_User_ID FOREIGN KEY (User_ID) REFERENCES client(User_ID)
-ALTER TABLE favorite_articles
-ADD CONSTRAINT FK_favorite_articles_Article_ID FOREIGN KEY (Article_ID) REFERENCES articles(Article_ID);
+ALTER TABLE favorite_comics
+ADD CONSTRAINT FK_favorite_comics_User_ID FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
+ALTER TABLE favorite_comics
+ADD CONSTRAINT FK_favorite_articles_Article_ID FOREIGN KEY (Comic_ID) REFERENCES Comics(Comic_ID);
 
 ALTER TABLE favorite_books
-ADD CONSTRAINT FK_favorite_books_User_ID FOREIGN KEY (User_ID) REFERENCES client(User_ID)
+ADD CONSTRAINT FK_favorite_books_User_ID FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
 ALTER TABLE favorite_books
-ADD CONSTRAINT FK_favorite_books_ISBN FOREIGN KEY (ISBN) REFERENCES books(ISBN);
+ADD CONSTRAINT FK_favorite_books_ISBN FOREIGN KEY (ISBN) REFERENCES Books(ISBN);
