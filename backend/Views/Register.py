@@ -5,9 +5,7 @@ from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt()
 views_bp = Blueprint('views', __name__)
 
-@views_bp.route('/login')
-def login():
-    return "hi"
+
 
 @views_bp.route('/register', methods=['POST'])
 def register():

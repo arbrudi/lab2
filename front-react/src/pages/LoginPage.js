@@ -1,34 +1,45 @@
-import React, { useState, useEffect } from "react";
-import {Link} from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
- 
-
-  const[data, setData] = useState([])
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const [loginMessage, setLoginMessage] = useState('');
 
-  useEffect(() => {
-    fetch("/members")
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data.members);
-        console.log(data.members);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
- 
-    console.log("Username:", username);
-    console.log("Password:", password);
+
+    try {
+      const response = await axios.post('/login', { Username: username, Password: password });
+      const token = response.data.token;
+      
+      localStorage.setItem('token', token); // Store token in local storage
+     
+      //navigate('/dashboard'); // Redirect to dashboard after successful login
+      console.log(response.data.role);
+    } catch (error) {
+      console.error('Login failed:', error.response.data.message);
+      setError('Invalid username or password');
+
+      console.error('Login failed:', error.response.data.message);
+      setLoginMessage(error.response.data.message);
+    }
   };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token'); // Remove token from local storage
+    navigate('/login'); // Redirect to login page after logout
+  };
+
 
   return (
     <div>
       <h1>Login Page</h1>
+      {loginMessage && <p>{loginMessage}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Username:</label>
@@ -49,17 +60,10 @@ const LoginPage = () => {
           />
         </div>
         <button type="submit">Login</button>
+        {error && <div style={{ color: 'red' }}>{error}</div>}
       </form>
-      <div>
-        <p>API CALL TESTING</p>
-        <h2>Members:</h2>
-        <ul>
-            {data.map((member, index) => (
-            <li key={index}>{member}</li>
-            ))}
-        </ul>
-        </div>
-        <Link to="/register">Register</Link>
+      <button onClick={handleLogout}>Logout</button>
+      <Link to="/register">Register</Link>
     </div>
   );
 };
