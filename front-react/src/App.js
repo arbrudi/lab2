@@ -8,7 +8,8 @@ import EventsPage from "./pages/EventsPage";
 import LoginPage from './pages/LoginPage'; 
 import RegisterPage from './pages/RegisterPage';
 import NavBar from './components/NavBar/NavBar';
-import Footer from './components/NavBar/Footer';
+import Footer from './components/NavBar/Footer'; 
+import AdminDashboard from './pages/AdminDashboard';
 function App() {
   return (
     <BrowserRouter>
@@ -25,6 +26,7 @@ function App() {
           <Route path="/events" element={<EventsPage />} /> 
           <Route path="/login" element={<LoginPage />} /> 
           <Route path="/register" element={<RegisterPage />} /> 
+          <Route path="/admindashboard" element={<AdminDashboard />} /> 
         </Routes>
       </div>
       <Footer />
