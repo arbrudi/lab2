@@ -3,8 +3,7 @@ import '.././assets/css/AdminNav.css'
 
 const AdminDashboard = () => {
   return (
-    <div className="sidebar">
-      <h2>Admin Dashboard</h2>
+    <div className="sidebar"> 
       <ul>
         <li>
           <a href="/admin/books">Books</a>

@@ -1,30 +1,32 @@
 .sidebar {
-    width: 250px;
-    height: 100%;
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-  }
-  
-  .sidebar h2 {
-    margin-bottom: 20px;
-  }
-  
-  .sidebar ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .sidebar ul li {
-    margin-bottom: 10px;
-  }
-  
-  .sidebar ul li a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 16px;
-  }
-  
-  .sidebar ul li a:hover {
-    color: #ffd700;
-  }
+  width: 100px; /* Increased width for a wider sidebar */
+  height: 500px;
+  background-color: #555; /* Changed background color */
+  color: #fff;
+  padding: 20px; 
+}
+
+.sidebar h2 {
+  margin-bottom: 30px; /* Increased margin-bottom for h2 elements */
+  font-size: 20px; /* Increased font size for h2 elements */
+}
+
+.sidebar ul {
+  list-style-type: square; /* Changed list-style-type to square */
+  padding: 10px 0; /* Adjusted padding */
+}
+
+.sidebar ul li {
+  margin-bottom: 15px; /* Increased margin-bottom for li elements */
+}
+
+.sidebar ul li a {
+  text-decoration: underline; /* Changed text-decoration to underline */
+  color: #ffcc00; /* Changed link color */
+  font-size: 18px; /* Increased font size for links */
+}
+
+.sidebar ul li a:hover {
+  color: #ffd700; /* Changed link color on hover */
+  font-weight: bold; /* Added font-weight on hover */
+}

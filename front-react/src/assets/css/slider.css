@@ -27,7 +27,7 @@
     height: 15px; 
     border: none; 
     border-radius: 50%; 
-    background-color: #ccc; 
+    background-color: #cccccc; 
     cursor: pointer; 
   }
   
@@ -38,9 +38,8 @@
 
 .e-library-section {
   padding: 40px 50px;
-  background: linear-gradient(135deg, #f1b9ed 0%, #9bcff5 100%);
-  text-align: center;
-  border-radius: 10px;
+  background: linear-gradient(135deg, #d5c3d4 0%, #b6c5d2 100%);
+  text-align: center; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   animation: fadeInUp 0.8s ease-out;
   margin-bottom: 0px;
