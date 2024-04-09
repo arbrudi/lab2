@@ -5,7 +5,7 @@ import AboutPage from "./pages/AboutPage";
 import BooksPage from "./pages/BooksPage"; 
 import ComicsPage from "./pages/ComicsPage";
 import EventsPage from "./pages/EventsPage";
-import LoginPage from './pages/LoginPage'; 
+import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import NavBar from './components/NavBar/NavBar';
 import Footer from './components/NavBar/Footer'; 
