@@ -18,12 +18,13 @@ const LoginPage = () => {
       const token = response.data.token;
       
       localStorage.setItem('token', token); 
+      
      if (response.data.role === 'admin'){
       navigate('/admin'); 
-      console.log(response.data.role);
+      
      }else if (response.data.role === 'client'){
       navigate('/client'); 
-      console.log(response.data.role);
+      
      }else{
       setError('Please contact your admininstrator!');
      }

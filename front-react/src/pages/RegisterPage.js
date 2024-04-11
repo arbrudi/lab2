@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
     const [formData, setFormData] = useState({
@@ -10,7 +11,7 @@ const RegisterPage = () => {
         Username: '',
         Password: ''
     });
-
+    const navigate = useNavigate();
     const handleChange = (e) => {
         const { name, value } = e.target;
         console.log(name, value);
@@ -22,8 +23,8 @@ const RegisterPage = () => {
         e.preventDefault();
         try {
             await axios.post('/register', formData);
-            alert('User registered successfully!');
-          
+            navigate('/login')
+            
         } catch (error) {
             console.error('Registration failed:', error);
             alert('Registration failed. Please try again.');
