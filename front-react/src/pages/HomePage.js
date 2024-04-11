@@ -18,13 +18,13 @@ const HomePage = () => {
     <div> 
       <Slider {...settings}>
         <div className='image'>
-          <img src="https://cdn.optipic.io/site-104380/images/library/elibrary_.jpg" />
+          <img src="https://cdn.optipic.io/site-104380/images/library/elibrary_.jpg" alt ='img1'/>
         </div>
         <div className='image'>
-          <img src="image2.jpg" alt="image2" />
+          {/* <img src="image2.jpg" alt="image2" /> */}
         </div>
         <div className='image'>
-          <img src="image3.jpg" alt="image3" />
+          {/* <img src="image3.jpg" alt="image3" /> */}
         </div>
       </Slider>
     </div>
