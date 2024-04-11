@@ -45,8 +45,6 @@ CREATE TABLE Book_comments (
   ISBN INT NOT NULL,
   Book_comments TEXT
 );
-Insert into Book_Genre(Book_Genre_ID, ISBN, Genre_Name)
-VALUES(912, 123, 'Novel')
 
 CREATE TABLE Users (
   User_ID INT NOT NULL PRIMARY KEY IDENTITY(100, 1),
@@ -151,5 +149,3 @@ ALTER TABLE favorite_books
 ADD CONSTRAINT FK_favorite_books_User_ID FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
 ALTER TABLE favorite_books
 ADD CONSTRAINT FK_favorite_books_ISBN FOREIGN KEY (ISBN) REFERENCES Books(ISBN);
-
-Select * from Books
