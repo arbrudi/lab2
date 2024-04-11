@@ -40,6 +40,14 @@ Genre_Name varchar(50) NOT NULL,
 FOREIGN KEY (ISBN) REFERENCES Books(ISBN)
 );
 
+CREATE TABLE Book_comments (
+  User_ID INT NOT NULL,
+  ISBN INT NOT NULL,
+  Book_comments TEXT
+);
+Insert into Book_Genre(Book_Genre_ID, ISBN, Genre_Name)
+VALUES(912, 123, 'Novel')
+
 CREATE TABLE Users (
   User_ID INT NOT NULL PRIMARY KEY IDENTITY(100, 1),
   Name VARCHAR(255) NOT NULL,
@@ -119,9 +127,9 @@ ADD CONSTRAINT FK_Comic_ratings_User_ID FOREIGN KEY (User_ID) REFERENCES Users(U
 ALTER TABLE Comics_ratings
 ADD CONSTRAINT FK_Comic_ratings_Article_ID FOREIGN KEY (Comic_ID) REFERENCES Comics(Comic_ID);
 
-ALTER TABLE book_comments
+ALTER TABLE Book_comments
 ADD CONSTRAINT FK_book_comments_User_ID FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
-ALTER TABLE book_comments
+ALTER TABLE Book_comments
 ADD CONSTRAINT FK_book_comments_ISBN FOREIGN KEY (ISBN) REFERENCES Books(ISBN); 
 
 ALTER TABLE book_ratings
@@ -143,3 +151,5 @@ ALTER TABLE favorite_books
 ADD CONSTRAINT FK_favorite_books_User_ID FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
 ALTER TABLE favorite_books
 ADD CONSTRAINT FK_favorite_books_ISBN FOREIGN KEY (ISBN) REFERENCES Books(ISBN);
+
+Select * from Books

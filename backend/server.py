@@ -1,7 +1,8 @@
 from flask import Flask
-from Models.Users import db 
+from extensions import db
 from Views.Register import views_bp
 from Views.Login import auth_bp
+from Views.Books import books_bp
 
 
 def create_app():
@@ -20,9 +21,8 @@ def create_app():
 
     db.init_app(app)
     app.register_blueprint(views_bp)
-
-
     app.register_blueprint(auth_bp)
+    app.register_blueprint(books_bp)
 
     with app.app_context():
         try:

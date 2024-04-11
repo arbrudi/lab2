@@ -1,11 +1,10 @@
 from flask import Blueprint, request, jsonify
-from Models.Users import db, Users
+from Models.Users import Users
+from extensions import db
 from flask_bcrypt import Bcrypt
 
 bcrypt = Bcrypt()
 views_bp = Blueprint('views', __name__)
-
-
 
 @views_bp.route('/register', methods=['POST'])
 def register():

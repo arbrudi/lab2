@@ -14,6 +14,9 @@ import Book from './pages/admin/Book'
 import Comics from './pages/admin/Comics' 
 import EventBooks from './pages/admin/EventBooks' 
 import EventParticipants from './pages/admin/EventParticipants'
+import Create_Book from './pages/admin/Book/Create_Book';
+import Edit_Books from './pages/admin/Book/Edit_Books';
+
 function App() {
   return (
     <BrowserRouter>
@@ -32,6 +35,8 @@ function App() {
           <Route path="/register" element={<RegisterPage />} /> 
           <Route path="/admin" element={<Admin />} /> 
           <Route path="/admin/book" element={<Book />} /> 
+          <Route path="/admin/book/create" element={<Create_Book />} /> 
+          <Route path="/admin/book/update/:id" element={<Edit_Books />} /> 
           <Route path="/admin/comics" element={<Comics />} /> 
           <Route path="/admin/event_books" element={<EventBooks/>} /> 
           <Route path="/admin/event_participants" element={<EventParticipants/>} />
