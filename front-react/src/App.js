@@ -8,7 +8,12 @@ import EventsPage from "./pages/EventsPage";
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import NavBar from './components/NavBar/NavBar';
-import Footer from './components/NavBar/Footer';
+import Footer from './components/NavBar/Footer'; 
+import Admin from './pages/AdminDashboard'; 
+import Book from './pages/admin/Book' 
+import Comics from './pages/admin/Comics' 
+import EventBooks from './pages/admin/EventBooks' 
+import EventParticipants from './pages/admin/EventParticipants'
 function App() {
   return (
     <BrowserRouter>
@@ -25,6 +30,11 @@ function App() {
           <Route path="/events" element={<EventsPage />} /> 
           <Route path="/login" element={<LoginPage />} /> 
           <Route path="/register" element={<RegisterPage />} /> 
+          <Route path="/admin" element={<Admin />} /> 
+          <Route path="/admin/book" element={<Book />} /> 
+          <Route path="/admin/comics" element={<Comics />} /> 
+          <Route path="/admin/event_books" element={<EventBooks/>} /> 
+          <Route path="/admin/event_participants" element={<EventParticipants/>} />
         </Routes>
       </div>
       <Footer />

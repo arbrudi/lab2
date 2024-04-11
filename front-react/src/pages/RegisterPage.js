@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-// import {Link} from 'react-router-dom';
 
 const RegisterPage = () => {
     const [formData, setFormData] = useState({
@@ -24,7 +23,7 @@ const RegisterPage = () => {
         try {
             await axios.post('/register', formData);
             alert('User registered successfully!');
-            // Optionally, redirect to another page or perform other actions after successful registration
+          
         } catch (error) {
             console.error('Registration failed:', error);
             alert('Registration failed. Please try again.');

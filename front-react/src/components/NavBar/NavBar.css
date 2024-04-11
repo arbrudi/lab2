@@ -1,22 +1,22 @@
 .nav-1 {
     overflow: hidden;
-    height: 100%;
-    background-color: #F2F2F7;
+    height: 120px;
+    background-color: #dfd8df;
     display: flex;
-    justify-content:center;
+    justify-content:center; 
   }
-  
+ 
   .nav-1 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    border-bottom: 1px #a2a1a1 solid;
+    border-bottom: 1px #323131 solid;
   }
   
   .nav-1 li {
     display: inline-block;
-    padding-top: 24px;
-    padding-bottom: 24px;
+    padding-top: 50px;
+    padding-bottom: 50px;
     margin-right: 20px; 
   }
   
@@ -28,6 +28,6 @@
   }
   
   .nav-1 a:hover {
-    background-color: rgba(229, 229, 228, 0.742);
-    color: #62B9B6;
+    background-color: rgba(206, 206, 201, 0.742);
+    color: #6280b9;
   }

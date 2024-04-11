@@ -1,0 +1,33 @@
+.sidebar {
+  width: 230px; /* Adjusted width */
+  height: 700px;
+  background-color: #555;
+  color: #fff;
+  padding: 20px; 
+  
+}
+
+.sidebar h2 {
+  margin-bottom: 20px; 
+  font-size: 50px; 
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 50px; 
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: #ffcc00;
+  font-size: 20px;
+}
+
+.sidebar ul li a:hover {
+  color: #ffd700;
+  font-weight: bold;
+}

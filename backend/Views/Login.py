@@ -21,12 +21,12 @@ def login():
     if not user or not bcrypt.check_password_hash(user.Password, password):
         return jsonify({'message': 'Invalid username or password'}), 401
 
-    # You may want to use a better token generation method in production
+ 
     user_id = user.User_ID
     role = user.User_Role
     
 
-    # Generate JWT token
+   
     token_payload = {'user_id': user_id, 'role': role}
     token = jwt.encode(token_payload, 'Ellie', algorithm='HS256')
    

@@ -1,7 +1,7 @@
 
 .image img {
-    width: 1300px; 
-    height: 500px; 
+    width: 1500px; 
+    height: 600px; 
     margin-left:100px; 
     justify-content: center;
   }
@@ -27,10 +27,66 @@
     height: 15px; 
     border: none; 
     border-radius: 50%; 
-    background-color: #ccc; 
+    background-color: #cccccc; 
     cursor: pointer; 
   }
   
   .slick-dots li.slick-active button {
     background-color: #000;
-  }
+  } 
+/* Add this CSS to your existing slider.css or create a new CSS file and import it */
+
+.e-library-section {
+  padding: 40px 50px;
+  background: linear-gradient(135deg, #d5c3d4 0%, #b6c5d2 100%);
+  text-align: center; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 0.8s ease-out;
+  margin-bottom: 0px;
+}
+
+.e-library-section h2 {
+  margin-bottom: 20px;
+  font-size: 36px;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.e-library-section p {
+  margin-bottom: 15px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #fff;
+  opacity: 0.9;
+}
+
+.categories-section {
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.categories-section h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #333;
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.category h3 {
+  font-size: 24px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.category p {
+  font-size: 16px;
+  color: #777;
+  text-align: center;
+}

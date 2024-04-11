@@ -17,10 +17,16 @@ const LoginPage = () => {
       const response = await axios.post('/login', { Username: username, Password: password });
       const token = response.data.token;
       
-      localStorage.setItem('token', token); // Store token in local storage
-     
-      //navigate('/dashboard'); // Redirect to dashboard after successful login
+      localStorage.setItem('token', token); 
+     if (response.data.role === 'admin'){
+      navigate('/admin'); 
       console.log(response.data.role);
+     }else if (response.data.role === 'client'){
+      navigate('/client'); 
+      console.log(response.data.role);
+     }else{
+      setError('Please contact your admininstrator!');
+     }
     } catch (error) {
       console.error('Login failed:', error.response.data.message);
       setError('Invalid username or password');
@@ -31,8 +37,8 @@ const LoginPage = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token'); // Remove token from local storage
-    navigate('/login'); // Redirect to login page after logout
+    localStorage.removeItem('token');
+    navigate('/login'); 
   };
 
 
