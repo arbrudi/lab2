@@ -33,17 +33,13 @@ CREATE TABLE Books (
   Book_description TEXT NOT NULL
 );
 
-CREATE TABLE Book_comments (
-  User_ID INT NOT NULL,
-  ISBN INT NOT NULL,
-  B_comments TEXT
+CREATE TABLE Book_Genre(
+Book_Genre_ID int NOT NULL PRIMARY KEY,
+ISBN INT NOT NULL,
+Genre_Name varchar(50) NOT NULL,
+FOREIGN KEY (ISBN) REFERENCES Books(ISBN)
 );
 
-CREATE TABLE Book_ratings (
-  User_ID INT NOT NULL,
-  ISBN INT NOT NULL,
-  B_Rating INT NOT NULL
-); 
 CREATE TABLE Users (
   User_ID INT NOT NULL PRIMARY KEY IDENTITY(100, 1),
   Name VARCHAR(255) NOT NULL,
@@ -63,14 +59,14 @@ CREATE TABLE contact_us (
   Contact_postal_code INT
 );
 
-CREATE TABLE events (
+CREATE TABLE Events (
   Event_ID VARCHAR(255) NOT NULL PRIMARY KEY,
   Event_image TEXT,
   Event_description TEXT,
   Event_date DATE
 );
 
-CREATE TABLE event_participants (
+CREATE TABLE Event_participants (
   Event_ID VARCHAR(255) NOT NULL,
   User_ID INT NOT NULL,
   PRIMARY KEY (Event_ID, User_ID)
@@ -133,10 +129,10 @@ ADD CONSTRAINT FK_book_ratings_User_ID FOREIGN KEY (User_ID) REFERENCES Users(Us
 ALTER TABLE book_ratings
 ADD CONSTRAINT FK_book_ratings_ISBN FOREIGN KEY (ISBN) REFERENCES Books(ISBN);
 
-ALTER TABLE event_participants
+ALTER TABLE Event_participants
 ADD CONSTRAINT FK_event_participants_User_ID FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
-ALTER TABLE event_participants
-ADD CONSTRAINT FK_event_participants_Event_ID FOREIGN KEY (Event_ID) REFERENCES events(Event_ID);
+ALTER TABLE Event_participants
+ADD CONSTRAINT FK_event_participants_Event_ID FOREIGN KEY (Event_ID) REFERENCES Events(Event_ID);
 
 ALTER TABLE favorite_comics
 ADD CONSTRAINT FK_favorite_comics_User_ID FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
