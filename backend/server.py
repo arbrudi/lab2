@@ -2,7 +2,8 @@ from flask import Flask
 from extensions import db
 from Views.Register import views_bp
 from Views.Login import auth_bp
-from Views.Books import books_bp
+from Views.Books import books_bp 
+from Views.Events import events_bp
 
 
 def create_app():
@@ -11,7 +12,7 @@ def create_app():
     # Change SERVER
     conn = 'mssql+pyodbc:///?odbc_connect=' + \
            'DRIVER={ODBC Driver 17 for SQL Server};' + \
-           'SERVER=LAPTOP-TQGV5751;' + \
+           'SERVER=DESKTOP-UD05JRG\MSSQLSERVER01;' + \
            'DATABASE=lab2;' + \
            'Trusted_Connection=yes;'
 
@@ -22,7 +23,8 @@ def create_app():
     db.init_app(app)
     app.register_blueprint(views_bp)
     app.register_blueprint(auth_bp)
-    app.register_blueprint(books_bp)
+    app.register_blueprint(books_bp) 
+    app.register_blueprint(events_bp)
 
     with app.app_context():
         try:

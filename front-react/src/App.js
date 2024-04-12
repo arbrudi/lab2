@@ -13,9 +13,11 @@ import Admin from './pages/AdminDashboard';
 import Book from './pages/admin/Book' 
 import Comics from './pages/admin/Comics' 
 import EventBooks from './pages/admin/EventBooks' 
-import EventParticipants from './pages/admin/EventParticipants'
+import Event from './pages/admin/Event'
 import Create_Book from './pages/admin/Book/Create_Book';
-import Edit_Books from './pages/admin/Book/Edit_Books';
+import Edit_Books from './pages/admin/Book/Edit_Books'; 
+import Create_Event from './pages/admin/Event/Create_Event'
+import Edit_Events from './pages/admin/Event/Edit_Events'; 
 
 function App() {
   return (
@@ -39,7 +41,9 @@ function App() {
           <Route path="/admin/book/update/:id" element={<Edit_Books />} /> 
           <Route path="/admin/comics" element={<Comics />} /> 
           <Route path="/admin/event_books" element={<EventBooks/>} /> 
-          <Route path="/admin/event_participants" element={<EventParticipants/>} />
+          <Route path="/admin/event" element={<Event/>} /> 
+          <Route path="/admin/event/create" element={<Create_Event />} />  
+          <Route path="/admin/event/update/:id" element={<Edit_Events />} /> 
         </Routes>
       </div>
       <Footer />

@@ -12,7 +12,7 @@ const AdminDashboard = () => {
           <a href="/admin/comics">Comics</a>
         </li>
         <li>
-          <a href="/admin/event_participants">Event participants</a>
+          <a href="/admin/event">Event </a>
         </li> 
         <li>
           <a href="/admin/event_books">Event books</a>
