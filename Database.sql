@@ -29,9 +29,10 @@ CREATE TABLE Books (
   Book_image TEXT,
   Book_title VARCHAR(255) NOT NULL,
   Book_author VARCHAR(255) NOT NULL,
-  Book_genre VARCHAR(255) NOT NULL,
+  Book_genre INT NOT NULL,
   Book_description TEXT NOT NULL
 );
+Select * FROM Books
 
 CREATE TABLE Book_Genre(
 Book_Genre_ID int NOT NULL PRIMARY KEY,
@@ -40,6 +41,9 @@ Genre_Name varchar(50) NOT NULL,
 FOREIGN KEY (ISBN) REFERENCES Books(ISBN)
 );
 
+INSERT INTO Book_Genre(Book_Genre_ID, ISBN, Genre_Name)
+VALUES(1, 1234, 'Fantasy')
+SELECT * FROM Book_Genre
 CREATE TABLE Book_comments (
   User_ID INT NOT NULL,
   ISBN INT NOT NULL,

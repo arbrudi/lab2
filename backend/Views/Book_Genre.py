@@ -37,10 +37,10 @@ def get_book_genres():
         print("Error: ", e)
         return jsonify({'error':str(e)}), 500
     
-@bookG_bp.route('/admin/book_genre/<int:id>', methods=['GET'])
-def get_book_genre(id):
+@bookG_bp.route('/admin/book_genre/<int:Book_Genre_ID>', methods=['GET'])
+def get_book_genre(Book_Genre_ID):
     try:
-        genre = Book_Genre.query.get(id)
+        genre = Book_Genre.query.get(Book_Genre_ID)
         if genre is None:
             return jsonify({'error':'Genre not found!'}), 404
         
@@ -54,10 +54,10 @@ def get_book_genre(id):
         print("Error:", e)
         return jsonify({"error": str(e)}), 500
     
-@bookG_bp.route('/admin/book_genre/update/<int:id>', methods =['GET', 'POST', 'PUT'])
-def update_book_genre(id):
+@bookG_bp.route('/admin/book_genre/update/<int:Book_Genre_ID>', methods =['GET', 'POST', 'PUT'])
+def update_book_genre(Book_Genre_ID):
     try:
-        genre = Book_Genre.query.get(id)
+        genre = Book_Genre.query.get(Book_Genre_ID)
         if genre is None:
             return jsonify({'error':'Genre not found!'})
         
@@ -71,10 +71,10 @@ def update_book_genre(id):
         print("Error:", e)
         return jsonify({"error":str(e)}), 500
     
-@bookG_bp.route('/admin/book_genre/delete/<int:id>', methods=['DELETE'])
-def delete_book_genre(id):
+@bookG_bp.route('/admin/book_genre/delete/<int:Book_Genre_ID>', methods=['DELETE'])
+def delete_book_genre(Book_Genre_ID):
     try:
-        genre = Book_Genre.quety.get(id)
+        genre = Book_Genre.query.get(Book_Genre_ID)
         if genre is None:
             return jsonify({'error':'Genre not found!'}), 404
         
