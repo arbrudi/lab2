@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Link, useParams } from "react-router-dom";
+import '../css/Create.css'
 
 const Edit_Genre = () => {
     const { Book_Genre_ID } = useParams()
@@ -46,7 +47,7 @@ const Edit_Genre = () => {
     };
 
     return (
-        <div>
+        <div className="container_c">
             <h1>Edit Genre</h1>
             <form onSubmit={handleSubmit}>
                  <div>
@@ -63,7 +64,7 @@ const Edit_Genre = () => {
                 </div>
                 <button type="submit">Update Genre</button>
             </form>
-            <Link to={'/admin/book'}>Cancel</Link>
+            <Link className="cancel" to={'/admin/book'}>Cancel</Link>
         </div>
     );
 };

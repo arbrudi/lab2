@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../css/Create.css'
 
 const Create_Genre = () => {
     const [formData, setFormData] = useState({
@@ -27,9 +28,9 @@ const Create_Genre = () => {
     };
 
     return (
-        <div>
+        <div className="container_c">
             <h1>Add a new Genre</h1>
-            {error && <p>{error}</p>}
+            {error && <p className="error-message">{error}</p>}
             <form onSubmit={handleSubmit}>
                 <label>
                     Book Genre ID:

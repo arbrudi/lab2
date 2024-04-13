@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import AdminNav from '../../components/adminNav';
+import AdminBar from '../../components/AdminBar';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-
+import './css/Books_.css'
 const Book = () => {
   const [books, setBooks] = useState([]);
 
@@ -53,14 +53,14 @@ const Book = () => {
   };
 
   return (
-    <div>
-      <AdminNav />
-      <div>
+    <div class='container'>
+      <AdminBar />
+      <div >
+        <h1 class='list'>Book List</h1>
+        <div class='add-link'>
         <Link to={'/admin/book/create'}>Add a new book</Link>
-      </div>
-      <div>
-        <h1>Books List</h1>
-        <table>
+        </div>
+        <table class='table'>
           <thead>
             <tr>
               <th>ISBN</th>
@@ -68,7 +68,7 @@ const Book = () => {
               <th>Author</th>
               <th>Genre</th>
               <th>Description</th>
-              <th>Action</th>
+              <th >Action</th>
             </tr>
           </thead>
           <tbody>
@@ -79,11 +79,11 @@ const Book = () => {
                 <td>{book.Book_author}</td>
                 <td>{book.Book_genre}</td>
                 <td>{book.Book_description}</td>
-                <td>
+                <td >
                     <Link to={`/admin/book/update/${book.ISBN}`}>
-                        <button>Edit</button>
+                        <button class='edit-bttn'>Edit</button>
                     </Link>
-                        <button onClick={()=>handleDelete(book.ISBN)}>Delete</button>
+                        <button  class='del-bttn' onClick={()=>handleDelete(book.ISBN)}>Delete</button>
                 </td>
               </tr>
             ))}
@@ -91,11 +91,11 @@ const Book = () => {
         </table>
       </div>
       <div>
+        <h1 class='list'>Genre List</h1>
+        <div class='add-link'>
         <Link to={'/admin/book_genre/create'}>Add a new Genre</Link>
-      </div>
-      <div>
-        <h1>Genre List</h1>
-        <table>
+        </div>
+        <table class='table'>
           <thead>
             <tr>
               <th>Genre_ID</th>
@@ -112,9 +112,9 @@ const Book = () => {
                 <td>{genre.ISBN}</td>
                 <td>
                     <Link to={`/admin/book_genre/update/${genre.Book_Genre_ID}`}>
-                        <button>Edit</button>
+                        <button class='edit-bttn' >Edit</button>
                     </Link>
-                        <button onClick={()=>Delete_Genre(genre.Book_Genre_ID)}>Delete</button>
+                        <button  class='del-bttn' onClick={()=>Delete_Genre(genre.Book_Genre_ID)}>Delete</button>
                 </td>
               </tr>
             ))}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import AdminNav from '../../components/adminNav';
+import AdminBar from '../../components/AdminBar';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 
@@ -32,7 +32,7 @@ const Event = () => {
 
   return (
     <div>
-      <AdminNav />
+      <AdminBar />
       <div>
         <Link to={'/admin/event/create'}>Add a new event</Link>
       </div>
