@@ -12,6 +12,15 @@ CREATE TABLE Comics (
   Comic_Description TEXT
 );
 
+CREATE TABLE Comics_Author(
+Comics_Author_ID int NOT NULL PRIMARY KEY,
+Comic_ID VARCHAR(50) NOT NULL,
+Author_Name varchar(50) NOT NULL,
+Publisher varchar(50) NOT NULL,
+Author_notes varchar(255),
+FOREIGN KEY (Comic_ID) REFERENCES Comics(Comic_ID)
+)
+
 CREATE TABLE Comics_comments (
   User_ID INT NOT NULL,
   Comic_ID VARCHAR(50) NOT NULL,
