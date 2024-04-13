@@ -11,7 +11,7 @@ class Comics(db.Model):
 
 class Comics_Author(db.Model):
     __tablename__ = 'Comics_Author'  
-    Comics_Author_ID = db.Column(db.Integer, primary_key=True)
+    Comics_Author_ID = db.Column(db.Integer, primary_key=True ,autoincrement=False)
     Comic_ID  = db.Column(db.String(50), db.ForeignKey('Comics.Comic_ID'), nullable=False)
     Author_Name = db.Column(db.String(50), nullable=False)
     Publisher = db.Column(db.String(50), nullable=False)
