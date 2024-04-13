@@ -4,7 +4,7 @@ from extensions import db
 
 bookG_bp = Blueprint('bookG',__name__)
 
-@bookG_bp.route('admin/book_genre/create', methods=['POST'])
+@bookG_bp.route('/admin/book_genre/create', methods=['POST'])
 def add_book_genre():
     try:
         data= request.get_json()
@@ -54,7 +54,7 @@ def get_book_genre(id):
         print("Error:", e)
         return jsonify({"error": str(e)}), 500
     
-@bookG_bp.route('/admin/book_genre/update/<int: id>', methods =['GET', 'POST', 'PUT'])
+@bookG_bp.route('/admin/book_genre/update/<int:id>', methods =['GET', 'POST', 'PUT'])
 def update_book_genre(id):
     try:
         genre = Book_Genre.query.get(id)
@@ -71,7 +71,7 @@ def update_book_genre(id):
         print("Error:", e)
         return jsonify({"error":str(e)}), 500
     
-@bookG_bp.route('/admin/book_genre/delete/<int: id>', methods=['DELETE'])
+@bookG_bp.route('/admin/book_genre/delete/<int:id>', methods=['DELETE'])
 def delete_book_genre(id):
     try:
         genre = Book_Genre.quety.get(id)
