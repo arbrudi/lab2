@@ -23,4 +23,4 @@ pip install pyodbc
 python server.py
 
 ------MSSQL CONN SERVERS------
-
+Arbi -> LAPTOP-TQGV5751
