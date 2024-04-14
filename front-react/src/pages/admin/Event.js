@@ -20,6 +20,7 @@ const Event = () => {
     fetchEvents();
   }, []);
 
+
   const handleDeleteEvent = async (eventId) => {
     try {
       await axios.delete(`/admin/event/delete/${eventId}`);
@@ -29,6 +30,29 @@ const Event = () => {
     }
   }; 
 
+  const[participant, setParticipant] = useState([])
+
+  useEffect(() => {
+    const fetchParticipant = async () => {
+      try {
+        const response_participant = await axios.get("/admin/event_participant");
+        setParticipant(response_participant.data);
+      } catch (error) {
+        console.error("Error fetching participants:", error);
+      }
+    };
+
+    fetchParticipant();
+  }, []);
+
+  const Delete_Participant = async (Event_ID) => {
+    try {
+      await axios.delete(`/admin/event_participant/delete/${Event_ID}`);
+      setParticipant(participant.filter(participant => participant.Event_ID !== Event_ID));
+    } catch (error) {
+      console.error("Error deleting participant:", error);
+    }
+  };
 
   return (
     <div>
@@ -64,6 +88,37 @@ const Event = () => {
             ))}
           </tbody>
         </table>
+      </div>
+
+      <div>
+        <Link to={'/admin/event_participant/create'}>Add a new Event Participant</Link>
+      </div>
+      <div>
+        <h1>Participant List</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Event_ID</th>
+              <th>User_ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            {participant.map((participant) => (
+              <tr key={participant.Event_ID}> 
+              <td>{participant.Event_ID}</td> 
+                <td>{participant.User_ID}</td> 
+                <td>
+                    <Link to={`/admin/event_participant/update/${participant.Event_ID}`}>
+                        <button>Edit</button>
+                    </Link>
+                        <button onClick={()=>Delete_Participant(participant.Event_ID)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div>
       </div>
 
     

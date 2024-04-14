@@ -4,7 +4,7 @@ from Views.Register import views_bp
 from Views.Login import auth_bp
 from Views.Books import books_bp 
 from Views.Events import events_bp
-
+from Views.Event_Participant import eventp_bp
 
 def create_app():
     app = Flask(__name__)
@@ -25,7 +25,7 @@ def create_app():
     app.register_blueprint(auth_bp)
     app.register_blueprint(books_bp) 
     app.register_blueprint(events_bp)
-
+    app.register_blueprint(eventp_bp) 
     with app.app_context():
         try:
             db.engine.connect()

@@ -1,9 +1,39 @@
 from flask import Blueprint, request, jsonify
-from Models.Events import Events, Event_Participants
+from Models.Events import Events, Event_Participants 
+from Models.Users import Users
 from extensions import db
 
 events_bp = Blueprint('events', __name__)
+ 
 
+
+
+from flask import jsonify
+
+@events_bp.route('/events', methods=['GET'])
+def get_all_event_participants():
+    try:
+        sql = """
+            SELECT ep.Event_ID, e.Event_image, e.Event_description, e.Event_date, ep.User_ID, c.Name, c.Surname 
+            FROM Event_Participants ep 
+            INNER JOIN Events e ON e.Event_ID = ep.Event_ID 
+            INNER JOIN Users c ON c.User_ID = ep.User_ID
+        """
+        participants = db.session.execute(sql)
+        participants_data = [{
+            'Event_ID': row.Event_ID,
+            'Event_image': row.Event_image,
+            'Event_description': row.Event_description,
+            'Event_date': row.Event_date.strftime("%Y-%m-%d") if row.Event_date else None,
+            'User_ID': row.User_ID,
+            'Name': row.Name,
+            'Surname': row.Surname
+        } for row in participants]
+
+        return jsonify(participants_data), 200
+    except Exception as e:
+        print("Error:", e)
+        return jsonify({"error": str(e)}), 500
 @events_bp.route('/admin/event/create', methods=['POST'])
 def add_event():
     try:
@@ -93,3 +123,4 @@ def delete_event(event_id):
 
 
     
+
