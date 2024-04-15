@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../../../assets/css/Create.css'; // Assuming this CSS file contains styles for the CreateParticipant component
 
 const CreateParticipant = () => {
     const [formData, setFormData] = useState({
@@ -26,9 +27,9 @@ const CreateParticipant = () => {
     };
 
     return (
-        <div>
+        <div className="container_c">
             <h1>Add a new Participant</h1>
-            {error && <p>{error}</p>}
+            {error && <p className="error-message">{error}</p>}
             <form onSubmit={handleSubmit}>
                 <label>
                     Event ID:

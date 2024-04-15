@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import AdminNav from '../../../components/adminNav';
 import axios from 'axios';
+import '../../../assets/css/Create.css'; // Assuming this CSS file contains styles for the Create_Event component
 
 const Create_Event = () => {
     const [formData, setFormData] = useState({
@@ -29,10 +30,10 @@ const Create_Event = () => {
     };
 
     return (
-        <div>
+        <div className="container_c">
             <AdminNav />
             <h1>Add a New Event</h1>
-            {error && <p>{error}</p>}
+            {error && <p className="error-message">{error}</p>}
             <form onSubmit={handleSubmit}>
                 <label>
                     Event ID:
