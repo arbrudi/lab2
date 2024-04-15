@@ -21,10 +21,10 @@ const Event = () => {
   }, []);
 
 
-  const handleDeleteEvent = async (eventId) => {
+  const handleDeleteEvent = async (Event_ID) => {
     try {
-      await axios.delete(`/admin/event/delete/${eventId}`);
-      setEvents(events.filter(event => event.Event_ID !== eventId));
+      await axios.delete(`/admin/event/delete/${Event_ID}`);
+      setEvents(events.filter(event => event.Event_ID !== Event_ID));
     } catch (error) {
       console.error("Error deleting event:", error);
     }

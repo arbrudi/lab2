@@ -52,9 +52,9 @@ def get_book_genres():
         return jsonify({'error':str(e)}), 500
 
 @eventp_bp.route('/admin/event_participant/<int:Event_ID>', methods=['GET'])
-def get_event_participant(id):
+def get_event_participant(Event_ID):
     try:
-        participant = Event_Participants.query.get(id)
+        participant = Event_Participants.query.get(Event_ID)
         if participant is None:
             return jsonify({'error':'Participant not found!'}), 404
 
@@ -67,22 +67,23 @@ def get_event_participant(id):
         print("Error:", e)
         return jsonify({"error": str(e)}), 500
 
-@eventp_bp.route('/admin/evenr_participant/update/<int:Event_ID>', methods =['GET', 'POST', 'PUT'])
-def update_event_participant(id):
+
+@eventp_bp.route('/admin/event_participant/update/<int:Event_ID>', methods=['PUT'])
+def update_event_participant(Event_ID):
     try:
-        participant = Event_Participants.query.get(id)
+        data = request.get_json() 
+        User_ID = data.get('User_ID')
+
+        participant = Event_Participants.query.filter_by(Event_ID=Event_ID).first()
         if participant is None:
-            return jsonify({'error':'Participant not found!'})
+            return jsonify({'error': 'Participant not found!'}), 404
 
-        data = request.get_json()
-        for key, value in data.items():
-            setattr(participant, key, value)
-
+        participant.User_ID = User_ID  # Update the User_ID
         db.session.commit()
-        return jsonify({'message':'Participant updated successfully!'}), 200
+        return jsonify({'message': 'Participant updated successfully!'}), 200
     except Exception as e:
         print("Error:", e)
-        return jsonify({"error":str(e)}), 500
+        return jsonify({"error": str(e)}), 500
 
 @eventp_bp.route('/admin/event_participant/delete/<int:Event_ID>', methods=['DELETE'])
 def delete_event_participant(id):
