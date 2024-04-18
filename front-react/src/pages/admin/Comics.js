@@ -1,9 +1,9 @@
 import React from "react"; 
-import AdminNav from '../../components/adminNav'
+import AdminBar from '../../components/AdminBar'
 const Comics = () =>{
    return (
         <div>
-            <AdminNav />
+            <AdminBar />
             <h1>Comics crud</h1> 
         </div>
     );

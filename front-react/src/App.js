@@ -18,6 +18,8 @@ import Create_Book from './pages/admin/Book/Create_Book';
 import Edit_Books from './pages/admin/Book/Edit_Books'; 
 import Create_Event from './pages/admin/Event/Create_Event'
 import Edit_Events from './pages/admin/Event/Edit_Events'; 
+import Create_Genre from './pages/admin/Book_Genre/Create_Genre';
+import Edit_Genre from './pages/admin/Book_Genre/Edit_Genre';
 
 function App() {
   return (
@@ -39,6 +41,8 @@ function App() {
           <Route path="/admin/book" element={<Book />} /> 
           <Route path="/admin/book/create" element={<Create_Book />} /> 
           <Route path="/admin/book/update/:id" element={<Edit_Books />} /> 
+          <Route path="/admin/book_genre/create" element={<Create_Genre />} /> 
+          <Route path="/admin/book_genre/update/:Book_Genre_ID" element={<Edit_Genre/>} /> 
           <Route path="/admin/comics" element={<Comics />} /> 
           <Route path="/admin/event_books" element={<EventBooks/>} /> 
           <Route path="/admin/event" element={<Event/>} /> 
