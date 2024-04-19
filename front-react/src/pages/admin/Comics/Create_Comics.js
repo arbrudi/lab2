@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { useNavigate } from 'react-router-dom';
-import AdminNav from '../../../components/adminNav'
+
 import axios from 'axios';
 
 const Create_Comics = () => {

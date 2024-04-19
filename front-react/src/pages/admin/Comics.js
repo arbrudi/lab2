@@ -1,7 +1,9 @@
+
 import React, { useState, useEffect } from "react";
-import AdminNav from '../../components/adminNav'
+import AdminBar from '../../components/AdminBar'
 import axios from 'axios';
 import { Link } from "react-router-dom";
+
 
 
 
@@ -61,7 +63,7 @@ const Comics = () =>{
 
    return (
         <div>
-            <AdminNav />
+            <AdminBar />
             <h1>Comics crud</h1> 
 
             <div>

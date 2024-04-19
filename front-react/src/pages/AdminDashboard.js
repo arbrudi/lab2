@@ -1,10 +1,10 @@
 import React from 'react';
-import AdminNav from '../components/adminNav'
+import AdminBar from '../components/AdminBar'
 
 const AdminDashboard = () => {
   return (
     <div > 
-      <AdminNav/>
+      <AdminBar/>
     </div>
   );
 }

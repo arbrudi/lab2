@@ -6,6 +6,7 @@ from Views.Books import books_bp
 from Views.Events import events_bp
 from Views.Comics import Comics_bp
 from Views.Comics_Author import ComicsA_bp
+from Views.Book_Genre import bookG_bp
 
 
 def create_app():
@@ -26,10 +27,12 @@ def create_app():
     
     app.register_blueprint(views_bp)
     app.register_blueprint(auth_bp)
-    app.register_blueprint(books_bp) 
+    app.register_blueprint(books_bp)
+    app.register_blueprint(bookG_bp) 
     app.register_blueprint(events_bp)
     app.register_blueprint(Comics_bp)
     app.register_blueprint(ComicsA_bp)
+
 
     with app.app_context():
         try:

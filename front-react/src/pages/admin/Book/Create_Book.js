@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { useNavigate } from 'react-router-dom';
-import AdminNav from '../../../components/adminNav'
 import axios from 'axios';
+import '../css/Create.css'
 
 const Create_Book = () => {
     const [formData, setFormData] = useState({
@@ -30,10 +30,9 @@ const Create_Book = () => {
     };
 
     return (
-        <div>
-           
+        <div className="container_c">
             <h1>Add a new book</h1>
-            {error && <p>{error}</p>}
+            {error && <p className="error-message">{error}</p>}
             <form onSubmit={handleSubmit}>
                 <label>
                     ISBN:

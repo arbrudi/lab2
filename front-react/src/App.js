@@ -24,6 +24,8 @@ import Edit_Comics_Author from './pages/admin/Comics_Author/Edit_Comics_Author';
 import Create_Comics_Author from './pages/admin/Comics_Author/Create_Comics_Author';
 
 
+import Create_Genre from './pages/admin/Book_Genre/Create_Genre';
+import Edit_Genre from './pages/admin/Book_Genre/Edit_Genre';
 
 function App() {
   return (
@@ -42,18 +44,18 @@ function App() {
           <Route path="/login" element={<LoginPage />} /> 
           <Route path="/register" element={<RegisterPage />} /> 
           <Route path="/admin" element={<Admin />} /> 
+
           <Route path="/admin/book" element={<Book />} /> 
           <Route path="/admin/book/create" element={<Create_Book />} /> 
           <Route path="/admin/book/update/:id" element={<Edit_Books />} /> 
-
+          <Route path="/admin/book_genre/create" element={<Create_Genre />} /> 
+          <Route path="/admin/book_genre/update/:Book_Genre_ID" element={<Edit_Genre/>} /> 
+ 
           <Route path="/admin/comics" element={<Comics />} /> 
           <Route path="/admin/comics/create" element={<Create_Comics />} /> 
           <Route path="/admin/comics/update/:id" element={<Edit_Comics />} /> 
-          <Route path="/admin/comics/update/:id" element={<Edit_Comics />} /> 
-
           <Route path="/admin/comics_Author/create" element={<Create_Comics_Author />} />
           <Route path="/admin/comics_Author/update/:id" element={<Edit_Comics_Author />} /> 
-
 
           <Route path="/admin/event_books" element={<EventBooks/>} /> 
           <Route path="/admin/event" element={<Event/>} /> 
