@@ -1,9 +1,9 @@
 import React from "react"; 
-import AdminNav from '../../components/adminNav'
+import AdminBar from '../../components/AdminBar'
 
 const Event_books = () =>{
     return( <div>
-        <AdminNav/>
+        <AdminBar/>
         <h1> event books crud</h1>
         </div>
 

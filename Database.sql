@@ -12,6 +12,15 @@ CREATE TABLE Comics (
   Comic_Description TEXT
 );
 
+CREATE TABLE Comics_Author(
+Comics_Author_ID int NOT NULL PRIMARY KEY,
+Comic_ID VARCHAR(50) NOT NULL,
+Author_Name varchar(50) NOT NULL,
+Publisher varchar(50) NOT NULL,
+Author_notes varchar(255),
+FOREIGN KEY (Comic_ID) REFERENCES Comics(Comic_ID)
+)
+
 CREATE TABLE Comics_comments (
   User_ID INT NOT NULL,
   Comic_ID VARCHAR(50) NOT NULL,
@@ -29,9 +38,10 @@ CREATE TABLE Books (
   Book_image TEXT,
   Book_title VARCHAR(255) NOT NULL,
   Book_author VARCHAR(255) NOT NULL,
-  Book_genre VARCHAR(255) NOT NULL,
+  Book_genre INT NOT NULL,
   Book_description TEXT NOT NULL
 );
+Select * FROM Books
 
 CREATE TABLE Book_Genre(
 Book_Genre_ID int NOT NULL PRIMARY KEY,
@@ -40,6 +50,9 @@ Genre_Name varchar(50) NOT NULL,
 FOREIGN KEY (ISBN) REFERENCES Books(ISBN)
 );
 
+INSERT INTO Book_Genre(Book_Genre_ID, ISBN, Genre_Name)
+VALUES(1, 1234, 'Fantasy')
+SELECT * FROM Book_Genre
 CREATE TABLE Book_comments (
   User_ID INT NOT NULL,
   ISBN INT NOT NULL,

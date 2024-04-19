@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import AdminNav from '../../components/adminNav'; // Assuming AdminNav component is already styled
+import AdminBar from '../../components/AdminBar';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import './../../assets/css/Event.css'; // Assuming this CSS file contains styles for the Event component
@@ -54,7 +54,9 @@ const Event = () => {
 
   return (
     <div className='container'>
-      <AdminNav />
+    
+    <div>
+      <AdminBar />
       <div>
         <h1 className='list'>Events List</h1>
         <div className='add-link'>
@@ -87,6 +89,7 @@ const Event = () => {
             ))}
           </tbody>
         </table>
+      </div> 
       </div>
       <div>
         <h1 className='list'>Participant List</h1>

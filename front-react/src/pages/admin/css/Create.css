@@ -1,0 +1,63 @@
+.container_c {
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 5%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .container_c h1 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .container_c label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .container_c input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .container_c button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0cc218;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .container_c button:hover {
+    background-color: #00b333;
+  }
+  .container_c textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    resize: vertical; 
+    min-height: 100px; 
+  }
+  .cancel{
+    text-decoration: none;
+    margin-top:15px;
+    color: black;
+  }
+  .container_c .error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import AdminNav from '../../../components/adminNav';
+import AdminNav from '../../../components/AdminBar';
 import axios from 'axios';
 import '../../../assets/css/Create.css'; // Assuming this CSS file contains styles for the Create_Event component
 
