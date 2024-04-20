@@ -45,7 +45,7 @@ def get_event(event_id):
         event = Events.query.get(event_id)
         if event is None:
             return jsonify({'error': 'Event not found'}), 404
-        
+
         event_data = {
             'Event_ID': event.Event_ID,
             'Event_image': event.Event_image,
@@ -64,7 +64,7 @@ def update_event(event_id):
         event = Events.query.get(event_id)
         if event is None:
             return jsonify({'error': 'Event not found'}), 404
-        
+
         data = request.get_json()
         for key, value in data.items():
             setattr(event, key, value)
@@ -84,12 +84,8 @@ def delete_event(event_id):
 
         db.session.delete(event)
         db.session.commit()
-        
+
         return jsonify({'message': 'Event deleted successfully'}), 200
     except Exception as e:
         print("Error:", e)
         return jsonify({"error": str(e)}), 500 
-    
-
-
-    
