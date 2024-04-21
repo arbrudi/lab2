@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import AdminBar from '../../components/AdminBar'
 import axios from 'axios';
 import { Link } from "react-router-dom";
-
+import './css/Books_.css'
 
 
 
@@ -62,20 +62,21 @@ const Comics = () =>{
 
 
    return (
-        <div>
+        <div class='container'>
             <AdminBar />
-            <h1>Comics crud</h1> 
+      
+
+         
+
+
+
 
             <div>
+        <h1 class='list'>Comic List</h1>
+           <div class='add-link' >
                   <Link to={'/admin/comics/create'}>Comics</Link>
             </div>
-
-
-
-
-            <div>
-        <h1>Comic List</h1>
-        <table>
+        <table class='table'>
           <thead>
             <tr>
               <th>Comic ID</th>
@@ -93,20 +94,20 @@ const Comics = () =>{
                 <td>{comic.Comic_type}</td>
                 <td>{comic.Comic_Description}</td>
                 <Link to={`/admin/comics/update/${comic.Comic_ID}`}>
-                        <button>Edit</button>
+                        <button class='edit-bttn'>Edit</button>
                     </Link>
-                    <button onClick={()=>handleDelete(comic.Comic_ID)}>Delete</button>
+                    <button class='del-bttn' onClick={()=>handleDelete(comic.Comic_ID)}>Delete</button>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
             <div>
-           <h1>Genre List</h1>
-           <div>
+           <h1 class='list'>Author List</h1>
+           <div class='add-link'>
                   <Link to={'/admin/comics_Author/create'}>Comics Author</Link>
             </div>
-           <table>
+           <table class='table'>
           <thead>
             <tr>
               <th>Comic_ID</th>
