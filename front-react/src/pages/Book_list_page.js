@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-
+import './pages_css/BookList.css'
 
 const Book_list_page = () =>{
 
@@ -23,14 +23,26 @@ const Book_list_page = () =>{
     return (
         <div>
             <h1>This is the Book_list_page!</h1>
-            <div>
+            <div className="book-container">
                 {books.map((book )=> (
+                  <div className="book" key={book.ISBN}>
                     <div key={book.ISBN}>
+                      <div className="book-img">
+                        <img src={book.Book_image} alt={book.Book_title} />
+                        </div>
+                        <div className="book-title">
                         <h2>{book.Book_title}</h2>
+                        </div>
+                        <div className="book-author">
                         <p>{book.Book_author}</p>
+                        </div>
+                        <div className="book-genre">
                         <p>{book.Book_genre}</p>
-                        <p>{book.Book_description}</p>
-
+                        </div>
+                        <div className="read-more-b">
+                          <button>Read more</button>
+                          </div>
+                    </div>
                     </div>
                 ))}
             </div>
