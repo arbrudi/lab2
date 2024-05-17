@@ -1,0 +1,29 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;  
+  }
+  
+  .event-details-container {
+    margin-top: 20px;
+    border: 2px solid #ccc;
+    padding: 20px;
+  }
+  
+  .event-image-details { 
+    margin-left: 100px;
+    max-width: 1300px;
+    height: 700px;
+    margin-bottom: 10px; 
+  }
+  
+  .event-description {
+    font-size: 30px;
+    text-align: center; 
+    font-style:calc();
+  }
+  
+  .event-date {
+    font-style: italic;
+    color: #fa9c3e;
+  }
