@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './pages_css/BookList.css'
 
@@ -40,7 +41,9 @@ const Book_list_page = () =>{
                         <p>{book.Book_genre}</p>
                         </div>
                         <div className="read-more-b">
+                          <Link to={`/book/${book.ISBN}`}>
                           <button>Read more</button>
+                          </Link>
                           </div>
                     </div>
                     </div>
