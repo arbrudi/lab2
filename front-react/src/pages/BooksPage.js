@@ -48,6 +48,7 @@ const BooksPage = () =>{
                             <p>Genre: {book.Book_genre}</p>
                         </div>
                         <div className="bookP-description">
+                            <p>Description:</p>
                             <p>{book.Book_description}</p>
                         </div>
                     </div>
