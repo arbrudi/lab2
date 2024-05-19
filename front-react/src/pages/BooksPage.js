@@ -33,9 +33,9 @@ const BooksPage = () =>{
                 <div className="bookP" key={book.ISBN}>
                     <div className="imgP-container">
                         <img src={book.Book_image} alt={book.Book_title} />
-                    </div>
                     <div className="bookP_status">
                         <a>Option 1</a>
+                    </div>
                     </div>
                     <div className="textP-section">
                         <div className="bookP-title">
