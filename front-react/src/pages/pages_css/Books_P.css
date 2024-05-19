@@ -1,0 +1,9 @@
+.bookP{
+    margin-left: 50px;
+    margin-top: 50px;
+}
+
+.imgP-container img{
+    max-width: 500px;
+    max-height: 500px;
+}
