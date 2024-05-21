@@ -31,9 +31,6 @@ const BooksPage = () =>{
         return <div>Loading...</div>;
     }
 
-    console.log("Book:", book); // Log book state
-    console.log("Genres:", genres); // Log genres state
-
     return (
         
         <div>
