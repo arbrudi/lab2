@@ -16,7 +16,7 @@ def create_app():
     # Change SERVER
     conn = 'mssql+pyodbc:///?odbc_connect=' + \
            'DRIVER={ODBC Driver 17 for SQL Server};' + \
-           'SERVER=Eris;' + \
+           'SERVER=LAPTOP-TQGV5751;' + \
            'DATABASE=lab2;' + \
            'Trusted_Connection=yes;'
 
