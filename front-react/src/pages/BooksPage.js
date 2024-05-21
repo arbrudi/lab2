@@ -7,6 +7,7 @@ const BooksPage = () =>{
 
     const { id } = useParams();
     const [book, setBook] = useState({});
+    const [genres, setGenres] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -14,9 +15,12 @@ const BooksPage = () =>{
             try {
                 const response = await axios.get(`/admin/book/${id}`);
                 setBook(response.data);
+                const genreResponse = await axios.get(`/books_by_genre/${id}`);
+                const genresArray = Array.isArray(genreResponse.data) ? genreResponse.data : [genreResponse.data];
+                setGenres(genresArray);
                 setLoading(false);
             } catch (error) {
-                console.error("Error fetching book:", error);
+                console.error("Error fetching book or genres:", error);
             }
         };
 
@@ -27,7 +31,11 @@ const BooksPage = () =>{
         return <div>Loading...</div>;
     }
 
+    console.log("Book:", book); // Log book state
+    console.log("Genres:", genres); // Log genres state
+
     return (
+        
         <div>
             <div className="bookP-container">
                 <div className="bookP" key={book.ISBN}>
@@ -45,7 +53,7 @@ const BooksPage = () =>{
                             <p>Author: {book.Book_author}</p>
                         </div>
                         <div className="bookP-genre">
-                            <p>Genre: {book.Book_genre}</p>
+                        <p>Genres: {genres.join(", ")}</p>
                         </div>
                         <div className="bookP-description">
                             <p>Description:</p>
