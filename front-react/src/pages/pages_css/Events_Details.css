@@ -1,29 +1,57 @@
+/* Container with a gradient background and rounded corners */
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;  
-  }
-  
-  .event-details-container {
-    margin-top: 20px;
-    border: 2px solid #ccc;
-    padding: 20px;
-  }
-  
-  .event-image-details { 
-    margin-left: 100px;
-    max-width: 1300px;
-    height: 700px;
-    margin-bottom: 10px; 
-  }
-  
-  .event-description {
-    font-size: 30px;
-    text-align: center; 
-    font-style:calc();
-  }
-  
-  .event-date {
-    font-style: italic;
-    color: #fa9c3e;
-  }
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 15px;
+  color: #f9a845;
+  text-align: center;
+}
+
+/* Event details container with semi-transparent background and border */
+.event-details-container {
+  margin-top: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  background: #f5ba72;
+  border-radius: 10px;
+  color: #fff;
+}
+
+/* Styling for the event image with shadow and hover effect */
+.event-image-details {
+  display: block;
+  max-width: 1200px;
+  height: auto;
+  margin: 20px auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-image-details:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(222, 153, 49, 0.5);
+}
+
+/* Event description with a modern font and gradient text */
+.event-description-details {
+  font-size: 32px;
+  font-weight: bold;
+  background: -webkit-linear-gradient(#1b0603, #110500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+}
+
+/* Event date with a distinctive style */
+.event-date-details {
+  font-size: 20px;
+  font-style: italic;
+  color: #181716;
+  margin-top: 10px;
+  display: inline-block;
+  padding: 5px 10px;
+  background: rgba(12, 12, 12, 0.2);
+  border-radius: 5px;
+}

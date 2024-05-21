@@ -23,16 +23,16 @@ const EventDetailsPage = () => {
 
   return (
     <div className='container'>
-      <div className='event-details-container'>
+      <div className='event-details-container'> 
         {event.Event_image && (
           <img src={event.Event_image} alt="Event" className="event-image-details" />
         )}
         <div className="event-details">
           {event.Event_description && (
-            <p className="event-description">{event.Event_description}</p>
+            <p className="event-description-details">{event.Event_description}</p>
           )}
           {event.Event_date && (
-            <p className="event-date">{event.Event_date}</p>
+            <p className="event-date-details">{event.Event_date}</p>
           )}
         </div>
       </div>
