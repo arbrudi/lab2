@@ -52,3 +52,19 @@
   .book-genre p {
     font-weight: bold;
   }
+  .read-more-b {
+    margin-top: 10px; 
+  }
+  
+  .read-more-b button {
+    background-color: #007bff; 
+    color: white; 
+    border: none; 
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+  }
+  
+  .read-more-b button:hover {
+    background-color: #0056b3; 
+  }

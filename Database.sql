@@ -41,7 +41,6 @@ CREATE TABLE Books (
   Book_genre INT NOT NULL,
   Book_description TEXT NOT NULL
 );
-Select * FROM Books
 
 CREATE TABLE Book_Genre(
 Book_Genre_ID int NOT NULL PRIMARY KEY,
@@ -50,9 +49,15 @@ Genre_Name varchar(50) NOT NULL,
 FOREIGN KEY (ISBN) REFERENCES Books(ISBN)
 );
 
-INSERT INTO Book_Genre(Book_Genre_ID, ISBN, Genre_Name)
-VALUES(1, 1234, 'Fantasy')
-SELECT * FROM Book_Genre
+CREATE TABLE Book_Status(
+  ISBN INT NOT NULL,
+  User_ID INT NOT NULL,
+  Book_Status_ID INT PRIMARY KEY,
+  Book_state varchar(25) NOT NULL,
+  FOREIGN KEY (ISBN) REFERENCES Books(ISBN),
+  FOREIGN KEY (User_ID) REFERENCES Users(User_ID),
+  CONSTRAINT b_state check(Book_state IN ('Read', 'Going to read', 'Dropped', 'Finished'))
+)
 CREATE TABLE Book_comments (
   User_ID INT NOT NULL,
   ISBN INT NOT NULL,
