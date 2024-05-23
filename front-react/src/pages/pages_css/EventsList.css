@@ -13,7 +13,8 @@
   }
   
   .event-item {
-    width: calc(33.333% - 20px); /* Adjust width to fit three items in one row */ 
+    width: calc(33.333% - 20px); /* Adjust width to fit three items in one row */  
+    margin-top: 10px;
     margin-bottom: 20px; /* Add margin between rows */
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -45,7 +46,7 @@
   
   .event-date {
     font-size: 16px;
-    color: #9795df; 
+    color: #908de1; 
     margin-top: 50px;
     margin-bottom: 10px;
   }
@@ -55,7 +56,7 @@
     background-color: #f3c571;
     color: #fff;  
     margin-top: 50px;
-    margin-left: 50px;
+    margin-left: 30px;
     padding: 8px 16px;
     border-radius: 4px;
     text-decoration: none;
