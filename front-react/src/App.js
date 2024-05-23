@@ -30,6 +30,16 @@ import Edit_Genre from './pages/admin/Book_Genre/Edit_Genre';
 import Comic_list_page from './pages/Comic_list_page';
 
 function App() {
+
+
+  const user = localStorage.getItem("userToken");
+  const admin = localStorage.getItem("adminToken");
+
+
+  console.log(user,"client")
+  console.log(admin ,"admin")
+
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -38,14 +48,43 @@ function App() {
       <NavBar />
       <div className="page-body">
         <Routes>
+
+        {user || admin == null &&
+           <>
+           <Route index element={<LoginPage />} />
+           <Route path="/login" element={<LoginPage />} /> 
+           <Route path="/register" element={<RegisterPage />} /> 
+              {/*<Route path="/*" element={<PageNotFound />} /> */}
+              
+           </> 
+          }
+       {user &&
+          <>
+
           <Route path="/" element={<HomePage />} /> 
           <Route path="/about" element={<AboutPage />} /> 
-          
-         
           <Route path="/events" element={<EventsPage />} /> 
           <Route path="/login" element={<LoginPage />} /> 
           <Route path="/register" element={<RegisterPage />} /> 
+          <Route path="/book/:id" element={<BooksPage />} /> 
+          <Route path="/books" element={<Book_list_page />} /> 
+          <Route path="/comics/:id" element={<ComicsPage />} /> 
+          <Route path="/comics" element={<Comic_list_page/>} /> 
+          <Route path="/admin/event_books" element={<EventBooks/>} /> 
+          <Route path="/admin/event" element={<Event/>} /> 
+
+          </>
+          }
+{admin &&
+           <>
           <Route path="/admin" element={<Admin />} /> 
+
+
+          <Route path="/" element={<HomePage />} /> 
+          <Route path="/about" element={<AboutPage />} /> 
+          <Route path="/events" element={<EventsPage />} /> 
+          <Route path="/login" element={<LoginPage />} /> 
+          <Route path="/register" element={<RegisterPage />} />
 
           {/* BOOKS */}
           <Route path="/book/:id" element={<BooksPage />} /> 
@@ -72,7 +111,8 @@ function App() {
           <Route path="/admin/event/update/:id" element={<Edit_Events />} /> 
           <Route path="/admin/event_participant/create" element={<Create_participant />} /> 
           <Route path="/admin/event_participant/update/:Event_ID" element={<Edit_participant />} /> 
-
+          </>
+           }
         </Routes>
       </div>
       <Footer />

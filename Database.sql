@@ -168,3 +168,6 @@ ADD CONSTRAINT FK_favorite_books_ISBN FOREIGN KEY (ISBN) REFERENCES Books(ISBN);
 
 
 Select*from Users
+
+Alter Table Users 
+
