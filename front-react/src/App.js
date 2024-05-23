@@ -27,6 +27,7 @@ import Create_Comics_Author from './pages/admin/Comics_Author/Create_Comics_Auth
 import Book_list_page from './pages/Book_list_page';
 import Create_Genre from './pages/admin/Book_Genre/Create_Genre';
 import Edit_Genre from './pages/admin/Book_Genre/Edit_Genre';
+import Comic_list_page from './pages/Comic_list_page';
 
 function App() {
   return (
@@ -40,7 +41,7 @@ function App() {
           <Route path="/" element={<HomePage />} /> 
           <Route path="/about" element={<AboutPage />} /> 
           
-          <Route path="/comics" element={<ComicsPage />} /> 
+         
           <Route path="/events" element={<EventsPage />} /> 
           <Route path="/login" element={<LoginPage />} /> 
           <Route path="/register" element={<RegisterPage />} /> 
@@ -55,7 +56,9 @@ function App() {
           <Route path="/admin/book_genre/create" element={<Create_Genre />} /> 
           <Route path="/admin/book_genre/update/:Book_Genre_ID" element={<Edit_Genre/>} /> 
  
-          {/* COMICS */}
+          {/* COMICS */} 
+          <Route path="/comics/:id" element={<ComicsPage />} /> 
+          <Route path="/comics" element={<Comic_list_page/>} /> 
           <Route path="/admin/comics" element={<Comics />} /> 
           <Route path="/admin/comics/create" element={<Create_Comics />} /> 
           <Route path="/admin/comics/update/:id" element={<Edit_Comics />} /> 
