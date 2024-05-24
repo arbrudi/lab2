@@ -53,7 +53,10 @@ const EventDetailsPage = () => {
         {event.Event_image && (
           <img src={event.Event_image} alt="Event" className="event-image-details" />
         )}
-        <div className="event-details">
+        <div className="event-details"> 
+        {event.Event_title && (
+            <p className="event-description-details">{event.Event_title}</p>
+          )}
           {event.Event_description && (
             <p className="event-description-details">{event.Event_description}</p>
           )}

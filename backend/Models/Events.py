@@ -2,7 +2,8 @@ from extensions import db
 
 class Events(db.Model):
     __tablename__ = 'events'
-    Event_ID = db.Column(db.String(255), primary_key=True)
+    Event_ID = db.Column(db.String(255), primary_key=True) 
+    Event_title=db.Column(db.String)
     Event_image = db.Column(db.Text)
     Event_description = db.Column(db.Text)
     Event_date = db.Column(db.Date)
