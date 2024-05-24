@@ -9,7 +9,6 @@ from Views.Comics import Comics_bp
 from Views.Comics_Author import ComicsA_bp
 from Views.Book_Genre import bookG_bp
 
-
 def create_app():
     app = Flask(__name__)
 
@@ -34,7 +33,6 @@ def create_app():
     app.register_blueprint(eventp_bp) 
     app.register_blueprint(Comics_bp)
     app.register_blueprint(ComicsA_bp)
-
 
     with app.app_context():
         try:

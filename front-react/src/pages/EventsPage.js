@@ -25,7 +25,6 @@ const EventsPage = () => {
  
   return (
     <div className='container'>
-     
       <div className='events-list'>
         {events.map((event) => (
           <div key={event.Event_ID} className="event-item">
@@ -35,7 +34,7 @@ const EventsPage = () => {
               <p className="event-date">{event.Event_date}</p>
               <Link to={`/eventsdetails/${event.Event_ID}`} className="event-link">View Details</Link>
             </div>
-          </div>
+          </div> 
         ))}
       </div>
     </div>

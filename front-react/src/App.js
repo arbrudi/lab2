@@ -25,10 +25,8 @@ import Edit_Comics from './pages/admin/Comics/Edit_Comics';
 import Edit_Comics_Author from './pages/admin/Comics_Author/Edit_Comics_Author';
 import Create_Comics_Author from './pages/admin/Comics_Author/Create_Comics_Author';
 import EventDetailsPage from './pages/Event_details';
-
 import Create_Genre from './pages/admin/Book_Genre/Create_Genre';
 import Edit_Genre from './pages/admin/Book_Genre/Edit_Genre';
-
 function App() {
   return (
     <BrowserRouter>
@@ -68,8 +66,6 @@ function App() {
           <Route path="/admin/event_participant/create" element={<Create_participant />} /> 
           <Route path="/admin/event_participant/update/:Event_ID" element={<Edit_participant />} /> 
           
-         
-
         </Routes>
       </div>
       <Footer />

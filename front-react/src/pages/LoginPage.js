@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -15,33 +14,30 @@ const LoginPage = () => {
 
     try {
       const response = await axios.post('/login', { Username: username, Password: password });
-      const token = response.data.token;
+      const { token, user_id, role } = response.data;
       
       localStorage.setItem('token', token); 
-      
-     if (response.data.role === 'admin'){
-      navigate('/admin'); 
-      
-     }else if (response.data.role === 'client'){
-      navigate('/client'); 
-      
-     }else{
-      setError('Please contact your admininstrator!');
-     }
+      localStorage.setItem('user_id', user_id); // Store user_id in localStorage
+
+      if (role === 'admin') {
+        navigate('/admin'); 
+      } else if (role === 'client') {
+        navigate('/client'); 
+      } else {
+        setError('Please contact your administrator!');
+      }
     } catch (error) {
       console.error('Login failed:', error.response.data.message);
       setError('Invalid username or password');
-
-      console.error('Login failed:', error.response.data.message);
       setLoginMessage(error.response.data.message);
     }
   };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('user_id'); // Remove user_id from localStorage
     navigate('/login'); 
   };
-
 
   return (
     <div>
