@@ -27,7 +27,22 @@ import Create_Comics_Author from './pages/admin/Comics_Author/Create_Comics_Auth
 import EventDetailsPage from './pages/Event_details';
 import Create_Genre from './pages/admin/Book_Genre/Create_Genre';
 import Edit_Genre from './pages/admin/Book_Genre/Edit_Genre';
+import Book_list_page from './pages/Book_list_page';
+import Create_Genre from './pages/admin/Book_Genre/Create_Genre';
+import Edit_Genre from './pages/admin/Book_Genre/Edit_Genre';
+import Comic_list_page from './pages/Comic_list_page';
+
 function App() {
+
+
+  const user = localStorage.getItem("userToken");
+  const admin = localStorage.getItem("adminToken");
+
+
+  console.log(user,"client")
+  console.log(admin ,"admin")
+
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -36,29 +51,65 @@ function App() {
       <NavBar />
       <div className="page-body">
         <Routes>
+
+        {user || admin == null &&
+           <>
+           <Route index element={<LoginPage />} />
+           <Route path="/login" element={<LoginPage />} /> 
+           <Route path="/register" element={<RegisterPage />} /> 
+              {/*<Route path="/*" element={<PageNotFound />} /> */}
+              
+           </> 
+          }
+       {user &&
+          <>
+
           <Route path="/" element={<HomePage />} /> 
           <Route path="/about" element={<AboutPage />} /> 
-          <Route path="/books" element={<BooksPage />} /> 
-          <Route path="/comics" element={<ComicsPage />} /> 
           <Route path="/events" element={<EventsPage />} /> 
           <Route path="/login" element={<LoginPage />} /> 
           <Route path="/register" element={<RegisterPage />} /> 
+          <Route path="/book/:id" element={<BooksPage />} /> 
+          <Route path="/books" element={<Book_list_page />} /> 
+          <Route path="/comics/:id" element={<ComicsPage />} /> 
+          <Route path="/comics" element={<Comic_list_page/>} /> 
+          <Route path="/admin/event_books" element={<EventBooks/>} /> 
+          <Route path="/admin/event" element={<Event/>} /> 
+
+          </>
+          }
+{admin &&
+           <>
           <Route path="/admin" element={<Admin />} /> 
 
           <Route path="/eventsdetails/:Event_ID" element={<EventDetailsPage />} /> 
 
+
+          <Route path="/" element={<HomePage />} /> 
+          <Route path="/about" element={<AboutPage />} /> 
+          <Route path="/events" element={<EventsPage />} /> 
+          <Route path="/login" element={<LoginPage />} /> 
+          <Route path="/register" element={<RegisterPage />} />
+
+          {/* BOOKS */}
+          <Route path="/book/:id" element={<BooksPage />} /> 
+          <Route path="/books" element={<Book_list_page />} /> 
           <Route path="/admin/book" element={<Book />} /> 
           <Route path="/admin/book/create" element={<Create_Book />} /> 
           <Route path="/admin/book/update/:id" element={<Edit_Books />} /> 
           <Route path="/admin/book_genre/create" element={<Create_Genre />} /> 
           <Route path="/admin/book_genre/update/:Book_Genre_ID" element={<Edit_Genre/>} /> 
  
+          {/* COMICS */} 
+          <Route path="/comics/:id" element={<ComicsPage />} /> 
+          <Route path="/comics" element={<Comic_list_page/>} /> 
           <Route path="/admin/comics" element={<Comics />} /> 
           <Route path="/admin/comics/create" element={<Create_Comics />} /> 
           <Route path="/admin/comics/update/:id" element={<Edit_Comics />} /> 
           <Route path="/admin/comics_Author/create" element={<Create_Comics_Author />} />
           <Route path="/admin/comics_Author/update/:id" element={<Edit_Comics_Author />} /> 
 
+          {/* EVENTS */}
           <Route path="/admin/event_books" element={<EventBooks/>} /> 
           <Route path="/admin/event" element={<Event/>} /> 
           <Route path="/admin/event/create" element={<Create_Event />} />  
@@ -66,6 +117,8 @@ function App() {
           <Route path="/admin/event_participant/create" element={<Create_participant />} /> 
           <Route path="/admin/event_participant/update/:Event_ID" element={<Edit_participant />} /> 
           
+          </>
+           }
         </Routes>
       </div>
       <Footer />

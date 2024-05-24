@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 * {
   box-sizing: border-box;
+  font-family: 'Poppins';
 }
 
 body {
@@ -10,7 +12,7 @@ body {
 .foot {
   display: flex;
   justify-content: space-between;
-  background-color: #555555;
+  background-color: #30a3a7;
   color: #fff;
   padding: 20px;
   position: absolute;

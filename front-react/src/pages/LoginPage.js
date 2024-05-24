@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import './pages_css/Loginpage.css';
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -26,6 +28,34 @@ const LoginPage = () => {
       } else {
         setError('Please contact your administrator!');
       }
+      
+      if (response.data.role === 'admin') {
+        // Redirect to user dashboard
+        navigate('/admin',{replace:true})
+
+        localStorage.setItem("adminToken", JSON.stringify({
+          role : "admin",
+          token : response.data.token,
+          User :response.data.ID
+
+        }))
+        window.location.reload()
+      
+     }else if (response.data.role === 'client'){
+              // Redirect to user dashboard
+              navigate('/about',{replace:true})
+
+              localStorage.setItem("userToken", JSON.stringify({
+                role : "client",
+                token : response.data.token,
+                User :response.data.ID
+      
+              }))
+              window.location.reload()
+      
+     }else{
+      setError('Please contact your admininstrator!');
+     }
     } catch (error) {
       console.error('Login failed:', error.response.data.message);
       setError('Invalid username or password');
@@ -33,14 +63,16 @@ const LoginPage = () => {
     }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user_id'); // Remove user_id from localStorage
-    navigate('/login'); 
-  };
+  const logoutFunction = ()=>{
+    localStorage.removeItem("userToken");
+    localStorage.removeItem("adminToken");
+    localStorage.removeItem('user_id');
+    setTimeout(() => {navigate("/login", {replace:true})}, 400);
+    setTimeout(()=> { window.location.reload()},500)
+}
 
   return (
-    <div>
+    <div className="container_c">
       <h1>Login Page</h1>
       {loginMessage && <p>{loginMessage}</p>}
       <form onSubmit={handleSubmit}>
@@ -63,9 +95,9 @@ const LoginPage = () => {
           />
         </div>
         <button type="submit">Login</button>
-        {error && <div style={{ color: 'red' }}>{error}</div>}
+        {error && <div className="error">{error}</div>}
       </form>
-      <button onClick={handleLogout}>Logout</button>
+      <button className="logout" onClick={()=> logoutFunction()}>Logout</button>
       <Link to="/register">Register</Link>
     </div>
   );

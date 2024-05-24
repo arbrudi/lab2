@@ -21,6 +21,7 @@ def add_Comic():
         print("Error:", e)
         return jsonify({"error": str(e)}), 500
     
+
 @Comics_bp.route('/admin/comics', methods=['GET'])
 def get_comics():
     try:
@@ -40,6 +41,9 @@ def get_comics():
     except Exception as e:
         print("Error: ", e)
         return jsonify({"error": str(e)}), 500
+    
+
+    
     
 
 
