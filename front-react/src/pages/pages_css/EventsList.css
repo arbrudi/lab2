@@ -61,16 +61,4 @@
   font-style: italic;
 }
 
-.event-link {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
 
-.event-link:hover {
-  background-color: #0056b3;
-}
