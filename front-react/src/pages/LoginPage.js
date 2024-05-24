@@ -90,7 +90,7 @@ const LoginPage = () => {
         <button type="submit">Login</button>
         {error && <div className="error">{error}</div>}
       </form>
-      <button onClick={()=> logoutFunction()}>Logout</button>
+      <button className="logout" onClick={()=> logoutFunction()}>Logout</button>
       <Link to="/register">Register</Link>
     </div>
   );
