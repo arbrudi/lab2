@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './pages_css/Loginpage.css';
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -64,7 +65,7 @@ const LoginPage = () => {
 
 
   return (
-    <div>
+    <div className="container_c">
       <h1>Login Page</h1>
       {loginMessage && <p>{loginMessage}</p>}
       <form onSubmit={handleSubmit}>
@@ -87,7 +88,7 @@ const LoginPage = () => {
           />
         </div>
         <button type="submit">Login</button>
-        {error && <div style={{ color: 'red' }}>{error}</div>}
+        {error && <div className="error">{error}</div>}
       </form>
       <button onClick={()=> logoutFunction()}>Logout</button>
       <Link to="/register">Register</Link>
