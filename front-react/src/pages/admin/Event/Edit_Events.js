@@ -5,8 +5,9 @@ import { Link, useParams } from "react-router-dom";
 const Edit_Events = () => {
     const { id } = useParams();
     const [event, setEvent] = useState({});
-    const [formData, setFormData] = useState({
-        Event_image: "",
+    const [formData, setFormData] = useState({ 
+        Event_title: "",
+        Event_image: "", 
         Event_description: "",
         Event_date: ""
     });
@@ -16,7 +17,8 @@ const Edit_Events = () => {
             try {
                 const response = await axios.get(`/admin/event/${id}`);
                 setEvent(response.data);
-                setFormData({
+                setFormData({ 
+                    Event_title: response.data.Event_title,
                     Event_image: response.data.Event_image,
                     Event_description: response.data.Event_description,
                     Event_date: response.data.Event_date
@@ -46,7 +48,11 @@ const Edit_Events = () => {
     return (
         <div>
             <h1>Edit Event</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}> 
+            <div>
+                    <label>Event Title:</label>
+                    <input type="text" name="Event_title" value={formData.Event_title} onChange={handleChange} />
+                </div>
                 <div>
                     <label>Event Image URL:</label>
                     <input type="text" name="Event_image" value={formData.Event_image} onChange={handleChange} />
