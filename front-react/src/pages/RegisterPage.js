@@ -6,7 +6,7 @@ const RegisterPage = () => {
     const [formData, setFormData] = useState({
         Name:'' ,
         Surname: '',
-        User_Role: 'admin',
+        User_Role: 'client',
         Email: '',
         Username: '',
         Password: ''

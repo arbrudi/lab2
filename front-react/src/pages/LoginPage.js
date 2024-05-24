@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './pages_css/Loginpage.css';
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -19,11 +20,29 @@ const LoginPage = () => {
       
       localStorage.setItem('token', token); 
       
-     if (response.data.role === 'admin'){
-      navigate('/admin'); 
+      if (response.data.role === 'admin') {
+        // Redirect to user dashboard
+        navigate('/admin',{replace:true})
+
+        localStorage.setItem("adminToken", JSON.stringify({
+          role : "admin",
+          token : response.data.token,
+          User :response.data.ID
+
+        }))
+        window.location.reload()
       
      }else if (response.data.role === 'client'){
-      navigate('/client'); 
+              // Redirect to user dashboard
+              navigate('/about',{replace:true})
+
+              localStorage.setItem("userToken", JSON.stringify({
+                role : "client",
+                token : response.data.token,
+                User :response.data.ID
+      
+              }))
+              window.location.reload()
       
      }else{
       setError('Please contact your admininstrator!');
@@ -37,14 +56,16 @@ const LoginPage = () => {
     }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/login'); 
-  };
+  const logoutFunction = ()=>{
+    localStorage.removeItem("userToken");
+    localStorage.removeItem("adminToken");
+    setTimeout(() => {navigate("/login", {replace:true})}, 400);
+    setTimeout(()=> { window.location.reload()},500)
+}
 
 
   return (
-    <div>
+    <div className="container_c">
       <h1>Login Page</h1>
       {loginMessage && <p>{loginMessage}</p>}
       <form onSubmit={handleSubmit}>
@@ -67,9 +88,9 @@ const LoginPage = () => {
           />
         </div>
         <button type="submit">Login</button>
-        {error && <div style={{ color: 'red' }}>{error}</div>}
+        {error && <div className="error">{error}</div>}
       </form>
-      <button onClick={handleLogout}>Logout</button>
+      <button className="logout" onClick={()=> logoutFunction()}>Logout</button>
       <Link to="/register">Register</Link>
     </div>
   );
