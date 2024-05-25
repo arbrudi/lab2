@@ -50,7 +50,7 @@ const Edit_Comics_Author = () => {
  };
 
  return (
-     <div>
+     <div className="container_c">
          <h1>Edit Author</h1>
          <form onSubmit={handleSubmit}>
 
