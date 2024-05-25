@@ -22,8 +22,6 @@ class Book_Genre(db.Model):
 class Book_Status(db.Model):
     """Base model for Book_Status"""
     __tablename__ = 'Book_Status'
-    ISBN = db.Column(db.Integer, db.ForeignKey('Books.ISBN'), nullable = False)
-    User_ID = db.Column(db.Integer, db.ForeignKey('Users.User_ID'), nullable = False)
     Book_Status_ID = db.Column(db.Integer, primary_key=True, autoincrement=False)
     Book_state = db.Column(db.String(25), nullable = False)
 
@@ -33,3 +31,15 @@ class Book_Status(db.Model):
             name='b_state'
         ),
     )
+
+
+class User_Book_Status(db.Model):
+    """Base class for User_Book_Status"""
+    __tablename__ = 'User_Book_Status'
+    ISBN = db.Column(db.Integer, db.ForeignKey('Books.ISBN'), primary_key=True, nullable=False)
+    Book_Status_ID = db.Column(db.Integer, db.ForeignKey('Book_Status.book_stat_ID'), primary_key=True, nullable=False)
+    User_ID = db.Column(db.Integer, db.ForeignKey('Users.user_id'), primary_key=True, nullable=False)
+
+    book = db.relationship('Book', backref=db.backref('user_book_statuses', cascade='all, delete-orphan'))
+    book_status = db.relationship('BookStatus', backref=db.backref('user_book_statuses', cascade='all, delete-orphan'))
+    user = db.relationship('User', backref=db.backref('user_book_statuses', cascade='all, delete-orphan'))

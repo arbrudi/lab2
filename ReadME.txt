@@ -17,6 +17,7 @@ pip install Flask-Login
 pip install Flask-User==0.6.21 
 pip install PyJWT
 pip install pyodbc
+pip install flask_bcrypt
 
 .\backend\back-flask\Scripts\Activate
 

@@ -1,0 +1,54 @@
+/* Event.css */
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .events-list {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next row */
+    justify-content: space-between; /* Space items evenly */
+  }
+  
+  .event-item {
+    width: calc(33.333% - 20px); /* Adjust width to fit three items in one row */
+    margin-bottom: 20px; /* Add margin between rows */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+  }
+  
+  .event-item:hover {
+    border-color: orange;
+  }
+  
+  .event-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .event-details {
+    padding: 20px;
+  }
+  
+  .event-description {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .event-date {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 10px;
+  }
+  
+
+  
+  .event-link:hover {
+    background-color: #0056b3;
+  }
