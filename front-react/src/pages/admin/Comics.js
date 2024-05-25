@@ -74,12 +74,13 @@ const Comics = () =>{
             <div>
         <h1 class='list'>Comic List</h1>
            <div class='add-link' >
-                  <Link to={'/admin/comics/create'}>Comics</Link>
+                  <Link to={'/admin/comics/create'}> Add Comics</Link>
             </div>
         <table class='table'>
           <thead>
             <tr>
               <th>Comic ID</th>
+              <th>Image</th>
               <th>Title</th>
               <th>Type</th>
               <th>Description</th>
@@ -88,8 +89,9 @@ const Comics = () =>{
           </thead>
           <tbody>
             {Comics.map((comic) => (
-              <tr key={comic.Comic_ID}>
-                <td>{comic.Comic_ID}</td>
+              <tr key={comic.Comic_ID}> 
+              <td>{comic.Comic_ID}</td>
+                <td>{comic.Comic_image}</td>
                 <td>{comic.Comic_title}</td>
                 <td>{comic.Comic_type}</td>
                 <td>{comic.Comic_Description}</td>
@@ -105,7 +107,7 @@ const Comics = () =>{
             <div>
            <h1 class='list'>Author List</h1>
            <div class='add-link'>
-                  <Link to={'/admin/comics_Author/create'}>Comics Author</Link>
+                  <Link to={'/admin/comics_Author/create'}> Add Comics Author</Link>
             </div>
            <table class='table'>
           <thead>

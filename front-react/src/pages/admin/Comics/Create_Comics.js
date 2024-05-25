@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { useNavigate } from 'react-router-dom';
+import '../css/Create.css'
 
 import axios from 'axios';
 
@@ -31,7 +32,7 @@ const Create_Comics = () => {
     };
 
     return (
-        <div>
+        <div className="container_c" >
            
             <h1>Comics</h1>
             {error && <p>{error}</p>}

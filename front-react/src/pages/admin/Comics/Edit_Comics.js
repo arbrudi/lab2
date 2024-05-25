@@ -48,8 +48,8 @@ const Edit_Comics = () => {
     };
 
     return (
-        <div>
-            <h1>Edit Book</h1>
+        <div className="container_c">
+            <h1>Edit Comics</h1>
             <form onSubmit={handleSubmit}>
                  <div>
                     <label>Cover Art:</label>

@@ -1,0 +1,72 @@
+/* LoginPage.css */
+  
+  .container_c {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+  }
+  
+  .container_c h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .container_c form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .container_c form div {
+    margin-bottom: 15px;
+  }
+  
+  .container_c label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .container_c input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+ 
+  
+
+  .container_c .error {
+    color: red;
+    margin-top: 10px;
+  }
+
+  .container_c button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #9e0b0b;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  
+  .container_c button:hover {
+    background-color: #218838;
+  }
+  
+
+  .container_c a {
+    display: block;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .container_c a:hover {
+    text-decoration: underline;
+  }
+  
