@@ -1,4 +1,6 @@
 from extensions import db
+from sqlalchemy import ForeignKey, Integer, Column
+from sqlalchemy.orm import relationship
 from Models.Users import Users
 
 class Books(db.Model):
@@ -36,10 +38,11 @@ class Book_Status(db.Model):
 class User_Book_Status(db.Model):
     """Base class for User_Book_Status"""
     __tablename__ = 'User_Book_Status'
-    ISBN = db.Column(db.Integer, db.ForeignKey('Books.ISBN'), primary_key=True, nullable=False)
-    Book_Status_ID = db.Column(db.Integer, db.ForeignKey('Book_Status.book_stat_ID'), primary_key=True, nullable=False)
-    User_ID = db.Column(db.Integer, db.ForeignKey('Users.user_id'), primary_key=True, nullable=False)
+    ISBN = Column(Integer, ForeignKey('Books.ISBN'), primary_key=True, nullable=False)
+    Book_Status_ID = Column(Integer, ForeignKey('Book_Status.Book_Status_ID'), nullable=False)
+    User_ID = Column(Integer, ForeignKey('Users.User_ID'), primary_key=True, nullable=False)
 
-    book = db.relationship('Book', backref=db.backref('user_book_statuses', cascade='all, delete-orphan'))
-    book_status = db.relationship('BookStatus', backref=db.backref('user_book_statuses', cascade='all, delete-orphan'))
-    user = db.relationship('User', backref=db.backref('user_book_statuses', cascade='all, delete-orphan'))
+    book = relationship('Books', backref=db.backref('user_book_statuses', cascade='all, delete-orphan'))
+    book_status = relationship('Book_Status', backref=db.backref('user_book_statuses', cascade='all, delete-orphan'))
+    user = relationship('Users', backref=db.backref('user_book_statuses', cascade='all, delete-orphan'),
+                        primaryjoin='User_Book_Status.User_ID == Users.User_ID')

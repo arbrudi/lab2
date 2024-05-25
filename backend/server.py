@@ -8,6 +8,7 @@ from Views.Event_Participant import eventp_bp
 from Views.Comics import Comics_bp
 from Views.Comics_Author import ComicsA_bp
 from Views.Book_Genre import bookG_bp
+from Views.Book_Status import bookS_bp
 
 def create_app():
     app = Flask(__name__)
@@ -15,7 +16,7 @@ def create_app():
     # Change SERVER
     conn = 'mssql+pyodbc:///?odbc_connect=' + \
            'DRIVER={ODBC Driver 17 for SQL Server};' + \
-           'SERVER=DESKTOP-UD05JRG\MSSQLSERVER01;' + \
+           'SERVER=LAPTOP-TQGV5751;' + \
            'DATABASE=lab2;' + \
            'Trusted_Connection=yes;'
 
@@ -33,11 +34,13 @@ def create_app():
     app.register_blueprint(eventp_bp) 
     app.register_blueprint(Comics_bp)
     app.register_blueprint(ComicsA_bp)
+    app.register_blueprint(bookS_bp)
 
     with app.app_context():
         try:
             db.engine.connect()
             print("Connection to MSSQL database successful!")
+            
         except Exception as e:
             print("Error connecting to MSSQL database:", e)
 
