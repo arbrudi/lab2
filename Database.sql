@@ -50,14 +50,21 @@ FOREIGN KEY (ISBN) REFERENCES Books(ISBN)
 );
 
 CREATE TABLE Book_Status(
-  ISBN INT NOT NULL,
-  User_ID INT NOT NULL,
   Book_Status_ID INT PRIMARY KEY,
   Book_state varchar(25) NOT NULL,
-  FOREIGN KEY (ISBN) REFERENCES Books(ISBN),
-  FOREIGN KEY (User_ID) REFERENCES Users(User_ID),
   CONSTRAINT b_state check(Book_state IN ('Read', 'Going to read', 'Dropped', 'Finished'))
 )
+
+CREATE TABLE User_Book_Status(
+ISBN int NOT NULL,
+Book_Status_ID int NOT NULL,
+User_ID INT NOT NULL,
+PRIMARY KEY (ISBN, User_ID),
+FOREIGN KEY (ISBN) REFERENCES Books(ISBN),
+FOREIGN KEY (Book_Status_ID) REFERENCES Book_Status(Book_Status_ID),
+FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
+)
+
 CREATE TABLE Book_comments (
   User_ID INT NOT NULL,
   ISBN INT NOT NULL,
