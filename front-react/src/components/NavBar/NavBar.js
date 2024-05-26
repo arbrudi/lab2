@@ -4,6 +4,10 @@ import './NavBar.css';
 const NavBar = () => {
     const navigate = useNavigate();
 
+    const userToken = localStorage.getItem("userToken");
+    const adminToken = localStorage.getItem("adminToken");
+
+
     const logoutFunction = () => {
         localStorage.removeItem("userToken");
         localStorage.removeItem("adminToken");
@@ -19,9 +23,10 @@ const NavBar = () => {
                 <li><Link to="/books">Books</Link></li>
                 <li><Link to="/comics">Comics</Link></li>
                 <li><Link to="/events">Events</Link></li>
-                <li><Link to="/login">Login</Link></li>
-                <li><Link to="/admin">Admin</Link></li>
-                <li onClick={logoutFunction} style={{ cursor: 'pointer', color: 'red', fontWeight: 'bold' }}>Log out</li>
+                { !userToken && !adminToken && <li><Link to="/login">Login</Link></li> }
+                { userToken && <li><Link to="/userDashboard">User</Link></li> }
+                { adminToken && <li><Link to="/admin">Admin</Link></li> }
+                { (userToken || adminToken) && <li onClick={logoutFunction} style={{ cursor: 'pointer', color: 'red', fontWeight: 'bold' }}>Log out</li> }
             </ul>
         </nav>
     );
