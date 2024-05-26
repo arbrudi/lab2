@@ -14,6 +14,10 @@ const AdminBar = () => {
       {isVisible && (
         <div className="sidebar">
           <ul>
+
+          <li>
+              <a href="/admin/user">Users</a>
+            </li>
             <li>
               <a href="/admin/book">Book</a>
             </li>

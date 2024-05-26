@@ -1,8 +1,29 @@
-import React, {useState} from "react";
+import React, {useEffect,useState} from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Create_Comics_Author = () => {
+
+
+
+
+
+    const [Comics, setComics] = useState([]);
+
+
+    useEffect(() => {
+        const fetchComics = async () => {
+          try {
+            const response = await axios.get("/admin/comics");
+            setComics(response.data);
+          } catch (error) {
+            console.error("Error fetching Comics:", error);
+          }
+        };
+    
+        fetchComics();
+      }, []);
+
     
     const [formData, setFormData] = useState({
         Comics_Author_ID: "",
@@ -31,7 +52,6 @@ const Create_Comics_Author = () => {
         }
     };
 
-
 return (
     <div>
  
@@ -43,15 +63,25 @@ return (
            <form onSubmit={handleSubmit}>
            <label>
            Comics Author ID:
-                   <input type="text" name="Comics Author ID" value={formData.Comics_Author_ID} onChange={handleChange} />
+                   <input type="text" name="Comics_Author_ID" value={formData.Comics_Author_ID} onChange={handleChange} />
                </label>
-               <label>
-                   Comic ID:
-                   <input type="text" name="Comic_ID" value={formData.Comic_ID} onChange={handleChange} />
+
+               
+            <label>
+                
+            Comic ID:
+            <select className='form-control' name="Comic_ID" value={formData.Comic_ID} onChange={handleChange}>
+             <option value="">Select Comic ID</option>
+             {Comics.map(comic => (
+              <option key={comic.Comic_ID} value={comic.Comic_ID}>{comic.Comic_title}</option>
+                     ))}
+                 </select>
                </label>
+
+
                <label>
                Author Name:
-                   <input type="text" name="Author Name" value={formData.Author_Name} onChange={handleChange} />
+                   <input type="text" name="Author_Name" value={formData.Author_Name} onChange={handleChange} />
                </label>
                <label>
                Publisher:
@@ -60,7 +90,7 @@ return (
 
                <label>
                Author notes:
-                   <textarea name="Author notes" value={formData.Author_notes} onChange={handleChange}></textarea>
+                   <textarea name="Author_notes" value={formData.Author_notes} onChange={handleChange}></textarea>
                </label>
                <button type="submit">Create Comic author</button>
            </form>

@@ -63,6 +63,7 @@ CREATE TABLE Book_comments (
   ISBN INT NOT NULL,
   Book_comments TEXT
 );
+Select * from Users
 
 CREATE TABLE Users (
   User_ID INT NOT NULL PRIMARY KEY IDENTITY(100, 1),

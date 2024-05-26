@@ -28,6 +28,9 @@ import Book_list_page from './pages/Book_list_page';
 import Create_Genre from './pages/admin/Book_Genre/Create_Genre';
 import Edit_Genre from './pages/admin/Book_Genre/Edit_Genre';
 import Comic_list_page from './pages/Comic_list_page';
+import User from './pages/admin/User';
+import Create_User from './pages/admin/User/Create_User';
+import Edit_User from './pages/admin/User/Edit_User';
 
 function App() {
 
@@ -85,6 +88,12 @@ function App() {
           <Route path="/events" element={<EventsPage />} /> 
           <Route path="/login" element={<LoginPage />} /> 
           <Route path="/register" element={<RegisterPage />} />
+
+             {/* Users */}
+          
+             <Route path="/admin/user" element={<User />} />
+             <Route path="/admin/user/create" element={<Create_User />} /> 
+             <Route path="/admin/user/update/:User_ID" element={<Edit_User />} />
 
           {/* BOOKS */}
           <Route path="/book/:id" element={<BooksPage />} /> 

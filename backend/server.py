@@ -8,6 +8,7 @@ from Views.Event_Participant import eventp_bp
 from Views.Comics import Comics_bp
 from Views.Comics_Author import ComicsA_bp
 from Views.Book_Genre import bookG_bp
+from Views.User import Users_bp
 
 
 def create_app():
@@ -26,6 +27,7 @@ def create_app():
 
     db.init_app(app)
     
+    app.register_blueprint(Users_bp)
     app.register_blueprint(views_bp)
     app.register_blueprint(auth_bp)
     app.register_blueprint(books_bp)
