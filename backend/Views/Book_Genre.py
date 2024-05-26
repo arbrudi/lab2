@@ -86,3 +86,5 @@ def delete_book_genre(Book_Genre_ID):
     except Exception as e:
         print("Error:", e)
         return jsonify({'error': str(e)}), 500
+    
+

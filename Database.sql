@@ -4,8 +4,6 @@ use lab2
 
 DROP DATABASE lab2
 
-
-Select * FROM Comics
 CREATE TABLE Comics (
   Comic_ID VARCHAR(50) NOT NULL PRIMARY KEY,
   Comic_image TEXT,
@@ -37,6 +35,7 @@ CREATE TABLE Comics_ratings (
   Comic_Rating INT NOT NULL
 );
 
+/*-------------------------------Books-------------------------------*/
 CREATE TABLE Books (
   ISBN INT NOT NULL PRIMARY KEY,
   Book_image TEXT,
@@ -59,6 +58,15 @@ CREATE TABLE Book_Status(
   CONSTRAINT b_state check(Book_state IN ('Read', 'Going to read', 'Dropped', 'Finished'))
 )
 
+INSERT INTO Book_Status(Book_Status_ID, Book_state)
+VALUES(1,'Read')
+INSERT INTO Book_Status(Book_Status_ID, Book_state)
+VALUES(2,'Going to read')
+INSERT INTO Book_Status(Book_Status_ID, Book_state)
+VALUES(3,'Dropped')
+INSERT INTO Book_Status(Book_Status_ID, Book_state)
+VALUES(4,'Finished')
+
 CREATE TABLE User_Book_Status(
 ISBN int NOT NULL,
 Book_Status_ID int NOT NULL,
@@ -74,8 +82,7 @@ CREATE TABLE Book_comments (
   ISBN INT NOT NULL,
   Book_comments TEXT
 );
-Select * from Users
-
+/*-------------------------------Users-------------------------------*/
 CREATE TABLE Users (
   User_ID INT NOT NULL PRIMARY KEY IDENTITY(100, 1),
   Name VARCHAR(255) NOT NULL,
@@ -94,7 +101,7 @@ CREATE TABLE contact_us (
   Contact_city VARCHAR(50),
   Contact_postal_code INT
 );
-
+/*-------------------------------Events-------------------------------*/
 CREATE TABLE Events (
   Event_ID VARCHAR(255) NOT NULL PRIMARY KEY,
   Event_image TEXT,

@@ -94,4 +94,14 @@ def delete_book(ISBN):
         print("Error:", e)
         return jsonify({"error": str(e)}), 500
 
+@books_bp.route('/books_by_genre/<int:isbn>', methods =['GET'])
+def get_book_by_genre(isbn):
+    book = db.session.query(Books).filter_by(ISBN=isbn).first()
 
+    if not book:
+        return jsonify({"error":f"{book} doesn't exist in the database!"})
+    
+    genres = db.session.query(Book_Genre.Genre_Name).filter_by(ISBN = isbn).all()
+    genres_name = [genre.Genre_Name for genre in genres]
+
+    return genres_name
