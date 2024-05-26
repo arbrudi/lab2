@@ -24,7 +24,7 @@ const NavBar = () => {
                 <li><Link to="/comics">Comics</Link></li>
                 <li><Link to="/events">Events</Link></li>
                 { !userToken && !adminToken && <li><Link to="/login">Login</Link></li> }
-                { userToken && <li><Link to="/userDashboard">User</Link></li> }
+                { userToken && <li><Link to="/UserDashboard">User</Link></li> }
                 { adminToken && <li><Link to="/admin">Admin</Link></li> }
                 { (userToken || adminToken) && <li onClick={logoutFunction} style={{ cursor: 'pointer', color: 'red', fontWeight: 'bold' }}>Log out</li> }
             </ul>
