@@ -10,10 +10,32 @@ const Edit_Comics_Author = () => {
  const [comic, setcomic] = useState({});
  const [formData, setFormData] = useState({
     Author_Name:"",
+    Comic_ID: "",
     Publisher: "",
     Author_notes: "",
      
  });
+
+
+ const [Comics, setComics] = useState([]);
+
+
+ useEffect(() => {
+     const fetchComics = async () => {
+       try {
+         const response = await axios.get("/admin/comics");
+         setComics(response.data);
+       } catch (error) {
+         console.error("Error fetching Comics:", error);
+       }
+     };
+ 
+     fetchComics();
+   }, []);
+
+
+
+
 
  useEffect(() => {
     
@@ -62,7 +84,22 @@ const Edit_Comics_Author = () => {
                  <label>Publisher:</label>
                  <input type="text" name="Publisher" value={formData.Publisher} onChange={handleChange} />
              </div>
+
+
+             <label>
+                
+                Comic ID:
+                <select className='form-control' name="Comic_ID" value={formData.Comic_ID} onChange={handleChange}>
+                 <option value="">Select Comic ID</option>
+                 {Comics.map(comic => (
+                  <option key={comic.Comic_ID} value={comic.Comic_ID}>{comic.Comic_title}</option>
+                         ))}
+                     </select>
+                   </label>
+
+
              <div>
+
                  <label>Description:</label>
                  <textarea name="Author_notes" value={formData.Author_notes} onChange={handleChange} />
              </div>

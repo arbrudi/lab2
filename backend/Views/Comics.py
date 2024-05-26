@@ -44,9 +44,6 @@ def get_comics():
     
 
     
-    
-
-
 @Comics_bp.route('/admin/comics/<int:id>', methods=['GET'])
 def get_comic(id):
     try:
@@ -87,10 +84,10 @@ def update_comic(id):
 
 
     
-@Comics_bp.route('/admin/comics/delete/<int:ISBN>', methods=['DELETE'])
-def delete_comic(ISBN):
+@Comics_bp.route('/admin/comics/delete/<int:Comic_ID>', methods=['DELETE'])
+def delete_comic(Comic_ID):
     try:
-        comic = Comics.query.get(ISBN)
+        comic = Comics.query.get(Comic_ID)
         if comic is None:
             return jsonify({'error': 'Comic not found'}), 404
 

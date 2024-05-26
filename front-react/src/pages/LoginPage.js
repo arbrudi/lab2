@@ -61,13 +61,8 @@ const LoginPage = () => {
     }
   };
 
-  const logoutFunction = ()=>{
-    localStorage.removeItem("userToken");
-    localStorage.removeItem("adminToken");
-    localStorage.removeItem('user_id');
-    setTimeout(() => {navigate("/login", {replace:true})}, 400);
-    setTimeout(()=> { window.location.reload()},500)
-}
+
+
 
   return (
     <div className="container_c">
@@ -95,7 +90,7 @@ const LoginPage = () => {
         <button type="submit">Login</button>
         {error && <div className="error">{error}</div>}
       </form>
-      <button className="logout" onClick={()=> logoutFunction()}>Logout</button>
+      
       <Link to="/register">Register</Link>
     </div>
   );

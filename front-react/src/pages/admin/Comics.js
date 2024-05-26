@@ -80,7 +80,7 @@ const Comics = () =>{
           <thead>
             <tr>
               <th>Comic ID</th>
-              <th>Image</th>
+
               <th>Title</th>
               <th>Type</th>
               <th>Description</th>
@@ -91,7 +91,6 @@ const Comics = () =>{
             {Comics.map((comic) => (
               <tr key={comic.Comic_ID}> 
               <td>{comic.Comic_ID}</td>
-                <td>{comic.Comic_image}</td>
                 <td>{comic.Comic_title}</td>
                 <td>{comic.Comic_type}</td>
                 <td>{comic.Comic_Description}</td>
