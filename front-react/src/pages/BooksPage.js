@@ -75,11 +75,15 @@ const BooksPage = () => {
                 }
             });
             setMessage(method === 'POST' ? "Book status added successfully." : "Book status updated successfully.");
-            console.log('Response:', resp.data); // Log the response from the backend
-            setUserBookEntryExists(true); // After adding, set the flag to true for future updates
+            console.log('Response:', resp.data); 
+            setUserBookEntryExists(true);
+            
+            setTimeout(() => setMessage(""), 3000);
         } catch (error) {
             console.error("Error updating status:", error);
             setMessage("Error updating status.");
+
+            setTimeout(() => setMessage(""), 3000);
         }
     };
 
@@ -90,7 +94,7 @@ const BooksPage = () => {
                     <div className="imgP-container">
                         <img src={book.Book_image} alt={book.Book_title} />
                         <div className="bookP_status">
-                            <label htmlFor="status-select">Status:</label>
+                            <label htmlFor="status-select">Book Status:</label>
                             <select 
                                 id="status-select" 
                                 value={statusOptions.find(option => option.Book_state === status)?.Book_Status_ID || ""} 
