@@ -36,7 +36,7 @@ CREATE TABLE Comics_ratings (
   Comic_ID VARCHAR(50) NOT NULL,
   Comic_Rating INT NOT NULL
 );
-SELECT * FROM Users
+
 CREATE TABLE Books (
   ISBN INT NOT NULL PRIMARY KEY,
   Book_image TEXT,
@@ -60,13 +60,13 @@ CREATE TABLE Book_Status(
 )
 
 INSERT INTO Book_Status(Book_Status_ID, Book_state)
-VALUES(1,'Read' )
+VALUES(1,'Read')
 INSERT INTO Book_Status(Book_Status_ID, Book_state)
-VALUES(2,'Going to read' )
+VALUES(2,'Going to read')
 INSERT INTO Book_Status(Book_Status_ID, Book_state)
-VALUES(3,'Dropped' )
+VALUES(3,'Dropped')
 INSERT INTO Book_Status(Book_Status_ID, Book_state)
-VALUES(4,'Finished' )
+VALUES(4,'Finished')
 
 CREATE TABLE User_Book_Status(
 ISBN int NOT NULL,

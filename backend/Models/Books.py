@@ -20,6 +20,7 @@ class Book_Genre(db.Model):
     Book_Genre_ID = db.Column(db.Integer, primary_key=True, autoincrement = False)
     ISBN = db.Column(db.Integer, db.ForeignKey('Books.ISBN'), nullable=False)
     Genre_Name = db.Column(db.String(50), nullable=False)
+    #  book = db.relationship('Book', backref=db.backref('genres', lazy=True))
 
 class Book_Status(db.Model):
     """Base model for Book_Status"""

@@ -6,35 +6,78 @@ from extensions import db
 bookS_bp = Blueprint('bookS',__name__)
 
 
-@bookS_bp.route('/book/get_status_by_id/<int:id>', methods = ['GET'])
-def get_book_status_by_id():
-    pass
+@bookS_bp.route('/book/get_status_by_id/<int:id>', methods=['GET'])
+def get_book_status_by_id(id):
+    try:
+        book_status = User_Book_Status.query.filter_by(ISBN=id).first()
+        if book_status:
+            status = Book_Status.query.get(book_status.Book_Status_ID)
+            return jsonify({'Book_state': status.Book_state}), 200
+        else:
+            return jsonify({'Book_state': 'Not read yet'}), 200  # Default message if no status found
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
-@bookS_bp.route('/book/get_book_status', methods= ['GET'])
+    
+@bookS_bp.route('/book/get_book_status', methods= ['GET','POST'])
 def get_book_status():
-    pass
-def add_book_status(user_id, isbn, book_status):
+    try:
+        all_statuses = Book_Status.query.all()
+        status_data = []
+        for status in all_statuses:
+            data = {
+                'Book_Status_ID':status.Book_Status_ID,
+                'Book_state':status.Book_state
+            }
+            status_data.append(data)
+        return jsonify(status_data), 200
+    except Exception as e:
+        return jsonify({'error':str(e)}), 500
+@bookS_bp.route('/book/add_status', methods=['POST'])
+def add_book_status():
+    data = request.get_json()
+    user_id = data.get('user_id')
+    isbn = data.get('isbn')
+    book_status_id = data.get('book_status')
+    
     user = Users.query.get(user_id)
     book = Books.query.get(isbn)
-    status = Book_Status.query.get(book_status)
+    status = Book_Status.query.get(book_status_id)
 
-    if not user:
-        return jsonify({'error': f"User {user} does not exist!"}), 404
-    if not book:
-        return jsonify({'error': f"Book {book} doesn't exist!"}), 404
-    if not status:
-        return jsonify({'error': f"Status {status} doesn't exist!"}), 404
-    
-    user_book_entry = User_Book_Status(
-        User_ID= user.User_ID,
-        ISBN = book.ISBN,
-        Book_Status_ID = status.Book_Status_ID
+    if not all([user, book, status]):
+        return jsonify({'error': 'Invalid user, book, or status.'}), 404
+
+    if User_Book_Status.query.filter_by(User_ID=user_id, ISBN=isbn).first():
+        return jsonify({'error': 'User book status entry already exists. Use update_book_status endpoint to update.'}), 400
+
+    new_entry = User_Book_Status(
+        User_ID=user.User_ID,
+        ISBN=book.ISBN,
+        Book_Status_ID=status.Book_Status_ID
     )
-
-    db.session.add(user_book_entry)
+    db.session.add(new_entry)
     db.session.commit()
+    return jsonify({'message': 'Book status added successfully.'}), 200
 
-    return user_book_entry
+@bookS_bp.route('/book/update_status', methods=['PUT'])
+def update_book_status():
+    data = request.get_json()
+    user_id = data.get('user_id')
+    isbn = data.get('isbn')
+    book_status_id = data.get('book_status')
+
+    user_book_entry = User_Book_Status.query.filter_by(User_ID=user_id, ISBN=isbn).first()
+
+    if not user_book_entry:
+        return jsonify({'error': 'User book status entry does not exist. Use add_book_status endpoint to add.'}), 404
+
+    status = Book_Status.query.get(book_status_id)
+    user_book_entry.Book_Status_ID = status.Book_Status_ID
+    db.session.commit()
+    return jsonify({'message': 'Book status updated successfully.'}), 200
+
+
+
 
 
 

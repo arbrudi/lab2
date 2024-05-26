@@ -17,7 +17,7 @@ const LoginPage = () => {
       const { token, user_id, role } = response.data;
       
       localStorage.setItem('token', token); 
-      localStorage.setItem('user_id', user_id); // Store user_id in localStorage
+      localStorage.setItem('user_id', user_id); 
 
       if (role === 'admin') {
         navigate('/admin'); 
