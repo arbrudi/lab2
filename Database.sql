@@ -6,6 +6,8 @@ DROP DATABASE lab2
 
 
 Select * FROM User_Book_Status
+DELETE FROM User_Book_Status WHERE ISBN = 111111
+Select * FROM Users
 CREATE TABLE Comics (
   Comic_ID VARCHAR(50) NOT NULL PRIMARY KEY,
   Comic_image TEXT,

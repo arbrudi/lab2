@@ -11,6 +11,7 @@ const BooksPage = () => {
     const [statusOptions, setStatusOptions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [message, setMessage] = useState("");
+    const [userBookEntryExists, setUserBookEntryExists] = useState(false);
 
     useEffect(() => {
         const fetchBook = async () => {
@@ -26,11 +27,18 @@ const BooksPage = () => {
                 setStatusOptions(statusOptionsResponse.data);
 
                 const statusResponse = await axios.get(`/book/get_status_by_id/${id}`);
-                setStatus(statusResponse.data.Book_state);
-
-                setLoading(false);
+                if (statusResponse.status === 200) {
+                    setStatus(statusResponse.data.Book_state);
+                    setUserBookEntryExists(true);
+                }
             } catch (error) {
-                console.error("Error fetching book or genres:", error);
+                if (error.response && error.response.status === 404) {
+                    setUserBookEntryExists(false);
+                } else {
+                    console.error("Error fetching status:", error);
+                }
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -39,9 +47,9 @@ const BooksPage = () => {
 
     const handleStatusChange = async (event) => {
         const newStatus = event.target.value;
-        console.log('ssssssss', newStatus)
-        setStatus(newStatus);
-        
+        const selectedStatus = statusOptions.find(option => option.Book_Status_ID === parseInt(newStatus));
+
+        setStatus(selectedStatus.Book_state);
 
         const token = localStorage.getItem('adminToken');
         const user_id = localStorage.getItem('user_id');
@@ -52,50 +60,26 @@ const BooksPage = () => {
         }
 
         try {
-            const resp = await axios.put('/book/update_status', {
-                user_id: user_id,
-                isbn: id,
-                book_status: newStatus
-            }, {
+            const method = userBookEntryExists ? 'PUT' : 'POST';
+            const resp = await axios({
+                method: method,
+                url: '/book/status',
+                data: {
+                    user_id: user_id,
+                    isbn: id,
+                    book_status: newStatus
+                },
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 }
             });
-            setMessage("Book status updated successfully.");
+            setMessage(method === 'POST' ? "Book status added successfully." : "Book status updated successfully.");
             console.log('Response:', resp.data); // Log the response from the backend
+            setUserBookEntryExists(true); // After adding, set the flag to true for future updates
         } catch (error) {
             console.error("Error updating status:", error);
             setMessage("Error updating status.");
-        }
-    };
-
-    const handleAddStatus = async () => {
-        const token = localStorage.getItem('adminToken');
-        const user_id = localStorage.getItem('user_id');
-        console.log('token', token)
-        console.log('user', user_id)
-        if (!token || !user_id) {
-            setMessage("Please log in to add book status.");
-            return;
-        }
-
-        try {
-            const resp = await axios.post('/book/add_status', {
-                user_id: user_id,
-                isbn: id,
-                book_status: status
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-            setMessage("Book status added successfully.");
-            console.log('Response:', resp.data); // Log the response from the backend
-        } catch (error) {
-            console.error("Error adding status:", error);
-            setMessage("Error adding status.");
         }
     };
 
@@ -109,17 +93,18 @@ const BooksPage = () => {
                             <label htmlFor="status-select">Status:</label>
                             <select 
                                 id="status-select" 
-                                value={status} 
+                                value={statusOptions.find(option => option.Book_state === status)?.Book_Status_ID || ""} 
                                 onChange={handleStatusChange}
                             >
+                                <option value="" disabled>Select a status</option>
                                 {statusOptions.map((option) => (
                                     <option key={option.Book_Status_ID} value={option.Book_Status_ID}>
                                         {option.Book_state}
                                     </option>
                                 ))}
                             </select>
-                            <button onClick={handleAddStatus}>Add Status</button>
                         </div>
+                        <p>{message}</p>
                     </div>
                     <div className="textP-section">
                         <div className="bookP-title">
@@ -138,7 +123,7 @@ const BooksPage = () => {
                     </div>
                 </div>
             </div>
-            <p>{message}</p>
+            
         </div>
     );
 }
