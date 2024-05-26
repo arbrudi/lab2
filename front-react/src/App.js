@@ -24,9 +24,10 @@ import Create_Comics from './pages/admin/Comics/Create_Comics';
 import Edit_Comics from './pages/admin/Comics/Edit_Comics';
 import Edit_Comics_Author from './pages/admin/Comics_Author/Edit_Comics_Author';
 import Create_Comics_Author from './pages/admin/Comics_Author/Create_Comics_Author';
-import Book_list_page from './pages/Book_list_page';
+import EventDetailsPage from './pages/Event_details';
 import Create_Genre from './pages/admin/Book_Genre/Create_Genre';
 import Edit_Genre from './pages/admin/Book_Genre/Edit_Genre';
+import Book_list_page from './pages/Book_list_page';
 import Comic_list_page from './pages/Comic_list_page';
 import User from './pages/admin/User';
 import Create_User from './pages/admin/User/Create_User';
@@ -74,7 +75,10 @@ function App() {
           <Route path="/comics/:id" element={<ComicsPage />} /> 
           <Route path="/comics" element={<Comic_list_page/>} /> 
           <Route path="/admin/event_books" element={<EventBooks/>} /> 
-          <Route path="/admin/event" element={<Event/>} /> 
+          <Route path="/admin/event" element={<Event/>} />  
+          <Route path="/eventsdetails/:Event_ID" element={<EventDetailsPage />} /> 
+          
+
 
           </>
           }
@@ -82,6 +86,7 @@ function App() {
            <>
           <Route path="/admin" element={<Admin />} /> 
 
+          <Route path="/eventsdetails/:Event_ID" element={<EventDetailsPage />} /> 
 
           <Route path="/" element={<HomePage />} /> 
           <Route path="/about" element={<AboutPage />} /> 
@@ -119,7 +124,9 @@ function App() {
           <Route path="/admin/event/create" element={<Create_Event />} />  
           <Route path="/admin/event/update/:id" element={<Edit_Events />} /> 
           <Route path="/admin/event_participant/create" element={<Create_participant />} /> 
-          <Route path="/admin/event_participant/update/:Event_ID" element={<Edit_participant />} /> 
+          <Route path="/admin/event_participant/update/:Event_ID" element={<Edit_participant />} />   
+          
+          
           </>
            }
         </Routes>
