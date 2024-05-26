@@ -30,33 +30,34 @@ def get_users():
         print("Error: ", e)
         return jsonify({"error": str(e)}), 500
     
+    
 @Users_bp.route('/admin/user/<int:User_ID>', methods=['GET'])
-def get_user(User_ID):
+def get_user_data(User_ID):
     try:
-        Users = Users.query.get(User_ID)
-        if Users is None:
-            return jsonify({'error':'User not found'}), 404
-        
+        user = Users.query.get(User_ID)
+        if user is None:
+            return jsonify({'error': 'User not found'}), 404
+
         user_data = {
-                'Name':Users.Name,
-                'Surname': Users.Surname,
-                'User_Role': Users.User_Role,
-                'Email': Users.Email,
-                'Username': Users.Username,
-                'Password': Users.Password
+            'User_ID': user.User_ID,
+            'Name': user.Name,
+            'Surname': user.Surname,
+            'User_Role': user.User_Role,
+            'Email': user.Email,
+            'Username': user.Username,
+            'Password': user.Password 
         }
 
         return jsonify(user_data), 200
     except Exception as e:
         print("Error:", e)
-        return jsonify({"error": str(e)}), 500    
+        return jsonify({"error": str(e)}), 500
 
 
 
 
-    
 
-   
+       
 @Users_bp.route('/admin/user/create', methods=['POST'])
 def register():
     data = request.get_json()
@@ -89,13 +90,10 @@ def update_User(User_ID):
             return jsonify({'error': 'User not found'}), 404
         
         data = request.json
-        # Check if the 'Password' field is present in the request data
         if 'Password' in data:
-            # Hash the password before storing it
             hashed_password = bcrypt.generate_password_hash(data['Password']).decode('utf-8')
             data['Password'] = hashed_password
         
-        # Update user attributes based on the received data
         for key, value in data.items():
             setattr(user, key, value)
       
@@ -104,6 +102,9 @@ def update_User(User_ID):
     except Exception as e:
         print("Error:", e)
         return jsonify({"error": str(e)}), 500
+
+
+
 
 @Users_bp.route('/admin/user/delete/<int:User_ID>', methods=['DELETE'])
 def delete_user(User_ID):

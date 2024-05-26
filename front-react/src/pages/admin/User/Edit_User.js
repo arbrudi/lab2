@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 const Edit_User = () => {
     const { User_ID } = useParams();
-    const [user, setUser] = useState({});
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         Name: "",
         Surname: "",
@@ -13,28 +13,28 @@ const Edit_User = () => {
         Username: "",
         Password: ""
     });
+   
 
     useEffect(() => {
-       
-        const fetchBook = async () => {
+        const fetchUser = async () => {
             try {
                 const response = await axios.get(`/admin/user/${User_ID}`);
-                setUser(response.data);
                 setFormData({
-                    Name:response.data.Name,
-                    Surname: response.data.Surname,
-                    User_Role: response.data.User_Role,
-                    Email: response.data.Email,
-                    Username: response.data.Username,
-                    Password: response.data.Password
-
+                    Name: response.data.Name || "",
+                    Surname: response.data.Surname || "",
+                    User_Role: response.data.User_Role || "",
+                    Email: response.data.Email || "",
+                    Username: response.data.Username || "",
+                    Password: "" 
                 });
+          
             } catch (error) {
                 console.error("Error fetching User:", error);
+              
             }
         };
 
-        fetchBook();
+        fetchUser();
     }, [User_ID]);
 
     const handleChange = (e) => {
@@ -45,11 +45,14 @@ const Edit_User = () => {
         e.preventDefault();
         try {
             await axios.put(`/admin/user/update/${User_ID}`, formData);
-            window.location.href = "/admin/user";
+            navigate("/admin/user");
         } catch (error) {
             console.error("Error updating user:", error);
         }
     };
+
+ 
+
 
     return (
         <div className="container_c">
