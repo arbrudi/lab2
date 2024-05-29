@@ -52,7 +52,7 @@ const Create_User = () => {
                 <select name="User_Role" value={formData.User_Role} onChange={handleChange}>
                     <option value="">Select a role</option>
                     <option value="admin">Admin</option>
-                    <option value="clinet">client</option>
+                    <option value="client">client</option>
                 </select>
                 </label>
                 <label>

@@ -7,7 +7,6 @@ import './../../assets/css/Event.css'; // Assuming this CSS file contains styles
 const Event = () => {
   const [events, setEvents] = useState([]);
   const [participants, setParticipants] = useState([]);
-
   useEffect(() => {
     const fetchEvents = async () => {
       try {
@@ -119,6 +118,9 @@ const Event = () => {
             ))}
           </tbody>
         </table>
+      </div> 
+      <div>
+       
       </div>
     </div>
   );

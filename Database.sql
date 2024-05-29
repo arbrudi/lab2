@@ -4,8 +4,6 @@ use lab2
 
 DROP DATABASE lab2
 
-
-Select * FROM Comics
 CREATE TABLE Comics (
   Comic_ID VARCHAR(50) NOT NULL PRIMARY KEY,
   Comic_image TEXT,
@@ -37,6 +35,7 @@ CREATE TABLE Comics_ratings (
   Comic_Rating INT NOT NULL
 );
 
+/*-------------------------------Books-------------------------------*/
 CREATE TABLE Books (
   ISBN INT NOT NULL PRIMARY KEY,
   Book_image TEXT,
@@ -45,7 +44,6 @@ CREATE TABLE Books (
   Book_genre INT NOT NULL,
   Book_description TEXT NOT NULL
 );
-Select * FROM Books
 
 CREATE TABLE Book_Genre(
 Book_Genre_ID int NOT NULL PRIMARY KEY,
@@ -54,17 +52,37 @@ Genre_Name varchar(50) NOT NULL,
 FOREIGN KEY (ISBN) REFERENCES Books(ISBN)
 );
 
+CREATE TABLE Book_Status(
+  Book_Status_ID INT PRIMARY KEY,
+  Book_state varchar(25) NOT NULL,
+  CONSTRAINT b_state check(Book_state IN ('Read', 'Going to read', 'Dropped', 'Finished'))
+)
 
+INSERT INTO Book_Status(Book_Status_ID, Book_state)
+VALUES(1,'Read')
+INSERT INTO Book_Status(Book_Status_ID, Book_state)
+VALUES(2,'Going to read')
+INSERT INTO Book_Status(Book_Status_ID, Book_state)
+VALUES(3,'Dropped')
+INSERT INTO Book_Status(Book_Status_ID, Book_state)
+VALUES(4,'Finished')
 
-
+CREATE TABLE User_Book_Status(
+ISBN int NOT NULL,
+Book_Status_ID int NOT NULL,
+User_ID INT NOT NULL,
+PRIMARY KEY (ISBN, User_ID),
+FOREIGN KEY (ISBN) REFERENCES Books(ISBN),
+FOREIGN KEY (Book_Status_ID) REFERENCES Book_Status(Book_Status_ID),
+FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
+)
 
 CREATE TABLE Book_comments (
   User_ID INT NOT NULL,
   ISBN INT NOT NULL,
   Book_comments TEXT
 );
-Select * from Users
-
+/*-------------------------------Users-------------------------------*/
 CREATE TABLE Users (
   User_ID INT NOT NULL PRIMARY KEY IDENTITY(100, 1),
   Name VARCHAR(255) NOT NULL,
@@ -83,7 +101,7 @@ CREATE TABLE contact_us (
   Contact_city VARCHAR(50),
   Contact_postal_code INT
 );
-
+/*-------------------------------Events-------------------------------*/
 CREATE TABLE Events (
   Event_ID VARCHAR(255) NOT NULL PRIMARY KEY,
   Event_image TEXT,
@@ -165,10 +183,3 @@ ALTER TABLE favorite_books
 ADD CONSTRAINT FK_favorite_books_User_ID FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
 ALTER TABLE favorite_books
 ADD CONSTRAINT FK_favorite_books_ISBN FOREIGN KEY (ISBN) REFERENCES Books(ISBN);
-
-
-
-Select*from Users
-
-Alter Table Users 
-

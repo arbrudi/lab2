@@ -37,9 +37,6 @@ const Book_list_page = () =>{
                         <div className="book-author">
                         <p>{book.Book_author}</p>
                         </div>
-                        <div className="book-genre">
-                        <p>{book.Book_genre}</p>
-                        </div>
                         <div className="read-more-b">
                           <Link to={`/book/${book.ISBN}`}>
                           <button>Read more</button>

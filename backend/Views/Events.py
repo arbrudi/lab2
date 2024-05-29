@@ -28,6 +28,7 @@ def get_events():
         for event in all_events:
             _data = {
                 'Event_ID': event.Event_ID,
+                'Event_title': event.Event_title,
                 'Event_image': event.Event_image,
                 'Event_description': event.Event_description,
                 'Event_date': event.Event_date.strftime("%Y-%m-%d") if event.Event_date else None
@@ -48,6 +49,7 @@ def get_event(event_id):
 
         event_data = {
             'Event_ID': event.Event_ID,
+            'Event_title': event.Event_title,
             'Event_image': event.Event_image,
             'Event_description': event.Event_description,
             'Event_date': event.Event_date.strftime("%Y-%m-%d") if event.Event_date else None

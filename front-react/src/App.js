@@ -24,9 +24,10 @@ import Create_Comics from './pages/admin/Comics/Create_Comics';
 import Edit_Comics from './pages/admin/Comics/Edit_Comics';
 import Edit_Comics_Author from './pages/admin/Comics_Author/Edit_Comics_Author';
 import Create_Comics_Author from './pages/admin/Comics_Author/Create_Comics_Author';
-import Book_list_page from './pages/Book_list_page';
+import EventDetailsPage from './pages/Event_details';
 import Create_Genre from './pages/admin/Book_Genre/Create_Genre';
 import Edit_Genre from './pages/admin/Book_Genre/Edit_Genre';
+import Book_list_page from './pages/Book_list_page';
 import Comic_list_page from './pages/Comic_list_page';
 import User from './pages/admin/User';
 import Create_User from './pages/admin/User/Create_User';
@@ -36,6 +37,7 @@ import Books from './pages/user/Book';
 import Comic from './pages/user/Comics' 
 import Events from './pages/user/Events'; 
 import EventBook from './pages/user/EventBook';
+
 function App() {
   const user = localStorage.getItem("userToken");
   const admin = localStorage.getItem("adminToken");
@@ -54,7 +56,6 @@ function App() {
                 <Route index element={<LoginPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
-                {/* <Route path="/*" element={<PageNotFound />} /> */}
               </>
             )}
             {user && !admin && (
@@ -70,7 +71,8 @@ function App() {
                 <Route path="/user/book" element={<Books />} /> 
                 <Route path="/user/comics" element={<Comic />} /> 
                 <Route path="/user/event" element={<Events />} />  
-                <Route path="/user/eventbooks" element={<EventBooks />} /> 
+                <Route path="/user/eventbooks" element={<EventBook />} /> 
+                <Route path="/eventsdetails/:Event_ID" element={<EventDetailsPage />} /> 
               </>
             )}
             {admin && (
@@ -81,7 +83,7 @@ function App() {
                 <Route path="/events" element={<EventsPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
-                
+
                 {/* Users */}
                 <Route path="/admin/user" element={<User />} />
                 <Route path="/admin/user/create" element={<Create_User />} />
@@ -112,6 +114,7 @@ function App() {
                 <Route path="/admin/event/update/:id" element={<Edit_Events />} />
                 <Route path="/admin/event_participant/create" element={<Create_participant />} />
                 <Route path="/admin/event_participant/update/:Event_ID" element={<Edit_participant />} />
+                <Route path="/eventsdetails/:Event_ID" element={<EventDetailsPage />} /> 
               </>
             )}
           </Routes>
