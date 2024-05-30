@@ -36,7 +36,7 @@ import Books from './pages/user/Book';
 import Comic from './pages/user/Comics' 
 import Events from './pages/user/Events'; 
 import EventBook from './pages/user/EventBook'; 
-
+import UserDashboard from './pages/UserDashboard';
 
 function App() {
 
@@ -82,10 +82,11 @@ function App() {
           <Route path="/admin/event_books" element={<EventBooks/>} /> 
           <Route path="/admin/event" element={<Event/>} />  
           <Route path="/eventsdetails/:Event_ID" element={<EventDetailsPage />} /> 
+          <Route path="/UserDashboard" element={<UserDashboard />} /> 
           <Route path="/user/book" element={<Books />} /> 
-         <Route path="/user/comics" element={<Comic />} /> 
-         <Route path="/user/event" element={<Events />} />  
-         <Route path="/user/eventbooks" element={<EventBook />} /> 
+          <Route path="/user/comics" element={<Comic />} /> 
+          <Route path="/user/event" element={<Events />} />  
+          <Route path="/user/eventbooks" element={<EventBook />} /> 
           
 
 
