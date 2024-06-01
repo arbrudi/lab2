@@ -32,17 +32,12 @@ def get_book_status():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+
 @bookS_bp.route('/book/status', methods=['POST', 'PUT'])
 def manage_book_status():
     try:
-        data = request.get_json()
-        user_id = int(data.get('user_id'))
-        isbn = int(data.get('isbn'))
-        book_status_id = int(data.get('book_status'))
-
-        user = Users.query.get(user_id)
-        book = Books.query.get(isbn)
-        status = Book_Status.query.get(book_status_id)
+        user_id, isbn, book_status_id = get_json_data()
+        user, book, status = get_db_data(user_id, isbn, book_status_id)
 
         if not all([user, book, status]):
             return jsonify({'error': 'Invalid user, book, or status.'}), 404
@@ -50,22 +45,65 @@ def manage_book_status():
         user_book_entry = User_Book_Status.query.filter_by(User_ID=user_id, ISBN=isbn).first()
 
         if request.method == 'POST':
-            if user_book_entry:
-                return jsonify({'error': 'User book status entry already exists.'}), 400
-            new_entry = User_Book_Status(
-                User_ID=user_id,
-                ISBN=isbn,
-                Book_Status_ID=book_status_id
-            )
-            db.session.add(new_entry)
-            db.session.commit()
-            return jsonify({'message': 'Book status added successfully.'}), 200
-
+            return handle_post_request(user_book_entry, user_id, isbn, book_status_id)
         elif request.method == 'PUT':
-            if not user_book_entry:
-                return jsonify({'error': 'User book status entry does not exist.'}), 404
-            user_book_entry.Book_Status_ID = book_status_id
-            db.session.commit()
-            return jsonify({'message': 'Book status updated successfully.'}), 200
+            return handle_put_request(user_book_entry, user_id, isbn, book_status_id)
+
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+def get_json_data():
+
+    data = request.get_json()
+
+    if not data:
+        raise ValueError('No JSON data received!')
+    
+    user_id = int(data.get('user_id'))
+    isbn = int(data.get('isbn'))
+    book_status_id = int(data.get('book_status'))
+
+    return user_id, isbn, book_status_id
+
+def get_db_data(user_id, isbn, book_status_id):
+
+    user = Users.query.get(user_id)
+    book = Books.query.get(isbn)
+    status = Book_Status.query.get(book_status_id)
+
+    return user, book, status
+
+def handle_post_request(user_book_entry, user_id, isbn, book_status_id):
+
+    if user_book_entry:
+        return jsonify({'error': 'User book status entry already exists.'}), 400
+    
+    new_entry = User_Book_Status(
+        User_ID=user_id,
+        ISBN=isbn,
+        Book_Status_ID=book_status_id
+    )
+
+    db.session.add(new_entry)
+    db.session.commit()
+
+    return jsonify({'message': 'Book status added successfully.'}), 200
+
+def handle_put_request(user_book_entry, user_id, isbn, book_status_id):
+
+    if not user_book_entry:
+        new_entry = User_Book_Status(
+            User_ID=user_id,
+            ISBN=isbn,
+            Book_Status_ID=book_status_id
+        )
+
+        db.session.add(new_entry)
+        db.session.commit()
+
+        return jsonify({'message': 'Book status added successfully.'}), 200
+    
+    user_book_entry.Book_Status_ID = book_status_id
+    db.session.commit()
+    
+    return jsonify({'message': 'Book status updated successfully.'}), 200
