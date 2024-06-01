@@ -56,11 +56,9 @@
 
   .add-link {
     margin-bottom: 15px;
-    margin-left: 89%;
     display: flex;
     display: inline-block; 
     padding: 10px 20px;
-    background-color: #00ff66; 
     color: #fff; 
     text-decoration: none; 
     border: none; 
@@ -68,8 +66,4 @@
     cursor: pointer; 
     transition: background-color 0.3s; 
 
-  }
-
-  .add-link:hover {
-    background-color: #03b300e2; 
   }

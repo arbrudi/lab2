@@ -1,8 +1,13 @@
+.h1-book-list{
+margin-left: 40%;
+margin-right: 10%;
+}
+
 .book-container {
     display: flex;
     flex-wrap: wrap;
-    margin-left: 35px;
-    margin-right: 35px;
+    margin-left: 5%;
+    margin-right: auto;
   }
   
   .book {
@@ -17,7 +22,7 @@
   }
 
   .book:hover {
-    box-shadow: 0 0 20px #fa8232c2;
+    box-shadow: 0 0 20px #fa99327f;
   }
   .book-img {
     width: 100%;
@@ -57,7 +62,7 @@
   }
   
   .read-more-b button {
-    background-color: #007bff; 
+    background-color: #0089d3e3; 
     color: white; 
     border: none; 
     padding: 10px 20px; 

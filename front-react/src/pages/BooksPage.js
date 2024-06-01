@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import './pages_css/Books_P.css';
 
 const BooksPage = () => {
-    const { id } = useParams();
+    const { id } = useParams();  // id here is ISBN
     const [book, setBook] = useState({});
     const [genres, setGenres] = useState([]);
     const [status, setStatus] = useState("");
@@ -26,10 +26,14 @@ const BooksPage = () => {
                 const statusOptionsResponse = await axios.get('/book/get_book_status');
                 setStatusOptions(statusOptionsResponse.data);
 
-                const statusResponse = await axios.get(`/book/get_status_by_id/${id}`);
-                if (statusResponse.status === 200) {
-                    setStatus(statusResponse.data.Book_state);
-                    setUserBookEntryExists(true);
+                const user_id = localStorage.getItem('user_id');
+                if (user_id) {
+                    const statusResponse = await axios.get(`/book/get_status_by_id/${id}/${user_id}`);
+                    if (statusResponse.status === 200) {
+                        setStatus(statusResponse.data.Book_state);
+                        setUserBookEntryExists(true);
+                        
+                    }
                 }
             } catch (error) {
                 if (error.response && error.response.status === 404) {
@@ -48,24 +52,27 @@ const BooksPage = () => {
     const handleStatusChange = async (event) => {
         const newStatus = event.target.value;
         const selectedStatus = statusOptions.find(option => option.Book_Status_ID === parseInt(newStatus));
-
+    
         setStatus(selectedStatus.Book_state);
-
-        const token = localStorage.getItem('adminToken');
+    
+        const admin_token = localStorage.getItem('adminToken');
+        const user_token = localStorage.getItem('userToken');
         const user_id = localStorage.getItem('user_id');
-
-        if (!token || !user_id) {
+    
+        if ((!admin_token && !user_token) || !user_id) {
             setMessage("Please log in to update the book status.");
             return;
         }
-
+    
         try {
             const method = userBookEntryExists ? 'PUT' : 'POST';
+            const token = admin_token || user_token;
+    
             const resp = await axios({
                 method: method,
                 url: '/book/status',
                 data: {
-                    user_id: user_id,
+                    user_id: parseInt(user_id),
                     isbn: id,
                     book_status: newStatus
                 },
@@ -75,18 +82,17 @@ const BooksPage = () => {
                 }
             });
             setMessage(method === 'POST' ? "Book status added successfully." : "Book status updated successfully.");
-            console.log('Response:', resp.data); 
             setUserBookEntryExists(true);
-            
+    
             setTimeout(() => setMessage(""), 3000);
         } catch (error) {
             console.error("Error updating status:", error);
             setMessage("Error updating status.");
-
+    
             setTimeout(() => setMessage(""), 3000);
         }
     };
-
+    
     return (
         <div>
             <div className="bookP-container">
@@ -133,7 +139,6 @@ const BooksPage = () => {
                     </div>
                 </div>
             </div>
-            
         </div>
     );
 }

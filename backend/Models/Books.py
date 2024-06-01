@@ -39,6 +39,7 @@ class Book_Status(db.Model):
 class User_Book_Status(db.Model):
     """Base class for User_Book_Status"""
     __tablename__ = 'User_Book_Status'
+    User_Book_Status_ID = db.Column(db.Integer, primary_key=True, autoincrement = True)
     ISBN = Column(Integer, ForeignKey('Books.ISBN'), primary_key=True, nullable=False)
     Book_Status_ID = Column(Integer, ForeignKey('Book_Status.Book_Status_ID'), nullable=False)
     User_ID = Column(Integer, ForeignKey('Users.User_ID'), primary_key=True, nullable=False)

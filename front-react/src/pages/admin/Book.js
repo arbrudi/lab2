@@ -55,7 +55,7 @@ const Book = () => {
   return (
     <div class='container'>
       <AdminBar />
-      <div >
+      <div>
         <h1 class='list'>Book List</h1>
         <div class='add-link'>
         <Link to={'/admin/book/create'}>Add a new book</Link>
@@ -78,7 +78,7 @@ const Book = () => {
                 <td>{book.Book_title}</td>
                 <td>{book.Book_author}</td>
                 <td>{book.Book_genre}</td>
-                <td>{book.Book_description}</td>
+                <td className="truncate">{book.Book_description}</td>
                 <td >
                     <Link to={`/admin/book/update/${book.ISBN}`}>
                         <button class='edit-bttn'>Edit</button>

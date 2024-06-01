@@ -22,8 +22,8 @@ const Book_list_page = () =>{
 
 
     return (
-        <div>
-            <h1>Explore our library!</h1>
+        <div className="book-box">
+            <h1 className="h1-book-list">Explore our library!</h1>
             <div className="book-container">
                 {books.map((book )=> (
                   <div className="book" key={book.ISBN}>
