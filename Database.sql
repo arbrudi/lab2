@@ -3,7 +3,7 @@ create database lab2
 use lab2
 
 DROP DATABASE lab2
-
+/*-------------------------------Comics-------------------------------*/
 CREATE TABLE Comics (
   Comic_ID VARCHAR(50) NOT NULL PRIMARY KEY,
   Comic_image TEXT,
@@ -11,8 +11,6 @@ CREATE TABLE Comics (
   Comic_type VARCHAR(50),
   Comic_Description TEXT
 );
-
-
 
 CREATE TABLE Comics_Author(
 Comics_Author_ID int NOT NULL PRIMARY KEY,
@@ -67,15 +65,16 @@ VALUES(3,'Dropped')
 INSERT INTO Book_Status(Book_Status_ID, Book_state)
 VALUES(4,'Finished')
 
-CREATE TABLE User_Book_Status(
-ISBN int NOT NULL,
-Book_Status_ID int NOT NULL,
-User_ID INT NOT NULL,
-PRIMARY KEY (ISBN, User_ID),
-FOREIGN KEY (ISBN) REFERENCES Books(ISBN),
-FOREIGN KEY (Book_Status_ID) REFERENCES Book_Status(Book_Status_ID),
-FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
-)
+CREATE TABLE User_Book_Status (
+  User_Book_Status_ID INT IDENTITY(1,1) PRIMARY KEY,
+  ISBN INT NOT NULL,
+  Book_Status_ID INT NOT NULL,
+  User_ID INT NOT NULL,
+  FOREIGN KEY (ISBN) REFERENCES Books(ISBN),
+  FOREIGN KEY (Book_Status_ID) REFERENCES Book_Status(Book_Status_ID),
+  FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
+);
+
 
 CREATE TABLE Book_comments (
   User_ID INT NOT NULL,
@@ -167,8 +166,6 @@ ADD CONSTRAINT FK_book_comments_User_ID FOREIGN KEY (User_ID) REFERENCES Users(U
 ALTER TABLE Book_comments
 ADD CONSTRAINT FK_book_comments_ISBN FOREIGN KEY (ISBN) REFERENCES Books(ISBN); 
 
-
-
 ALTER TABLE Event_participants
 ADD CONSTRAINT FK_event_participants_User_ID FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
 ALTER TABLE Event_participants
@@ -183,3 +180,9 @@ ALTER TABLE favorite_books
 ADD CONSTRAINT FK_favorite_books_User_ID FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
 ALTER TABLE favorite_books
 ADD CONSTRAINT FK_favorite_books_ISBN FOREIGN KEY (ISBN) REFERENCES Books(ISBN);
+
+/*-------------------------------Queries-------------------------------*/
+
+SELECT * FROM Users
+SELECT * FROM User_Book_Status
+

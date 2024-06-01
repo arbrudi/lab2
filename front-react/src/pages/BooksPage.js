@@ -109,6 +109,9 @@ const BooksPage = () => {
                             </select>
                         </div>
                         <p>{message}</p>
+                        <div className="book-rating">
+                            <p>rating</p>
+                        </div>
                     </div>
                     <div className="textP-section">
                         <div className="bookP-title">
@@ -123,6 +126,9 @@ const BooksPage = () => {
                         <div className="bookP-description">
                             <p>Description:</p>
                             <p>{book.Book_description}</p>
+                        </div>
+                        <div className="ml-button-cont">
+                            <button>What to read next?</button>
                         </div>
                     </div>
                 </div>

@@ -23,5 +23,11 @@ pip install flask_bcrypt
 
 python server.py
 
+------ML------
+pip install numpy
+pip install pandas
+pip install scikit-learn
+
+
 ------MSSQL CONN SERVERS------
 Arbi -> LAPTOP-TQGV5751
