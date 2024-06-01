@@ -48,24 +48,38 @@ const BooksPage = () => {
     const handleStatusChange = async (event) => {
         const newStatus = event.target.value;
         const selectedStatus = statusOptions.find(option => option.Book_Status_ID === parseInt(newStatus));
-
+    
         setStatus(selectedStatus.Book_state);
-
-        const token = localStorage.getItem('adminToken');
+    
+        const admin_token = localStorage.getItem('adminToken');
+        const user_token = localStorage.getItem('userToken');
         const user_id = localStorage.getItem('user_id');
-
-        if (!token || !user_id) {
+    
+        // Detailed logging to debug
+        console.log('New Status:', newStatus);
+        console.log('Selected Status:', selectedStatus);
+        console.log('Admin Token:', admin_token);
+        console.log('User Token:', user_token);
+        console.log('User ID:', user_id);
+    
+        // Check if user is logged in as either admin or regular user
+        if ((!admin_token && !user_token) || !user_id) {
             setMessage("Please log in to update the book status.");
             return;
         }
-
+    
         try {
             const method = userBookEntryExists ? 'PUT' : 'POST';
+            const token = admin_token || user_token; // Use the available token
+    
+            console.log('Method:', method);
+            console.log('Token:', token);
+    
             const resp = await axios({
                 method: method,
                 url: '/book/status',
                 data: {
-                    user_id: user_id,
+                    user_id: parseInt(user_id),  // Ensure user_id is an integer
                     isbn: id,
                     book_status: newStatus
                 },
@@ -74,19 +88,21 @@ const BooksPage = () => {
                     'Authorization': `Bearer ${token}`
                 }
             });
+    
+            console.log('Response:', resp.data);
             setMessage(method === 'POST' ? "Book status added successfully." : "Book status updated successfully.");
-            console.log('Response:', resp.data); 
             setUserBookEntryExists(true);
-            
+    
             setTimeout(() => setMessage(""), 3000);
         } catch (error) {
             console.error("Error updating status:", error);
             setMessage("Error updating status.");
-
+    
             setTimeout(() => setMessage(""), 3000);
         }
     };
-
+    
+    
     return (
         <div>
             <div className="bookP-container">
