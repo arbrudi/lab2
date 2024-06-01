@@ -12,7 +12,7 @@ const BooksPage = () => {
     const [loading, setLoading] = useState(true);
     const [message, setMessage] = useState("");
     const [userBookEntryExists, setUserBookEntryExists] = useState(false);
-
+    const user_id = localStorage.getItem('user_id');
     useEffect(() => {
         const fetchBook = async () => {
             try {
@@ -26,7 +26,7 @@ const BooksPage = () => {
                 const statusOptionsResponse = await axios.get('/book/get_book_status');
                 setStatusOptions(statusOptionsResponse.data);
 
-                const statusResponse = await axios.get(`/book/get_status_by_id/${id}`);
+                const statusResponse = await axios.get(`/book/get_status_by_id/${id}/${user_id}`);
                 if (statusResponse.status === 200) {
                     setStatus(statusResponse.data.Book_state);
                     setUserBookEntryExists(true);
