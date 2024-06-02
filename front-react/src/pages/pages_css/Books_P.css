@@ -53,6 +53,7 @@
     padding: 10px;
     font-size: 16px;
     border: none;
+    color: #ffffff;
     border-radius: 25px;
     background-color: #fdbe01;
     cursor: pointer;
@@ -83,6 +84,22 @@
     font-size: 16px;
     color: #555;
 }
+
+.ml-button-cont button {
+    background-color: #fdbe01;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.ml-button-cont button:hover {
+    background-color: #fca500;
+}
+
 .recommendations-section {
     margin-top: 20px;
     padding: 20px;
@@ -97,8 +114,9 @@
 }
 
 .recommended-book {
-    width: 200px; /* Adjust as needed */
-    margin-right: 20px;
+    max-width: 200px; 
+    margin-left: 20px;
+    margin-right: 30px;
     margin-bottom: 20px;
     background-color: #ffffff;
     border-radius: 10px;

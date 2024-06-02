@@ -150,7 +150,7 @@ const BooksPage = () => {
                             <button onClick={handleRecommendationClick}>What to read next?</button>
                             {showRecommendations && (
                                 <div className="recommendations-section">
-                                    <h3>Recommended Books</h3>
+                                    <h3>We recommend:</h3>
                                     <div className="recommendations-list">
                                         {recommendedBooks.map((recommendedBook, index) => (
                                             <div className="recommended-book" key={index}>
