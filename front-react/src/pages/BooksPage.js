@@ -12,6 +12,7 @@ const BooksPage = () => {
     const [loading, setLoading] = useState(true);
     const [message, setMessage] = useState("");
     const [userBookEntryExists, setUserBookEntryExists] = useState(false);
+    const [recommendedBooks, setRecommendedBooks] = useState([]);
 
     useEffect(() => {
         const fetchBook = async () => {
@@ -32,8 +33,13 @@ const BooksPage = () => {
                     if (statusResponse.status === 200) {
                         setStatus(statusResponse.data.Book_state);
                         setUserBookEntryExists(true);
-                        
                     }
+                }
+
+                // Fetch recommended books
+                const recommendationsResponse = await axios.get(`/recommendations/recommend_book?book_name=${bookResponse.data.Book_title}`);
+                if (recommendationsResponse.status === 200) {
+                    setRecommendedBooks(recommendationsResponse.data);
                 }
             } catch (error) {
                 if (error.response && error.response.status === 404) {
@@ -137,6 +143,18 @@ const BooksPage = () => {
                             <button>What to read next?</button>
                         </div>
                     </div>
+                </div>
+                <div className="recommendations-section">
+                    <h3>Recommended Books</h3>
+                    {recommendedBooks.length > 0 ? (
+                        <ul>
+                            {recommendedBooks.map((recommendedBook, index) => (
+                                <li key={index}>{recommendedBook}</li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p>No recommendations available.</p>
+                    )}
                 </div>
             </div>
         </div>

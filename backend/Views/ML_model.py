@@ -1,5 +1,4 @@
 from flask import Blueprint, Flask, request, jsonify
-import pickle
 import os
 import pandas as pd
 import numpy as np
@@ -14,15 +13,10 @@ model_path = os.path.join(ARTIFACTS_DIR, 'model.pkl')
 user_data_path = os.path.join(ARTIFACTS_DIR, 'book_pivot.pkl')
 final_rating_path = os.path.join(ARTIFACTS_DIR, 'final_rating.pkl')
 
-with open(model_path, 'rb') as f:
-    model = pickle.load(f)
 
+model = pd.read_pickle(model_path)
 book_pivot = pd.read_pickle(user_data_path)
 df_final_rating = pd.read_pickle(final_rating_path)
-
-print("DataFrame shape:", book_pivot.shape)
-print("Model expected features:", model.n_features_in_)
-print('cols', type(df_final_rating))
 
 @recommendation_bp.route('/')
 def index():
@@ -54,8 +48,7 @@ def recommend_book(book_name):
 
 @recommendation_bp.route('/recommend_book', methods=['GET'])
 def recommend_book_route():
-    # book_name = request.args.get('book_name')
-    book_name = 'Harry Potter and the Chamber of Secrets (Book 2)'
+    book_name = request.args.get('book_name')
     if not book_name:
         return jsonify({'error': 'No book name provided'}), 400
     

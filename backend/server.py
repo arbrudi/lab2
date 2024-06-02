@@ -38,7 +38,7 @@ def create_app():
     app.register_blueprint(Comics_bp)
     app.register_blueprint(ComicsA_bp)
     app.register_blueprint(bookS_bp)
-    app.register_blueprint(recommendation_bp)
+    app.register_blueprint(recommendation_bp, url_prefix='/recommendations')
 
     with app.app_context():
         try:
