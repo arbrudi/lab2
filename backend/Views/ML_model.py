@@ -1,9 +1,7 @@
-from flask import Blueprint, Flask, request, jsonify
+from flask import Blueprint, request, jsonify
 import os
 import pandas as pd
 import numpy as np
-from extensions import db
-from sqlalchemy.sql import text
 
 recommendation_bp = Blueprint('recommendation_bp', __name__)
 
@@ -13,14 +11,9 @@ model_path = os.path.join(ARTIFACTS_DIR, 'model.pkl')
 user_data_path = os.path.join(ARTIFACTS_DIR, 'book_pivot.pkl')
 final_rating_path = os.path.join(ARTIFACTS_DIR, 'final_rating.pkl')
 
-
 model = pd.read_pickle(model_path)
 book_pivot = pd.read_pickle(user_data_path)
 df_final_rating = pd.read_pickle(final_rating_path)
-
-@recommendation_bp.route('/')
-def index():
-    return "Book-Based Recommendation System"
 
 def recommend_book(book_name):
     try:
@@ -28,8 +21,7 @@ def recommend_book(book_name):
             return jsonify({'error': 'Book not found'}), 404
 
         book_id = np.where(book_pivot.index == book_name)[0][0]
-
-        distance, suggestion = model.kneighbors(book_pivot.iloc[book_id, :].values.reshape(1, -1), n_neighbors=6)
+        distance, suggestion = model.kneighbors(book_pivot.iloc[book_id, :].values.reshape(1, -1), n_neighbors=5)
         
         recommended_books = []
         for i in range(len(suggestion)):
@@ -38,7 +30,7 @@ def recommend_book(book_name):
                 if j != book_name:
                     recommended_books.append(j)
         
-        return jsonify(recommended_books)
+        return recommended_books
     
     except IndexError:
         return jsonify({'error': 'Book not found in the dataset'}), 404
@@ -52,10 +44,16 @@ def recommend_book_route():
     if not book_name:
         return jsonify({'error': 'No book name provided'}), 400
     
-    return recommend_book(book_name)
-
-app = Flask(__name__)
-app.register_blueprint(recommendation_bp, url_prefix='/recommendations')
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    recommended_books = recommend_book(book_name)
+    
+    recommended_books_details = []
+    for recommended_book in recommended_books:
+        book_details = df_final_rating[df_final_rating['title'] == recommended_book]
+        if not book_details.empty:
+            recommended_books_details.append({
+                'title': recommended_book,
+                'author': book_details['author'].values[0],
+                'img_url': book_details['img_url'].values[0]
+            })
+    
+    return jsonify(recommended_books_details)
