@@ -10,6 +10,7 @@ from Views.Comics_Author import ComicsA_bp
 from Views.Book_Genre import bookG_bp
 from Views.Book_Status import bookS_bp
 from Views.User import Users_bp
+from Views.ML_model import recommendation_bp
 
 def create_app():
     app = Flask(__name__)
@@ -37,6 +38,7 @@ def create_app():
     app.register_blueprint(Comics_bp)
     app.register_blueprint(ComicsA_bp)
     app.register_blueprint(bookS_bp)
+    app.register_blueprint(recommendation_bp, url_prefix='/recommendations')
 
     with app.app_context():
         try:

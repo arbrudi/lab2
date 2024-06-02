@@ -12,6 +12,8 @@ const BooksPage = () => {
     const [loading, setLoading] = useState(true);
     const [message, setMessage] = useState("");
     const [userBookEntryExists, setUserBookEntryExists] = useState(false);
+    const [recommendedBooks, setRecommendedBooks] = useState([]);
+    const [showRecommendations, setShowRecommendations] = useState(false);
 
     useEffect(() => {
         const fetchBook = async () => {
@@ -32,7 +34,6 @@ const BooksPage = () => {
                     if (statusResponse.status === 200) {
                         setStatus(statusResponse.data.Book_state);
                         setUserBookEntryExists(true);
-                        
                     }
                 }
             } catch (error) {
@@ -92,6 +93,18 @@ const BooksPage = () => {
             setTimeout(() => setMessage(""), 3000);
         }
     };
+
+    const handleRecommendationClick = async () => {
+        try {
+            const recommendationsResponse = await axios.get(`/recommendations/recommend_book?book_name=${book.Book_title}`);
+            if (recommendationsResponse.status === 200) {
+                setRecommendedBooks(recommendationsResponse.data);
+                setShowRecommendations(true);
+            }
+        } catch (error) {
+            console.error("Error fetching recommendations:", error);
+        }
+    };
     
     return (
         <div>
@@ -115,6 +128,9 @@ const BooksPage = () => {
                             </select>
                         </div>
                         <p>{message}</p>
+                        <div className="book-rating">
+                            <p>rating</p>
+                        </div>
                     </div>
                     <div className="textP-section">
                         <div className="bookP-title">
@@ -129,6 +145,25 @@ const BooksPage = () => {
                         <div className="bookP-description">
                             <p>Description:</p>
                             <p>{book.Book_description}</p>
+                        </div>
+                        <div className="ml-button-cont">
+                            <button onClick={handleRecommendationClick}>What to read next?</button>
+                            {showRecommendations && (
+                                <div className="recommendations-section">
+                                    <h3>We recommend:</h3>
+                                    <div className="recommendations-list">
+                                        {recommendedBooks.map((recommendedBook, index) => (
+                                            <div className="recommended-book" key={index}>
+                                                <img src={recommendedBook.img_url} alt={recommendedBook.title} />
+                                                <div className="book-details">
+                                                    <p className="book-title">{recommendedBook.title}</p>
+                                                    <p className="book-author">Author: {recommendedBook.author}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

@@ -10,9 +10,9 @@ class Books(db.Model):
     Book_image = db.Column(db.Text)
     Book_title = db.Column(db.String(255), nullable=False)
     Book_author = db.Column(db.String(255), nullable=False)
-    Book_genre = db.Column(db.Integer, nullable=False)
+    Book_genre = db.Column(db.Integer, nullable=False) # possibly change this to issue or smth similar or even pages
     Book_description = db.Column(db.Text, nullable=False)
-    genres = db.relationship('Book_Genre', backref='book', overlaps="Book_genre,books")
+    # genres = db.relationship('Book_Genre', backref='book', overlaps="Book_genre,books")
 
 class Book_Genre(db.Model):
     """Base model for Book_Genre"""
@@ -20,7 +20,7 @@ class Book_Genre(db.Model):
     Book_Genre_ID = db.Column(db.Integer, primary_key=True, autoincrement = False)
     ISBN = db.Column(db.Integer, db.ForeignKey('Books.ISBN'), nullable=False)
     Genre_Name = db.Column(db.String(50), nullable=False)
-    #  book = db.relationship('Book', backref=db.backref('genres', lazy=True))
+    book = db.relationship('Books', backref=db.backref('genres', lazy=True))
 
 class Book_Status(db.Model):
     """Base model for Book_Status"""
