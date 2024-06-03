@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './../pages/pages_css/Loginpage.css'
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const [loginMessage, setLoginMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,41 +57,45 @@ const LoginPage = () => {
     } catch (error) {
       console.error('Login failed:', error.response.data.message);
       setError('Invalid username or password');
-      setLoginMessage(error.response.data.message);
     }
   };
 
-
-
-
   return (
-    <div className="container_c">
-      <h1>Login Page</h1>
-      {loginMessage && <p>{loginMessage}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
+    <div className="page-container">
+    <div className="container_cl">
+      <div className="login-title">
+      <h1>Login to Your Account</h1>
+      </div>
+      <form className="login-form" onSubmit={handleSubmit}>
+        <div className="user_login">
           <input
             type="text"
             id="username"
             value={username}
+            placeholder="Username"
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-        <div>
-          <label htmlFor="password">Password:</label>
+        <div className="pass_login">
           <input
             type="password"
             id="password"
             value={password}
+            placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <button type="submit">Login</button>
         {error && <div className="error">{error}</div>}
       </form>
-      
-      <Link to="/register">Register</Link>
+      <div className="register-link">
+        <h1>New Here?</h1>
+        <p>Sign up now and discover your focal point!</p>
+        <div className="reg-button">
+      <button><Link to="/register">Register</Link></button>
+      </div>
+      </div>
+    </div>
     </div>
   );
 };
