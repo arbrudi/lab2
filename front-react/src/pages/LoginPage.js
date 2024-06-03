@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './pages_css/Loginpage.css'
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -17,7 +18,7 @@ const LoginPage = () => {
       const { token, user_id, role } = response.data;
       
       localStorage.setItem('token', token); 
-      localStorage.setItem('user_id', user_id); 
+      localStorage.setItem('user_id', user_id); // Store user_id in localStorage
 
       if (role === 'admin') {
         navigate('/admin'); 
@@ -28,7 +29,7 @@ const LoginPage = () => {
       }
       
       if (response.data.role === 'admin') {
-        
+        // Redirect to user dashboard
         navigate('/admin',{replace:true})
 
         localStorage.setItem("adminToken", JSON.stringify({
@@ -40,7 +41,7 @@ const LoginPage = () => {
         window.location.reload()
       
      }else if (response.data.role === 'client'){
-              
+              // Redirect to user dashboard
               navigate('/about',{replace:true})
 
               localStorage.setItem("userToken", JSON.stringify({
@@ -61,37 +62,44 @@ const LoginPage = () => {
     }
   };
 
-
-
+  const logoutFunction = ()=>{
+    localStorage.removeItem("userToken");
+    localStorage.removeItem("adminToken");
+    localStorage.removeItem('user_id');
+    setTimeout(() => {navigate("/login", {replace:true})}, 400);
+    setTimeout(()=> { window.location.reload()},500)
+  }
 
   return (
-    <div className="container_c">
-      <h1>Login Page</h1>
-      {loginMessage && <p>{loginMessage}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit">Login</button>
-        {error && <div className="error">{error}</div>}
-      </form>
-      
-      <Link to="/register">Register</Link>
+    <div className="login-container">
+      <div className="container_c">
+        <h1>Login Page</h1>
+        {loginMessage && <p>{loginMessage}</p>}
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="username">Username:</label>
+            <input
+              type="text"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <button type="submit">Login</button>
+          {error && <div className="error">{error}</div>}
+        </form>
+        <button className="logout" onClick={()=> logoutFunction()}>Logout</button>
+        <Link to="/register">Register</Link>
+      </div>
     </div>
   );
 };

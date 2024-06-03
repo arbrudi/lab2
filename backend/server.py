@@ -10,20 +10,27 @@ from Views.Comics_Author import ComicsA_bp
 from Views.Book_Genre import bookG_bp
 from Views.Book_Status import bookS_bp
 from Views.User import Users_bp
+from flask_pymongo import PyMongo
+from dotenv import load_dotenv
+import os
+
+load_dotenv(dotenv_path='./config/.env')
 
 def create_app():
     app = Flask(__name__)
 
-    # Change SERVER
+    # Configure MSSQL
     conn = 'mssql+pyodbc:///?odbc_connect=' + \
            'DRIVER={ODBC Driver 17 for SQL Server};' + \
-           'SERVER=LAPTOP-TQGV5751;' + \
+           'SERVER=DESKTOP-UD05JRG\\MSSQLSERVER01;' + \
            'DATABASE=lab2;' + \
            'Trusted_Connection=yes;'
-
     app.config['SQLALCHEMY_DATABASE_URI'] = conn 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+    # Configure MongoDB
+    app.config["MONGO_URI"] = os.getenv("DB_URI")
+    mongo = PyMongo(app)
 
     db.init_app(app)
     
@@ -39,15 +46,23 @@ def create_app():
     app.register_blueprint(bookS_bp)
 
     with app.app_context():
+        # Test MSSQL connection
         try:
             db.engine.connect()
             print("Connection to MSSQL database successful!")
-            
         except Exception as e:
             print("Error connecting to MSSQL database:", e)
+        
+        # Test MongoDB connection
+        try:
+            mongo.cx.server_info()  # Ping the MongoDB server
+            print("Connection to MongoDB successful!")
+        except Exception as e:
+            print("Error connecting to MongoDB:", e)
 
     return app
 
 if __name__ == "__main__":
     app = create_app()
-    app.run(debug=True)
+    port = os.getenv("PORT", 5000)
+    app.run(debug=True, port=port)
