@@ -23,7 +23,8 @@
 }
 
 .login-title {
-  margin-bottom: 20px;
+  margin-left: 60px;
+  margin-bottom: 40px;
 }
 
 .user_login, .pass_login {
@@ -69,7 +70,7 @@ button:hover {
 
 .register-link {
   background: linear-gradient(135deg, #00aaff, #0ffc72);
-  margin-top: -350px;
+  margin-top: -400px;
   margin-left: 550px;
   margin-right: -40px;
   margin-bottom: -40px;
@@ -90,7 +91,7 @@ button:hover {
 }
 
 .register-link p {
-  margin-bottom: 120px;
+  margin-bottom: 50px;
 }
 
 .register-link .reg-button button {
@@ -98,6 +99,8 @@ button:hover {
   color: #00aaff;
   font-weight: bold;
   margin-top: 20px;
+  margin-bottom: 110px;
+
 }
 
 .register-link .reg-button button:hover {
