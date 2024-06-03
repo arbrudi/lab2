@@ -3,10 +3,12 @@ body {
     background-color: white;
     margin: 0;
     padding: 0; 
+    
+}
+.register{
     background: url('https://img.freepik.com/premium-photo/vintage-book-magnifying-glass-light-blue-background-education-background-world-books-day_609048-2470.jpg');
     background-size: cover;
 }
-
 .register-container {
     max-width: 500px;
     margin: 50px auto;

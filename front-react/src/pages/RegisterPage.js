@@ -31,6 +31,7 @@ const RegisterPage = () => {
     };
 
     return (
+        <div className="register">
         <div className="register-container">
             <h1 className="register-header">Register Page</h1>
             <form className="register-form" onSubmit={handleSubmit}>
@@ -86,6 +87,7 @@ const RegisterPage = () => {
                 
                 <button type="submit" className="register-button">Submit</button>
             </form>
+        </div> 
         </div>
     );
 };
