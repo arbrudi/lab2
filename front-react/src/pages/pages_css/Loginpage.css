@@ -1,10 +1,7 @@
-
 .page-container {
-  margin-top: 100px;
-  margin-left: 250px;
+  margin: 100px 250px 0 250px;
   display: flex;
-  width: 70%;
-  max-width: 1200px;
+  justify-content: center; 
   background-color: white;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
@@ -23,12 +20,19 @@
 }
 
 .login-title {
-  margin-left: 60px;
+  margin-top: 50px;
   margin-bottom: 40px;
+  text-align: center; 
 }
 
-.user_login, .pass_login {
-  margin-bottom: 20px;
+.user_login input,
+.pass_login input {
+  padding: 10px;
+  margin: 8px;
+  width: 250px;
+  margin-left: 120px;
+  border-radius: 16px;
+  border: 1px solid #ccc;
 }
 
 label {
@@ -36,27 +40,17 @@ label {
   margin-bottom: 5px;
 }
 
-input[type="text"], input[type="password"] {
-  width: 35%;
-  padding: 10px;
-  margin-top: 5px;
-  margin-bottom: 10px;
-  border: 1px solid #ddd;
-  border-radius: 16px;
-}
-
-button[type="submit"] {
-  width: 17.5%;
-  margin-left: 8.75%;
-  margin-bottom: 20px;
-  padding: 10px;
+.log-submit button {
+  margin-top: 30px;
+  margin-left: 195px;
+  width: 20%; 
+  padding: 7px;
   border: none;
   border-radius: 16px;
   cursor: pointer;
   background-color: #00ff6c;
-  color: white;
+  color: #fff;
   font-size: large;
-
 }
 
 button:hover {
@@ -65,42 +59,39 @@ button:hover {
 
 .error {
   color: red;
-  margin-top: 10px;
 }
 
 .register-link {
   background: linear-gradient(135deg, #00aaff, #0ffc72);
-  margin-top: -400px;
-  margin-left: 550px;
-  margin-right: -40px;
-  margin-bottom: -40px;
+  max-width: 450px;
   height: 500px;
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   padding: 40px;
   text-align: center;
 }
 
-
 .register-link h1 {
   font-size: 40px;
-  margin-bottom: 50px;
+  margin-bottom: 20px; 
 }
 
 .register-link p {
-  margin-bottom: 50px;
+  margin-bottom: 60px;
 }
 
 .register-link .reg-button button {
   background-color: white;
+  margin-bottom: 70px;
   color: #00aaff;
   font-weight: bold;
-  margin-top: 20px;
-  margin-bottom: 110px;
-
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  padding: 10px 20px;
 }
 
 .register-link .reg-button button:hover {

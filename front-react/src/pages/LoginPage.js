@@ -85,15 +85,17 @@ const LoginPage = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+        <div className="log-submit">
         <button type="submit">Login</button>
         {error && <div className="error">{error}</div>}
+        </div>
       </form>
+      </div>
       <div className="register-link">
         <h1>New Here?</h1>
-        <p>Sign up now and discover your focal point!</p>
+        <p>Ready to dive into the world of books? Discover new stories, share your thoughts, and connect with fellow book lovers. Embark on your bookish adventure!</p>
         <div className="reg-button">
       <button><Link to="/register">Register</Link></button>
-      </div>
       </div>
     </div>
     </div>
