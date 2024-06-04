@@ -42,6 +42,8 @@ CREATE TABLE Books (
   Book_genre INT NOT NULL,
   Book_description TEXT NOT NULL
 );
+Alter table Books
+
 
 CREATE TABLE Book_Genre(
 Book_Genre_ID int NOT NULL PRIMARY KEY,
