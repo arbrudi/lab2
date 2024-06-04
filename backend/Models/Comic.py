@@ -16,3 +16,8 @@ class Comics_Author(db.Model):
     Author_Name = db.Column(db.String(50), nullable=False)
     Publisher = db.Column(db.String(50), nullable=False)
     Author_notes = db.Column(db.String(255))
+
+
+
+
+    
