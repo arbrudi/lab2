@@ -20,7 +20,7 @@ const UserBar = () => {
               <a href="/user/book">Book</a>
             </li>
             <li>
-              <a href="/user/comics">Comics</a>
+              <a href="/user/comics_rating">Comics</a>
             </li>
             <li>
               <a href="/user/event">Event</a>

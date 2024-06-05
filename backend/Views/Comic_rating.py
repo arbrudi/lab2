@@ -22,6 +22,10 @@ def get_comic_rating_by_id(comic_id, user_id):
         return jsonify({'error': str(e)}), 500
     
 
+
+
+    
+
 @cRating_bp.route('/comic/rating', methods=['POST'])
 def add_or_update_comic_rating():
     try:
@@ -44,6 +48,45 @@ def add_or_update_comic_rating():
         db.session.commit()
 
         return jsonify({'message': 'Rating added/updated successfully'}), 200
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+
+
+@cRating_bp.route('/comic/get_all_ratings/<int:user_id>', methods=['GET'])
+def get_all_ratings(user_id):
+    try:
+        all_ratings = User_Comic_rating.query.filter_by(User_ID=user_id).all()
+        rating_data = []
+        for rating in all_ratings:
+            _data = {
+                'Comic_rating_ID': rating.Comic_rating_ID,
+                'User_ID': rating.User_ID,
+                'Comic_ID': rating.Comic_ID,
+                'Comic_Rating': rating.Comic_Rating,
+            }
+            rating_data.append(_data)
+        return jsonify(rating_data), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@cRating_bp.route('/comic/delete_rating', methods=['DELETE'])
+def delete_comic_rating():
+    try:
+        data = request.get_json()
+        user_id = data.get('user_id')
+        comic_id = data.get('comic_id')
+
+        rating_to_delete = User_Comic_rating.query.filter_by(Comic_ID=comic_id, User_ID=user_id).first()
+
+        if rating_to_delete:
+            db.session.delete(rating_to_delete)
+            db.session.commit()
+            return jsonify({'message': 'Rating deleted successfully'}), 200
+        else:
+            return jsonify({'error': 'Rating not found'}), 404
 
     except Exception as e:
         db.session.rollback()

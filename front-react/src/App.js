@@ -37,6 +37,7 @@ import Comic from './pages/user/Comics'
 import Events from './pages/user/Events'; 
 import EventBook from './pages/user/EventBook'; 
 import UserDashboard from './pages/UserDashboard';
+import Comic_rating from './pages/user/Comic_rating';
 
 function App() {
 
@@ -87,7 +88,9 @@ function App() {
           <Route path="/user/comics" element={<Comic />} /> 
           <Route path="/user/event" element={<Events />} />  
           <Route path="/user/eventbooks" element={<EventBook />} /> 
-          
+
+          <Route path="/user/comics_rating" element={<Comic_rating />} /> 
+
 
 
           </>
