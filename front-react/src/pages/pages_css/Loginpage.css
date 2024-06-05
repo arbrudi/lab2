@@ -1,72 +1,107 @@
-/* LoginPage.css */
-  
-  .container_c {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    text-align: center;
-  }
-  
-  .container_c h1 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
-  }
-  
-  .container_c form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .container_c form div {
-    margin-bottom: 15px;
-  }
-  
-  .container_c label {
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #555;
-  }
-  
-  .container_c input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
+.page-container {
+  margin: 100px 250px 0 250px;
+  display: flex;
+  justify-content: center; 
+  background-color: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+}
 
- 
-  
+.container_cl {
+  flex: 1;
+  padding: 40px;
+}
 
-  .container_c .error {
-    color: red;
-    margin-top: 10px;
-  }
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-  .container_c button {
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #9e0b0b;
-    color: #fff;
-    cursor: pointer;
-  }
+.login-title {
+  margin-top: 50px;
+  margin-bottom: 40px;
+  text-align: center; 
+}
 
-  
-  .container_c button:hover {
-    background-color: #218838;
-  }
-  
+.user_login input,
+.pass_login input {
+  padding: 10px;
+  margin: 8px;
+  width: 250px;
+  margin-left: 120px;
+  border-radius: 16px;
+  border: 1px solid #ccc;
+}
 
-  .container_c a {
-    display: block;
-    margin-top: 10px;
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  .container_c a:hover {
-    text-decoration: underline;
-  }
-  
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.log-submit button {
+  margin-top: 30px;
+  margin-left: 190px;
+  width: 25%; 
+  padding: 7px;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  background-color: #00ff6c;
+  color: #fff;
+  font-size: large;
+}
+
+button:hover {
+  background-color: #16e26b;
+}
+
+.error {
+  color: red;
+  margin-top: 20px;
+}
+
+.register-link {
+  background: linear-gradient(135deg, #00aaff, #0ffc72);
+  max-width: 450px;
+  height: 500px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  text-align: center;
+}
+
+.register-link h1 {
+  font-size: 40px;
+  margin-bottom: 10px; 
+}
+
+.register-link p {
+  margin-bottom: 60px;
+}
+
+.register-link .reg-button button {
+  background-color: white;
+  margin-bottom: 80px;
+  color: #00aaff;
+  font-weight: bold;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.register-link .reg-button button:hover {
+  background-color: #00ff6c;
+  color: white;
+}
+
+.register-link a {
+  color: inherit;
+  text-decoration: none;
+}
