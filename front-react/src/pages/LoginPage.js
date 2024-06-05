@@ -41,7 +41,7 @@ const LoginPage = () => {
       
      }else if (response.data.role === 'client'){
               
-              navigate('/about',{replace:true})
+              navigate('/UserDashboard',{replace:true})
 
               localStorage.setItem("userToken", JSON.stringify({
                 role : "client",
