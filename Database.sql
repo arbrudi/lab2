@@ -27,11 +27,24 @@ CREATE TABLE Comics_comments (
   Comic_comments TEXT
 );
 
-CREATE TABLE Comics_ratings (
+CREATE TABLE Comic_ratings (
+  Comic_rating_ID int Primary key Identity (1,1),
   User_ID INT NOT NULL,
   Comic_ID VARCHAR(50) NOT NULL,
-  Comic_Rating INT NOT NULL
+  Comic_Rating INT NOT NULL,
+  FOREIGN KEY (Comic_ID) REFERENCES Comics(Comic_ID),
+  FOREIGN KEY (User_ID) REFERENCES Users(User_ID) 
+
 );
+
+CREATE TABLE favorite_comics (
+  User_ID INT NOT NULL,
+  Comic_ID VARCHAR(50) NOT NULL,
+  Comic_list_name VARCHAR(255),
+  PRIMARY KEY (User_ID, Comic_ID)
+);
+
+ Table Comics_ratings
 
 /*-------------------------------Books-------------------------------*/
 CREATE TABLE Books (
@@ -114,12 +127,7 @@ CREATE TABLE Event_participants (
   PRIMARY KEY (Event_ID, User_ID)
 );
  
-CREATE TABLE favorite_comics (
-  User_ID INT NOT NULL,
-  Comic_ID VARCHAR(50) NOT NULL,
-  Comic_list_name VARCHAR(255),
-  PRIMARY KEY (User_ID, Comic_ID)
-);
+
 
 CREATE TABLE favorite_books (
   User_ID INT NOT NULL,
@@ -180,6 +188,9 @@ ALTER TABLE favorite_books
 ADD CONSTRAINT FK_favorite_books_User_ID FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
 ALTER TABLE favorite_books
 ADD CONSTRAINT FK_favorite_books_ISBN FOREIGN KEY (ISBN) REFERENCES Books(ISBN);
+
+
+
 
 /*-------------------------------Queries-------------------------------*/
 

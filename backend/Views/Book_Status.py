@@ -16,6 +16,9 @@ def get_book_status_by_id(isbn, user_id):
             return jsonify({'Book_state': 'Status not available'}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+
+    
 
 @bookS_bp.route('/book/get_book_status', methods=['GET'])
 def get_book_status():
