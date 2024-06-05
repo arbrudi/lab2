@@ -1,19 +1,11 @@
-from flask import Flask, Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify
 from flask_pymongo import PyMongo
-from bson.objectid import ObjectId 
-from Models.Features import Feature
-from dotenv import load_dotenv
-import os
-
-load_dotenv(dotenv_path='./config/.env')
-
-app = Flask(__name__)
-
-# Configure MongoDB
-app.config["MONGO_URI"] = os.getenv("DB_URI")
-mongo = PyMongo(app)
+from bson.objectid import ObjectId
 
 features_bp = Blueprint('features', __name__)
+
+# Assuming you have already configured MongoDB
+mongo = PyMongo()
 
 @features_bp.route('/admin/feature/create', methods=['POST'])
 def add_feature():
@@ -27,7 +19,7 @@ def add_feature():
             return jsonify({'error': "Field 'icon' cannot be null!"}), 400
 
         new_feature = {
-            "self.icon": icon,
+            "icon": icon,
             "name": name,
             "description": description
         }
@@ -94,6 +86,3 @@ def delete_feature(id):
     except Exception as e:
         print("Error:", e)
         return jsonify({"error": str(e)}), 500
-
-app.register_blueprint(features_bp)
-

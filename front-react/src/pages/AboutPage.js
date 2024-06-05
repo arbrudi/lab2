@@ -3,6 +3,7 @@ import './pages_css/AboutPage.css';
 
 const AboutPage = () => {
     return (
+        <div className="about-page-container">
         <div className="about-page">
             <div className="left-section">
                 <p>Focal Point</p>
@@ -38,7 +39,14 @@ const AboutPage = () => {
                     <img className="placeholder-image-2" src="https://mpd-biblio-covers.imgix.net/9780374719678.jpg?w=300" alt="Placeholder 19" />
                     <img className="placeholder-image-2" src="https://shop.merriam-webster.com/cdn/shop/products/Britannica-Baby-Encyclopedia-cover.jpg?v=1667239352&width=533" alt="Placeholder 20" />
                 </div>  
-            </div> 
+            </div>  
+         
+        </div> 
+        <div className="third-section">
+                <div className="icon-placeholder"></div>
+                <div className="name-placeholder"></div>
+                <div className="description-placeholder"></div>
+            </div>
         </div>
     );
 }

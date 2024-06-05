@@ -1,8 +1,12 @@
+
+
 .about-page {
     display: flex;
     max-height: 100vh; 
     max-width: 200vh;
     font-family: Arial, sans-serif; 
+    display: flex; 
+    flex-direction: row;
 }
 
 .left-section {
@@ -141,4 +145,19 @@
     background-position: bottom;  
     margin-bottom: 5px; 
     background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlwkl2cfIG_d2wRZ3ToFLGHgqg8eFfdMBeYA&s'); 
+} 
+.third-section {
+    background-color: #f0f0f0;
+    padding: 20px;
+    text-align: center; 
+    margin-top: 20px; /* Add margin to separate it from the content above */
+}
+
+.icon-placeholder,
+.name-placeholder,
+.description-placeholder {
+    width: 100px; /* Adjust width as needed */
+    height: 100px; /* Adjust height as needed */
+    background-color: #ddd; /* Placeholder background color */
+    margin-bottom: 10px; /* Add spacing between placeholders */
 }
