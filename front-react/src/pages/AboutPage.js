@@ -37,7 +37,7 @@ const AboutPage = () => {
                     <img className="placeholder-image-2" src="https://alastore.ala.org/sites/default/files/styles/imagezoom_gallery_image/public/book_covers/BannedBooks_Sourcebooks_1200.jpg?itok=uk0WosMa" alt="Placeholder 18" />
                     <img className="placeholder-image-2" src="https://mpd-biblio-covers.imgix.net/9780374719678.jpg?w=300" alt="Placeholder 19" />
                     <img className="placeholder-image-2" src="https://shop.merriam-webster.com/cdn/shop/products/Britannica-Baby-Encyclopedia-cover.jpg?v=1667239352&width=533" alt="Placeholder 20" />
-                </div>  jpg
+                </div>  
             </div> 
         </div>
     );

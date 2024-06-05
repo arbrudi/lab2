@@ -9,9 +9,10 @@ from Views.Comics import Comics_bp
 from Views.Comics_Author import ComicsA_bp
 from Views.Book_Genre import bookG_bp
 from Views.Book_Status import bookS_bp
-from Views.User import Users_bp
-from flask_pymongo import PyMongo
-from dotenv import load_dotenv
+from Views.User import Users_bp 
+from Views.ListOfFeatures import features_bp
+from flask_pymongo import PyMongo 
+from dotenv import load_dotenv 
 import os
 
 load_dotenv(dotenv_path='./config/.env')
@@ -44,7 +45,7 @@ def create_app():
     app.register_blueprint(Comics_bp)
     app.register_blueprint(ComicsA_bp)
     app.register_blueprint(bookS_bp)
-
+    app.register_blueprint(features_bp)
     with app.app_context():
         # Test MSSQL connection
         try:

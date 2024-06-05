@@ -32,7 +32,7 @@ const EventsPage = () => {
             <div className="event-details"> 
             <p className="event-title">{event.Event_title}</p>
               <p className="event-date">{event.Event_date}</p>
-              <Link to={`/eventsdetails/${event.Event_ID}`} className="event-link">View Details</Link>
+              <Link to={`/eventsdetails/${event.Event_ID}`} className="event-link"><button>Read more</button></Link>
             </div>
           </div> 
         ))}

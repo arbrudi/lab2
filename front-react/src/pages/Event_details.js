@@ -55,7 +55,7 @@ const EventDetailsPage = () => {
         )}
         <div className="event-details"> 
         {event.Event_title && (
-            <p className="event-description-details">{event.Event_title}</p>
+            <p className="event-title-details">{event.Event_title}</p>
           )}
           {event.Event_description && (
             <p className="event-description-details">{event.Event_description}</p>

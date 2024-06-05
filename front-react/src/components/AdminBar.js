@@ -29,6 +29,9 @@ const AdminBar = () => {
             </li>
             <li>
               <a href="/admin/event_books">Event books</a>
+            </li> 
+            <li>
+              <a href="/admin/feature">Feature</a>
             </li>
           </ul>
         </div>
