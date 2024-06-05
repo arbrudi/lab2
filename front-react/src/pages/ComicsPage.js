@@ -104,9 +104,11 @@ const ComicsPage = () => {
                                         {rating}
                                     </option>
                                 ))}
-                            </select>
+                            </select> 
+                            {message && <div className="message">{message}</div>}
                         </div>
-                    </div>
+                    </div> 
+                      
                     <div className="textP-section">
                         <div className="bookP-title">
                             <h2>{comic.Comic_title}</h2>
@@ -121,7 +123,7 @@ const ComicsPage = () => {
                     </div>
                 </div>
             </div>
-            {message && <div className="message">{message}</div>}
+        
         </div>
     );
 };
