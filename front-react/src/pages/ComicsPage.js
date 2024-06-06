@@ -1,33 +1,32 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { useParams } from "react-router-dom";
-import './pages_css/Books_P.css';
+import './pages_css/Comic_P.css';
 
 const ComicsPage = () => {
     const { id } = useParams();
     const [comic, setComic] = useState({});
     const [loading, setLoading] = useState(true);
-    const [status, setStatus] = useState("");
+    const [status, setStatus] = useState(0);
+    const [hoverRating, setHoverRating] = useState(0);
     const [message, setMessage] = useState("");
     const [ratingEntryExists, setRatingEntryExists] = useState(false);
 
     useEffect(() => {
         const fetchComic = async () => {
             try {
-                // Fetch comic details
                 const response = await axios.get(`/admin/comics/${id}`);
                 setComic(response.data);
 
                 const user_id = localStorage.getItem('user_id');
                 if (user_id) {
-                    // Fetch user rating for the comic
                     const ratingResponse = await axios.get(`/comic/get_rating_by_id/${id}/${user_id}`);
                     if (ratingResponse.status === 200) {
                         if (ratingResponse.data.Comic_Rating !== 'Rating not available') {
                             setStatus(ratingResponse.data.Comic_Rating);
                             setRatingEntryExists(true);
                         } else {
-                            setStatus("");
+                            setStatus(0);
                             setRatingEntryExists(false);
                         }
                     }
@@ -42,9 +41,8 @@ const ComicsPage = () => {
         fetchComic();
     }, [id]);
 
-    const handleStatusChange = async (event) => {
-        const newRating = parseInt(event.target.value);
-        setStatus(newRating);
+    const handleStarClick = async (rating) => {
+        setStatus(rating);
 
         const admin_token = localStorage.getItem('adminToken');
         const user_token = localStorage.getItem('userToken');
@@ -65,7 +63,7 @@ const ComicsPage = () => {
                 data: {
                     user_id: parseInt(user_id),
                     comic_id: id,
-                    comic_rating: newRating
+                    comic_rating: rating
                 },
                 headers: {
                     'Content-Type': 'application/json',
@@ -87,43 +85,43 @@ const ComicsPage = () => {
 
     return (
         <div>
-            <div className="bookP-container">
-                <div className="bookP" key={comic.Comic_ID}>
-                    <div className="imgP-container">
+            <div className="comic-container">
+                <div className="comic-page" key={comic.Comic_ID}>
+                    <div className="comic-img-container">
                         <img src={comic.Comic_image} alt={comic.Comic_title} />
-                        <div className="bookP_status">
-                            <label htmlFor="status-select">Comic Rating:</label>
-                            <select 
-                                id="status-select" 
-                                value={status || ""} 
-                                onChange={handleStatusChange}
-                            >
-                                <option value="" disabled>Select a rating</option>
+                        <div className="comic-status">
+                            <label>Comic Rating:</label>
+                            <div className="stars">
                                 {[1, 2, 3, 4, 5].map((rating) => (
-                                    <option key={rating} value={rating}>
-                                        {rating}
-                                    </option>
+                                    <i
+                                        key={rating}
+                                        className={`star ${rating <= (hoverRating || status) ? "hover" : ""} ${rating <= status ? "active" : ""}`}
+                                        onClick={() => handleStarClick(rating)}
+                                        onMouseEnter={() => setHoverRating(rating)}
+                                        onMouseLeave={() => setHoverRating(0)}
+                                    >
+                                        ★
+                                    </i>
                                 ))}
-                            </select> 
-                            {message && <div className="message">{message}</div>}
+                            </div>
+                            {message && <div className="comic-message">{message}</div>}
                         </div>
                     </div> 
                       
-                    <div className="textP-section">
-                        <div className="bookP-title">
+                    <div className="comic-text-section">
+                        <div className="comic-title">
                             <h2>{comic.Comic_title}</h2>
                         </div>
-                        <div className="bookP-author">
+                        <div className="comic-author">
                             <p>Type: {comic.Comic_type}</p>
                         </div>
-                        <div className="bookP-description">
+                        <div className="comic-description">
                             <p>Description:</p>
                             <p>{comic.Comic_Description}</p>
                         </div>
                     </div>
                 </div>
             </div>
-        
         </div>
     );
 };
