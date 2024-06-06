@@ -1,6 +1,10 @@
+.star-rating {
+    display: inline-flex;
+}
+
 .star {
     font-size: 20px;
-    color: #ffd700;
+    color: #ddd;
     cursor: pointer;
 }
 

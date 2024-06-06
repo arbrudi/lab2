@@ -4,7 +4,6 @@ import axios from 'axios';
 import StarRating from '../user/user_comp/StarRating';
 import '../pages_css/Comic_R.css';
 
-
 const ComicRating = () => {
     const [comicRating, setComicRating] = useState([]);
     const [comics, setComics] = useState([]);
@@ -42,6 +41,12 @@ const ComicRating = () => {
         return comic ? comic.Comic_title : "Unknown Comic";
     };
 
+    const getComicimage = (comicID) => {
+      const comic = comics.find(c => c.Comic_ID === comicID);
+      return comic ? comic.Comic_image : "Unknown image";
+  };
+
+
     const handleDelete = async (comic_id) => {
         try {
             const response = await axios.delete('/comic/delete_rating', {
@@ -61,6 +66,37 @@ const ComicRating = () => {
         }
     };
 
+    const handleRatingChange = async (comic_id, newRating) => {
+        try {
+            const token = localStorage.getItem('userToken') || localStorage.getItem('adminToken');
+            if (!token || !user_id) {
+                console.error("Please log in to update the rating.");
+                return;
+            }
+
+            await axios({
+                method: 'POST',
+                url: '/comic/rating',
+                data: {
+                    user_id: parseInt(user_id),
+                    comic_id: comic_id,
+                    comic_rating: newRating
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            setComicRating(comicRating.map(rating => 
+                rating.Comic_ID === comic_id ? { ...rating, Comic_Rating: newRating } : rating
+            ));
+            console.log("Rating updated successfully.");
+        } catch (error) {
+            console.error("Error updating rating:", error);
+        }
+    };
+
     return (
         <div className="comic-rating-container">
             <UserBar />
@@ -69,25 +105,32 @@ const ComicRating = () => {
                 <table className="comic-rating-table">
                     <thead>
                         <tr>
+                            <th>Image</th>
                             <th>Comic Name</th>
                             <th>Comic Rating</th>
-                            
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {comicRating.map((rating) => (
-                            <tr key={rating.Comic_rating_ID}
-                            ><td>{getComicName(rating.Comic_ID)}</td>
-                                <td><StarRating rating={rating.Comic_Rating} /></td>
-                                
+                            <tr key={rating.Comic_rating_ID}>
+                                <td className="img-box">
+                                    <img src={getComicimage(rating.Comic_ID)} alt="Comic" />
+                                </td>
+                                <td>{getComicName(rating.Comic_ID)}</td>
+                                <td>
+                                    <StarRating 
+                                        rating={rating.Comic_Rating} 
+                                        onRatingChange={(newRating) => handleRatingChange(rating.Comic_ID, newRating)} 
+                                    />
+                                </td>
                                 <td>
                                     <button
                                         className="comic-rating-button comic-rating-button-delete"
                                         onClick={() => handleDelete(rating.Comic_ID)}
                                     >
                                         Delete
-                                    </button>
+                                    </button>  
                                 </td>
                             </tr>
                         ))}
