@@ -10,10 +10,11 @@ const Feature = () => {
   useEffect(() => {
     const fetchFeatures = async () => {
       try {
-        const response = await axios.get("/admin/features"); 
-     
+        const response = await axios.get("/admin/feature"); 
           setFeatures(response.data);
        
+
+
       } catch (error) {
         console.error("Error fetching features:", error);
       }

@@ -1,4 +1,8 @@
-class Feature:
+from flask_pymongo import PyMongo
+
+mongo = PyMongo()
+
+class Features:
     def __init__(self, icon, name, description):
         self.icon = icon
         self.name = name
@@ -11,9 +15,9 @@ class Feature:
             "description": self.description
         }
 
-    @staticmethod
-    def from_dict(data):
-        return Feature(
+    @classmethod
+    def from_dict(cls, data):
+        return cls(
             icon=data.get('icon'),
             name=data.get('name'),
             description=data.get('description')

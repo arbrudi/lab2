@@ -17,8 +17,14 @@ import os
 
 load_dotenv(dotenv_path='./config/.env')
 
+# Initialize PyMongo instance
+mongo = PyMongo()
+
 def create_app():
     app = Flask(__name__)
+
+    # Load environment variables
+    load_dotenv(dotenv_path='./config/.env')
 
     # Configure MSSQL
     conn = 'mssql+pyodbc:///?odbc_connect=' + \
@@ -31,8 +37,11 @@ def create_app():
 
     # Configure MongoDB
     app.config["MONGO_URI"] = os.getenv("DB_URI")
-    mongo = PyMongo(app)
 
+    # Initialize PyMongo with the Flask app instance
+    mongo.init_app(app)
+
+    # Initialize SQLAlchemy instance
     db.init_app(app)
     
     app.register_blueprint(Users_bp)
@@ -46,6 +55,7 @@ def create_app():
     app.register_blueprint(ComicsA_bp)
     app.register_blueprint(bookS_bp)
     app.register_blueprint(features_bp)
+    
     with app.app_context():
         # Test MSSQL connection
         try:

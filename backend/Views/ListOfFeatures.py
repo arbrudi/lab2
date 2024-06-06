@@ -11,9 +11,11 @@ mongo = PyMongo()
 def add_feature():
     try:
         data = request.get_json()
+        print('data', data)
         icon = data.get('icon')
         name = data.get('name')
         description = data.get('description')
+        print('get', icon, name, description)
 
         if not icon:
             return jsonify({'error': "Field 'icon' cannot be null!"}), 400
@@ -23,8 +25,9 @@ def add_feature():
             "name": name,
             "description": description
         }
-        result = mongo.db.features.insert_one(new_feature)
-
+        print('newwww', new_feature)
+        result = mongo.db.features.insert_one(new_feature)  # Specify collection name here
+        print('resss', result)
         return jsonify({"_id": str(result.inserted_id), **new_feature}), 201
     except Exception as e:
         print("Error:", e)
@@ -33,7 +36,7 @@ def add_feature():
 @features_bp.route('/admin/features', methods=['GET'])
 def get_features():
     try:
-        features = mongo.db.features.find()
+        features = mongo.db.features.find()  # Specify collection name here
         features_data = []
         for feature in features:
             feature['_id'] = str(feature['_id'])
@@ -46,7 +49,7 @@ def get_features():
 @features_bp.route('/admin/feature/<id>', methods=['GET'])
 def get_feature(id):
     try:
-        feature = mongo.db.features.find_one({"_id": ObjectId(id)})
+        feature = mongo.db.features.find_one({"_id": ObjectId(id)})  # Specify collection name here
         if feature is None:
             return jsonify({'error': 'Feature not found'}), 404
         feature['_id'] = str(feature['_id'])
@@ -64,7 +67,7 @@ def update_feature(id):
             if value is not None:
                 updated_data[key] = value
 
-        result = mongo.db.features.update_one({"_id": ObjectId(id)}, {"$set": updated_data})
+        result = mongo.db.features.update_one({"_id": ObjectId(id)}, {"$set": updated_data})  # Specify collection name here
 
         if result.matched_count == 0:
             return jsonify({'error': 'Feature not found'}), 404
@@ -77,7 +80,7 @@ def update_feature(id):
 @features_bp.route('/admin/feature/delete/<id>', methods=['DELETE'])
 def delete_feature(id):
     try:
-        result = mongo.db.features.delete_one({"_id": ObjectId(id)})
+        result = mongo.db.features_collection.delete_one({"_id": ObjectId(id)})  # Specify collection name here
 
         if result.deleted_count == 0:
             return jsonify({'error': 'Feature not found'}), 404
