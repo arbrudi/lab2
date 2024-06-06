@@ -1,0 +1,75 @@
+/* Container styling */
+.comic-rating-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+}
+
+/* List title styling */
+.comic-rating-list {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 24px;
+    color: #06ad06;
+}
+
+/* Table styling */
+.comic-rating-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+    background-color: #f8f9fa;
+}
+
+.comic-rating-table th, .comic-rating-table td {
+    padding: 12px;
+    border: 1px solid #dee2e6;
+}
+
+.comic-rating-table th {
+    background-color: #343a40;
+    color: #fff;
+    text-align: left;
+}
+
+.comic-rating-table td {
+    color: #495057;
+}
+
+.comic-rating-table td.truncate {
+    max-width: 350px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Button styling */
+.comic-rating-button {
+    padding: 8px 12px;
+    margin-right: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.comic-rating-button-edit {
+    background-color: #007bff;
+}
+
+.comic-rating-button-edit:hover {
+    background-color: #0056b3;
+}
+
+.comic-rating-button-delete {
+    background-color: #dc3545;
+}
+
+.comic-rating-button-delete:hover {
+    background-color: #c82333;
+}
