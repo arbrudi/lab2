@@ -34,7 +34,6 @@ CREATE TABLE Comic_ratings (
   Comic_Rating INT NOT NULL,
   FOREIGN KEY (Comic_ID) REFERENCES Comics(Comic_ID),
   FOREIGN KEY (User_ID) REFERENCES Users(User_ID) 
-
 );
 
 Select * from Comic_ratings
@@ -45,8 +44,6 @@ CREATE TABLE favorite_comics (
   Comic_list_name VARCHAR(255),
   PRIMARY KEY (User_ID, Comic_ID)
 );
-
- Table Comics_ratings
 
 /*-------------------------------Books-------------------------------*/
 CREATE TABLE Books (
@@ -90,12 +87,22 @@ CREATE TABLE User_Book_Status (
   FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
 );
 
+CREATE TABLE Book_ratings(
+	Book_rating_ID INT PRIMARY KEY IDENTITY(1,1),
+	User_ID int NOT NULL,
+	ISBN int NOT NULL,
+	Book_rating INT NOT NULL,
+	FOREIGN KEY(User_ID) REFERENCES Users(User_ID),
+	FOREIGN KEY(ISBN) REFERENCES Books(ISBN)
+);
 
-CREATE TABLE Book_comments (
+CREATE TABLE favorite_books (
   User_ID INT NOT NULL,
   ISBN INT NOT NULL,
-  Book_comments TEXT
+  Book_list_name VARCHAR(255),
+  PRIMARY KEY (User_ID, ISBN)
 );
+
 /*-------------------------------Users-------------------------------*/
 CREATE TABLE Users (
   User_ID INT NOT NULL PRIMARY KEY IDENTITY(100, 1),
@@ -129,15 +136,6 @@ CREATE TABLE Event_participants (
   PRIMARY KEY (Event_ID, User_ID)
 );
  
-
-
-CREATE TABLE favorite_books (
-  User_ID INT NOT NULL,
-  ISBN INT NOT NULL,
-  Book_list_name VARCHAR(255),
-  PRIMARY KEY (User_ID, ISBN)
-);
-
 CREATE TABLE news (
   News_ID INT PRIMARY KEY IDENTITY(1,1),
   News_title NVARCHAR(255) NOT NULL,
@@ -190,9 +188,6 @@ ALTER TABLE favorite_books
 ADD CONSTRAINT FK_favorite_books_User_ID FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
 ALTER TABLE favorite_books
 ADD CONSTRAINT FK_favorite_books_ISBN FOREIGN KEY (ISBN) REFERENCES Books(ISBN);
-
-
-
 
 /*-------------------------------Queries-------------------------------*/
 
