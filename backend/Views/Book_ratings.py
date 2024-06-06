@@ -5,11 +5,7 @@ from extensions import db
 
 
 bRating_bp = Blueprint('bRating', __name__)
-import logging
 
-# Configure logging
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
 
 @bRating_bp.route('/books/get_rating_by_id/<int:book_id>/<int:user_id>', methods=['GET'])
 def get_book_by_id(book_id, user_id):
@@ -24,7 +20,6 @@ def get_book_by_id(book_id, user_id):
         else:
             return jsonify({'Book_Rating': 'Rating not available'}), 200
     except Exception as e:
-        logger.error(f"Error fetching book rating: {str(e)}")
         return jsonify({'error': str(e)}), 500
     
 
@@ -53,7 +48,6 @@ def add_or_update_book_rating():
 
     except Exception as e:
         db.session.rollback()
-        logger.error(f"Error adding/updating book rating: {str(e)}")
         return jsonify({'error': str(e)}), 500
 
 
@@ -72,7 +66,6 @@ def get_all_ratings(user_id):
         ]
         return jsonify(rating_data), 200
     except Exception as e:
-        logger.error(f"Error fetching all ratings: {str(e)}")
         return jsonify({'error': str(e)}), 500
 
 
@@ -94,5 +87,4 @@ def delete_book_rating():
 
     except Exception as e:
         db.session.rollback()
-        logger.error(f"Error deleting book rating: {str(e)}")
         return jsonify({'error': str(e)}), 500

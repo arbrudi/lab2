@@ -194,7 +194,8 @@ ADD CONSTRAINT FK_favorite_books_ISBN FOREIGN KEY (ISBN) REFERENCES Books(ISBN);
 
 SELECT * FROM Users
 SELECT * FROM User_Book_Status
-/* Used to se all table names in our database; used it to debugg Book_ratings*/
+SELECT * FROM Book_ratings
+/* Used to see all table names in our database; used it to debugg Book_ratings*/
 SELECT COLUMN_NAME, DATA_TYPE
 FROM INFORMATION_SCHEMA.COLUMNS
 /* WHERE TABLE_NAME = 'Book_ratings';*/
