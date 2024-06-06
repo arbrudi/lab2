@@ -11,7 +11,6 @@ def get_comic_rating_by_id(comic_id, user_id):
         comic_rating = User_Comic_rating.query.filter_by(Comic_ID=comic_id, User_ID=user_id).first()
         
         if comic_rating:
-            # Ensure rating is within the valid range
             if 1 <= comic_rating.Comic_Rating <= 5:
                 return jsonify({'Comic_Rating': comic_rating.Comic_Rating}), 200
             else:
@@ -20,10 +19,6 @@ def get_comic_rating_by_id(comic_id, user_id):
             return jsonify({'Comic_Rating': 'Rating not available'}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
-
-
-
     
 
 @cRating_bp.route('/comic/rating', methods=['POST'])
@@ -54,7 +49,6 @@ def add_or_update_comic_rating():
         return jsonify({'error': str(e)}), 500
 
 
-
 @cRating_bp.route('/comic/get_all_ratings/<int:user_id>', methods=['GET'])
 def get_all_ratings(user_id):
     try:
@@ -71,6 +65,7 @@ def get_all_ratings(user_id):
         return jsonify(rating_data), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
 
 @cRating_bp.route('/comic/delete_rating', methods=['DELETE'])
 def delete_comic_rating():

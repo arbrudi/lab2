@@ -87,6 +87,7 @@ CREATE TABLE User_Book_Status (
   FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
 );
 
+
 CREATE TABLE Book_ratings(
 	Book_rating_ID INT PRIMARY KEY IDENTITY(1,1),
 	User_ID int NOT NULL,
@@ -193,4 +194,7 @@ ADD CONSTRAINT FK_favorite_books_ISBN FOREIGN KEY (ISBN) REFERENCES Books(ISBN);
 
 SELECT * FROM Users
 SELECT * FROM User_Book_Status
-
+/* Used to se all table names in our database; used it to debugg Book_ratings*/
+SELECT COLUMN_NAME, DATA_TYPE
+FROM INFORMATION_SCHEMA.COLUMNS
+/* WHERE TABLE_NAME = 'Book_ratings';*/

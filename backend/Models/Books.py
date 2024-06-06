@@ -35,7 +35,6 @@ class Book_Status(db.Model):
         ),
     )
 
-
 class User_Book_Status(db.Model):
     """Base class for User_Book_Status"""
     __tablename__ = 'User_Book_Status'
@@ -48,3 +47,15 @@ class User_Book_Status(db.Model):
     book_status = relationship('Book_Status', backref=db.backref('user_book_statuses', cascade='all, delete-orphan'))
     user = relationship('Users', backref=db.backref('user_book_statuses', cascade='all, delete-orphan'),
                         primaryjoin='User_Book_Status.User_ID == Users.User_ID')
+
+class Book_ratings(db.Model):
+    "Base class for Book_ratings"
+    __tablename__ = "Book_ratings"
+    Book_rating_ID = Column(Integer,primary_key=True ,autoincrement=True)
+    User_ID = Column(Integer, ForeignKey('Users.User_ID'), nullable= False)
+    ISBN = Column(Integer, ForeignKey('Books.ISBN'), nullable=False)
+    Book_rating = Column(Integer, nullable=False)
+
+    book = relationship('Books', backref=db.backref('Book_ratings'))
+    user = relationship('Users', backref=db.backref('Book_ratings'),
+                        primaryjoin='Book_ratings.User_ID == Users.User_ID')
