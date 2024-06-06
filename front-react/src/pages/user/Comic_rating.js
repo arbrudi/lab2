@@ -69,17 +69,18 @@ const ComicRating = () => {
                 <table className="comic-rating-table">
                     <thead>
                         <tr>
-
-                            <th>Comic Rating</th>
                             <th>Comic Name</th>
+                            <th>Comic Rating</th>
+                            
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {comicRating.map((rating) => (
-                            <tr key={rating.Comic_rating_ID}>
+                            <tr key={rating.Comic_rating_ID}
+                            ><td>{getComicName(rating.Comic_ID)}</td>
                                 <td><StarRating rating={rating.Comic_Rating} /></td>
-                                <td>{getComicName(rating.Comic_ID)}</td>
+                                
                                 <td>
                                     <button
                                         className="comic-rating-button comic-rating-button-delete"
