@@ -51,15 +51,14 @@ CREATE TABLE Books (
   Book_image TEXT,
   Book_title VARCHAR(255) NOT NULL,
   Book_author VARCHAR(255) NOT NULL,
-  Book_genre INT NOT NULL,
+  Book_genre INT,
+  FOREIGN KEY(Book_genre) REFERENCES Book_Genre(Book_Genre_ID),
   Book_description TEXT NOT NULL
 );
 
 CREATE TABLE Book_Genre(
 Book_Genre_ID int NOT NULL PRIMARY KEY,
-ISBN INT NOT NULL,
 Genre_Name varchar(50) NOT NULL,
-FOREIGN KEY (ISBN) REFERENCES Books(ISBN)
 );
 
 CREATE TABLE Book_Status(
@@ -169,11 +168,6 @@ ALTER TABLE Comics_ratings
 ADD CONSTRAINT FK_Comic_ratings_User_ID FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
 ALTER TABLE Comics_ratings
 ADD CONSTRAINT FK_Comic_ratings_Article_ID FOREIGN KEY (Comic_ID) REFERENCES Comics(Comic_ID);
-
-ALTER TABLE Book_comments
-ADD CONSTRAINT FK_book_comments_User_ID FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
-ALTER TABLE Book_comments
-ADD CONSTRAINT FK_book_comments_ISBN FOREIGN KEY (ISBN) REFERENCES Books(ISBN); 
 
 ALTER TABLE Event_participants
 ADD CONSTRAINT FK_event_participants_User_ID FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
