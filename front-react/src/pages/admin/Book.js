@@ -107,7 +107,6 @@ const Book = () => {
             <tr>
               <th>Genre_ID</th>
               <th>Genre_Name</th>
-              <th>ISBN</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -116,7 +115,6 @@ const Book = () => {
               <tr key={genre.Book_Genre_ID}>
                 <td>{genre.Book_Genre_ID}</td>
                 <td>{genre.Genre_Name}</td>
-                <td>{genre.ISBN}</td>
                 <td>
                     <Link to={`/admin/book_genre/update/${genre.Book_Genre_ID}`}>
                         <button class='edit-bttn' >Edit</button>
