@@ -1,34 +1,24 @@
-from flask import Blueprint, request, jsonify
-from flask_pymongo import PyMongo
+from flask import Blueprint, request, jsonify, current_app
 from bson.objectid import ObjectId
+from pymongo.errors import PyMongoError
+from Models.Features import Features
 
 features_bp = Blueprint('features', __name__)
-
-# Assuming you have already configured MongoDB
-mongo = PyMongo()
 
 @features_bp.route('/admin/feature/create', methods=['POST'])
 def add_feature():
     try:
         data = request.get_json()
-        print('data', data)
         icon = data.get('icon')
         name = data.get('name')
         description = data.get('description')
-        print('get', icon, name, description)
 
         if not icon:
             return jsonify({'error': "Field 'icon' cannot be null!"}), 400
 
-        new_feature = {
-            "icon": icon,
-            "name": name,
-            "description": description
-        }
-        print('newwww', new_feature)
-        result = mongo.db.features.insert_one(new_feature)  # Specify collection name here
-        print('resss', result)
-        return jsonify({"_id": str(result.inserted_id), **new_feature}), 201
+        new_feature = Features(icon=icon, name=name, description=description)
+        result = new_feature.save(current_app.config['MONGO_CLIENT'])  # Pass mongo instance from config
+        return jsonify({"_id": str(result.inserted_id), "icon": icon, "name": name, "description": description}), 201
     except Exception as e:
         print("Error:", e)
         return jsonify({"error": str(e)}), 500
@@ -36,20 +26,21 @@ def add_feature():
 @features_bp.route('/admin/features', methods=['GET'])
 def get_features():
     try:
-        features = mongo.db.features.find()  # Specify collection name here
+        features = current_app.config['MONGO_CLIENT'].db.features.find()  # Access the 'features' collection using 'db'
         features_data = []
         for feature in features:
             feature['_id'] = str(feature['_id'])
             features_data.append(feature)
         return jsonify(features_data), 200
     except Exception as e:
-        print("Error: ", e)
+        print("Error:", e)
         return jsonify({"error": str(e)}), 500
 
 @features_bp.route('/admin/feature/<id>', methods=['GET'])
 def get_feature(id):
     try:
-        feature = mongo.db.features.find_one({"_id": ObjectId(id)})  # Specify collection name here
+        # Ensure that you are accessing the 'features' collection correctly
+        feature = current_app.config['MONGO_CLIENT'].db.features.find_one({"_id": ObjectId(id)})
         if feature is None:
             return jsonify({'error': 'Feature not found'}), 404
         feature['_id'] = str(feature['_id'])
@@ -62,15 +53,31 @@ def get_feature(id):
 def update_feature(id):
     try:
         data = request.get_json()
-        updated_data = {}
-        for key, value in data.items():
-            if value is not None:
-                updated_data[key] = value
+        icon = data.get('icon')
+        name = data.get('name')
+        description = data.get('description')
 
-        result = mongo.db.features.update_one({"_id": ObjectId(id)}, {"$set": updated_data})  # Specify collection name here
+        if not icon:
+            return jsonify({'error': "Field 'icon' cannot be null!"}), 400
 
-        if result.matched_count == 0:
+   
+        feature_collection = current_app.config['MONGO_CLIENT'].db.features
+        feature = feature_collection.find_one({"_id": ObjectId(id)})
+
+        if not feature:
             return jsonify({'error': 'Feature not found'}), 404
+
+     
+        update_data = {}
+        if icon is not None:
+            update_data['icon'] = icon
+        if name is not None:
+            update_data['name'] = name
+        if description is not None:
+            update_data['description'] = description
+
+    
+        feature_collection.update_one({"_id": ObjectId(id)}, {"$set": update_data})
 
         return jsonify({'message': 'Feature updated successfully'}), 200
     except Exception as e:
@@ -80,7 +87,7 @@ def update_feature(id):
 @features_bp.route('/admin/feature/delete/<id>', methods=['DELETE'])
 def delete_feature(id):
     try:
-        result = mongo.db.features_collection.delete_one({"_id": ObjectId(id)})  # Specify collection name here
+        result = current_app.config['MONGO_CLIENT'].db.features.delete_one({"_id": ObjectId(id)})
 
         if result.deleted_count == 0:
             return jsonify({'error': 'Feature not found'}), 404

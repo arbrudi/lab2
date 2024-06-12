@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import './pages_css/AboutPage.css';  
 
 const AboutPage = () => {
+    const [features, setFeatures] = useState([]);
+    
+    useEffect(() => {
+      const fetchFeatures = async () => {
+        try {
+          const response = await axios.get("/admin/features"); 
+          setFeatures(response.data);
+        } catch (error) {
+          console.error("Error fetching features:", error);
+        }
+      };
+  
+      fetchFeatures();
+    }, []);
+
     return (
         <div className="about-page-container">
         <div className="about-page">
@@ -40,14 +56,19 @@ const AboutPage = () => {
                     <img className="placeholder-image-2" src="https://shop.merriam-webster.com/cdn/shop/products/Britannica-Baby-Encyclopedia-cover.jpg?v=1667239352&width=533" alt="Placeholder 20" />
                 </div>  
             </div>  
-         
         </div> 
-        <div className="third-section">
-                <div className="icon-placeholder"></div>
-                <div className="name-placeholder"></div>
-                <div className="description-placeholder"></div>
+        <div className="third-section"> 
+          <div className="title">Focal is the all-in-one platform for your bookish needs.</div>
+          {features.map((feature) => (
+            <div key={feature._id} className="feature-item">
+              <img className="icon-placeholder" src={feature.icon} alt="Feature Icon" />
+              <div className="name-placeholder"><p>{feature.name}</p></div>
+              <div className="description-placeholder"><p>{feature.description}</p></div>
+              
             </div>
+          ))}
         </div>
+      </div>
     );
 }
 

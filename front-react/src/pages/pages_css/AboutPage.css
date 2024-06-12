@@ -11,7 +11,7 @@
 
 .left-section {
     flex: 1;
-    background-color: #33b1b5d5;
+    background-color: #089498d5;
     display: flex;
     justify-content: center;
     align-items: center; 
@@ -147,17 +147,63 @@
     background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlwkl2cfIG_d2wRZ3ToFLGHgqg8eFfdMBeYA&s'); 
 } 
 .third-section {
-    background-color: #f0f0f0;
+    background-color: #089498d5;
+    width: auto;
     padding: 20px;
-    text-align: center; 
-    margin-top: 20px; /* Add margin to separate it from the content above */
+    padding-left:200px;
+    text-align: left;
+    margin-top: 20px; 
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between; 
 }
 
-.icon-placeholder,
-.name-placeholder,
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    margin-bottom: 20px; 
+    width: calc(33.33% - 20px); 
+    box-sizing: border-box; 
+    padding: 10px; 
+    border-radius: 5px; 
+    padding-bottom:50px;
+}
+
+.icon-placeholder {
+    width: 50px;
+    height: 50px; 
+    margin-bottom: 5px;
+    background-color: #92d3d8; 
+    border-radius: 50px; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 2px; 
+}
+
+.icon-placeholder img {
+    width: 3%; 
+    height: 2%; 
+}
+
+.name-placeholder {
+    color: white; 
+    margin-bottom: 1px;
+    width: 100%; 
+    font-size: 20px;
+}
+
 .description-placeholder {
-    width: 100px; /* Adjust width as needed */
-    height: 100px; /* Adjust height as needed */
-    background-color: #ddd; /* Placeholder background color */
-    margin-bottom: 10px; /* Add spacing between placeholders */
+    color: #afe6ecd5;
+    text-align: start;
+    white-space: normal; 
+    margin-bottom: 5px; 
+    width: 70%; 
+    word-wrap: break-word; 
+} 
+.title {
+    width: 100%; 
+    color:  #afe6ecd5;
+    font-size: 30px;
+    margin-bottom: 100px; 
 }

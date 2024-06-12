@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AdminBar from '../../components/AdminBar';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import './../../assets/css/Event.css'; // Assuming this CSS file contains styles for the Event component
+import './../../assets/css/Event.css'; // Assuming this CSS file contains styles for the Features component
 
 const Feature = () => {
   const [features, setFeatures] = useState([]);
@@ -10,11 +10,8 @@ const Feature = () => {
   useEffect(() => {
     const fetchFeatures = async () => {
       try {
-        const response = await axios.get("/admin/feature"); 
-          setFeatures(response.data);
-       
-
-
+        const response = await axios.get("/admin/features"); 
+        setFeatures(response.data);
       } catch (error) {
         console.error("Error fetching features:", error);
       }
@@ -26,10 +23,10 @@ const Feature = () => {
   const handleDeleteFeature = async (_id) => {
     try {
       await axios.delete(`/admin/feature/delete/${_id}`);
-      // Filter features based on feature_id
+      // Filter features based on _id
       setFeatures(features.filter(feature => feature._id !== _id));
     } catch (error) {
-      console.error("Error deleting event:", error);
+      console.error("Error deleting feature:", error);
     }
   };
 

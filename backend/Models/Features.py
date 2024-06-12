@@ -1,6 +1,4 @@
-from flask_pymongo import PyMongo
-
-mongo = PyMongo()
+from pymongo.errors import PyMongoError
 
 class Features:
     def __init__(self, icon, name, description):
@@ -22,3 +20,10 @@ class Features:
             name=data.get('name'),
             description=data.get('description')
         )
+
+    def save(self, mongo_client):
+        try:
+            result = mongo_client.db.features.insert_one(self.to_dict())
+            return result
+        except PyMongoError as e:
+            raise Exception(f"Error saving feature: {e}")
