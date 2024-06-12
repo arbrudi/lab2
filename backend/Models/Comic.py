@@ -31,3 +31,15 @@ class User_Comic_rating(db.Model):
     comic = relationship ('Comics',backref=db.backref('User_comic_ratings',cascade='all, delete-orphan'))
     user = relationship ('Users',backref=db.backref('User_comic_ratings',cascade='all, delete-orphan'),
                          primaryjoin='User_Comic_rating.User_ID == Users.User_ID')    
+    
+
+class User_Favorite_comics (db.model):
+     __tablename__ = 'favorite_comics'
+     Favorite_comics_ID = db.Column(db.Integer, primary_key=True, autoincrement = True)
+     User_ID = Column(Integer, ForeignKey('Users.User_ID'), nullable=False)   
+     Comic_ID = Column(Integer, ForeignKey('Comics.Comic_ID'),  nullable=False)
+     Comic_list_name = db.Column(db.String(255), nullable=False)
+
+     comic = relationship ('Comics',backref=db.backref('User_comic_ratings',cascade='all, delete-orphan'))
+     user = relationship ('Users',backref=db.backref('User_comic_ratings',cascade='all, delete-orphan'),
+                         primaryjoin='User_Comic_rating.User_ID == Users.User_ID') 
