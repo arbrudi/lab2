@@ -26,7 +26,6 @@ const BooksPage = () => {
 
                 const genreResponse = await axios.get(`/books_by_genre/${id}`);
                 const genresArray = Array.isArray(genreResponse.data) ? genreResponse.data : [genreResponse.data];
-                console.log(genresArray)
                 setGenres(genresArray);
 
                 const statusOptionsResponse = await axios.get('/book/get_book_status');

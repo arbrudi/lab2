@@ -1,0 +1,82 @@
+.book-user-dash{
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.book-rating-container {
+    margin: 40px;
+    width: auto;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+.book-rating-list {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    margin-left: 160px;
+}
+
+.book-rating-table {
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.book-rating-table th, 
+.book-rating-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.book-rating-table th {
+    background-color: #464545;
+    color:white;
+    font-weight: bold;
+    max-width: a;
+}
+
+.book-rating-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.book-rating-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.img-box {
+    width: 20px;
+    height: 10px;
+}
+
+.img-box img {
+    width: 100%;
+    height: auto;
+}
+
+.book-rating-button {
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    transition: background-color 0.3s;
+}
+
+.book-rating-button-delete {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.book-rating-button-delete:hover {
+    background-color: #cc0000;
+}
+
+.fav-books-user{
+    color: #333;
+    margin-bottom: 20px;
+}

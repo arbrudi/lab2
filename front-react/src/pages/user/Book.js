@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import UserBar from '../../components/UserBar';
 import axios from 'axios';
 import StarRating from '../user/user_comp/StarRating';
-// import '../pages_css/Book_R.css';
+import '../pages_css/Book_U.css';
 
 const Book = () =>{
     const [bookRating, setBookRating] = useState([]);
@@ -97,10 +97,11 @@ const Book = () =>{
     };
 
     return (
-        <div className="book-rating-container">
+        <div >
             <UserBar />
-            <div>
-                <h1 className="book-rating-list">Rating List</h1>
+            <div className="book-user-dash">
+            <div className="book-rating-container">
+                <h1 className="book-rating-list">Books rated</h1>
                 <table className="book-rating-table">
                     <thead>
                         <tr>
@@ -135,6 +136,12 @@ const Book = () =>{
                         ))}
                     </tbody>
                 </table>
+            </div>
+
+            <div className="fav-books-user">
+                {/* <h1 className="fav-book-h">Favorite books</h1> */}
+
+            </div>
             </div>
         </div>
     );
