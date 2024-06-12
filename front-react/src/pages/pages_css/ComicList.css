@@ -1,26 +1,28 @@
-.comic-box {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-}
 
 .h1-comic-list {
     text-align: center;
     margin-top: 30px;
     margin-bottom: 20px;
+
 }
+.comic-box {
+    max-width: 1200px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
 
 .comic-container {
     display: flex;
-    flex-direction: column; /* Display comics in a column */
-    align-items: center; /* Center align items horizontally */
+    flex-direction: row; 
+    align-items: center; 
     padding: 10px;
 }
 
 .comic-item {
-    width: 100%; /* Ensure full width of the container */
-    margin-bottom: 20px; /* Space between each comic */
+    width: auto;
+    margin-right: 5%; 
+    margin-bottom: 20px; 
 }
 
 .comic {

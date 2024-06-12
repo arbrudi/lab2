@@ -20,8 +20,12 @@ const Comic_list_page = () => {
   }, []);
 
   return (
+
+    <div>
+
+
+    <h1 className="h1-comic-list">Explore our library!</h1>
       <div className="comic-box">
-          <h1 className="h1-comic-list">Explore our library!</h1>
           <div className="comic-container">
               {comics.map((comic) => (
                   <div className="comic-item" key={comic.Comic_ID}>
@@ -46,6 +50,7 @@ const Comic_list_page = () => {
                   </div>
               ))}
           </div>
+      </div>
       </div>
   );
 }
