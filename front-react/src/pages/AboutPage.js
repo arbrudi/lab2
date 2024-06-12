@@ -56,7 +56,67 @@ const AboutPage = () => {
                     <img className="placeholder-image-2" src="https://shop.merriam-webster.com/cdn/shop/products/Britannica-Baby-Encyclopedia-cover.jpg?v=1667239352&width=533" alt="Placeholder 20" />
                 </div>  
             </div>  
+        </div>  
+        <div className="second-section">
+    <div className="secondl">
+        <div className="rec">
+            <div className="recommandations">Recommandations</div> 
+            <div className="preferences">Preferences</div>
         </div> 
+        <div className="rec2">What are you in the mood for?</div> 
+        <div className="items">
+            <div className="items-2">
+               
+                    <img className="book" src="https://m.media-amazon.com/images/I/41JJJDH3WML._AC_UF1000,1000_QL80_.jpg" alt="Placeholder 2" /> 
+                    <div className="books">
+            <div className="book-title">Feeding The Ghosts</div>
+              <div className="book-author">Fred D'Aguiar</div>  
+              <div className="genre">
+                <div className="g1">nonfiction</div> 
+                <div className="g1">historical</div>
+                <div className="g1">literary</div> 
+                <div className="g1">race</div>
+              </div> 
+              </div><div className="read">
+                <div className="read1">
+                  <div className="read2">to read</div>
+                    <div className="read3"> ↓</div>
+                </div>
+                <div className="next">add to up next</div>
+              </div>
+            </div>  
+        </div> 
+        <div className="items">
+        <div className="items-2">
+               
+               <img className="book" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRStE_d9TMMUwJpL3YVqnRLkMSf_FncjAyx2N6flBM4f9UxfaZSvws5uyQP_z35lBx28ks&usqp=CAU" alt="Placeholder 2" /> 
+               <div className="books">
+       <div className="book-title"> Tiny Beautiful Things</div>
+         <div className="book-author">Cheryl Strayed</div>  
+         <div className="genre">
+           <div className="g1">nonfiction</div> 
+           <div className="g1">historical</div>
+           <div className="g1">literary</div> 
+           <div className="g1">race</div>
+         </div> 
+         </div><div className="read">
+           <div className="read1">
+             <div className="read20">to read</div>
+               <div className="read3"> ↓</div>
+           </div>
+           <div className="next">add to up next</div>
+         </div>
+       </div>  
+        </div>
+    </div>  
+    <div className="secondr"> 
+        <div className="secondr-container">
+          <img className="icon" src="https://i.pinimg.com/736x/b2/38/01/b238018c0a4861898f3f44f78ce3eb2c.jpg" alt="icon"/>
+            <div className="right-title">Discover Your Next Favorite Book</div> 
+            <div className="right-description">Focal Point's AI-powered recommendation system analyzes your unique tastes and reading habits to deliver spot-on book suggestions. Whether you're into thrilling mysteries, heartfelt romances, or enlightening non-fiction, the perfect read is always within reach.</div>
+        </div>
+    </div>
+</div>
         <div className="third-section"> 
           <div className="title">Focal is the all-in-one platform for your bookish needs.</div>
           {features.map((feature) => (
@@ -67,7 +127,7 @@ const AboutPage = () => {
               
             </div>
           ))}
-        </div>
+        </div> 
       </div>
     );
 }

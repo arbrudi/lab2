@@ -206,4 +206,177 @@
     color:  #afe6ecd5;
     font-size: 30px;
     margin-bottom: 100px; 
+} 
+.second-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-top: 10px;
+    background-color: #fbfafa; /* Background color for the second section */
 }
+
+.secondl {
+    width: 50%; /* Adjust the width as needed */
+    height: 700px; /* Adjust the height as needed */
+    border:  2px solid #e4e4e4; /* Add border with desired color and thickness */
+}
+
+.secondr {
+    width: 50%; /* Adjust the width as needed */ 
+    height: auto;
+    padding: 20px; /* Add padding as needed */  
+}
+
+.secondr-container {
+    width: 70%; 
+    height: 100%;
+}
+
+.right-title { 
+    font-size: 30px;
+    font-weight: bold;
+    color: #333; /* Color for the title */
+    margin-bottom: 50px; /* Increase margin bottom for more space */
+    white-space: pre-wrap; /* This ensures that the text will wrap correctly */
+    word-break: break-word; /* This ensures that long words will break to fit the container */
+    line-height: 1.5; /* Increase line height for more space between lines */
+}
+.icon{
+width: 150px;
+height: 150px;
+padding-bottom: 3px;
+}
+.right-description {
+    font-size: 20px;
+    color: #666; /* Color for the description */
+    margin-bottom: 20px; /* Increase margin bottom for more space */
+    white-space: pre-wrap; /* This ensures that the text will wrap correctly */
+    word-break: break-word; /* This ensures that long words will break to fit the container */ 
+    line-height: 2; /* Increase line height for more space between lines */
+    max-width: 500px; /* Limit the width to encourage wrapping */ 
+} 
+
+.rec {
+    display: flex;
+    flex-direction: row; 
+    padding-top: 3px; 
+    padding-bottom: 3px; 
+}
+
+.recommandations {
+    padding-left: 10px;
+    color: #0a8189; 
+    font-size: 20px; 
+}
+
+.preferences {
+    margin-left: auto; /* Align the Preferences div to the end */ 
+    margin-right: 10px; 
+    width: 20%; 
+    height: 30px; /* Adjusted height for consistency */
+    background-color: #e4e2e2;  
+    padding-left: 20px; 
+    color: #666;
+}
+
+.rec2 { 
+    padding-left: 100px; 
+    padding-top: 5px;
+    margin-left: 30px; 
+    margin-right: 10px;  
+    margin-top: 10px; 
+    border: 2px solid #f3efef; /* Add border with desired color and thickness */  
+}
+
+.items {
+    display: flex; 
+    flex-direction: column;  
+    width: 100%; /* Adjusted to full width */
+    height: auto; /* Adjust height as needed */ 
+    margin-top: 20px;   
+    margin-bottom: 5px;
+}
+
+.items-2 {
+    display: flex; 
+    flex-direction: row; 
+    width: 98%; /* Adjusted to full width */ 
+    height: auto;
+    border: 2px solid #f3efef; /* Add border with desired color and thickness */
+    margin-left: 0px; 
+    margin-right: 0px; 
+    padding-left: 0; 
+    padding-right: 0;
+    justify-content: flex-start; /* Ensure items are aligned to the left */
+}
+.items-2 .book {
+    width: 150px; /* Adjust width as needed */
+    height: 250px; /* Adjust height as needed */
+    margin: 0; /* Remove margins */
+    padding: 0; /* Remove paddings */
+} 
+.books{
+    display: flex; 
+    flex-direction: column;
+}
+.book-title { 
+    padding-top: 20px;
+    padding-left: 10px; 
+    font-size: 20px; 
+    font-weight: bold;
+} 
+.book-author{
+    font-size: 10px; 
+    color: #898686; 
+    padding-left: 10px;
+} 
+.genre{
+    display: flex; 
+    flex-direction: coulmn; 
+    color:#0a8189 ;
+    padding-top: 30px;
+}  
+.g1{ 
+    border:2px solid #f3efef;
+    padding-left: 5px;
+}
+.read {
+    display: flex; 
+    flex-direction: column; 
+    padding-left: 100px;
+} 
+
+.read1 {
+    display: flex; 
+    width: 150px;
+    flex-direction: row; 
+    border: 2px solid #dedada;
+    align-items: center; /* Align items to the center vertically */
+    justify-content: space-between; /* Space items evenly */
+} 
+
+.read2 {
+    color: #0a8189;
+} 
+
+.read3 { 
+    width:30px; 
+    align-items: center; 
+    padding-left: 10px;
+    color: white; 
+    background-color: #0a8189;
+}
+.next{
+    display: flex; 
+    width: 150px;
+    flex-direction: row; 
+    border: 2px solid #dedada;
+    align-items: center; /* Align items to the center vertically */
+    justify-content: space-between; /* Space items evenly */ 
+    background-color: #c6c4c4;
+} 
+.read20 {
+    width: 120px;
+    color: #f8fafa;
+    background-color: #0a8189;
+} 
