@@ -10,14 +10,13 @@ class Comics(db.Model):
     Comic_title = db.Column(db.String(255), nullable=False)
     Comic_type = db.Column(db.String(255), nullable=False)
     Comic_Description = db.Column(db.Text, nullable=False)
+    Comics_Author_ID = Column(Integer, ForeignKey('Comics_Author.Comics_Author_ID'), nullable=False)   
     author = db.relationship('Comics_Author', backref='comic', overlaps="Comics_Author,comic")
 
 class Comics_Author(db.Model):
     __tablename__ = 'Comics_Author'  
     Comics_Author_ID = db.Column(db.Integer, primary_key=True ,autoincrement=False)
-    Comic_ID  = db.Column(db.String(50), db.ForeignKey('Comics.Comic_ID'), nullable=False)
     Author_Name = db.Column(db.String(50), nullable=False)
-    Publisher = db.Column(db.String(50), nullable=False)
     Author_notes = db.Column(db.String(255))
 
 class User_Comic_rating(db.Model):
@@ -31,3 +30,16 @@ class User_Comic_rating(db.Model):
     comic = relationship ('Comics',backref=db.backref('User_comic_ratings',cascade='all, delete-orphan'))
     user = relationship ('Users',backref=db.backref('User_comic_ratings',cascade='all, delete-orphan'),
                          primaryjoin='User_Comic_rating.User_ID == Users.User_ID')    
+    
+class Favorite_comic(db.Model):
+    __tablename__ = 'favorite_comics'
+    User_ID = Column(Integer, ForeignKey('Users.User_ID'), nullable=False)   
+    Comic_ID = Column(Integer, ForeignKey('Comics.Comic_ID'),  nullable=False)
+    Favorite_Comic_Id = db.Column(db.Integer, primary_key=True, autoincrement = True)
+
+
+    comic = relationship ('Comics',backref=db.backref('Favorite_comic',cascade='all, delete-orphan'))
+    user = relationship ('Users',backref=db.backref('Favorite_comic',cascade='all, delete-orphan'),
+                         primaryjoin='Favorite_comic.User_ID == Users.User_ID')    
+
+

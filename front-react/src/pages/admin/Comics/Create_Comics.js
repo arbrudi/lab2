@@ -10,8 +10,12 @@ const Create_Comics = () => {
         Comic_image: "",
         Comic_title: "",
         Comic_type: "",
-        Comic_Description: ""
+        Comic_Description: "",
+        Comics_Author_ID:""
     });
+
+
+
 
 
     const [error, setError] = useState(null);
@@ -45,6 +49,12 @@ const Create_Comics = () => {
                    Comic Image URL:
                     <input type="text" name="Comic_image" value={formData.Comic_image} onChange={handleChange} />
                 </label>
+
+                <label>
+                   Comics_Author_ID:
+                    <input type="text" name="Comics_Author_ID" value={formData.Comics_Author_ID} onChange={handleChange} />
+                </label>
+                
                 <label>
                     Title:
                     <input type="text" name="Comic_title" value={formData.Comic_title} onChange={handleChange} />
