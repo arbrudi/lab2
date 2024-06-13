@@ -5,6 +5,8 @@ import './pages_css/ComicList.css';
 
 const Comic_list_page = () => {
   const [comics, setComics] = useState([]);
+  const [authors, setAuthors] = useState([]);
+  const [authorsMap, setAuthorsMap] = useState({});
 
   useEffect(() => {
       const fetchComics = async () => {
@@ -18,6 +20,31 @@ const Comic_list_page = () => {
 
       fetchComics();
   }, []);
+
+  useEffect(() => {
+    const fetchAuthors = async () => {
+      try {
+        const response = await axios.get("/admin/Comics_Author");
+        const authorsData = response.data;
+        setAuthors(authorsData);
+        
+        const authorsMap = {};
+        authorsData.forEach(author => {
+          authorsMap[author.Comics_Author_ID] = author.Author_Name;
+        });
+        setAuthorsMap(authorsMap);
+
+      } catch (error) {
+        console.error("Error fetching Authors:", error);
+      }
+    };
+    fetchAuthors();
+  }, [comics]);
+
+
+
+
+
 
 
 //
@@ -56,6 +83,9 @@ const addToFavorites = async (comic_id) => {
                               </div>
                               <div className="comic-title">
                                   <h2>{comic.Comic_title}</h2>
+                              </div>
+                              <div className="comic-Author">
+                              <h3>{authorsMap[comic.Comics_Author_ID]}</h3>
                               </div>
                               <div className="comic-type">
                                   <p>{comic.Comic_type}</p>
