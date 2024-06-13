@@ -57,3 +57,13 @@ class Book_ratings(db.Model):
     book = relationship('Books', backref=db.backref('Book_ratings'))
     user = relationship('Users', backref=db.backref('Book_ratings'),
                         primaryjoin='Book_ratings.User_ID == Users.User_ID')
+
+class Favorite_books(db.Model):
+    """Base class for Favorite books"""
+    __tablename__ = "Favorite_books"
+    Favorite_Book_ID = Column(Integer, primary_key=True, autoincrement=True)
+    User_ID = Column(Integer, ForeignKey('Users.User_ID'), nullable = False)
+    ISBN = Column(Integer, ForeignKey('Books.ISBN'), nullable = False)
+
+    user = relationship('Users', backref=db.backref('Favorte_books'), primaryjoin='Favorite_books.User_ID==Users.User_ID')
+    book = relationship('Books', backref=db.backref('Favorite_books'))

@@ -86,7 +86,6 @@ CREATE TABLE User_Book_Status (
   FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
 );
 
-
 CREATE TABLE Book_ratings(
 	Book_rating_ID INT PRIMARY KEY IDENTITY(1,1),
 	User_ID int NOT NULL,
@@ -96,11 +95,12 @@ CREATE TABLE Book_ratings(
 	FOREIGN KEY(ISBN) REFERENCES Books(ISBN)
 );
 
-CREATE TABLE favorite_books (
+CREATE TABLE Favorite_books (
+  Favorite_Book_ID int Primary Key Identity(1,1),
   User_ID INT NOT NULL,
   ISBN INT NOT NULL,
-  Book_list_name VARCHAR(255),
-  PRIMARY KEY (User_ID, ISBN)
+  FOREIGN KEY (User_ID) REFERENCES Users(User_ID),
+  FOREIGN KEY (ISBN) REFERENCES Books(ISBN)
 );
 
 /*-------------------------------Users-------------------------------*/
