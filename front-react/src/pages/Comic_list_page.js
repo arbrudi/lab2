@@ -20,6 +20,24 @@ const Comic_list_page = () => {
   }, []);
 
 
+//
+const user_id = localStorage.getItem('user_id');
+
+const addToFavorites = async (comic_id) => {
+    try {
+        const response = await axios.post(`/comic/favorite`, { user_id, comic_id });
+        console.log('Response from add to favorites:', response);
+        if (response.status === 200) {
+            alert('Comic added to favorites');
+        }
+    } catch (error) {
+        console.error("Error adding comic to favorites:", error);
+    }
+};
+
+
+
+
 
   return (
 
@@ -49,10 +67,9 @@ const Comic_list_page = () => {
                                   </Link>
                               </div>
 
-                            <div className="Add-FavoriteComics">
-                            <button type="submit">FavoriteComic</button>
-
-                                </div>
+                              <div className="Add-FavoriteComics">
+                                  <button onClick={() => addToFavorites(comic.Comic_ID)}>+</button>
+                             </div>
                           </div>
                       </div>
                   </div>
