@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AdminBar from '../../components/AdminBar';
 import axios from 'axios';
-import { Link } from "react-router-dom";
 import '../pages_css/Comic_F.css';
 
 const FavoriteComics = () => {
