@@ -19,6 +19,8 @@ const Comic_list_page = () => {
       fetchComics();
   }, []);
 
+
+
   return (
 
     <div>
@@ -41,10 +43,16 @@ const Comic_list_page = () => {
                                   <p>{comic.Comic_type}</p>
                               </div>
                               <div className="read-more">
+
                                   <Link to={`/comics/${comic.Comic_ID}`}>
                                       <button>Read more</button>
                                   </Link>
                               </div>
+
+                            <div className="Add-FavoriteComics">
+                            <button type="submit">FavoriteComic</button>
+
+                                </div>
                           </div>
                       </div>
                   </div>

@@ -20,14 +20,20 @@ const UserBar = () => {
               <a href="/user/book">Book</a>
             </li>
             <li>
-              <a href="/user/comics_rating">Comics</a>
+              <a href="/user/comics_rating">Comic Rating</a>
             </li>
+            <li>
+              <a href="/user/FavoriteComics">FavoriteComics</a>
+            </li>
+
             <li>
               <a href="/user/event">Event</a>
             </li>
             <li>
               <a href="/user/eventbooks">Event books</a>
             </li>
+
+
           </ul>
         </div>
       )}

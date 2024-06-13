@@ -1,0 +1,91 @@
+/* Container styling */
+.favorite-comics-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+}
+
+/* List title styling */
+.favorite-comics-list {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 24px;
+    color: #06ad06;
+}
+
+/* Table styling */
+.favorite-comics-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+    background-color: #f8f9fa;
+}
+
+.favorite-comics-table th, .favorite-comics-table td {
+    padding: 12px;
+    border: 1px solid #dee2e6;
+}
+
+.favorite-comics-table th {
+    background-color: #343a40;
+    color: #fff;
+    text-align: left;
+}
+
+.favorite-comics-table td {
+    color: #495057;
+}
+
+.favorite-comics-table td.truncate {
+    max-width: 350px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Button styling */
+.favorite-comics-button {
+    padding: 8px 12px;
+    margin-right: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.favorite-comics-button-edit {
+    background-color: #007bff;
+}
+
+.favorite-comics-button-edit:hover {
+    background-color: #0056b3;
+}
+
+.favorite-comics-button-delete {
+    background-color: #dc3545;
+}
+
+.favorite-comics-button-delete:hover {
+    background-color: #c82333;
+}
+
+/* Image box styling */
+.favorite-comics-img-box {
+    width: 100px;
+    height: 100px;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+}
+
+.favorite-comics-img-box img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
