@@ -17,6 +17,7 @@ const BooksPage = () => {
     const [ratingStatus, setRatingStatus] = useState(0);
     const [hoverRating, setHoverRating] = useState(0);
     const [ratingEntryExists, setRatingEntryExists] = useState(false);
+    const [isFavorite, setIsFavorite] = useState(false); // New state for favorite status
 
     useEffect(() => {
         const fetchBook = async () => {
@@ -47,6 +48,13 @@ const BooksPage = () => {
                     } else {
                         setRatingStatus(0);
                         setRatingEntryExists(false);
+                    }
+
+                    const favoriteResponse = await axios.get(`/favorite/book/${user_id}/${id}`);
+                    if (favoriteResponse.status === 200) {
+                        setIsFavorite(true);
+                    } else {
+                        setIsFavorite(false);
                     }
                 }
             } catch (error) {
@@ -146,8 +154,50 @@ const BooksPage = () => {
         }
     };
 
+    const handleHeartClick = async () => {
+        const user_id = localStorage.getItem('user_id');
+        const token = localStorage.getItem('adminToken') || localStorage.getItem('userToken');
+
+        if (!user_id || !token) {
+            setMessage("Please log in to add this book to your favorites.");
+            setTimeout(() => setMessage(""), 3000);
+            return;
+        }
+
+        try {
+            if (isFavorite) {
+                await axios.delete('/favorite/book/delete', {
+                    data: { User_ID: parseInt(user_id), ISBN: id },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                setIsFavorite(false);
+                setMessage("Book removed from favorites.");
+            } else {
+                await axios.post('/favorite/book/add', {
+                    User_ID: parseInt(user_id),
+                    ISBN: id
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                setIsFavorite(true);
+                setMessage("Book added to favorites.");
+            }
+        } catch (error) {
+            console.error("Error updating favorite status:", error);
+            setMessage("Error updating favorite status.");
+        }
+
+        setTimeout(() => setMessage(""), 3000);
+    };
+
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className='loading'>Loading...</div>;
     }
 
     return (
@@ -173,9 +223,9 @@ const BooksPage = () => {
                         </div>
                         
                         <div className="book-rating">
-                            <div className="comic-status">
-                                <div className="stars">
-                                <h3>Rate this book</h3>
+                            <div className="book-status">
+                                <div className="book-stars">
+                                    <h3>Rate this book</h3>
                                     {[1, 2, 3, 4, 5].map((rating) => (
                                         <i
                                             key={rating}
@@ -195,12 +245,15 @@ const BooksPage = () => {
                     <div className="textP-section">
                         <div className="bookP-title">
                             <h2>{book.Book_title}</h2>
+                            <button className={`heart-button ${isFavorite ? 'active' : ''}`} onClick={handleHeartClick}>
+                                ♥
+                            </button>
                         </div>
                         <div className="bookP-author">
                             <p>Author: {book.Book_author}</p>
                         </div>
                         <div className="bookP-genre">
-                        <p>Genre: {genres.length > 0 ? genres[0].Genre : "Genre not available"}</p>
+                            <p>Genre: {genres.length > 0 ? genres[0].Genre : "Genre not available"}</p>
                         </div>
                         <div className="bookP-description">
                             <p>Description:</p>

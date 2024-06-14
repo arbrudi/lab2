@@ -4,43 +4,60 @@ from extensions import db
 
 favbook_bp = Blueprint('favB', __name__)
 
-
-@favbook_bp.route('/favorite/book/add', methods = ["POST"])
+@favbook_bp.route('/favorite/book/add', methods=["POST"])
 def add_favorite_book():
     try:
         data = request.get_json()
         user_id = data.get('User_ID')
         book_id = data.get('ISBN')
 
-        exists = Favorite_books.query.filter_by(User_ID=user_id, ISBN = book_id).first()
+        exists = Favorite_books.query.filter_by(User_ID=user_id, ISBN=book_id).first()
         if exists:
-            jsonify({'message':'This book is already in the list'})
-        new_fav = Favorite_books(User_ID = user_id, ISBN = book_id)
+            return jsonify({'message': 'This book is already in the list'})
+        new_fav = Favorite_books(User_ID=user_id, ISBN=book_id)
         db.session.add(new_fav)
         db.session.commit()
 
-        return jsonify({'message':'Favorite book added successfully'})
+        return jsonify({'message': 'Favorite book added successfully'})
     except Exception as e:
         print('Error', e)
-        return jsonify({'error',str(e)}),500
+        return jsonify({'error': str(e)}), 500
 
-@favbook_bp.route('/favorite/book/<int:user_id>', methods =["GET"])
+@favbook_bp.route('/favorite/book/<int:user_id>', methods=["GET"])
 def get_favorite_books(user_id):
     try:
-        all_favorites = Favorite_books.query.filter_by(User_ID = user_id).all() # SELECT * From Favorite_books WHERE User_ID=USer_ID
+        all_favorites = Favorite_books.query.filter_by(User_ID=user_id).all()
         data = []
         for book in all_favorites:
             _data = {
                 'Favorite_Book_ID': book.Favorite_Book_ID,
-                'User_ID':book.User_ID,
-                'ISBN':book.ISBN
+                'User_ID': book.User_ID,
+                'ISBN': book.ISBN
             }
             data.append(_data)
-            return jsonify(data),200
+        return jsonify(data), 200
     except Exception as e:
-        print('Error',e)
-        return jsonify({'error',str(e)}),500
-    
+        print('Error', e)
+        return jsonify({'error': str(e)}), 500
+
+@favbook_bp.route('/favorite/book/<int:user_id>/<int:isbn>', methods=['GET'])
+def get_individual_book(user_id, isbn):
+    try:
+        exists = Favorite_books.query.filter_by(User_ID=user_id, ISBN=isbn).first()
+        if exists:
+            data = {
+                'Favorite_Book_ID': exists.Favorite_Book_ID,
+                'User_ID': exists.User_ID,
+                'ISBN': exists.ISBN
+            }
+            return jsonify(data), 200
+        else:
+            return jsonify({'message': 'Book not found in favorites'}), 404
+    except Exception as e:
+        print("Error", e)
+        return jsonify({'error': str(e)}), 500
+
+
 @favbook_bp.route('/favorite/book/delete', methods=['DELETE'])
 def delete_Favorite():
     try:

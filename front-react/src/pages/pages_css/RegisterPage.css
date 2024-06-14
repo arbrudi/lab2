@@ -48,8 +48,16 @@ body {
 .b-log a{
     text-decoration: none;
     color: #00aaff;
-
 }
+.b-log a:hover{
+    text-decoration: none;
+    color: white;
+}
+
+.b-log:hover{
+    background-color: #00aaff;
+}
+
 .register-header {
     text-align: center;
     color: #030303;
