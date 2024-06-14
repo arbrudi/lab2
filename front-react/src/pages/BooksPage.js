@@ -17,7 +17,7 @@ const BooksPage = () => {
     const [ratingStatus, setRatingStatus] = useState(0);
     const [hoverRating, setHoverRating] = useState(0);
     const [ratingEntryExists, setRatingEntryExists] = useState(false);
-    const [isFavorite, setIsFavorite] = useState(false); // New state for favorite status
+    const [isFavorite, setIsFavorite] = useState(false);
 
     useEffect(() => {
         const fetchBook = async () => {
