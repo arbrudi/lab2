@@ -3,14 +3,14 @@ import UserBar from '../../components/UserBar';
 import axios from 'axios';
 import StarRating from '../user/user_comp/StarRating';
 import '../pages_css/Book_U.css';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate as a fallback
+import { useNavigate } from 'react-router-dom';
 
 const Book = () => {
     const [bookRating, setBookRating] = useState([]);
     const [books, setBooks] = useState([]);
     const [favoriteBooks, setFavoriteBooks] = useState([]);
     const user_id = localStorage.getItem('user_id');
-    const navigate = useNavigate(); // Use useNavigate as a fallback
+    const navigate = useNavigate(); 
 
     useEffect(() => {
         const fetchBookRating = async () => {
@@ -135,7 +135,7 @@ const Book = () => {
     };
 
     const handleRedirectToBooksPage = () => {
-        navigate('/books'); // Use navigate to redirect to the books page
+        navigate('/books'); 
     };
 
     return (
