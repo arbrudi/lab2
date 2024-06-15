@@ -55,10 +55,6 @@ const Edit_Genre = () => {
                     <input type="text" name="Book_Genre_ID" value={formData.Book_Genre_ID} onChange={handleChange} />
                 </div>
                 <div>
-                    <label>ISBN</label>
-                    <input type="text" name="ISBN" value={formData.ISBN} onChange={handleChange} />
-                </div>
-                <div>
                     <label>Genre Name</label>
                     <input type="text" name="Genre_Name" value={formData.Genre_Name} onChange={handleChange} />
                 </div>

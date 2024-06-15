@@ -15,6 +15,11 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv(dotenv_path='./config/.env')
+from Views.User import Users_bp
+from Views.ML_model import recommendation_bp
+from Views.Comic_rating import cRating_bp
+from Views.Book_ratings import bRating_bp
+from Views.Favorite_Books import favbook_bp
 
 def create_app():
     app = Flask(__name__)
@@ -33,7 +38,8 @@ def create_app():
     mongo = PyMongo(app)
 
     db.init_app(app)
-    
+
+    app.register_blueprint(cRating_bp)
     app.register_blueprint(Users_bp)
     app.register_blueprint(views_bp)
     app.register_blueprint(auth_bp)
@@ -44,6 +50,10 @@ def create_app():
     app.register_blueprint(Comics_bp)
     app.register_blueprint(ComicsA_bp)
     app.register_blueprint(bookS_bp)
+    app.register_blueprint(recommendation_bp, url_prefix='/recommendations')
+    app.register_blueprint(bRating_bp)
+    app.register_blueprint(favbook_bp)
+
     with app.app_context():
         # Test MSSQL connection
         try:

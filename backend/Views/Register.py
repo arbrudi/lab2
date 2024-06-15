@@ -20,6 +20,7 @@ def register():
         return jsonify({'message': 'Username is already taken'}), 409
 
     hashed_password = bcrypt.generate_password_hash(data['Password']).decode('utf-8')
+    print("String",hashed_password)
    
     new_user = Users(Name=data['Name'], Surname=data['Surname'], User_Role=data['User_Role'],
                     Email=data['Email'], Username=data['Username'], Password=hashed_password)

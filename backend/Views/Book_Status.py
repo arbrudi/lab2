@@ -16,7 +16,39 @@ def get_book_status_by_id(isbn, user_id):
             return jsonify({'Book_state': 'Status not available'}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+    
+@bookS_bp.route('/book/get_status_book/<int:user_id>/<int:book_status_id>', methods=['GET'])
+def get_status_book(user_id, book_status_id):
+    try:
+        user_books = User_Book_Status.query.filter_by(User_ID=user_id, Book_Status_ID=book_status_id).all()
 
+        if not user_books:
+            return jsonify({'message': 'No books found with the specified status for this user.'}), 404
+
+        isbn_list = [user_book.ISBN for user_book in user_books]
+
+        books = Books.query.filter(Books.ISBN.in_(isbn_list)).all()
+
+        if not books:
+            return jsonify({'message': 'No books found with the specified status for this user.'}), 404
+
+        books_data = []
+        for book in books:
+            book_data = {
+                'Image': book.Book_image,
+                'Title': book.Book_title,
+                'Author': book.Book_author,
+                'Book_Status': Book_Status.query.get(book_status_id).Book_state,  
+            }
+            books_data.append(book_data)
+
+        return jsonify(books_data), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+    
 @bookS_bp.route('/book/get_book_status', methods=['GET'])
 def get_book_status():
     try:
