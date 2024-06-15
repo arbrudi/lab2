@@ -1,0 +1,27 @@
+
+.results {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+  }
+  
+  .book-item {
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  .book-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .book-details {
+    margin-top: 20px;
+  }
+  
+  .book-image {
+    max-width: 100px;
+    height: auto;
+  }

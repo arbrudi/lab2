@@ -1,5 +1,7 @@
 from flask import Flask
-from extensions import db
+from flask_cors import CORS
+from extensions import db  # Assuming you have SQLAlchemy db instance imported
+from Views.Search import search_bp  # Import your search_bp Blueprint
 from Views.Register import views_bp
 from Views.Login import auth_bp
 from Views.Books import books_bp 
@@ -19,16 +21,20 @@ def create_app():
     # Change SERVER
     conn = 'mssql+pyodbc:///?odbc_connect=' + \
            'DRIVER={ODBC Driver 17 for SQL Server};' + \
-           'SERVER=ERIS;' + \
+           'SERVER=DESKTOP-UD05JRG\\MSSQLSERVER01;' + \
            'DATABASE=lab2;' + \
            'Trusted_Connection=yes;'
 
     app.config['SQLALCHEMY_DATABASE_URI'] = conn 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-
+    # Initialize SQLAlchemy with the app
     db.init_app(app)
 
+    # Enable CORS for all routes
+    CORS(app)
+
+    # Register your existing Blueprints
     app.register_blueprint(cRating_bp)
     app.register_blueprint(Users_bp)
     app.register_blueprint(views_bp)
@@ -41,12 +47,13 @@ def create_app():
     app.register_blueprint(ComicsA_bp)
     app.register_blueprint(bookS_bp)
     app.register_blueprint(recommendation_bp, url_prefix='/recommendations')
+    app.register_blueprint(search_bp, url_prefix='/search')
 
+    # Establish database connection within app context
     with app.app_context():
         try:
             db.engine.connect()
             print("Connection to MSSQL database successful!")
-            
         except Exception as e:
             print("Error connecting to MSSQL database:", e)
 

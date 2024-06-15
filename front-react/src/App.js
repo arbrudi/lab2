@@ -102,7 +102,7 @@ function App() {
           <Route path="/eventsdetails/:Event_ID" element={<EventDetailsPage />} /> 
 
           <Route path="/" element={<HomePage />} /> 
-          <Route path="/about" element={<AboutPage />} /> 
+          <Route path="/search" element={<AboutPage />} /> 
           <Route path="/events" element={<EventsPage />} /> 
           <Route path="/login" element={<LoginPage />} /> 
           <Route path="/register" element={<RegisterPage />} />
