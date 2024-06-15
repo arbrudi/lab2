@@ -35,7 +35,6 @@ const BooksPage = () => {
                 const user_id = localStorage.getItem('user_id');
                 if (user_id) {
                     const statusResponse = await axios.get(`/book/get_status_by_id/${id}/${user_id}`);
-                    
                     if (statusResponse.status === 200) {
                         setStatus(statusResponse.data.Book_state);
                         setUserBookEntryExists(true);
@@ -59,7 +58,7 @@ const BooksPage = () => {
                 }
             } catch (error) {
                 if (error.response && error.response.status === 404) {
-                    setUserBookEntryExists(false);
+                    setIsFavorite(false);
                 } else {
                     console.error("Error fetching status:", error);
                     setMessage("Error fetching book details.");
@@ -108,18 +107,21 @@ const BooksPage = () => {
         const newStatus = event.target.value;
         const selectedStatus = statusOptions.find(option => option.Book_Status_ID === parseInt(newStatus));
         setStatus(selectedStatus.Book_state);
-
+    
         const user_id = localStorage.getItem('user_id');
         const token = localStorage.getItem('adminToken') || localStorage.getItem('userToken');
-
+    
         if (!user_id || !token) {
             setMessage("Please log in to update the book status.");
             return;
         }
-
         try {
-            const method = userBookEntryExists ? 'PUT' : 'POST';
-            await axios({
+            let method = 'POST';
+            if (userBookEntryExists) {
+                method = 'PUT';
+            }
+            
+            const response = await axios({
                 method: method,
                 url: '/book/status',
                 data: {
@@ -131,17 +133,23 @@ const BooksPage = () => {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 }
+            
             });
-            setMessage(method === 'POST' ? "Book status added successfully." : "Book status updated successfully.");
-            setUserBookEntryExists(true);
+            
+            if (response.status === 200) {
+                setMessage(method === 'POST' ? "Book status added successfully." : "Book status updated successfully.");
+                setUserBookEntryExists(true);
+            } else {
+                setMessage("Failed to update book status.");
+            }
         } catch (error) {
             console.error("Error updating status:", error);
             setMessage("Error updating status.");
         }
-
+    
         setTimeout(() => setMessage(""), 3000);
     };
-
+    
     const handleRecommendationClick = async () => {
         try {
             const recommendationsResponse = await axios.get(`/recommendations/recommend_book?book_name=${book.Book_title}`);
