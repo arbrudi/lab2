@@ -28,7 +28,6 @@ def get_book_genres():
         for genre in all_genres:
             _data = {
                 'Book_Genre_ID':genre.Book_Genre_ID,
-                'ISBN':genre.ISBN,
                 'Genre_Name':genre.Genre_Name
             }
             genre_data.append(_data)
@@ -46,7 +45,6 @@ def get_book_genre(Book_Genre_ID):
         
         genre_data={
                 'Book_Genre_ID':genre.Book_Genre_ID,
-                'ISBN':genre.ISBN,
                 'Genre_Name':genre.Genre_Name
         }
         return jsonify(genre_data), 200

@@ -12,6 +12,8 @@ from Views.Book_Status import bookS_bp
 from Views.User import Users_bp
 from Views.ML_model import recommendation_bp
 from Views.Comic_rating import cRating_bp
+from Views.Book_ratings import bRating_bp
+from Views.Favorite_Books import favbook_bp
 
 def create_app():
     app = Flask(__name__)
@@ -19,7 +21,7 @@ def create_app():
     # Change SERVER
     conn = 'mssql+pyodbc:///?odbc_connect=' + \
            'DRIVER={ODBC Driver 17 for SQL Server};' + \
-           'SERVER=ERIS;' + \
+           'SERVER=LAPTOP-TQGV5751;' + \
            'DATABASE=lab2;' + \
            'Trusted_Connection=yes;'
 
@@ -41,6 +43,8 @@ def create_app():
     app.register_blueprint(ComicsA_bp)
     app.register_blueprint(bookS_bp)
     app.register_blueprint(recommendation_bp, url_prefix='/recommendations')
+    app.register_blueprint(bRating_bp)
+    app.register_blueprint(favbook_bp)
 
     with app.app_context():
         try:

@@ -83,6 +83,7 @@ def update_book(id):
 def delete_book(ISBN):
     try:
         book = Books.query.get(ISBN)
+        print("bbb",book)
         if book is None:
             return jsonify({'error': 'Book not found'}), 404
 
@@ -92,16 +93,18 @@ def delete_book(ISBN):
         return jsonify({'message': 'Book deleted successfully'}), 200
     except Exception as e:
         print("Error:", e)
-        return jsonify({"error": str(e)}), 500
+        db.session.rollback()  # Rollback the session to avoid leaving the database in an inconsistent state
+        return jsonify({"error": "An unexpected error occurred while deleting the book"}), 500
 
-@books_bp.route('/books_by_genre/<int:isbn>', methods =['GET'])
+
+@books_bp.route('/books_by_genre/<int:isbn>', methods=['GET'])
 def get_book_by_genre(isbn):
     book = db.session.query(Books).filter_by(ISBN=isbn).first()
-
     if not book:
-        return jsonify({"error":f"{book} doesn't exist in the database!"})
-    
-    genres = db.session.query(Book_Genre.Genre_Name).filter_by(ISBN = isbn).all()
-    genres_name = [genre.Genre_Name for genre in genres]
+        return jsonify({"error": f"Book with ISBN {isbn} doesn't exist in the database!"}), 404
 
-    return genres_name
+    genre = db.session.query(Book_Genre).filter_by(Book_Genre_ID=book.Book_genre).first()
+    if not genre:
+        return jsonify({"error": "Genre not found!"}), 404
+    return jsonify({"Book Title": book.Book_title, "Genre": genre.Genre_Name})
+

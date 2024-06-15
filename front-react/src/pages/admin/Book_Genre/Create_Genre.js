@@ -6,7 +6,6 @@ import '../css/Create.css'
 const Create_Genre = () => {
     const [formData, setFormData] = useState({
         Book_Genre_ID: "",
-        ISBN: "",
         Genre_Name: "",
 
     });
@@ -36,10 +35,7 @@ const Create_Genre = () => {
                     Book Genre ID:
                     <input type="text" name="Book_Genre_ID" value={formData.Book_Genre_ID} onChange={handleChange} />
                 </label>
-                <label>
-                    ISBN:
-                    <input type="text" name="ISBN" value={formData.ISBN} onChange={handleChange} />
-                </label>
+                
                 <label>
                     Genre Name:
                     <input type="text" name="Genre_Name" value={formData.Genre_Name} onChange={handleChange} />
