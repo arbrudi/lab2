@@ -4,7 +4,8 @@
 }
 
 .book-rating-container,
-.fav-books-container {
+.fav-books-container,
+.books-with-status-container {
     margin: 40px;
     width: auto;
     background-color: #f9f9f9;
@@ -14,61 +15,72 @@
 }
 
 .book-rating-list,
-.fav-books-user h1 {
+.fav-books-user h1,
+.books-with-status-container h1 {
     font-size: 40px;
     color: #333;
     margin-bottom: 20px;
-    margin-left: 10px; 
+    margin-left: 10px;
 }
 
 .book-rating-table,
-.fav-book-tb {
+.fav-book-tb,
+.books-with-status-table {
+    width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
-    width: 100%; 
 }
 
 .book-rating-table th,
 .fav-book-tb th,
+.books-with-status-table th,
 .book-rating-table td,
-.fav-book-tb td {
+.fav-book-tb td,
+.books-with-status-table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
 
 .book-rating-table th,
-.fav-book-tb th {
+.fav-book-tb th,
+.books-with-status-table th {
     background-color: #464545;
     color: white;
     font-weight: bold;
 }
 
 .book-rating-table tbody tr:nth-child(even),
-.fav-book-tb tbody tr:nth-child(even) {
+.fav-book-tb tbody tr:nth-child(even),
+.books-with-status-table tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
 .book-rating-table tbody tr:hover,
-.fav-book-tb tbody tr:hover {
+.fav-book-tb tbody tr:hover,
+.books-with-status-table tbody tr:hover {
     background-color: #f1f1f1;
 }
 
 .img-box {
-    width: 80px; 
-    height: 100px; 
-    overflow: hidden; 
+    width: 80px;
+    height: 100px;
+    overflow: hidden;
 }
 
 .img-box img {
     width: 100%;
     height: auto;
-    object-fit: cover; 
+    object-fit: cover;
 }
 
 .book-rating-button,
-.fav-book-button, .book-favorite-button {
-    padding: 8px 12px; 
+.fav-book-button,
+.book-favorite-button,
+.book-rating-button-delete,
+.fav-book-button-delete,
+.book-favorite-button-delete {
+    padding: 8px 12px;
     font-size: 14px;
     cursor: pointer;
     border: none;
@@ -77,13 +89,15 @@
 }
 
 .book-rating-button-delete,
-.fav-book-button-delete, .book-favorite-button {
+.fav-book-button-delete,
+.book-favorite-button {
     background-color: #ff4d4d;
     color: white;
 }
 
 .book-rating-button-delete:hover,
-.fav-book-button-delete:hover, .book-favorite-button:hover {
+.fav-book-button-delete:hover,
+.book-favorite-button:hover {
     background-color: #cc0000;
 }
 
@@ -110,5 +124,3 @@
 .no-favorite-books button:hover {
     background-color: #fca500;
 }
-
-

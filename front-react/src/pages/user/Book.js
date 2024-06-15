@@ -3,13 +3,17 @@ import UserBar from '../../components/UserBar';
 import axios from 'axios';
 import StarRating from '../user/user_comp/StarRating';
 import '../pages_css/Book_U.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Book = () => {
+    const [booksWithStatus, setBooksWithStatus] = useState([]);
     const [bookRating, setBookRating] = useState([]);
     const [books, setBooks] = useState([]);
     const [favoriteBooks, setFavoriteBooks] = useState([]);
+    const [stat, setStat] = useState([]);
+    const [selectedStatus, setSelectedStatus] = useState("");
     const user_id = localStorage.getItem('user_id');
+    const { book_status_id } = useParams(); 
     const navigate = useNavigate(); 
 
     useEffect(() => {
@@ -40,12 +44,35 @@ const Book = () => {
             }
         };
 
+        const fetchStatus = async () => {
+            try {
+                const response = await axios.get("/book/get_book_status");
+                setStat(response.data);
+            } catch (error) {
+                console.error("Error fetching status:", error);
+            }
+        };
+
+        const fetchBooksByStatus = async (statusId) => {
+            try {
+                const response = await axios.get(`/book/get_status_book/${user_id}/${statusId}`);
+                setBooksWithStatus(response.data);
+            } catch (error) {
+                console.error("Error fetching books with status:", error);
+                setBooksWithStatus([]);
+            }
+        };
+
         if (user_id) {
             fetchBookRating();
             fetchBooks();
             fetchFavoriteBooks();
+            fetchStatus();
+            if (selectedStatus) {
+                fetchBooksByStatus(selectedStatus);
+            }
         }
-    }, [user_id]);
+    }, [user_id, selectedStatus]);
 
     const getBookName = (bookId) => {
         const book = books.find(b => b.ISBN === bookId);
@@ -125,7 +152,7 @@ const Book = () => {
                 }
             });
 
-            setBookRating(bookRating.map(rating => 
+            setBookRating(bookRating.map(rating =>
                 rating.ISBN === bookId ? { ...rating, Book_rating: newRating } : rating
             ));
             console.log("Rating updated successfully.");
@@ -134,8 +161,12 @@ const Book = () => {
         }
     };
 
+    const handleStatus = (statusId) => {
+        setSelectedStatus(statusId); 
+    };
+
     const handleRedirectToBooksPage = () => {
-        navigate('/books'); 
+        navigate('/books');
     };
 
     return (
@@ -161,9 +192,9 @@ const Book = () => {
                                     </td>
                                     <td>{getBookName(rating.ISBN)}</td>
                                     <td>
-                                        <StarRating 
-                                            rating={rating.Book_rating} 
-                                            onRatingChange={(newRating) => handleRatingChange(rating.ISBN, newRating)} 
+                                        <StarRating
+                                            rating={rating.Book_rating}
+                                            onRatingChange={(newRating) => handleRatingChange(rating.ISBN, newRating)}
                                         />
                                     </td>
                                     <td>
@@ -172,7 +203,7 @@ const Book = () => {
                                             onClick={() => handleDeleteRating(rating.ISBN)}
                                         >
                                             Delete
-                                        </button>  
+                                        </button>
                                     </td>
                                 </tr>
                             ))}
@@ -221,9 +252,49 @@ const Book = () => {
                         )}
                     </div>
                 </div>
+                </div>
+                <div className="books-with-status-container">
+                <h1>Books with Status</h1>
+                <div className="book_stat_dropdown">
+                    <select id="status" value={selectedStatus} onChange={(e) => handleStatus(e.target.value)}>
+                        <option value="">Select Status</option>
+                        {stat.map((status) => (
+                            <option key={status.Book_Status_ID} value={status.Book_Status_ID}>
+                                {status.Book_state}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                {booksWithStatus.length > 0 ? (
+                    <table className="books-with-status-table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {booksWithStatus.map((book) => (
+                                <tr key={book.ISBN}>
+                                    <td className="img-box">
+                                        <img src={book.Image} alt="Book" />
+                                    </td>
+                                    <td>{book.Title}</td>
+                                    <td>{book.Author}</td>
+                                    <td>{book.Book_Status}</td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+                        ) : (
+                            <p>No books found with the selected status.</p>
+                        )}
             </div>
         </div>
+        
     );
-}
+};
 
 export default Book;
