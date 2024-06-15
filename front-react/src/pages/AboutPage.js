@@ -22,7 +22,8 @@ const AboutPage = () => {
         }
         
         const data = await response.json();
-        setResults(data);
+        console.log('Elasticsearch Data:', data); // Log Elasticsearch data
+        setResults(data); // Assuming data is an array of objects
         setError(null);
       } catch (error) {
         console.error('Error fetching data:', error.message);
@@ -38,7 +39,7 @@ const AboutPage = () => {
 
   const handleItemClick = (item) => {
     setSelectedItem(item);
-    setResults([]);
+    setResults([]); // Clear results after selecting an item
   };
 
   return (
@@ -57,16 +58,17 @@ const AboutPage = () => {
         <ul className="results">
           {results.map((item, index) => (
             <li key={index} className="item" onClick={() => handleItemClick(item)}>
-              {item['field1']} {/* Adjust based on your data structure */}
+              {item._source.Book_title} {/* Adjust based on your data structure */}
             </li>
           ))}
         </ul>
       )}
       {selectedItem && (
         <div className="item-details">
-          <h2>{selectedItem['field1']}</h2>
-          <p>Field 2: {selectedItem['field2']}</p>
-          <p>Field 3: {selectedItem['field3']}</p>
+          <h2>{selectedItem._source.Book_title}</h2>
+          <p>Author: {selectedItem._source.Book_author}</p>
+          <p>Genre: {selectedItem._source.Book_genre}</p>
+          <p>Description: {selectedItem._source.Book_description}</p>
           {/* Add more fields as needed */}
         </div>
       )}

@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 from extensions import db  # Assuming you have SQLAlchemy db instance imported
-from Views.Search import search_bp  # Import your search_bp Blueprint
+from Views.Search import search_bp   # Import your search_bp Blueprint
 from Views.Register import views_bp
 from Views.Login import auth_bp
 from Views.Books import books_bp 
@@ -19,11 +19,13 @@ def create_app():
     app = Flask(__name__)
 
     # Change SERVER
-    conn = 'mssql+pyodbc:///?odbc_connect=' + \
-           'DRIVER={ODBC Driver 17 for SQL Server};' + \
-           'SERVER=DESKTOP-UD05JRG\\MSSQLSERVER01;' + \
-           'DATABASE=lab2;' + \
-           'Trusted_Connection=yes;'
+    conn = (
+        'mssql+pyodbc:///?odbc_connect='
+        'DRIVER={ODBC Driver 17 for SQL Server};'
+        'SERVER=DESKTOP-UD05JRG\\MSSQLSERVER01;'
+        'DATABASE=lab2;'
+        'Trusted_Connection=yes;'
+    )
 
     app.config['SQLALCHEMY_DATABASE_URI'] = conn 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -55,7 +57,7 @@ def create_app():
             db.engine.connect()
             print("Connection to MSSQL database successful!")
         except Exception as e:
-            print("Error connecting to MSSQL database:", e)
+            print("Error connecting to databases:", e)
 
     return app
 

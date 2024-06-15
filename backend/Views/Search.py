@@ -1,55 +1,52 @@
-from flask import Blueprint, jsonify, request
-from elasticsearch import Elasticsearch
+from flask import Blueprint, current_app
+from elasticsearch import Elasticsearch, NotFoundError, RequestError
 
-# Define the Blueprint
+# Define the Blueprint for search functionality
 search_bp = Blueprint('search_bp', __name__)
 
-# Initialize Elasticsearch client with Cloud ID and API Key
-cloud_id = "uBjVFpABj4l0RCL23Qps:dXMtY2VudHJhbDEuZ2NwLmNsb3VkLmVzLmlvJDJiNjMwNjVmYzhiZTQ2ODA5YTdjOTUwZjAzNWZiZmI0JDc4MDhmOGY4YTY1ZTQwNjJiMjIzMjM4Y2FmMjdlMzU1"
-api_key = "ilX2S6KSQzama1GB4P8T9w"
+# Initialize Elasticsearch client with authentication
+es = Elasticsearch(
+    [{'host': 'localhost', 'port': 9200}],
+    http_auth=('elastic', 'dkjGfNMmL6f6SjdldHc5')
+)
 
-try:
-    es = Elasticsearch(
-        cloud_id=cloud_id,
-        api_key=api_key
-    )
-    # Check if the connection is successful
-    if es.ping():
-        print("Connected to Elasticsearch successfully!")
-    else:
-        print("Failed to connect to Elasticsearch.")
-except Exception as e:
-    print(f"Error connecting to Elasticsearch: {e}")
-
-@search_bp.route('/search', methods=['GET'])
-def search_data():
-    query = request.args.get('query')
-    if not query:
-        return jsonify({'error': 'No query provided'}), 400
-
+@search_bp.route('/search')
+def search():
+    current_app.logger.info("Received request on /search endpoint")
+    print("Received request on /search endpoint")
     try:
-        es_query = {
-            "query": {
-                "multi_match": {
-                    "query": query,
-                    "fields": ["field1", "field2", "field3"]  # Adjust fields as per your Elasticsearch index
-                }
-            }
-        }
-        results = es.search(index="lab2", body=es_query)
-        hits = results['hits']['hits']
-        print(f"Search query executed successfully. Found {len(hits)} hits.")
-        return jsonify([hit['_source'] for hit in hits]), 200
+        # Test connection to Elasticsearch
+        if es.ping():
+            current_app.logger.info("Connected to Elasticsearch!")
+            print("Connected to Elasticsearch!")
+            # Example: Perform a search query
+            index_name = "lab2"
+            try:
+                if not es.indices.exists(index=index_name):
+                    es.indices.create(index=index_name)
+                    current_app.logger.info(f"Created Elasticsearch index '{index_name}'.")
+                    print(f"Created Elasticsearch index '{index_name}'.")
+                    return f"Elasticsearch index '{index_name}' created. Try your search query again."
+                else:
+                    res = es.search(index=index_name, body={"query": {"match_all": {}}})
+                    return f"Got {res['hits']['total']['value']} hits from Elasticsearch for index '{index_name}'."
+            except RequestError as e:
+                if e.error == 'resource_already_exists_exception':
+                    current_app.logger.info(f"Elasticsearch index '{index_name}' already exists.")
+                    print(f"Elasticsearch index '{index_name}' already exists.")
+                    res = es.search(index=index_name, body={"query": {"match_all": {}}})
+                    return f"Got {res['hits']['total']['value']} hits from Elasticsearch for index '{index_name}'."
+                else:
+                    current_app.logger.error(f"Error creating Elasticsearch index '{index_name}': {e}")
+                    print(f"Error creating Elasticsearch index '{index_name}': {e}")
+                    return f"Error creating Elasticsearch index '{index_name}'. Please check logs for details.", 500
+        else:
+            return "Failed to connect to Elasticsearch."
+    except NotFoundError as e:
+        current_app.logger.error(f"Elasticsearch index not found error: {e}")
+        print(f"Elasticsearch index not found error: {e}")
+        return "Elasticsearch index not found error. Please check logs for details.", 404
     except Exception as e:
-        print(f"Error executing search query: {e}")
-        return jsonify({'error': str(e)}), 500
-
-
-
-
-    
-  #"id": "uBjVFpABj4l0RCL23Qps",
-  #"name": "lab2",
-  #"api_key": "ilX2S6KSQzama1GB4P8T9w",
- # "encoded": "dUJqVkZwQUJqNGwwUkNMMjNRcHM6aWxYMlM2S1NRemFtYTFHQjRQOFQ5dw==",
-  #"beats_logstash_format": "uBjVFpABj4l0RCL23Qps:ilX2S6KSQzama1GB4P8T9w"
+        current_app.logger.error(f"Error connecting to Elasticsearch: {e}")
+        print(f"Error connecting to Elasticsearch: {e}")
+        return "Error connecting to Elasticsearch. Please check logs for details.", 500
