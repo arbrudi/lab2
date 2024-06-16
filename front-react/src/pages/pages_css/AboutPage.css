@@ -14,26 +14,73 @@
     background-color: #089498d5;
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: flex-start;
     flex-direction: column;
+    padding: 20px;
     max-width: 100vh;
 }
 
 .left-section p {
     color: white;
-    margin-top: 1rem; /* Added margin to create space between h1 and p */
-    font-size: xx-large; 
-    max-width: 80%; /* Adjust the width as necessary */
-} 
-
+    margin-top: 1rem;
+    font-size: xx-large;
+    max-width: 80%;
+    text-align: left; /* Align text to the left */
+    padding-left: 20px; /* Same left padding */
+}
 
 .left-section h1 {
-    color: white; 
+    color: white;
     font-size: 1.5rem;
+    text-align: left; /* Align text to the left */
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-width: 80%;
+    margin-bottom: 20px;
+    padding-left: 20px; /* Same left padding */
+}
+
+.buttons {
+    padding-top: 60px;
+    font-size: 30px;
+    align-items: flex-start;
+    padding-left: 20px; /* Same left padding */
+}
+
+.login-button {
+    border: none;
+    color: white;
+    padding: 15px 32px;
     text-align: center;
-    white-space: pre-wrap; /* This ensures that the text will wrap correctly */
-    word-break: break-word; /* This ensures that long words will break to fit the container */
-    max-width: 80%; /* Adjust the width as necessary */
+    text-decoration: none;
+    font-size: 20px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 8px;
+    transition-duration: 0.4s;
+}
+
+.registerbtn { 
+    background-color: rgb(11, 11, 11);
+    border: none;
+    color: gray;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 8px;
+    transition-duration: 0.4s;
+}
+
+.login-button:hover {
+    color: rgb(143, 142, 142);
+}
+
+.registerbtn:hover {
+    color: white;
+    background-color: #089498d5;
 }
 
 .right-section {

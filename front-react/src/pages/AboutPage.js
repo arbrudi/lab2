@@ -24,6 +24,10 @@ const AboutPage = () => {
             <div className="left-section">
                 <p>Focal Point</p>
                 <h1>Every book, every page, every journey right at your fingertips.</h1>
+                <div className="buttons">
+                <a href="./login" class="login-button">Sign-in</a> 
+                <a href="./register" class="registerbtn">Sign-up</a>
+                </div>
             </div>
             <div className="right-section">
                 <div className="column">
