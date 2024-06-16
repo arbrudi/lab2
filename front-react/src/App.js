@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HomePage from "./pages/HomePage"; 
 import AboutPage from "./pages/AboutPage"; 
 import BooksPage from "./pages/BooksPage"; 
 import ComicsPage from "./pages/ComicsPage";
@@ -39,43 +38,34 @@ import Events from './pages/user/Events';
 import EventBook from './pages/user/EventBook'; 
 import UserDashboard from './pages/UserDashboard';
 import Comic_rating from './pages/user/Comic_rating';
-
 import Edit_Feature from './pages/admin/Feature/Edit_feature'; 
 import Create_Feature from './pages/admin/Feature/Create_feature'
 function App() {
 
-
   const user = localStorage.getItem("userToken");
   const admin = localStorage.getItem("adminToken");
-
 
   console.log(user,"client")
   console.log(admin ,"admin")
 
-
   return (
     <BrowserRouter>
-      <div className="App">
-      
-      </div> 
+  
+      {(user || admin) &&
       <NavBar />
+      }
       <div className="page-body">
         <Routes>
-
         {user || admin == null &&
            <>
-           <Route index element={<LoginPage />} />
+           <Route index element={<AboutPage />} />
            <Route path="/login" element={<LoginPage />} /> 
-           <Route path="/register" element={<RegisterPage />} /> 
-              {/*<Route path="/*" element={<PageNotFound />} /> */}
-              
+           <Route path="/register" element={<RegisterPage />} />               
            </> 
           }
        {user &&
           <>
-
-          <Route path="/" element={<HomePage />} /> 
-          <Route path="/about" element={<AboutPage />} /> 
+          <Route path="/" element={<AboutPage />} /> 
           <Route path="/events" element={<EventsPage />} /> 
           <Route path="/login" element={<LoginPage />} /> 
           <Route path="/register" element={<RegisterPage />} /> 
@@ -91,30 +81,24 @@ function App() {
           <Route path="/user/comics" element={<Comic />} /> 
           <Route path="/user/event" element={<Events />} />  
           <Route path="/user/eventbooks" element={<EventBook />} /> 
-
           <Route path="/user/comics_rating" element={<Comic_rating />} /> 
-
-
-
           </>
           }
-{admin &&
+
+        {admin &&
            <>
           <Route path="/admin" element={<Admin />} /> 
-
           <Route path="/eventsdetails/:Event_ID" element={<EventDetailsPage />} /> 
-
-          <Route path="/" element={<HomePage />} /> 
-          <Route path="/about" element={<AboutPage />} /> 
+          <Route path="/" element={<AboutPage />} /> 
           <Route path="/events" element={<EventsPage />} /> 
           <Route path="/login" element={<LoginPage />} /> 
           <Route path="/register" element={<RegisterPage />} />
 
-             {/* Users */}
-          
-             <Route path="/admin/user" element={<User />} />
-             <Route path="/admin/user/create" element={<Create_User />} /> 
-             <Route path="/admin/user/update/:User_ID" element={<Edit_User />} />
+          {/* Users */}
+      
+          <Route path="/admin/user" element={<User />} />
+          <Route path="/admin/user/create" element={<Create_User />} /> 
+          <Route path="/admin/user/update/:User_ID" element={<Edit_User />} />
 
           {/* BOOKS */}
           <Route path="/book/:id" element={<BooksPage />} /> 
@@ -141,14 +125,16 @@ function App() {
           <Route path="/admin/event/update/:id" element={<Edit_Events />} /> 
           <Route path="/admin/event_participant/create" element={<Create_participant />} /> 
           <Route path="/admin/event_participant/update/:Event_ID" element={<Edit_participant />} />   
-           <Route path="/admin/feature" element={<Feature/>} /> 
-           <Route path="/admin/feature/create" element={<Create_Feature />} />  
+          <Route path="/admin/feature" element={<Feature/>} /> 
+          <Route path="/admin/feature/create" element={<Create_Feature />} />  
           <Route path="/admin/feature/update/:id" element={<Edit_Feature />} /> 
           </>
            }
         </Routes>
       </div>
+      {(user || admin) &&
       <Footer />
+}
     </BrowserRouter>
   );
 }

@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 import './pages_css/AboutPage.css';  
 
 const AboutPage = () => {
     const [features, setFeatures] = useState([]);
-    
+    const user = localStorage.getItem("userToken");
+    const admin = localStorage.getItem("adminToken");
+    console.log(user)
     useEffect(() => {
+
       const fetchFeatures = async () => {
         try {
           const response = await axios.get("/admin/features"); 
@@ -23,10 +27,12 @@ const AboutPage = () => {
         <div className="about-page">
             <div className="left-section">
                 <p>Focal Point</p>
-                <h1>Every book, every page, every journey right at your fingertips.</h1>
+                <p>Every book, every page, every journey right at your fingertips.</p>
                 <div className="buttons">
-                <a href="./login" class="login-button">Sign-in</a> 
-                <a href="./register" class="registerbtn">Sign-up</a>
+                {(!user  && !admin ) && <a href="./login" class="login-button">Sign-in</a> }
+                {(!user  && !admin) && <a href="./register" class="registerbtn">Sign-up</a> }
+                {(user || admin)&& <button className="link-to-books"><Link to="/books">Discover our library!</Link></button>}
+                
                 </div>
             </div>
             <div className="right-section">
