@@ -71,10 +71,10 @@ const AboutPage = () => {
         <div className="items">
             <div className="items-2">
                
-                    <img className="book" src="https://m.media-amazon.com/images/I/41JJJDH3WML._AC_UF1000,1000_QL80_.jpg" alt="Placeholder 2" /> 
+            <img className="book" src="https://images.penguinrandomhouse.com/cover/9780593448885" alt="Placeholder 2" /> 
                     <div className="books">
-            <div className="book-title">Feeding The Ghosts</div>
-              <div className="book-author">Fred D'Aguiar</div>  
+            <div className="book-title">The Limits</div>
+              <div className="book-author">Nell Fraudenberg</div>  
               <div className="genre">
                 <div className="g1">nonfiction</div> 
                 <div className="g1">historical</div>
