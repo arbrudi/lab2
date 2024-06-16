@@ -50,10 +50,8 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="App">
-      
-      </div> 
-      {user || admin &&
+  
+      {(user || admin) &&
       <NavBar />
       }
       <div className="page-body">
@@ -134,7 +132,7 @@ function App() {
            }
         </Routes>
       </div>
-      {user || admin &&
+      {(user || admin) &&
       <Footer />
 }
     </BrowserRouter>
