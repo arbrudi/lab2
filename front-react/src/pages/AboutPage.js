@@ -33,10 +33,11 @@ const AboutPage = () => {
                 {(!user  && !admin) && <a href="./register" class="registerbtn">Sign-up</a> }
                 {(user || admin)&& <button className="link-to-books"><Link to="/books">Discover our library!</Link></button>}
                 
-                </div>
+                </div> 
+               
             </div>
             <div className="right-section">
-                <img src='https://www.thestorygraph.com/assets/hero-image-9daf4eae0b6f8e9beb51f83fd4a99631698ca1c8c68ef07a1aae37ef8a477dd1.jpg'/>
+                <img  className="story-image" src='https://www.thestorygraph.com/assets/hero-image-9daf4eae0b6f8e9beb51f83fd4a99631698ca1c8c68ef07a1aae37ef8a477dd1.jpg'/>
             </div>  
         </div>  
         <div className="second-section">
