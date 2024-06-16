@@ -7,6 +7,7 @@ const EventDetailsPage = () => {
   const { Event_ID } = useParams();
   const [event, setEvent] = useState({});
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchEventDetails = async () => {
@@ -15,6 +16,8 @@ const EventDetailsPage = () => {
         setEvent(response.data);
       } catch (error) {
         console.error("Error fetching event details:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -47,25 +50,33 @@ const EventDetailsPage = () => {
     }
   };
 
+  if (loading) {
+    return <div className='loading'>Loading...</div>;
+  }
+
   return (
     <div className='container'>
       <div className='event-details-container'>
-        {event.Event_image && (
-          <img src={event.Event_image} alt="Event" className="event-image-details" />
-        )}
-        <div className="event-details"> 
-        {event.Event_title && (
+        <div className="event-details">
+          {event.Event_image && (
+            <img src={event.Event_image} alt="Event" className="event-image-details" />
+          )}
+          <div className="register_event_container">
+            <button className="register_event" onClick={handleRegister}>Register</button>
+            {message && (
+              <p className="events_name">{message}</p>
+            )}
+          </div>
+        </div>
+        <div className="event-details-column">
+          {event.Event_title && (
             <p className="event-title-details">{event.Event_title}</p>
           )}
-          {event.Event_description && (
-            <p className="event-description-details">{event.Event_description}</p>
-          )}
           {event.Event_date && (
-            <p className="event-date-details">{event.Event_date}</p>
+            <p className="event-date-details">Date: {event.Event_date}</p>
           )}
-          <button className="register_event"  onClick={handleRegister}>Register for Event</button>
-          {message && (
-            <p className="events_name">{message}</p>
+          {event.Event_description && (
+            <p className="event-description-details">Description: {event.Event_description}</p>
           )}
         </div>
       </div>
