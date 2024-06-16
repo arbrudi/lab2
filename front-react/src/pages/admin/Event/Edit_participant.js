@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Link, useParams } from "react-router-dom";
-
+import '../../../assets/css/Create.css';
 const Edit_participant = () => {
     const { Event_ID } = useParams()
     const [participant, setParticipant] = useState({});
