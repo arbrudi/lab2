@@ -31,7 +31,8 @@ import Book_list_page from './pages/Book_list_page';
 import Comic_list_page from './pages/Comic_list_page';
 import User from './pages/admin/User';
 import Create_User from './pages/admin/User/Create_User';
-import Edit_User from './pages/admin/User/Edit_User'; 
+import Edit_User from './pages/admin/User/Edit_User';
+import Feature from './pages/admin/Feature' 
 import Books from './pages/user/Book'; 
 import Comic from './pages/user/Comics' 
 import Events from './pages/user/Events'; 
@@ -39,6 +40,8 @@ import EventBook from './pages/user/EventBook';
 import UserDashboard from './pages/UserDashboard';
 import Comic_rating from './pages/user/Comic_rating';
 
+import Edit_Feature from './pages/admin/Feature/Edit_feature'; 
+import Create_Feature from './pages/admin/Feature/Create_feature'
 function App() {
 
 
@@ -138,8 +141,9 @@ function App() {
           <Route path="/admin/event/update/:id" element={<Edit_Events />} /> 
           <Route path="/admin/event_participant/create" element={<Create_participant />} /> 
           <Route path="/admin/event_participant/update/:Event_ID" element={<Edit_participant />} />   
-          
-          
+           <Route path="/admin/feature" element={<Feature/>} /> 
+           <Route path="/admin/feature/create" element={<Create_Feature />} />  
+          <Route path="/admin/feature/update/:id" element={<Edit_Feature />} /> 
           </>
            }
         </Routes>

@@ -72,7 +72,7 @@ const Book = () => {
               <th>Genre</th>
               <th>Description</th>
               <th >Action</th>
-            </tr>
+            </tr> 
           </thead>
           <tbody>
             {books.map((book) => (

@@ -12,7 +12,7 @@ const User = () => {
           try {
             const response = await axios.get("/admin/user");
             setUsers(response.data);
-          } catch (error) {
+          } catch (error) {   
             console.error("Error fetching users:", error);
           }
         };

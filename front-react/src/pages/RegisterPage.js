@@ -7,7 +7,7 @@ const RegisterPage = () => {
     const [formData, setFormData] = useState({
         Name: '' ,
         Surname: '',
-        User_Role: 'client',
+        User_Role: 'admin',
         Email: '',
         Username: '',
         Password: ''
@@ -31,6 +31,7 @@ const RegisterPage = () => {
     };
 
     return (
+        <div className="register">
         <div className="register-container">
             <div className = "cont_reg_">
             <div className="to-login">
@@ -92,6 +93,7 @@ const RegisterPage = () => {
                 
                 <button type="submit" className="register-button">Submit</button>
             </form>
+        </div> 
             </div>
         </div>
     );
