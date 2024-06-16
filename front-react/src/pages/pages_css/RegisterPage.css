@@ -1,13 +1,8 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: white;
+    background-color:white ;
     margin: 0;
-    padding: 0; 
-    
-}
-.register{
-    background: url('https://img.freepik.com/premium-photo/vintage-book-magnifying-glass-light-blue-background-education-background-world-books-day_609048-2470.jpg');
-    background-size: cover;
+    padding: 0;
 }
 .register-container {
     max-width: 63%;
@@ -15,8 +10,6 @@ body {
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
-    position: relative; /* Ensure it is positioned relative to the body */
-    z-index: 1; /* Ensure it's above the background */
 }
 
 .cont_reg_{
