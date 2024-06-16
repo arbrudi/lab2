@@ -33,6 +33,12 @@ import User from './pages/admin/User';
 import Create_User from './pages/admin/User/Create_User';
 import Edit_User from './pages/admin/User/Edit_User';
 import Feature from './pages/admin/Feature' 
+import Books from './pages/user/Book'; 
+import Comic from './pages/user/Comics' 
+import Events from './pages/user/Events'; 
+import EventBook from './pages/user/EventBook'; 
+import UserDashboard from './pages/UserDashboard';
+import Comic_rating from './pages/user/Comic_rating';
 
 import Edit_Feature from './pages/admin/Feature/Edit_feature'; 
 import Create_Feature from './pages/admin/Feature/Create_feature'
@@ -80,7 +86,14 @@ function App() {
           <Route path="/admin/event_books" element={<EventBooks/>} /> 
           <Route path="/admin/event" element={<Event/>} />  
           <Route path="/eventsdetails/:Event_ID" element={<EventDetailsPage />} /> 
-          
+          <Route path="/UserDashboard" element={<UserDashboard />} /> 
+          <Route path="/user/book" element={<Books />} /> 
+          <Route path="/user/comics" element={<Comic />} /> 
+          <Route path="/user/event" element={<Events />} />  
+          <Route path="/user/eventbooks" element={<EventBook />} /> 
+
+          <Route path="/user/comics_rating" element={<Comic_rating />} /> 
+
 
 
           </>
@@ -141,3 +154,16 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+

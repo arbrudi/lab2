@@ -7,7 +7,7 @@ npm i react-slick
 npm i axios
 npm start
 
-------Backend------
+------Backend:MSSQL------
 
 Through cmd
 
@@ -22,6 +22,18 @@ pip install flask_bcrypt
 .\backend\back-flask\Scripts\Activate
 
 python server.py
+
+------Backend:Mongo------
+
+pip install flask_pymongo
+pip install python-dotenv
+
+
+------ML------
+pip install numpy
+pip install pandas
+pip install scikit-learn
+
 
 ------MSSQL CONN SERVERS------
 Arbi -> LAPTOP-TQGV5751

@@ -10,12 +10,22 @@ from Views.Comics import Comics_bp
 from Views.Comics_Author import ComicsA_bp
 from Views.Book_Genre import bookG_bp
 from Views.Book_Status import bookS_bp
+from Views.User import Users_bp 
+from flask_pymongo import PyMongo 
+from dotenv import load_dotenv 
+import os
+
+load_dotenv(dotenv_path='./config/.env')
 from Views.User import Users_bp
 from Views.ListOfFeatures import features_bp
 from dotenv import load_dotenv
 import os
 
 load_dotenv(dotenv_path='./config/.env')
+from Views.ML_model import recommendation_bp
+from Views.Comic_rating import cRating_bp
+from Views.Book_ratings import bRating_bp
+from Views.Favorite_Books import favbook_bp
 
 def create_app():
     app = Flask(__name__)
@@ -36,10 +46,17 @@ def create_app():
     mongo_uri = os.getenv("DB_URI")
     mongo_client = MongoClient(mongo_uri)
     app.config['MONGO_CLIENT'] = mongo_client  # Attach mongo client to the app config
+    app.config['SQLALCHEMY_DATABASE_URI'] = conn 
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    # Configure MongoDB
+    app.config["MONGO_URI"] = os.getenv("DB_URI")
+    mongo = PyMongo(app)
 
     # Initialize SQLAlchemy instance
     db.init_app(app)
-    
+
+    app.register_blueprint(cRating_bp)
     app.register_blueprint(Users_bp)
     app.register_blueprint(views_bp)
     app.register_blueprint(auth_bp)
@@ -52,6 +69,10 @@ def create_app():
     app.register_blueprint(bookS_bp)
     app.register_blueprint(features_bp)
     
+    app.register_blueprint(recommendation_bp, url_prefix='/recommendations')
+    app.register_blueprint(bRating_bp)
+    app.register_blueprint(favbook_bp)
+
     with app.app_context():
         # Test MSSQL connection
         try:
@@ -63,6 +84,7 @@ def create_app():
         # Test MongoDB connection
         try:
             mongo_client.server_info()  # Ping the MongoDB server
+            mongo.cx.server_info()  # Ping the MongoDB server
             print("Connection to MongoDB successful!")
         except Exception as e:
             print("Error connecting to MongoDB:", e)

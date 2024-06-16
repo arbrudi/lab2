@@ -1,0 +1,92 @@
+.comic-box {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.h1-comic-list {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.comic-container {
+    display: flex;
+    flex-direction: column; /* Display comics in a column */
+    align-items: center; /* Center align items horizontally */
+    padding: 10px;
+}
+
+.comic-item {
+    width: 100%; /* Ensure full width of the container */
+    margin-bottom: 20px; /* Space between each comic */
+}
+
+.comic {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+}
+
+.comic:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.comic-info {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.comic-img {
+    flex: 1;
+    overflow: hidden;
+}
+
+.comic-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.comic-title {
+    margin: 10px 0;
+}
+
+.comic-title h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.comic-type p {
+    margin: 0;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.read-more {
+    margin-top: auto;
+}
+
+.read-more button {
+    background-color: #0089d3e3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.read-more button:hover {
+    background-color: #0056b3;
+}

@@ -3,7 +3,7 @@ create database lab2
 use lab2
 
 DROP DATABASE lab2
-
+/*-------------------------------Comics-------------------------------*/
 CREATE TABLE Comics (
   Comic_ID VARCHAR(50) NOT NULL PRIMARY KEY,
   Comic_image TEXT,
@@ -11,8 +11,6 @@ CREATE TABLE Comics (
   Comic_type VARCHAR(50),
   Comic_Description TEXT
 );
-
-
 
 CREATE TABLE Comics_Author(
 Comics_Author_ID int NOT NULL PRIMARY KEY,
@@ -29,10 +27,22 @@ CREATE TABLE Comics_comments (
   Comic_comments TEXT
 );
 
-CREATE TABLE Comics_ratings (
+CREATE TABLE Comic_ratings (
+  Comic_rating_ID int Primary key Identity (1,1),
   User_ID INT NOT NULL,
   Comic_ID VARCHAR(50) NOT NULL,
-  Comic_Rating INT NOT NULL
+  Comic_Rating INT NOT NULL,
+  FOREIGN KEY (Comic_ID) REFERENCES Comics(Comic_ID),
+  FOREIGN KEY (User_ID) REFERENCES Users(User_ID) 
+);
+
+Select * from Comic_ratings
+
+CREATE TABLE favorite_comics (
+  User_ID INT NOT NULL,
+  Comic_ID VARCHAR(50) NOT NULL,
+  Comic_list_name VARCHAR(255),
+  PRIMARY KEY (User_ID, Comic_ID)
 );
 
 /*-------------------------------Books-------------------------------*/
@@ -41,15 +51,14 @@ CREATE TABLE Books (
   Book_image TEXT,
   Book_title VARCHAR(255) NOT NULL,
   Book_author VARCHAR(255) NOT NULL,
-  Book_genre INT NOT NULL,
+  Book_genre INT,
+  FOREIGN KEY(Book_genre) REFERENCES Book_Genre(Book_Genre_ID),
   Book_description TEXT NOT NULL
 );
 
 CREATE TABLE Book_Genre(
 Book_Genre_ID int NOT NULL PRIMARY KEY,
-ISBN INT NOT NULL,
 Genre_Name varchar(50) NOT NULL,
-FOREIGN KEY (ISBN) REFERENCES Books(ISBN)
 );
 
 CREATE TABLE Book_Status(
@@ -67,21 +76,33 @@ VALUES(3,'Dropped')
 INSERT INTO Book_Status(Book_Status_ID, Book_state)
 VALUES(4,'Finished')
 
-CREATE TABLE User_Book_Status(
-ISBN int NOT NULL,
-Book_Status_ID int NOT NULL,
-User_ID INT NOT NULL,
-PRIMARY KEY (ISBN, User_ID),
-FOREIGN KEY (ISBN) REFERENCES Books(ISBN),
-FOREIGN KEY (Book_Status_ID) REFERENCES Book_Status(Book_Status_ID),
-FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
-)
+CREATE TABLE User_Book_Status (
+  User_Book_Status_ID INT IDENTITY(1,1) PRIMARY KEY,
+  ISBN INT NOT NULL,
+  Book_Status_ID INT NOT NULL,
+  User_ID INT NOT NULL,
+  FOREIGN KEY (ISBN) REFERENCES Books(ISBN),
+  FOREIGN KEY (Book_Status_ID) REFERENCES Book_Status(Book_Status_ID),
+  FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
+);
 
-CREATE TABLE Book_comments (
+CREATE TABLE Book_ratings(
+	Book_rating_ID INT PRIMARY KEY IDENTITY(1,1),
+	User_ID int NOT NULL,
+	ISBN int NOT NULL,
+	Book_rating INT NOT NULL,
+	FOREIGN KEY(User_ID) REFERENCES Users(User_ID),
+	FOREIGN KEY(ISBN) REFERENCES Books(ISBN)
+);
+
+CREATE TABLE Favorite_books (
+  Favorite_Book_ID int Primary Key Identity(1,1),
   User_ID INT NOT NULL,
   ISBN INT NOT NULL,
-  Book_comments TEXT
+  FOREIGN KEY (User_ID) REFERENCES Users(User_ID),
+  FOREIGN KEY (ISBN) REFERENCES Books(ISBN)
 );
+
 /*-------------------------------Users-------------------------------*/
 CREATE TABLE Users (
   User_ID INT NOT NULL PRIMARY KEY IDENTITY(100, 1),
@@ -115,20 +136,6 @@ CREATE TABLE Event_participants (
   PRIMARY KEY (Event_ID, User_ID)
 );
  
-CREATE TABLE favorite_comics (
-  User_ID INT NOT NULL,
-  Comic_ID VARCHAR(50) NOT NULL,
-  Comic_list_name VARCHAR(255),
-  PRIMARY KEY (User_ID, Comic_ID)
-);
-
-CREATE TABLE favorite_books (
-  User_ID INT NOT NULL,
-  ISBN INT NOT NULL,
-  Book_list_name VARCHAR(255),
-  PRIMARY KEY (User_ID, ISBN)
-);
-
 CREATE TABLE news (
   News_ID INT PRIMARY KEY IDENTITY(1,1),
   News_title NVARCHAR(255) NOT NULL,
@@ -162,13 +169,6 @@ ADD CONSTRAINT FK_Comic_ratings_User_ID FOREIGN KEY (User_ID) REFERENCES Users(U
 ALTER TABLE Comics_ratings
 ADD CONSTRAINT FK_Comic_ratings_Article_ID FOREIGN KEY (Comic_ID) REFERENCES Comics(Comic_ID);
 
-ALTER TABLE Book_comments
-ADD CONSTRAINT FK_book_comments_User_ID FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
-ALTER TABLE Book_comments
-ADD CONSTRAINT FK_book_comments_ISBN FOREIGN KEY (ISBN) REFERENCES Books(ISBN); 
-
-
-
 ALTER TABLE Event_participants
 ADD CONSTRAINT FK_event_participants_User_ID FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
 ALTER TABLE Event_participants
@@ -183,3 +183,13 @@ ALTER TABLE favorite_books
 ADD CONSTRAINT FK_favorite_books_User_ID FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
 ALTER TABLE favorite_books
 ADD CONSTRAINT FK_favorite_books_ISBN FOREIGN KEY (ISBN) REFERENCES Books(ISBN);
+
+/*-------------------------------Queries-------------------------------*/
+
+SELECT * FROM Users
+SELECT * FROM User_Book_Status
+SELECT * FROM Book_ratings
+/* Used to see all table names in our database; used it to debugg Book_ratings*/
+SELECT COLUMN_NAME, DATA_TYPE
+FROM INFORMATION_SCHEMA.COLUMNS
+/* WHERE TABLE_NAME = 'Book_ratings';*/

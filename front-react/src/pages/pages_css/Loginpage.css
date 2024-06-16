@@ -1,108 +1,107 @@
-.login-container {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #ffcc33, #ff6699);
-  margin: 0;
-  padding: 0;
+.page-container {
+  margin: 100px 250px 0 250px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding-bottom: 50px; /* Ensure space between footer and container */
+  justify-content: center; 
+  background-color: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-.login-container .container_c {
-  max-width: 800px; /* Increased the max-width for the container */
-  padding: 40px; /* Increased padding for more space */
-  background-color: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  border-radius: 15px;
-  text-align: center;
+.container_cl {
+  flex: 1;
+  padding: 40px;
 }
 
-.login-container .container_c h1 {
-  margin-bottom: 30px; /* Increased margin for more space */
-  font-size: 32px; /* Increased font size */
-  color: #333;
-}
-
-.login-container .container_c form {
+.login-form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
-.login-container .container_c label {
-  margin-bottom: 10px; /* Increased margin */
-  color: #555;
-  font-size: 18px; /* Increased font size */
+.login-title {
+  margin-top: 50px;
+  margin-bottom: 40px;
+  text-align: center; 
 }
 
-.login-container .container_c input {
-  padding: 15px; /* Increased padding */
-  margin-bottom: 20px; /* Increased margin */
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  width: 100%;
-  box-sizing: border-box;
-  font-size: 18px; /* Increased font size */
-  transition: border-color 0.3s ease;
+.user_login input,
+.pass_login input {
+  padding: 10px;
+  margin: 8px;
+  width: 250px;
+  margin-left: 120px;
+  border-radius: 16px;
+  border: 1px solid #ccc;
 }
 
-.login-container .container_c input:focus {
-  border-color: #007bff;
-}
-
-.login-container .container_c button {
-  padding: 15px 20px; /* Increased padding */
-  border: none;
-  border-radius: 8px;
-  background-color: #007bff;
-  color: white;
-  font-size: 18px; /* Increased font size */
-  cursor: pointer;
-  width: 100%;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.login-container .container_c button:hover {
-  background-color: #0056b3;
-  transform: scale(1.05);
-}
-
-.login-container .container_c .error {
-  color: #ff4d4d;
-  margin-bottom: 20px; /* Increased margin */
-  text-align: center;
-  font-weight: bold;
-  font-size: 18px; /* Increased font size */
-}
-
-.login-container .container_c a {
+label {
   display: block;
-  margin-top: 20px; /* Increased margin */
-  color: #007bff;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 18px; /* Increased font size */
+  margin-bottom: 5px;
 }
 
-.login-container .container_c a:hover {
-  text-decoration: underline;
-}
-
-.login-container .container_c .logout {
-  padding: 15px 20px; /* Increased padding */
+.log-submit button {
+  margin-top: 30px;
+  margin-left: 190px;
+  width: 25%; 
+  padding: 7px;
   border: none;
-  border-radius: 8px;
-  background-color: #dc3545;
-  color: white;
-  font-size: 18px; /* Increased font size */
+  border-radius: 24px;
   cursor: pointer;
-  margin: 20px auto 0;
-  width: 100%;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  background-color: #00ff6c;
+  color: #fff;
+  font-size: large;
 }
 
-.login-container .container_c .logout:hover {
-  background-color: #c82333;
-  transform: scale(1.05);
+
+.error {
+  color: red;
+  margin-top: 20px;
+}
+
+.register-link {
+  background: linear-gradient(135deg, #00aaff, #0ffc72);
+  max-width: 450px;
+  height: 500px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  text-align: center;
+}
+
+.register-link h1 {
+  font-size: 40px;
+  margin-bottom: 10px; 
+}
+
+.register-link p {
+  margin-bottom: 60px;
+}
+
+.register-link .reg-button button {
+  background-color: white;
+  margin-bottom: 80px;
+  color: #00aaff;
+  font-weight: bold;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+.log-submit button:hover{
+  background-color: #16e26b;
+  color: white;
+}
+.register-link button:hover{
+  background-color: #00aaff;
+  color: white;
+}
+
+.register-link a {
+  color: inherit;
+  text-decoration: none;
 }

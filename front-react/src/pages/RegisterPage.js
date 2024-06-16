@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import './pages_css/RegisterPage.css'; // Import the CSS file
+import { Link, useNavigate } from 'react-router-dom';
+import './pages_css/RegisterPage.css';
 
 const RegisterPage = () => {
     const [formData, setFormData] = useState({
@@ -33,52 +33,58 @@ const RegisterPage = () => {
     return (
         <div className="register">
         <div className="register-container">
-            <h1 className="register-header">Register Page</h1>
+            <div className = "cont_reg_">
+            <div className="to-login">
+                <h1 className="h1-log">Already have an account?</h1>
+                <p className="p-log">Then what are you waiting for? Login and rate some more!</p>
+                <button className="b-log"><Link to="/login">Login</Link></button>
+            </div>
             <form className="register-form" onSubmit={handleSubmit}>
-                <label className="register-label">Name:</label>
+            <h1 className="register-header">Sign up here!</h1>
                 <input 
                     type="text" 
                     name="Name" 
                     value={formData.Name} 
-                    onChange={handleChange} 
+                    onChange={handleChange}
+                    placeholder="Name" 
                     required 
                     className="register-input" 
                 />
                 
-                <label className="register-label">Surname:</label>
                 <input 
                     type="text" 
                     name="Surname" 
+                    placeholder="Surname"
                     value={formData.Surname} 
                     onChange={handleChange} 
                     required 
                     className="register-input" 
                 />
                 
-                <label className="register-label">Email:</label>
                 <input 
                     type="email" 
-                    name="Email" 
+                    name="Email"
+                    placeholder="Email" 
                     value={formData.Email} 
                     onChange={handleChange} 
                     required 
                     className="register-input" 
                 />
                 
-                <label className="register-label">Username:</label>
                 <input 
                     type="text" 
                     name="Username" 
+                    placeholder="Username"
                     value={formData.Username} 
                     onChange={handleChange} 
                     required 
                     className="register-input" 
                 />
                 
-                <label className="register-label">Password:</label>
                 <input 
                     type="password" 
                     name="Password" 
+                    placeholder="Password"
                     value={formData.Password} 
                     onChange={handleChange} 
                     required 
@@ -88,6 +94,7 @@ const RegisterPage = () => {
                 <button type="submit" className="register-button">Submit</button>
             </form>
         </div> 
+            </div>
         </div>
     );
 };
