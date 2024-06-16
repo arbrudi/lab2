@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import AdminBar from '../../components/AdminBar';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import './../../assets/css/Event.css'; // Assuming this CSS file contains styles for the Event component
+import './css/Events_.css'; // Importing CSS file for styling
 
 const Event = () => {
   const [events, setEvents] = useState([]);
   const [participants, setParticipants] = useState([]);
+
   useEffect(() => {
     const fetchEvents = async () => {
       try {
@@ -53,18 +54,19 @@ const Event = () => {
 
   return (
     <div className='container'>
-    
-    <div>
       <AdminBar />
-      <div>
-        <h1 className='list'>Events List</h1>
-        <div className='add-link'>
-          <Link to={'/admin/event/create'}>Add a new event</Link>
+      <div className='flex-book-contt'>
+        <div className='b-list_'>
+          <h1>Events List</h1>
+          <div className='cb_list'>
+            <Link to={'/admin/event/create'} className='link'>Add a new event</Link>
+          </div>
         </div>
-        <table className='table'>
+        <table className='table-b'>
           <thead>
             <tr>
               <th>Event ID</th> 
+              <th>Title</th>
               <th>Image</th>
               <th>Description</th>
               <th>Date</th>
@@ -74,8 +76,9 @@ const Event = () => {
           <tbody>
             {events.map((event) => (
               <tr key={event.Event_ID}>
-                <td>{event.Event_ID}</td> 
-                <td>{event.Event_image}</td>
+                <td>{event.Event_ID}</td>
+                <td>{event.Event_title}</td>
+                <td><img src={event.Event_image} alt={event.Event_description} /></td>
                 <td>{event.Event_description}</td>
                 <td>{event.Event_date}</td>
                 <td>
@@ -88,39 +91,39 @@ const Event = () => {
             ))}
           </tbody>
         </table>
-      </div> 
       </div>
-      <div>
-        <h1 className='list'>Participant List</h1>
-        <div className='add-link'>
-          <Link to={'/admin/event_participant/create'}>Add a new Event Participant</Link>
-        </div>
-        <table className='table'>
-          <thead>
-            <tr>
-              <th>Event ID</th>
-              <th>User ID</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {participants.map((participant) => (
-              <tr key={participant.Event_ID}>
-                <td>{participant.Event_ID}</td>
-                <td>{participant.User_ID}</td>
-                <td>
-                  <Link to={`/admin/event_participant/update/${participant.Event_ID}`}>
-                    <button className='edit-bttn'>Edit</button>
-                  </Link>
-                  <button className='del-bttn' onClick={() => handleDeleteParticipant(participant.Event_ID)}>Delete</button>
-                </td>
+      <div className='stepp'>
+        <div className='flex-book-conttt'>
+          <div className='bg-list_'>
+            <h1>Participant List</h1>
+            <div className='cb_list_'>
+              <Link to={'/admin/event_participant/create'} className='link'>Add a new Event Participant</Link>
+            </div>
+          </div>
+          <table className='table-c'>
+            <thead>
+              <tr>
+                <th>Event ID</th>
+                <th>User ID</th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div> 
-      <div>
-       
+            </thead>
+            <tbody>
+              {participants.map((participant) => (
+                <tr key={participant.Event_ID}>
+                  <td>{participant.Event_ID}</td>
+                  <td>{participant.User_ID}</td>
+                  <td>
+                    <Link to={`/admin/event_participant/update/${participant.Event_ID}`}>
+                      <button className='edit-bttn'>Edit</button>
+                    </Link>
+                    <button className='del-bttn' onClick={() => handleDeleteParticipant(participant.Event_ID)}>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
