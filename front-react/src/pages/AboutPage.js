@@ -27,11 +27,11 @@ const AboutPage = () => {
         <div className="about-page">
             <div className="left-section">
                 <p>Focal Point</p>
-                <h1>Every book, every page, every journey right at your fingertips.</h1>
+                <p>Every book, every page, every journey right at your fingertips.</p>
                 <div className="buttons">
                 {(!user  && !admin ) && <a href="./login" class="login-button">Sign-in</a> }
                 {(!user  && !admin) && <a href="./register" class="registerbtn">Sign-up</a> }
-                {(user || admin)&& <button><Link to="/books">Discover our library!</Link></button>}
+                {(user || admin)&& <button className="link-to-books"><Link to="/books">Discover our library!</Link></button>}
                 
                 </div>
             </div>
