@@ -40,6 +40,9 @@ import UserDashboard from './pages/UserDashboard';
 import Comic_rating from './pages/user/Comic_rating';
 import Edit_Feature from './pages/admin/Feature/Edit_feature'; 
 import Create_Feature from './pages/admin/Feature/Create_feature'
+import Sponsors from './pages/admin/Sponsors';
+import Create_Sponsor from './pages/admin/Sponsors/Create_Sponsor';
+import Edit_Sponsor from './pages/admin/Sponsors/Edit_Sponsor';
 function App() {
 
   const user = localStorage.getItem("userToken");
@@ -125,9 +128,16 @@ function App() {
           <Route path="/admin/event/update/:id" element={<Edit_Events />} /> 
           <Route path="/admin/event_participant/create" element={<Create_participant />} /> 
           <Route path="/admin/event_participant/update/:Event_ID" element={<Edit_participant />} />   
+
+          {/* Features */}
           <Route path="/admin/feature" element={<Feature/>} /> 
           <Route path="/admin/feature/create" element={<Create_Feature />} />  
           <Route path="/admin/feature/update/:id" element={<Edit_Feature />} /> 
+
+          {/* Sponsors */}
+          <Route path="/admin/sponsors" element={<Sponsors/>} /> 
+          <Route path="/admin/sponsors/create" element={<Create_Sponsor/>} /> 
+          <Route path="/admin/sponsors/update/:id" element={<Edit_Sponsor/>} /> 
           </>
            }
         </Routes>
