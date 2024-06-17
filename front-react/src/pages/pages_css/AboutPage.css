@@ -97,18 +97,19 @@
     justify-content: space-between;
     align-items: flex-start;
     padding-top: 10px;
-    background-color: #fbfafa; /* Background color for the second section */
+    background-color: #fbfafa;
+    overflow-x: hidden;
 }
 
 .secondl {
-    width: 50%; /* Adjust the width as needed */
-    height: 700px; /* Adjust the height as needed */
-    border:  2px solid #e4e4e4; /* Add border with desired color and thickness */
+    width: 50%; 
+    height: 700px; 
+    border:  2px solid #e4e4e4; 
 }
 
 .secondr {
     padding-left: 120px;
-    width: 50%; /* Adjust the width as needed */ 
+    width: 50%; 
     height: auto;
 }
 
@@ -120,11 +121,11 @@
 .right-title { 
     font-size: 30px;
     font-weight: bold;
-    color: #333; /* Color for the title */
-    margin-bottom: 50px; /* Increase margin bottom for more space */
-    white-space: pre-wrap; /* This ensures that the text will wrap correctly */
-    word-break: break-word; /* This ensures that long words will break to fit the container */
-    line-height: 1.5; /* Increase line height for more space between lines */
+    color: #333; 
+    margin-bottom: 50px; 
+    white-space: pre-wrap; 
+    word-break: break-word; 
+    line-height: 1.5; 
 }
 .icon{
 width: 300px;
@@ -133,13 +134,14 @@ padding-bottom: 3px;
 }
 .right-description {
     font-size: 20px;
-    color: #666; /* Color for the description */
-    margin-bottom: 20px; /* Increase margin bottom for more space */
-    white-space: pre-wrap; /* This ensures that the text will wrap correctly */
-    word-break: break-word; /* This ensures that long words will break to fit the container */ 
-    line-height: 2; /* Increase line height for more space between lines */
-    max-width: 600px; /* Limit the width to encourage wrapping */ 
-} 
+    color: #666; 
+    margin-bottom: 20px; 
+    white-space: pre-wrap; 
+    word-break: break-word; 
+    line-height: 2; 
+    max-width: 600px; 
+}
+ 
 
 .rec {
     display: flex;
@@ -155,10 +157,10 @@ padding-bottom: 3px;
 }
 
 .preferences {
-    margin-left: auto; /* Align the Preferences div to the end */ 
+    margin-left: auto; 
     margin-right: 10px; 
     width: 20%; 
-    height: 30px; /* Adjusted height for consistency */
+    height: 30px; 
     background-color: #e4e2e2;  
     padding-left: 20px; 
     color: #666;
@@ -170,14 +172,14 @@ padding-bottom: 3px;
     margin-left: 30px; 
     margin-right: 10px;  
     margin-top: 10px; 
-    border: 2px solid #f3efef; /* Add border with desired color and thickness */  
+    border: 2px solid #f3efef; 
 }
 
 .items {
     display: flex; 
     flex-direction: column;  
-    width: 100%; /* Adjusted to full width */
-    height: auto; /* Adjust height as needed */ 
+    width: 100%; 
+    height: auto; 
     margin-top: 20px;   
     margin-bottom: 5px;
 }
@@ -185,20 +187,20 @@ padding-bottom: 3px;
 .items-2 {
     display: flex; 
     flex-direction: row; 
-    width: 98%; /* Adjusted to full width */ 
+    width: 98%; 
     height: auto;
-    border: 2px solid #f3efef; /* Add border with desired color and thickness */
+    border: 2px solid #f3efef; 
     margin-left: 0px; 
     margin-right: 0px; 
     padding-left: 0; 
     padding-right: 0;
-    justify-content: flex-start; /* Ensure items are aligned to the left */
+    justify-content: flex-start; 
 }
 .items-2 .book {
-    width: 150px; /* Adjust width as needed */
-    height: 250px; /* Adjust height as needed */
-    margin: 0; /* Remove margins */
-    padding: 0; /* Remove paddings */
+    width: 150px; 
+    height: 250px; 
+    margin: 0; 
+    padding: 0; 
 } 
 .books{
     display: flex; 
@@ -236,8 +238,8 @@ padding-bottom: 3px;
     width: 150px;
     flex-direction: row; 
     border: 2px solid #dedada;
-    align-items: center; /* Align items to the center vertically */
-    justify-content: space-between; /* Space items evenly */
+    align-items: center; 
+    justify-content: space-between; 
 } 
 
 .read2 {
@@ -256,8 +258,8 @@ padding-bottom: 3px;
     width: 150px;
     flex-direction: row; 
     border: 2px solid #dedada;
-    align-items: center; /* Align items to the center vertically */
-    justify-content: space-between; /* Space items evenly */ 
+    align-items: center; 
+    justify-content: space-between; 
     background-color: #c6c4c4;
 } 
 .read20 {
@@ -324,7 +326,7 @@ padding-bottom: 3px;
 } 
 .title {
     width: 100%; 
-    color:  #afe6ecd5;
+    color:  white;
     font-size: 30px;
     margin-bottom: 100px; 
 } 
