@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AdminBar from '../../components/AdminBar';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import './../../assets/css/Event.css'; 
+import './css/Books_.css'
 
 const Sponsors = () => {
   const [sponsors, setSponsors] = useState([]);
@@ -32,10 +32,12 @@ const Sponsors = () => {
   return (
     <div className='container'>
       <AdminBar />
-      <div>
-        <h1 className='list'>Sponsor List</h1>
-        <div className='add-link'>
-          <Link to={'/admin/sponsors/create'}>Add a new sponsor</Link>
+      <div className="flex-book-contt">
+      <div className="b-list_">
+        <h1>Sponsor List</h1>
+        <div className='cb_list'>
+          <Link to={'/admin/sponsors/create'} className="link">Add a new sponsor</Link>
+        </div>
         </div>
         <table className='table'>
           <thead>
