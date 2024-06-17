@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Link, useParams } from "react-router-dom";
+import "../css/Create.css";
 
 const Edit_Sponsor = () => {
     const { id } = useParams();
@@ -44,7 +45,7 @@ const Edit_Sponsor = () => {
     };
 
     return (
-        <div>
+        <div className="container_c">
             <h1>Edit Sponsor</h1>
             <form onSubmit={handleSubmit}> 
                 <div>
