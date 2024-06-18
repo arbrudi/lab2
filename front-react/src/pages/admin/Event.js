@@ -43,14 +43,15 @@ const Event = () => {
     }
   };
 
-  const handleDeleteParticipant = async (Event_ID) => {
+  const handleDeleteParticipant = async (Event_ID, User_ID) => {
     try {
-      await axios.delete(`/admin/event_participant/delete/${Event_ID}`);
-      setParticipants(participants.filter(participant => participant.Event_ID !== Event_ID));
+      await axios.delete(`/admin/event_participant/delete/${Event_ID}/${User_ID}`);
+      setParticipants(participants.filter(participant => participant.Event_ID !== Event_ID || participant.User_ID !== User_ID));
     } catch (error) {
       console.error("Error deleting participant:", error);
     }
   };
+  
 
   return (
     <div className='container'>
@@ -117,7 +118,7 @@ const Event = () => {
                     <Link to={`/admin/event_participant/update/${participant.Event_ID}`}>
                       <button className='edit-bttn'>Edit</button>
                     </Link>
-                    <button className='del-bttn' onClick={() => handleDeleteParticipant(participant.Event_ID)}>Delete</button>
+                    <button className='del-bttn' onClick={() => handleDeleteParticipant(participant.Event_ID, participant.User_ID)}>Delete </button>
                   </td>
                 </tr>
               ))}

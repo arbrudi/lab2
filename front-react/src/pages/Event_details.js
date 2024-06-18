@@ -61,7 +61,8 @@ const EventDetailsPage = () => {
           {event.Event_image && (
             <img src={event.Event_image} alt="Event" className="event-image-details" />
           )}
-          <div className="register_event_container">
+          <div className="register_event_container"> 
+        
             <button className="register_event" onClick={handleRegister}>Register</button>
             {message && (
               <p className="events_name">{message}</p>
@@ -76,7 +77,8 @@ const EventDetailsPage = () => {
             <p className="event-date-details">Date: {event.Event_date}</p>
           )}
           {event.Event_description && (
-            <p className="event-description-details">Description: {event.Event_description}</p>
+             < div className="event-description-details"><p>Description:</p>
+             <p>{event.Event_description}</p></div>
           )}
         </div>
       </div>

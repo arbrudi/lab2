@@ -11,7 +11,7 @@ class Users(db.Model):
     Password = db.Column(db.String(60), nullable=False)
 
    
-    # participant = db.relationship('Event_Participants', backref='user', overlaps='Event_participants, users')
+    
  
 
 

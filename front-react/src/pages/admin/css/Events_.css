@@ -195,4 +195,128 @@
   
   .event-delete-button:hover {
     background-color: #b30000;
-  }
+  } 
+
+
+
+
+
+
+  .container_e {
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 5%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.container_e h1 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.container_e label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.container_e input[type="text"], .container_e input[type="date"], .container_e textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.container_e button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0cc218;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.container_e button:hover {
+    background-color: #00b333;
+}
+
+.container_e textarea {
+    resize: vertical; 
+    min-height: 100px; 
+}
+
+.cancel {
+    text-decoration: none;
+    margin-top: 15px;
+    color: black;
+    display: block;
+    text-align: center;
+}
+
+.container_e .error-message {
+    color: red;
+    margin-top: 10px;
+} 
+
+
+
+.container_p {
+  max-width: 400px;
+  margin: 0 auto;
+  margin-top: 5%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.container_p h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.container_p label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.container_p input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.container_p button {
+  width: 100%;
+  padding: 10px;
+  background-color: #0cc218;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.container_p button:hover {
+  background-color: #00b333;
+}
+
+.cancel {
+  text-decoration: none;
+  margin-top: 15px;
+  color: black;
+  display: block;
+  text-align: center;
+}
+
+.container_p .error-message {
+  color: red;
+  margin-top: 10px;
+}

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Link, useParams } from "react-router-dom";
-import '../../../assets/css/Create.css';
-const Edit_participant = () => {
-    const { Event_ID } = useParams()
+import '../css/Events_.css';
+
+const Edit_Participant = () => {
+    const { Event_ID, User_ID } = useParams();
     const [participant, setParticipant] = useState({});
+    const [event, setEvent] = useState({});
     const [formData, setFormData] = useState({
         User_ID: "",
     });
@@ -12,18 +14,25 @@ const Edit_participant = () => {
     useEffect(() => {
         const fetchParticipant = async () => {
             try {
-                const response = await axios.get(`/admin/event_participant/${Event_ID}`);
-                setParticipant(response.data);
-                setFormData({
-                    User_ID: response.data.User_ID,
-                });
+                const responseParticipant = await axios.get(`/admin/event_participant/${Event_ID}/${User_ID}`);
+                setParticipant(responseParticipant.data);
             } catch (error) {
                 console.error("Error fetching participant:", error);
             }
         };
 
+        const fetchEvent = async () => {
+            try {
+                const responseEvent = await axios.get(`/admin/event/${Event_ID}`);
+                setEvent(responseEvent.data);
+            } catch (error) {
+                console.error("Error fetching event:", error);
+            }
+        };
+
         fetchParticipant();
-    }, [Event_ID]);
+        fetchEvent();
+    }, [Event_ID, User_ID]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -32,26 +41,26 @@ const Edit_participant = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`/admin/event_participant/update/${Event_ID}`, formData);
+            await axios.put(`/admin/event_participant/update/${Event_ID}/${formData.User_ID}`);
             window.location.href = "/admin/event";
         } catch (error) {
-            console.error("Error updating event:", error);
+            console.error("Error updating participant:", error);
         }
     };
 
     return (
-        <div>
-            <h1>Edit Participant</h1>
+        <div className="container_p">
+            <h1>Edit Participant for Event: {event.Event_title}</h1>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>User_ID</label>
+                    <label>User ID</label>
                     <input type="text" name="User_ID" value={formData.User_ID} onChange={handleChange} />
                 </div>
-                <button type="submit">Update Participant</button>
+                <button type="submit">Update </button>
             </form>
-            <Link to={'/admin/event'}>Cancel</Link>
+            <Link className="cancel" to={'/admin/event'}>Cancel</Link>
         </div>
     );
 };
 
-export default Edit_participant;
+export default Edit_Participant;

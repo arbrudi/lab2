@@ -34,7 +34,22 @@ def add_event_participant():
 
     except Exception as e:
         print('Error:', e)
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': str(e)}), 500 
+@eventp_bp.route('/admin/event_participant/update/<string:Event_ID>/<int:User_ID>', methods=['PUT'])
+def update_event_participant(Event_ID, User_ID):
+    try:
+        participant = Event_Participants.query.filter_by(Event_ID=Event_ID).first()
+        if not participant:
+            return jsonify({'error': 'Participant not found'}), 404
+
+        participant.User_ID = User_ID
+        db.session.commit()
+
+        return jsonify({'message': 'Participant updated successfully'}), 200
+
+    except Exception as e:
+        print("Error:", e)
+        return jsonify({"error": str(e)}), 500
 
 @eventp_bp.route('/admin/event_participant/delete/<string:Event_ID>/<int:User_ID>', methods=['DELETE'])
 def delete_event_participant(Event_ID, User_ID):
@@ -75,4 +90,26 @@ def get_event_participant(Event_ID, User_ID):
 
     except Exception as e:
         print("Error:", e)
-        return jsonify({'error': str(e)}), 500 
+        return jsonify({'error': str(e)}), 500  
+    
+
+@eventp_bp.route('/admin/events/user/<int:User_ID>', methods=['GET'])
+def get_events_by_user(User_ID):
+    try:
+        # Query to find all events where the user is a participant
+        events = db.session.query(Events).join(Event_Participants).filter(Event_Participants.User_ID == User_ID).all()
+        if not events:
+            return jsonify({'error': 'No events found for this user'}), 404
+        
+        events_data = [{
+            'Event_ID': event.Event_ID,
+            'Event_title': event.Event_title,
+            'Event_image': event.Event_image,
+            'Event_description': event.Event_description,
+            'Event_date': event.Event_date
+        } for event in events]
+
+        return jsonify(events_data), 200
+    except Exception as e:
+        print("Error:", e)
+        return jsonify({'error': str(e)}), 500
