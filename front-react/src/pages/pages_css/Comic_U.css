@@ -1,0 +1,128 @@
+.conetet{
+    margin-left: 220px; 
+    padding: 20px;
+}
+
+.user-dash {
+    display: flex;
+    flex-direction: row;
+}
+
+.rating-container,
+.fav-comics-container {
+    margin: 40px;
+    width: auto;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.rating-list,
+.fav-comics-user h1,
+h1 {
+    font-size: 40px;
+    color: #333;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+.rating-table,
+.fav-comic-tb,
+.books-with-status-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.rating-table th,
+.fav-comic-tb th,
+.rating-table td,
+.fav-comic-tb td,
+.books-with-status-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.rating-table th,
+.fav-comic-tb th,
+.books-with-status-table th {
+    background-color: #464545;
+    color: white;
+    font-weight: bold;
+}
+
+.rating-table tbody tr:nth-child(even),
+.fav-comic-tb tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.rating-table tbody tr:hover,
+.fav-comic-tb tbody tr:hover,
+.books-with-status-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.img-box {
+    width: 80px;
+    height: 100px;
+    overflow: hidden;
+}
+
+.img-box img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.rating-button,
+.fav-comic-button,
+.comic-favorite-button,
+.rating-button-delete,
+.fav-comic-button-delete,
+.comic-favorite-button-delete {
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    transition: background-color 0.3s;
+}
+
+.rating-button-delete,
+.fav-comic-button-delete,
+.comic-favorite-button {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.rating-button-delete:hover,
+.fav-comic-button-delete:hover,
+.comic-favorite-button:hover {
+    background-color: #cc0000;
+}
+
+.no-favorite-comics {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.no-favorite-comics p {
+    margin-bottom: 10px;
+}
+
+.no-favorite-comics .browse-comics-button{
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    background-color: #ff8800;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.no-favorite-comics .browse-comics-button:hover {
+    background-color: #cc7000;
+}

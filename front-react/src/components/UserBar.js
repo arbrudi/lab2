@@ -3,8 +3,8 @@ import '../assets/css/AdminNav.css';
 
 const UserBar = () => {
   return (
-    <div className='sidabar-body'>
-      <div className="sidebar">
+    <div className='userbar-body'>
+      <div className="userbar-sidebar">
         <ul>
           <li>
             <a href="/user/book">Book</a>

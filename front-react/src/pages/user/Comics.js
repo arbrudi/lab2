@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import UserBar from '../../components/UserBar';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import StarRating from '../user/user_comp/StarRating';
-import '../pages_css/Comic_R.css';
-import '../pages_css/Comic_F.css';
+import '../pages_css/Comic_U.css';
 
-const Comic = () =>{
+const Comic = () => {
     const [comicRating, setComicRating] = useState([]);
     const [comics, setComics] = useState([]);
+    const [favorites, setFavorites] = useState([]);
     const user_id = localStorage.getItem('user_id');
 
     useEffect(() => {
@@ -37,16 +38,30 @@ const Comic = () =>{
         fetchComics();
     }, []);
 
+    useEffect(() => {
+        const fetchFavorite = async () => {
+            try {
+                const response = await axios.get(`/comic/Favorite/${user_id}`);
+                setFavorites(response.data);
+            } catch (error) {
+                console.error("Error fetching favorite comics:", error);
+            }
+        };
+
+        if (user_id) {
+            fetchFavorite();
+        }
+    }, [user_id]);
+
     const getComicName = (comicId) => {
         const comic = comics.find(c => c.Comic_ID === comicId);
         return comic ? comic.Comic_title : "Unknown Comic";
     };
 
-    const getComicimage = (comicID) => {
-      const comic = comics.find(c => c.Comic_ID === comicID);
-      return comic ? comic.Comic_image : "Unknown image";
-  };
-
+    const getComicImage = (comicId) => {
+        const comic = comics.find(c => c.Comic_ID === comicId);
+        return comic ? comic.Comic_image : "Unknown Image";
+    };
 
     const handleDelete = async (comic_id) => {
         try {
@@ -98,148 +113,94 @@ const Comic = () =>{
         }
     };
 
-
-
-    /// favorite comics
-
-    const [favorites, setFavorites] = useState([]);
-
-
-
-    useEffect(() => {
-        const fetchComics = async () => {
-          try {
-            const response = await axios.get("/admin/comics");
-            setComics(response.data);
-          } catch (error) {
-            console.error("Error fetching Comics:", error);
-          }
-        };
-        fetchComics();
-      }, []);
-    
-      useEffect(() => {
-        const fetchFavorite = async () => {
-          try {
-            const response = await axios.get(`/comic/Favorite/${user_id}`);
-            setFavorites(response.data);
-          } catch (error) {
-            console.error("Error fetching favorite comics:", error);
-          }
-        };
-    
-        if (user_id) {
-          fetchFavorite();
-        }
-      }, [user_id]);
-    
-      const getFComicName = (comicId) => {
-        const comic = comics.find(c => c.Comic_ID === comicId);
-        return comic ? comic.Comic_title : "Unknown Comic";
-      };
-    
-      const getComicImage = (comicId) => {
-        const comic = comics.find(c => c.Comic_ID === comicId);
-        return comic ? comic.Comic_image : "Unknown Image";
-      };
-    
-      const handleFDelete = async (Comic_ID) => {
+    const handleFDelete = async (Comic_ID) => {
         try {
-          await axios.delete(`/comic/Favorite/Delete`, {
-            data: { user_id: user_id, comic_id: Comic_ID }
-          });
-          setFavorites(favorites.filter(comic => comic.Comic_ID !== Comic_ID));
+            await axios.delete(`/comic/Favorite/Delete`, {
+                data: { user_id: user_id, comic_id: Comic_ID }
+            });
+            setFavorites(favorites.filter(comic => comic.Comic_ID !== Comic_ID));
         } catch (error) {
-          console.error("Error deleting favorite comic:", error);
+            console.error("Error deleting favorite comic:", error);
         }
-      };
-
-    
-
-
-
+    };
 
     return (
- 
-<div> <UserBar />
-        <div className="comic-rating-container">
-          
-            <div>
-                <h1 className="comic-rating-list">Rating List</h1>
-                <table className="comic-rating-table">
-                    <thead>
-                        <tr>
-                            <th>Image</th>
-                            <th>Comic Name</th>
-                            <th>Comic Rating</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {comicRating.map((rating) => (
-                            <tr key={rating.Comic_rating_ID}>
-                                <td className="img-box">
-                                    <img src={getComicimage(rating.Comic_ID)} alt="Comic" />
-                                </td>
-                                <td>{getComicName(rating.Comic_ID)}</td>
-                                <td>
-                                    <StarRating 
-                                        rating={rating.Comic_Rating} 
-                                        onRatingChange={(newRating) => handleRatingChange(rating.Comic_ID, newRating)} 
-                                    />
-                                </td>
-                                <td>
-                                    <button
-                                        className="comic-rating-button comic-rating-button-delete"
-                                        onClick={() => handleDelete(rating.Comic_ID)}
-                                    >
-                                        Delete
-                                    </button>  
-                                </td>
+        <div className="conetet">
+            <UserBar />
+            <div className="user-dash">
+                <div className="rating-container">
+                    <h1 className="rating-list">Rating List</h1>
+                    <table className="rating-table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Comic Name</th>
+                                <th>Comic Rating</th>
+                                <th>Action</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {comicRating.map((rating) => (
+                                <tr key={rating.Comic_rating_ID}>
+                                    <td className="img-box">
+                                        <img src={getComicImage(rating.Comic_ID)} alt="Comic" />
+                                    </td>
+                                    <td>{getComicName(rating.Comic_ID)}</td>
+                                    <td>
+                                        <StarRating 
+                                            rating={rating.Comic_Rating} 
+                                            onRatingChange={(newRating) => handleRatingChange(rating.Comic_ID, newRating)} 
+                                        />
+                                    </td>
+                                    <td>
+                                        <button
+                                            className="rating-button rating-button-delete"
+                                            onClick={() => handleDelete(rating.Comic_ID)}
+                                        >
+                                            Delete
+                                        </button>  
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+                <div className="fav-comics-container">
+                    <h1 className="fav-comics-user">Favorite Comics</h1>
+                    <table className="fav-comic-tb">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {favorites.map((comic) => (
+                                <tr key={comic.Favorite_Comic_Id}>
+                                    <td className="img-box">
+                                        <img src={getComicImage(comic.Comic_ID)} alt="Comic" />
+                                    </td>
+                                    <td>{getComicName(comic.Comic_ID)}</td>
+                                    <td>
+                                        <button className="comic-favorite-button comic-favorite-button-delete" onClick={() => handleFDelete(comic.Comic_ID)}>Delete</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                    {favorites.length === 0 && (
+                        <div className="no-favorite-comics">
+                            <p>No favorite comics found.</p>
+                            <button className="browse-comics-button">
+                                <Link to="/comics">Browse Comics</Link>
+                            </button>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
-        <div className='favorite-comics-container'>
-      <div>
-        <h1 className='favorite-comics-list'>Favorite Comics</h1>
-        <table className='favorite-comics-table'>
-          <thead>
-            <tr>
-              <th>Comic</th>
-              <th>Name</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {favorites.map((comic) => (
-              <tr key={comic.Favorite_Comic_Id}>
-                <td className="favorite-comics-img-box">
-                  <img src={getComicImage(comic.Comic_ID)} alt="Comic" />
-                </td>
-                <td>{getFComicName(comic.Comic_ID)}</td>
-                <td>
-                  <button className='favorite-comics-button favorite-comics-button-delete' onClick={() => handleFDelete(comic.Comic_ID)}>Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-
-
-
-</div>
-
-
-
-
-
     );
-}
+};
 
-export default Comic; 
+export default Comic;
