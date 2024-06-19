@@ -39,9 +39,10 @@ import Events from './pages/user/Events';
 import EventBook from './pages/user/EventBook'; 
 import UserDashboard from './pages/UserDashboard';
 import Comic_rating from './pages/user/Comic_rating';
-
+import CreateParticipant from './pages/user/Event/Create_participant';
 import Edit_Feature from './pages/admin/Feature/Edit_feature'; 
 import Create_Feature from './pages/admin/Feature/Create_feature'
+import Edit_Participant from './pages/user/Event/Edit_participant';
 function App() {
 
 
@@ -91,10 +92,11 @@ function App() {
           <Route path="/user/comics" element={<Comic />} /> 
           <Route path="/user/event" element={<Events />} />  
           <Route path="/user/eventbooks" element={<EventBook />} /> 
-
-          <Route path="/user/comics_rating" element={<Comic_rating />} /> 
-
-
+          
+          <Route path="/user/comics_rating" element={<Comic_rating />} />  
+    
+          <Route path="/user/event_participant/create" element={<CreateParticipant />}/>
+          <Route path="/user/event_participant/update/:Event_ID/:User_ID" element={<Edit_Participant />} />
 
           </>
           }
