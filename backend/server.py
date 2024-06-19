@@ -19,7 +19,8 @@ from Views.ML_model import recommendation_bp
 from Views.Comic_rating import cRating_bp
 from Views.Book_ratings import bRating_bp
 from Views.Favorite_Books import favbook_bp
-from Views.ListOfSponsors import sponsors_bp, add_sponsors
+from Views.ListOfSponsors import sponsors_bp
+from Views.ListOfDevelopers import Developers_bp
 from Views.Favorite_Comics import fComic_bp
 
 def create_app():
@@ -62,6 +63,8 @@ def create_app():
     app.register_blueprint(bRating_bp)
     app.register_blueprint(favbook_bp)
     app.register_blueprint(sponsors_bp)
+    app.register_blueprint(Developers_bp)
+
 
     with app.app_context():
         try:

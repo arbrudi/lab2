@@ -30,6 +30,11 @@ const AdminBar = () => {
             <li>
               <a href="/admin/sponsors">Sponsors</a>
             </li>
+            <li>
+              <a href="/admin/Developer">Developers</a>
+            </li>
+
+            
           </ul>
         </div>
 

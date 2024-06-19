@@ -6,6 +6,9 @@ import './pages_css/AboutPage.css';
 const AboutPage = () => {
     const [features, setFeatures] = useState([]);
     const [sponsors, setSponsors] = useState([]);
+    const [developer, setDevelopers] = useState([]);
+
+
     const user = localStorage.getItem("userToken");
     const admin = localStorage.getItem("adminToken");
 
@@ -28,10 +31,26 @@ const AboutPage = () => {
           console.error("Error fetching features:", error);
         }
       };
-  
+
+      const fetchDevelopers = async() => {
+        try{
+          const resp = await axios.get("admin/Developer");
+          setDevelopers(resp.data);
+        }catch (error) {
+          console.error("Error fetching Devolper:", error);
+        }
+      };
+
+
+
+
+      fetchDevelopers();
       fetchFeatures();
       fetchSponsors();
     }, []);
+
+
+
 
     return (
         <div className="about-page-container">
@@ -131,7 +150,29 @@ const AboutPage = () => {
             </div>
           ))}
         </div> 
+
+        <div className="third-section"> 
+          <div className="title">Developer.</div>
+          {developer.map((developers) => (
+            <div key={developers._id} className="feature-item">
+              <img className="icon-placeholder" src={developers.icon} alt="developers Icon" />
+              <div className="name-placeholder"><p>{developers.name}</p></div>
+              <div className="description-placeholder"><p>{developers.description}</p></div>
+              
+            </div>
+          ))}
+        </div> 
+
+
+
       </div>
+
+
+
+
+
+
+
     );
 }
 
