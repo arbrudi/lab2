@@ -1,72 +1,119 @@
 
 .container {
-    display:contents;
-    flex-direction: column;
-    
-  }
+  display:contents;
+  flex-direction: column;
   
-  .list {
-    margin-bottom: 40px;
-    margin-left: 45%;
-  }
+}
+.flex-book-contt{
+  margin-top: 25px;
+  margin-left: 50px;
+  margin-right: 50px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0.2, 0, 0.3);
+}
+
+.b-list_{
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   
-  .table {
+}
+.cb_list {
+  margin-top: 25px;
+  margin-bottom: 35px;
+  display: block;
+  align-items: end;
+  padding: 10px 20px;
+  background-color: #00ff66; 
+  color: #fff; 
+  text-decoration: none; 
+  border: none; 
+  border-radius: 4px; 
+  cursor: pointer; 
+}
+
+.cb_list .link {
+    text-decoration: none;
+    color: inherit;
+}
+.link {
+    text-decoration: none;
+    color: inherit;
+}
+.link:hover {
+  background-color: #1fe26df6; 
+}
+  
+  .cb_list:hover {
+    background-color: #1fe26df6; 
+  }
+  /* books table */
+  .table-b {
     width: 100%;
     border-collapse: collapse;
-  }
-  
-  .table th {
-    background-color: #333;
-    color: #fff;
+}
+
+.table-b th, .table-b td {
+    border: 0.2px solid #5f5f5f18;
     padding: 10px;
     text-align: left;
-  }
+}
+
+.table-b th {
+    background-color: #333;
+    color: #fff;
+    width: 20px;
+}
+
   
-  .table td {
+  .table-b td {
     padding: 10px;
     border-bottom: 1px solid #ccc;
     overflow: hidden;
+    width: auto;
+    height: auto;
+    overflow: hidden;
   }
-  .table td.truncate {
+  .table-b td.truncate {
     max-width: 350px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-  
-  .edit-bttn {
-    padding: 5px 10px;
-    margin-right: 5px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .edit-bttn:hover {
-    background-color: #0056b3;
-  }
 
-  .del-bttn {
-    padding: 5px 10px;
-    margin-right: 5px;
-    background-color: #ff0000;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
+.table-b td img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+/* Genre table */
+
+.flex-book-conttt{
+  margin-top: 25px;
+  margin-left: 50px;
+  max-width:31.5%;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0.2, 0, 0.3);
+}
+
+.bg-list_{
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content:baseline
   
-  .del-bttn:hover {
-    background-color: #b30000;
-  }
-  
-  .add-link {
-    margin-bottom: 15px;
-    margin-right: 15px;
-    margin-left: 87%;
-    display:block;
+}
+.cb_list_{
+    margin-top: 25px;
+    margin-bottom: 35px;
+    margin-left: 35px;
+    display: block;
     align-items: end;
     padding: 10px 20px;
     background-color: #00ff66; 
@@ -75,10 +122,73 @@
     border: none; 
     border-radius: 4px; 
     cursor: pointer; 
-    transition: background-color 0.3s; 
-    
-  }
+}
+
+.table-c {
+  width: auto;
+  border-collapse: collapse;
+}
+
+.table-c th, .table-c td {
+  border: 0.2px solid #5f5f5f18;
+  padding: 10px;
+  text-align: left;
+}
+
+.table-c th {
+  background-color: #333;
+  color: #fff;
+}
+
+.table-c td {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  overflow: hidden;
+  width: auto;
+  height: auto;
+  overflow: hidden;
+}
+.table-c td.truncate {
+  max-width: 350px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table-c td img {
+max-width: 100%;
+max-height: 100%;
+object-fit: cover;
+}
+.stepp{
+  display: flex;
+  flex-direction: row;
+}
+.edit-bttn {
+  padding: 5px 10px;
+  margin-right: 5px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-bttn:hover {
+  background-color: #0056b3;
+}
+
+.del-bttn {
+  padding: 5px 10px;
+  margin-right: 5px;
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.del-bttn:hover {
+  background-color: #b30000;
+}
   
-  .add-link:hover {
-    background-color: #00ff66c7; 
-  }

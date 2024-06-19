@@ -1,0 +1,486 @@
+
+
+.about-page {
+    display: flex;
+    max-height: 100vh; 
+    max-width: 200vh;
+    font-family: Arial, sans-serif; 
+    display: flex; 
+    flex-direction: row;
+}
+
+.left-section {
+    flex: 1;
+    background-color: #089498d5;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 20px;
+    max-width: 100vh;
+}
+.left-section p:nth-child(1) {
+    color: white;
+    font-size: 46px;
+    text-align: left; 
+    margin-left: 40px; 
+}
+
+.left-section p {
+    color: white;
+    font-size: 24px;
+    text-align: left; 
+    margin-left: 40px; 
+}
+
+
+.buttons {
+    padding-top: 60px;
+    font-size: 30px;
+    align-items: flex-start;
+    margin-left: 40px; 
+}
+
+.login-button {
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 8px;
+    transition-duration: 0.4s;
+}
+
+.registerbtn { 
+    background-color: rgb(130, 128, 128);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 8px;
+    transition-duration: 0.4s;
+}
+
+.login-button:hover {
+    color: rgb(143, 142, 142);
+}
+
+.registerbtn:hover {
+    color: white;
+    background-color: #565656d5;
+}
+
+.right-section {
+    flex: 1;
+    display: flex;
+    flex-direction: row; 
+    align-items: flex-start; 
+    background-color: #f0f0f0;
+    position: relative; 
+    overflow: hidden;  
+    margin-top: 0; 
+}
+
+.right-section .column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: calc(30% - 20px);
+    margin-right: 10px; 
+}
+
+.right-section .column:first-child {
+    margin-left: 0;
+}
+
+.right-section .column-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 30%; 
+    background-size: cover; 
+    background-position: left;  
+    margin-left: 2.5px;
+}
+
+.right-section .image-container {
+    width: 100%;
+    height: 20vh; 
+    background-size: cover; 
+    background-position: bottom;  
+    margin-bottom: 5px; 
+    background-image: url('https://m.media-amazon.com/images/I/51E2xf6nrtL._AC_UF1000,1000_QL80_.jpg'); 
+}
+
+.right-section img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 5px;
+}
+
+.placeholder-image {
+    width: 100%; 
+} 
+
+.placeholder-image-bottom {
+    width: 100%;
+    height: 30vh; 
+    background-size: cover; 
+    background-position: bottom;  
+    margin-bottom: 3px; 
+    background-image: url('https://m.media-amazon.com/images/I/81D-Vi+KWxL._AC_UF350,350_QL50_.jpg'); 
+}
+
+.image-container-2 {
+    width: 100%; 
+    height: 10vh; 
+    background-size: cover; 
+    background-position: bottom;  
+    margin-bottom: 5px; 
+    background-image: url('https://m.media-amazon.com/images/I/916xmpf1e4L._AC_UF1000,1000_QL80_.jpg'); 
+}
+
+.placeholder-image-bottom:nth-of-type(4) {
+    object-fit: cover;
+    object-position: bottom; 
+    height: 50px; 
+}
+
+.right-section .column:nth-child(1) img {
+    margin-bottom: 1vh; 
+    padding-top: 0; 
+    margin-top: 0;
+}
+
+.right-section .column-2:last-child {
+    margin-right: 0; 
+}  
+
+.right-section .new-column {
+    display: flex;
+    flex-direction: column;
+    width: 5%; 
+    overflow: hidden; 
+}
+
+.new-column img {
+    width: 300%;
+    height: 200px;
+    margin-right: -200%; 
+    margin-bottom: 5px; 
+    align-self: flex-start; 
+    max-width: none; 
+} 
+
+.image-container-3 {
+    width: 300%; 
+    height: 5vh; 
+    background-size: cover; 
+    background-position: bottom;  
+    margin-bottom: 5px; 
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlwkl2cfIG_d2wRZ3ToFLGHgqg8eFfdMBeYA&s'); 
+} 
+
+.second-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-top: 10px;
+    background-color: #fbfafa; /* Background color for the second section */
+}
+
+.secondl {
+    width: 50%; /* Adjust the width as needed */
+    height: 700px; /* Adjust the height as needed */
+    border:  2px solid #e4e4e4; /* Add border with desired color and thickness */
+}
+
+.secondr {
+    margin-left: 20px;
+    width: 50%; /* Adjust the width as needed */ 
+    height: auto;
+    padding: 20px; /* Add padding as needed */  
+}
+
+.secondr-container {
+    width: 70%; 
+    height: 100%;
+}
+
+.right-title { 
+    font-size: 30px;
+    font-weight: bold;
+    color: #333; /* Color for the title */
+    margin-bottom: 50px; /* Increase margin bottom for more space */
+    white-space: pre-wrap; /* This ensures that the text will wrap correctly */
+    word-break: break-word; /* This ensures that long words will break to fit the container */
+    line-height: 1.5; /* Increase line height for more space between lines */
+}
+.icon{
+width: 300px;
+height: 200px;
+padding-bottom: 3px;
+}
+.right-description {
+    font-size: 20px;
+    color: #666; /* Color for the description */
+    margin-bottom: 20px; /* Increase margin bottom for more space */
+    white-space: pre-wrap; /* This ensures that the text will wrap correctly */
+    word-break: break-word; /* This ensures that long words will break to fit the container */ 
+    line-height: 2; /* Increase line height for more space between lines */
+    max-width: 500px; /* Limit the width to encourage wrapping */ 
+} 
+
+.rec {
+    display: flex;
+    flex-direction: row; 
+    padding-top: 3px; 
+    padding-bottom: 3px; 
+}
+
+.recommandations {
+    padding-left: 10px;
+    color: #0a8189; 
+    font-size: 20px; 
+}
+
+.preferences {
+    margin-left: auto; /* Align the Preferences div to the end */ 
+    margin-right: 10px; 
+    width: 20%; 
+    height: 30px; /* Adjusted height for consistency */
+    background-color: #e4e2e2;  
+    padding-left: 20px; 
+    color: #666;
+}
+
+.rec2 { 
+    padding-left: 100px; 
+    padding-top: 5px;
+    margin-left: 30px; 
+    margin-right: 10px;  
+    margin-top: 10px; 
+    border: 2px solid #f3efef; /* Add border with desired color and thickness */  
+}
+
+.items {
+    display: flex; 
+    flex-direction: column;  
+    width: 100%; /* Adjusted to full width */
+    height: auto; /* Adjust height as needed */ 
+    margin-top: 20px;   
+    margin-bottom: 5px;
+}
+
+.items-2 {
+    display: flex; 
+    flex-direction: row; 
+    width: 98%; /* Adjusted to full width */ 
+    height: auto;
+    border: 2px solid #f3efef; /* Add border with desired color and thickness */
+    margin-left: 0px; 
+    margin-right: 0px; 
+    padding-left: 0; 
+    padding-right: 0;
+    justify-content: flex-start; /* Ensure items are aligned to the left */
+}
+.items-2 .book {
+    width: 150px; /* Adjust width as needed */
+    height: 250px; /* Adjust height as needed */
+    margin: 0; /* Remove margins */
+    padding: 0; /* Remove paddings */
+} 
+.books{
+    display: flex; 
+    flex-direction: column;
+}
+.book-title { 
+    padding-top: 20px;
+    padding-left: 10px; 
+    font-size: 20px; 
+    font-weight: bold;
+} 
+.book-author{
+    font-size: 10px; 
+    color: #898686; 
+    padding-left: 10px;
+} 
+.genre{
+    display: flex; 
+    flex-direction: coulmn; 
+    color:#0a8189 ;
+    padding-top: 30px;
+}  
+.g1{ 
+    border:2px solid #f3efef;
+    padding-left: 5px;
+}
+.read {
+    display: flex; 
+    flex-direction: column; 
+    padding-left: 100px;
+} 
+
+.read1 {
+    display: flex; 
+    width: 150px;
+    flex-direction: row; 
+    border: 2px solid #dedada;
+    align-items: center; /* Align items to the center vertically */
+    justify-content: space-between; /* Space items evenly */
+} 
+
+.read2 {
+    color: #0a8189;
+} 
+
+.read3 { 
+    width:30px; 
+    align-items: center; 
+    padding-left: 10px;
+    color: white; 
+    background-color: #0a8189;
+}
+.next{
+    display: flex; 
+    width: 150px;
+    flex-direction: row; 
+    border: 2px solid #dedada;
+    align-items: center; /* Align items to the center vertically */
+    justify-content: space-between; /* Space items evenly */ 
+    background-color: #c6c4c4;
+} 
+.read20 {
+    width: 120px;
+    color: #f8fafa;
+    background-color: #0a8189;
+}  
+
+
+.third-section {
+    background-color: #089498d5;
+    width: auto;
+    padding: 20px;
+    padding-left:200px;
+    text-align: left;
+    margin-top: 20px; 
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between; 
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    margin-bottom: 20px; 
+    width: calc(33.33% - 20px); 
+    box-sizing: border-box; 
+    padding: 10px; 
+    border-radius: 5px; 
+    padding-bottom:50px;
+}
+
+.icon-placeholder {
+    width: 80px;
+    height: 80px; 
+    margin-bottom: 5px;
+    background-color: #92d3d8; 
+    border-radius: 50px; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 2px; 
+}
+
+.icon-placeholder img {
+    width: 3%; 
+    height: 2%; 
+}
+
+.name-placeholder {
+    color: white; 
+    margin-bottom: 1px;
+    width: 100%; 
+    font-size: 20px;
+}
+
+.description-placeholder {
+    color: #afe6ecd5;
+    text-align: start;
+    white-space: normal; 
+    margin-bottom: 5px; 
+    width: 70%; 
+    word-wrap: break-word; 
+} 
+.title {
+    width: 100%; 
+    color:  #afe6ecd5;
+    font-size: 30px;
+    margin-bottom: 100px; 
+} 
+.link-to-books{
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition-duration: 0.4s;
+}
+.sponsor-title {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    margin-left: 14%;
+}
+.sponsor-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    margin-left: 13%;
+    margin-right: 13%;
+    width: auto;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+.sponsor-item {
+    margin-top: 3%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    width: auto;
+    margin-right: 140px;
+    box-sizing: border-box;
+}
+
+.logo-placeholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.sponsor-name-placeholder {
+    font-size: 24px;
+    color: #089498;
+}
+
+.date-placeholder {
+    font-size: 12px;
+    color: #666;
+}

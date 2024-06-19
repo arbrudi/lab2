@@ -53,9 +53,6 @@ label {
   font-size: large;
 }
 
-button:hover {
-  background-color: #16e26b;
-}
 
 .error {
   color: red;
@@ -95,9 +92,12 @@ button:hover {
   padding: 10px 20px;
   font-size: 16px;
 }
-
-.register-link .reg-button button:hover {
-  background-color: #00ff6c;
+.log-submit button:hover{
+  background-color: #16e26b;
+  color: white;
+}
+.register-link button:hover{
+  background-color: #00aaff;
   color: white;
 }
 

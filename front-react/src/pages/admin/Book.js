@@ -55,25 +55,29 @@ const Book = () => {
   return (
     <div class='container'>
       <AdminBar />
-      <div>
-        <h1 class='list'>Book List</h1>
-        <div class='add-link'>
-        <Link to={'/admin/book/create'}>Add a new book</Link>
+      <div className="flex-book-contt">
+        <div className="b-list_">
+        <h1>Books in the system</h1>
+        <div className="cb_list">
+        <Link to={'/admin/book/create'} className="link">Add a new book</Link>
         </div>
-        <table class='table'>
+        </div>
+        <table class='table-b'>
           <thead>
             <tr>
+              <th>Book img</th>
               <th>ISBN</th>
               <th>Title</th>
               <th>Author</th>
               <th>Genre</th>
               <th>Description</th>
               <th >Action</th>
-            </tr>
+            </tr> 
           </thead>
           <tbody>
             {books.map((book) => (
               <tr key={book.ISBN}>
+                <td><img src={book.Book_image} alt={book.Book_title} /></td>
                 <td>{book.ISBN}</td>
                 <td>{book.Book_title}</td>
                 <td>{book.Book_author}</td>
@@ -90,17 +94,19 @@ const Book = () => {
           </tbody>
         </table>
       </div>
-      <div>
-        <h1 class='list'>Genre List</h1>
-        <div class='add-link'>
-        <Link to={'/admin/book_genre/create'}>Add a new Genre</Link>
+      <div className="stepp">
+      <div className="flex-book-conttt">
+        <div className="bg-list_">
+        <h1>Books Genres</h1>
+        <div className="cb_list_">
+        <Link to={'/admin/book_genre/create'} className="link">Add a new Genre</Link>
         </div>
-        <table class='table'>
+        </div>
+        <table class='table-c'>
           <thead>
             <tr>
               <th>Genre_ID</th>
               <th>Genre_Name</th>
-              <th>ISBN</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -109,7 +115,6 @@ const Book = () => {
               <tr key={genre.Book_Genre_ID}>
                 <td>{genre.Book_Genre_ID}</td>
                 <td>{genre.Genre_Name}</td>
-                <td>{genre.ISBN}</td>
                 <td>
                     <Link to={`/admin/book_genre/update/${genre.Book_Genre_ID}`}>
                         <button class='edit-bttn' >Edit</button>
@@ -121,10 +126,16 @@ const Book = () => {
           </tbody>
         </table>
       </div>
-      <div>
-      </div>
+      <div className="flex-book-conttt"> {/* change here */}
+         <div className="bg-list_">  {/* change here */}
+        <h1>Books by genre</h1>
+        </div>
+        <p>pychart</p>
+        </div>
+    </div>
     </div>
   );
 };
+
 
 export default Book;

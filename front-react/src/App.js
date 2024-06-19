@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HomePage from "./pages/HomePage"; 
 import AboutPage from "./pages/AboutPage"; 
 import BooksPage from "./pages/BooksPage"; 
 import ComicsPage from "./pages/ComicsPage";
@@ -31,48 +30,45 @@ import Book_list_page from './pages/Book_list_page';
 import Comic_list_page from './pages/Comic_list_page';
 import User from './pages/admin/User';
 import Create_User from './pages/admin/User/Create_User';
-import Edit_User from './pages/admin/User/Edit_User'; 
+import Edit_User from './pages/admin/User/Edit_User';
+import Feature from './pages/admin/Feature' 
 import Books from './pages/user/Book'; 
 import Comic from './pages/user/Comics' 
 import Events from './pages/user/Events'; 
 import EventBook from './pages/user/EventBook'; 
 import UserDashboard from './pages/UserDashboard';
+import Edit_Feature from './pages/admin/Feature/Edit_feature'; 
+import Create_Feature from './pages/admin/Feature/Create_feature'
+import Sponsors from './pages/admin/Sponsors';
 
-
+import Create_Sponsor from './pages/admin/Sponsors/Create_Sponsor';
+import Edit_Sponsor from './pages/admin/Sponsors/Edit_Sponsor';
 function App() {
-
 
   const user = localStorage.getItem("userToken");
   const admin = localStorage.getItem("adminToken");
 
-
   console.log(user,"client")
   console.log(admin ,"admin")
 
-
   return (
     <BrowserRouter>
-      <div className="App">
-      
-      </div> 
+  
+      {(user || admin) &&
       <NavBar />
+      }
       <div className="page-body">
         <Routes>
-
         {user || admin == null &&
            <>
-           <Route index element={<LoginPage />} />
+           <Route index element={<AboutPage />} />
            <Route path="/login" element={<LoginPage />} /> 
-           <Route path="/register" element={<RegisterPage />} /> 
-              {/*<Route path="/*" element={<PageNotFound />} /> */}
-              
+           <Route path="/register" element={<RegisterPage />} />               
            </> 
           }
        {user &&
           <>
-
-          <Route path="/" element={<HomePage />} /> 
-          <Route path="/about" element={<AboutPage />} /> 
+          <Route path="/" element={<AboutPage />} /> 
           <Route path="/events" element={<EventsPage />} /> 
           <Route path="/login" element={<LoginPage />} /> 
           <Route path="/register" element={<RegisterPage />} /> 
@@ -88,27 +84,23 @@ function App() {
           <Route path="/user/comics" element={<Comic />} /> 
           <Route path="/user/event" element={<Events />} />  
           <Route path="/user/eventbooks" element={<EventBook />} /> 
-
-
           </>
           }
-{admin &&
+
+        {admin &&
            <>
           <Route path="/admin" element={<Admin />} /> 
-
           <Route path="/eventsdetails/:Event_ID" element={<EventDetailsPage />} /> 
-
-          <Route path="/" element={<HomePage />} /> 
-          <Route path="/about" element={<AboutPage />} /> 
+          <Route path="/" element={<AboutPage />} /> 
           <Route path="/events" element={<EventsPage />} /> 
           <Route path="/login" element={<LoginPage />} /> 
           <Route path="/register" element={<RegisterPage />} />
 
-             {/* Users */}
-          
-             <Route path="/admin/user" element={<User />} />
-             <Route path="/admin/user/create" element={<Create_User />} /> 
-             <Route path="/admin/user/update/:User_ID" element={<Edit_User />} />
+          {/* Users */}
+      
+          <Route path="/admin/user" element={<User />} />
+          <Route path="/admin/user/create" element={<Create_User />} /> 
+          <Route path="/admin/user/update/:User_ID" element={<Edit_User />} />
 
           {/* BOOKS */}
           <Route path="/book/:id" element={<BooksPage />} /> 
@@ -135,13 +127,23 @@ function App() {
           <Route path="/admin/event/update/:id" element={<Edit_Events />} /> 
           <Route path="/admin/event_participant/create" element={<Create_participant />} /> 
           <Route path="/admin/event_participant/update/:Event_ID" element={<Edit_participant />} />   
-          
-          
+
+          {/* Features */}
+          <Route path="/admin/feature" element={<Feature/>} /> 
+          <Route path="/admin/feature/create" element={<Create_Feature />} />  
+          <Route path="/admin/feature/update/:id" element={<Edit_Feature />} /> 
+
+          {/* Sponsors */}
+          <Route path="/admin/sponsors" element={<Sponsors/>} /> 
+          <Route path="/admin/sponsors/create" element={<Create_Sponsor/>} /> 
+          <Route path="/admin/sponsors/update/:id" element={<Edit_Sponsor/>} /> 
           </>
            }
         </Routes>
       </div>
+      {(user || admin) &&
       <Footer />
+}
     </BrowserRouter>
   );
 }

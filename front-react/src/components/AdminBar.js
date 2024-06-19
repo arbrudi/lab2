@@ -21,7 +21,15 @@ const AdminBar = () => {
             <li>
               <a href="/admin/event">Event</a>
             </li>
-
+            <li>
+              <a href="/admin/event_books">Event books</a>
+            </li> 
+            <li>
+              <a href="/admin/feature">Feature</a>
+            </li>
+            <li>
+              <a href="/admin/sponsors">Sponsors</a>
+            </li>
           </ul>
         </div>
 

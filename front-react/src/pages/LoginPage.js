@@ -17,7 +17,7 @@ const LoginPage = () => {
       const { token, user_id, role } = response.data;
       
       localStorage.setItem('token', token); 
-      localStorage.setItem('user_id', user_id); 
+      localStorage.setItem('user_id', user_id); // Store user_id in localStorage
 
       if (role === 'admin') {
         navigate('/admin'); 
@@ -28,7 +28,7 @@ const LoginPage = () => {
       }
       
       if (response.data.role === 'admin') {
-        
+        // Redirect to user dashboard
         navigate('/admin',{replace:true})
 
         localStorage.setItem("adminToken", JSON.stringify({
