@@ -30,6 +30,14 @@ const Feature = () => {
     }
   };
 
+  const renderIcon = (icon) => {
+    if (icon.length <= 4) {
+        return icon; 
+    }
+    return `${icon.slice(0, 3)}****`;
+};
+
+
   return (
     <div className="main-body">
     <div className='container'>
@@ -51,7 +59,7 @@ const Feature = () => {
           <tbody>
             {features.map((feature) => (
               <tr key={feature._id}>
-                <td>{feature.icon}</td>
+                 <td>{renderIcon(feature.icon)}</td>
                 <td>{feature.name}</td>
                 <td>{feature.description}</td>
                 <td>

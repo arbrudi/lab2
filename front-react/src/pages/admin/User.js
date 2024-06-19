@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import AdminBar from '../../components/AdminBar'
+import AdminBar from '../../components/AdminBar';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import './css/Books_.css';
+import './css/User_.css';
 
 const User = () => {
     const [users, setUsers] = useState([]);
@@ -29,12 +29,20 @@ const User = () => {
         }
     };
 
+
+    const renderPassword = (password) => {
+        if (password.length <= 4) {
+            return password; 
+        }
+        return `${password.slice(0, 3)}****`;
+    };
+
     return (
         <div className="main-body">
-        <div className='container'>
             <AdminBar />
-            <div>
-                <h1 className='list'>User List</h1>
+            <h1 className='list'>User List</h1>
+            <div className='container'>
+                
                 <div className='add-link'>
                     <Link to={'/admin/user/create'}>Add User</Link>
                 </div>
@@ -60,7 +68,7 @@ const User = () => {
                                 <td>{user.User_Role}</td>
                                 <td>{user.Email}</td>
                                 <td>{user.Username}</td>
-                                <td>{user.Password}</td>
+                                <td>{renderPassword(user.Password)}</td>
                                 <td>
                                     <Link to={`/admin/user/update/${user.User_ID}`}>
                                         <button className='edit-bttn'>Edit</button>
@@ -72,7 +80,6 @@ const User = () => {
                     </tbody>
                 </table>
             </div>
-        </div>
         </div>
     );
 }

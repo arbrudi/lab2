@@ -29,6 +29,14 @@ const Sponsors = () => {
     }
   };
 
+
+  const renderLogo = (Logo) => {
+    if (Logo.length <= 4) {
+        return Logo; 
+    }
+    return `${Logo.slice(0, 3)}****`;
+};
+
   return (
     <div className="main-body">
     <div className='container'>
@@ -52,7 +60,7 @@ const Sponsors = () => {
           <tbody>
             {sponsors.map((spon) => (
               <tr key={spon._id}>
-                <td>{spon.Logo}</td>
+                <td>{renderLogo(spon.Logo)}</td>
                 <td>{spon.Sponsor_name}</td>
                 <td>{spon.Joined_on}</td>
                 <td>

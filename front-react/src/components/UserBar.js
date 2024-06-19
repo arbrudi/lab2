@@ -15,9 +15,9 @@ const UserBar = () => {
           <li>
             <a href="/user/event">Event</a>
           </li>
-          <li>
+          {/* <li>
             <a href="/user/eventbooks">Event books</a>
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>
