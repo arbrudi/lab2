@@ -30,6 +30,7 @@ const Sponsors = () => {
   };
 
   return (
+    <div className="main-body">
     <div className='container'>
       <AdminBar />
       <div className="flex-book-contt">
@@ -65,6 +66,7 @@ const Sponsors = () => {
           </tbody>
         </table>
       </div>
+    </div>
     </div>
   );
 };

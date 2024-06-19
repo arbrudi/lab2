@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AdminBar from '../../components/AdminBar';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import './../../assets/css/Event.css'; // Assuming this CSS file contains styles for the Event component
+import './../../assets/css/Event.css'; 
 
 const Event = () => {
   const [events, setEvents] = useState([]);
@@ -52,6 +52,7 @@ const Event = () => {
   };
 
   return (
+    <div className="main-body">
     <div className='container'>
     
     <div>
@@ -122,6 +123,7 @@ const Event = () => {
       <div>
        
       </div>
+    </div>
     </div>
   );
 };

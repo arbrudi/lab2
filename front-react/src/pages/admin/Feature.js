@@ -31,6 +31,7 @@ const Feature = () => {
   };
 
   return (
+    <div className="main-body">
     <div className='container'>
       <AdminBar />
       <div>
@@ -64,6 +65,7 @@ const Feature = () => {
           </tbody>
         </table>
       </div>
+    </div>
     </div>
   );
 };

@@ -53,6 +53,7 @@ const Book = () => {
   };
 
   return (
+    <div className="main-body">
     <div class='container'>
       <AdminBar />
       <div className="flex-book-contt">
@@ -132,6 +133,7 @@ const Book = () => {
         </div>
         <p>pychart</p>
         </div>
+    </div>
     </div>
     </div>
   );

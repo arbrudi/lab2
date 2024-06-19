@@ -6,6 +6,7 @@
   height: 100%;
   background-color: #333;
   padding-top: 50px;
+  z-index: 1000; /* Ensures the sidebar stays on top */
 }
 
 .userbar-sidebar ul {
@@ -41,3 +42,4 @@
 .userbar-button:hover {
   background-color: #d26906;
 }
+

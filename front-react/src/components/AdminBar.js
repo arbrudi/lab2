@@ -6,7 +6,7 @@ const AdminBar = () => {
   return (
     <div>
     
-        <div className="sidebar">
+        <div className="userbar-sidebar">
           <ul>
 
           <li>
@@ -21,9 +21,9 @@ const AdminBar = () => {
             <li>
               <a href="/admin/event">Event</a>
             </li>
-            <li>
+            {/* <li>
               <a href="/admin/event_books">Event books</a>
-            </li> 
+            </li>  */}
             <li>
               <a href="/admin/feature">Feature</a>
             </li>

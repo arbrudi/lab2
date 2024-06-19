@@ -6,6 +6,7 @@
     display: flex;
     justify-content:center; 
     font-family: 'Poppins';
+    z-index: 10003;
   }
  
   .nav-1 ul {

@@ -30,6 +30,7 @@ const User = () => {
     };
 
     return (
+        <div className="main-body">
         <div className='container'>
             <AdminBar />
             <div>
@@ -71,6 +72,7 @@ const User = () => {
                     </tbody>
                 </table>
             </div>
+        </div>
         </div>
     );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../assets/css/AdminNav.css';
+import '../assets/css/UserNav.css';
 
 const UserBar = () => {
   return (

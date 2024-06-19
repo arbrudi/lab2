@@ -62,6 +62,7 @@ const Comics = () => {
   };
 
   return (
+    <div className="main-body">
     <div className='container'>
       <AdminBar />
       <div>
@@ -131,6 +132,7 @@ const Comics = () => {
         </table>
       </div>
     </div>
+  </div>
   );
 }
 
