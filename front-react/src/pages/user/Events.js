@@ -36,9 +36,6 @@ const Events = () => {
       <div className='flex-book-contt'>
         <div className='b-list_'>
           <h1>Event List</h1>
-          <div className='cb_list'>
-            <Link to={'/user/event_participant/create'} className='link'>Register</Link>
-          </div>
         </div>
         <table className='table-b'>
           <thead>
@@ -54,9 +51,7 @@ const Events = () => {
                 <td>{event.Event_ID}</td>
                 <td>{event.Event_title}</td>
                 <td>
-                  <Link to={`/user/event_participant/update/${event.Event_ID}/${user_id}`}>
-                    <button className='edit-bttn'>Edit</button>
-                  </Link>
+                 
                   <button className='del-bttn' onClick={() => handleDeleteParticipant(event.Event_ID)}>Delete</button>
                 </td>
               </tr>
