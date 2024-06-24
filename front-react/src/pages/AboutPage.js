@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
-import './pages_css/About.css';
 
 const AboutPage = () => {
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState([]);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [date, setDate] = useState('');
+  const [events, setEvents] = useState([]);
+  const [selectedEvent, setSelectedEvent] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (query.trim() === '') {
-      setResults([]);
-      return;
-    }
-
-    const fetchResults = async () => {
+    const fetchEvents = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/search?query=${encodeURIComponent(query)}`, {
+        let url = `http://localhost:5000/search/events?query=${encodeURIComponent(query)}`;
+        if (date) {
+          url += `&date=${encodeURIComponent(date)}`;
+        }
+
+        const response = await fetch(url, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
@@ -25,56 +25,67 @@ const AboutPage = () => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        
+
         const data = await response.json();
-        console.log('Elasticsearch Data:', data); // Log Elasticsearch data
-        setResults(data); // Assuming data is an array of objects
+        console.log('Fetched Events:', data); // Log fetched events
+        setEvents(data);
         setError(null);
       } catch (error) {
         console.error('Error fetching data:', error.message);
-        setError('Error fetching search results. Please try again later.');
+        setError('Error fetching events. Please try again later.');
       }
     };
 
-    const debounceTimeout = setTimeout(fetchResults, 300);
+    fetchEvents();
+  }, [query, date]);
 
-    return () => clearTimeout(debounceTimeout);
+  const handleInputChange = (event) => {
+    setQuery(event.target.value.trim().toLowerCase());
+    setSelectedEvent(null);
+  };
 
-  }, [query]);
+  const handleDateChange = (event) => {
+    setDate(event.target.value);
+    setSelectedEvent(null);
+  };
 
-  const handleItemClick = (item) => {
-    setSelectedItem(item);
-    setResults([]); // Clear results after selecting an item
+  const handleEventClick = (event) => {
+    setSelectedEvent(event);
+  };
+
+  const clearFilters = () => {
+    setDate('');
+    setQuery('');
   };
 
   return (
-    <div className="about-page">
-      <h1>Data Search</h1>
-      <form onSubmit={(e) => e.preventDefault()}>
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search for data"
-        />
-      </form>
-      {error && <p className="error-message">{error}</p>}
-      {results.length > 0 && (
-        <ul className="results">
-          {results.map((item, index) => (
-            <li key={index} className="item" onClick={() => handleItemClick(item)}>
-              {item._source.Book_title} {/* Adjust based on your data structure */}
-            </li>
-          ))}
-        </ul>
-      )}
-      {selectedItem && (
-        <div className="item-details">
-          <h2>{selectedItem._source.Book_title}</h2>
-          <p>Author: {selectedItem._source.Book_author}</p>
-          <p>Genre: {selectedItem._source.Book_genre}</p>
-          <p>Description: {selectedItem._source.Book_description}</p>
-          {/* Add more fields as needed */}
+    <div>
+      <input
+        type="text"
+        placeholder="Search events..."
+        value={query}
+        onChange={handleInputChange}
+      />
+      <input
+        type="date"
+        value={date}
+        onChange={handleDateChange}
+      />
+      <button onClick={clearFilters}>Clear Filters</button>
+      {error && <p>{error}</p>}
+      <ul>
+        {events.map(event => (
+          <li key={event.Event_ID} onClick={() => handleEventClick(event)}>
+            {event.Event_title}
+          </li>
+        ))}
+      </ul>
+      {selectedEvent && (
+        <div>
+          <h3>{selectedEvent.Event_title}</h3>
+          <p>{selectedEvent.Event_description}</p>
+          <p>{selectedEvent.Event_date}</p>
+          <img src={selectedEvent.Event_image} alt={selectedEvent.Event_title} />
         </div>
       )}
     </div>

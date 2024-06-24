@@ -1,102 +1,95 @@
-from flask import Blueprint, request, jsonify
-from Models.Events import Events, Event_Participants
-from extensions import db
-from Models.Users import Users
-eventp_bp = Blueprint('eventp',__name__)
+from flask import Blueprint
+from elasticsearch import Elasticsearch, helpers
+from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, Text, ForeignKey, select
+import logging
 
-@eventp_bp.route('/admin/event_participant/create', methods=['POST'])
-def add_event_participant():
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Blueprint for search API routes
+search_bp = Blueprint('search_bp', __name__)
+
+# Elasticsearch client initialization
+es = Elasticsearch(
+    [{'host': 'localhost', 'port': 9200}],
+    http_auth=('elastic', 'dkjGfNMmL6f6SjdldHc5')
+)
+
+# Database connection string
+conn_str = (
+    'mssql+pyodbc:///?odbc_connect='
+    'DRIVER={ODBC Driver 17 for SQL Server};'
+    'SERVER=DESKTOP-UD05JRG\\MSSQLSERVER01;'
+    'DATABASE=lab2;'
+    'Trusted_Connection=yes;'
+)
+
+# Initialize SQLAlchemy engine and metadata
+engine = create_engine(conn_str)
+
+# Define the Books table explicitly
+books_table = Table(
+    'Books',
+    Column('ISBN', Integer, primary_key=True, nullable=False),
+    Column('Book_image', Text(collation='SQL_Latin1_General_CP1_CI_AS')),
+    Column('Book_title', String(255, collation='SQL_Latin1_General_CP1_CI_AS'), nullable=False),
+    Column('Book_author', String(255, collation='SQL_Latin1_General_CP1_CI_AS'), nullable=False),
+    Column('Book_genre', Integer, ForeignKey('Book_Genre.Book_Genre_ID')),
+    Column('Book_description', Text(collation='SQL_Latin1_General_CP1_CI_AS'), nullable=False)
+)
+
+# Function to fetch data from MSSQL
+def fetch_data_from_mssql():
     try:
-        data = request.get_json()
-        event_id = data.get('Event_ID')
-        user_id = data.get('User_ID')
-
-        # Debugging statements
-        print("Event_ID:", event_id)
-        print("User_ID:", user_id)
-
-        # Check if event_id and user_id are provided
-        if not event_id or not user_id:
-            return jsonify({'error': 'Event_ID and User_ID are required fields.'}), 400
-
-        # Check if the user exists in the Users table
-        user = Users.query.filter_by(User_ID=user_id).first()
-        if not user:
-            return jsonify({'error': 'User with provided User_ID does not exist.'}), 404
-
-        # Create a new event participant entry
-        new_participant = Event_Participants(Event_ID=event_id, User_ID=user_id)
-        db.session.add(new_participant)
-        db.session.commit()
-
-        return jsonify({'message': 'Event participant added successfully.'}), 201
-
+        with engine.connect() as connection:
+            query = select([
+                books_table.c.ISBN,
+                books_table.c.Book_image,
+                books_table.c.Book_title,
+                books_table.c.Book_author,
+                books_table.c.Book_genre,
+                books_table.c.Book_description
+            ])
+            result = connection.execute(query)
+            data = [dict(row) for row in result]
+            logger.info(f"Fetched data from MSSQL: {data}")
+            return data
     except Exception as e:
-        print('Error:', e)
-        return jsonify({'error': str(e)}), 500
+        logger.error(f"Error fetching data from MSSQL: {e}")
+        return []
 
-@eventp_bp.route('/admin/event_participant', methods=['GET'])
-def get_book_genres():
+# Function to index data into Elasticsearch
+def index_data_to_elasticsearch(data):
     try:
-        all_participants = Event_Participants.query.all()
-        participant_data=[]
-        for participant in all_participants:
-            _data = {
-                'Event_ID':participant.Event_ID,
-                'User_ID':participant.User_ID 
+        index_name = 'lab2'
+        bulk_data = []
+        for item in data:
+            document = {
+                "ISBN": item['ISBN'],
+                "Book_title": item['Book_title'],
+                "Book_author": item['Book_author'],
+                "Book_genre": item['Book_genre'],
+                "Book_description": item['Book_description']
             }
-            participant_data.append(_data)
-        return jsonify(participant_data), 200
+            bulk_data.append({
+                "_index": index_name,
+                "_id": item['ISBN'],
+                "_source": document
+            })
+        helpers.bulk(es, bulk_data)
+        logger.info(f"Indexed {len(bulk_data)} documents from MSSQL to Elasticsearch")
     except Exception as e:
-        print("Error: ", e)
-        return jsonify({'error':str(e)}), 500
+        logger.error(f"Error indexing MSSQL data to Elasticsearch: {e}")
 
-@eventp_bp.route('/admin/event_participant/<int:Event_ID>', methods=['GET'])
-def get_event_participant(Event_ID):
+# Main function to execute fetching and indexing
+def main():
     try:
-        participant = Event_Participants.query.get(Event_ID)
-        if participant is None:
-            return jsonify({'error':'Participant not found!'}), 404
-
-        participant_data={
-                'Event_ID':participant.Event_ID,
-                'User_ID':participant.User_ID 
-        }
-        return jsonify(participant_data), 200
+        data = fetch_data_from_mssql()
+        index_data_to_elasticsearch(data)
+        logger.info("Indexing completed.")
     except Exception as e:
-        print("Error:", e)
-        return jsonify({"error": str(e)}), 500
+        logger.error(f"Error processing request: {e}")
 
-
-@eventp_bp.route('/admin/event_participant/update/<int:Event_ID>', methods=['PUT'])
-def update_event_participant(Event_ID):
-    try:
-        data = request.get_json() 
-        User_ID = data.get('User_ID')
-
-        participant = Event_Participants.query.filter_by(Event_ID=Event_ID).first()
-        if participant is None:
-            return jsonify({'error': 'Participant not found!'}), 404
-
-        participant.User_ID = User_ID  # Update the User_ID
-        db.session.commit()
-        return jsonify({'message': 'Participant updated successfully!'}), 200
-    except Exception as e:
-        print("Error:", e)
-        return jsonify({"error": str(e)}), 500
-
-@eventp_bp.route('/admin/event_participant/delete/<int:Event_ID>', methods=['DELETE'])
-def delete_event_participant(id):
-    try:
-        participant = Event_Participants.quety.get(id)
-        if participant is None:
-            return jsonify({'error':'Participant not found!'}), 404
-
-        db.session.delete(participant)
-        db.session.commit()
-
-        return jsonify({'message':'Participant deleted successfully!'}), 200
-
-    except Exception as e:
-        print("Error:", e)
-        return jsonify({'error': str(e)}), 500
+if __name__ == "__main__":
+    main()

@@ -1,29 +1,18 @@
-from flask import Blueprint, Flask, jsonify
-from elasticsearch import Elasticsearch, helpers
-from extensions import db  # Assuming you have SQLAlchemy db instance imported
+from flask import Flask, Blueprint, jsonify, request
+from flask_cors import CORS
+from elasticsearch import Elasticsearch
+from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, Text, select
+from flask_sqlalchemy import SQLAlchemy
 import logging
 
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-
-# Initialize Elasticsearch client with authentication
-es = Elasticsearch(
-    [{'host': 'localhost', 'port': 9200}],
-    http_auth=('elastic', 'dkjGfNMmL6f6SjdldHc5')
-)
-
-# Blueprint for search API routes
-search_bp = Blueprint('search_bp', __name__)
-
-from flask import Flask
-from elasticsearch import Elasticsearch, helpers
-from sqlalchemy import create_engine, MetaData, Table, select
-from extensions import db  # Assuming you have SQLAlchemy db instance imported
-import logging
-
-# Initialize Flask app
+# Initialize Flask application
 app = Flask(__name__)
 
-# Change SERVER
+# Database connection string
 conn = (
     'mssql+pyodbc:///?odbc_connect='
     'DRIVER={ODBC Driver 17 for SQL Server};'
@@ -36,89 +25,208 @@ app.config['SQLALCHEMY_DATABASE_URI'] = conn
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize SQLAlchemy with the app
-db.init_app(app)
+db = SQLAlchemy(app)
 
-# Initialize Elasticsearch client with authentication
-es = Elasticsearch([{'host': 'localhost', 'port': 9200}],
-                   http_auth=('elastic', 'dkjGfNMmL6f6SjdldHc5'))
+# Enable CORS for all routes
+CORS(app)
 
-# Function to fetch data from MSSQL
-def fetch_data_from_mssql():
+# Elasticsearch client initialization
+es = Elasticsearch(
+    [{'host': 'localhost', 'port': 9200}],
+    http_auth=('elastic', 'dkjGfNMmL6f6SjdldHc5')
+)
+
+# Define Blueprint for search API routes
+search_bp = Blueprint('search_bp', __name__)
+
+# Set up CORS for the blueprint
+CORS(search_bp)
+
+# Initialize SQLAlchemy engine
+engine = create_engine(conn)
+
+# Initialize metadata
+metadata = MetaData()
+
+# Define the Events table explicitly
+events_table = Table(
+    'Events', metadata,
+    Column('Event_ID', Integer, primary_key=True, nullable=False),
+    Column('Event_title', Text(collation='SQL_Latin1_General_CP1_CI_AS')),
+    Column('Event_image', String(255, collation='SQL_Latin1_General_CP1_CI_AS'), nullable=False),
+    Column('Event_date', String(255, collation='SQL_Latin1_General_CP1_CI_AS'), nullable=False),
+    Column('Event_description', String(255, collation='SQL_Latin1_General_CP1_CI_AS'), nullable=False)
+)
+
+# Reflect the metadata with the engine
+metadata.create_all(engine)
+
+# Function to fetch event details by ID from MSSQL
+def fetch_event_details(event_id):
     try:
-        engine = create_engine(conn)
-        metadata = MetaData()
-        metadata.reflect(bind=engine)
-        books_table = Table('Books', metadata, autoload=True, autoload_with=engine)
         with engine.connect() as connection:
-            query = select([books_table])
+            query = select(
+                events_table.c.Event_ID,
+                events_table.c.Event_title,
+                events_table.c.Event_image,
+                events_table.c.Event_date,
+                events_table.c.Event_description
+            ).where(events_table.c.Event_ID == event_id)
+
             result = connection.execute(query)
-            return [dict(row) for row in result]
-    except Exception as e:
-        logging.error(f"Error fetching data from MSSQL: {e}")
-        return []
+            event = result.fetchone()
 
-# Function to index data into Elasticsearch
-def index_data_to_elasticsearch(data):
-    try:
-        index_name = 'lab2'
-        bulk_data = []
-        for item in data:
-            document = {
-                "ISBN": item['ISBN'],
-                "Book_title": item['Book_title'],
-                "Book_author": item['Book_author'],
-                "Book_genre": item['Book_genre'],
-                "Book_description": item['Book_description']
-            }
-            bulk_data.append({
-                "_index": index_name,
-                "_id": item['ISBN'],
-                "_source": document
-            })
-        helpers.bulk(es, bulk_data)
-        logging.info(f"Indexed {len(bulk_data)} documents from MSSQL to Elasticsearch")
-    except Exception as e:
-        logging.error(f"Error indexing MSSQL data to Elasticsearch: {e}")
+            if not event:
+                return None
+            
+            return dict(event)
 
-# Function to compare data from MSSQL and Elasticsearch
-def compare_data():
+    except Exception as e:
+        logger.error(f"Error fetching event details from MSSQL: {e}")
+        return None
+
+# Function to update an event in MSSQL and Elasticsearch
+def update_event(event_id, event_data):
     try:
-        mssql_data = fetch_data_from_mssql()
-        es_data = fetch_data_from_elasticsearch()
-        mssql_isbns = {book['ISBN'] for book in mssql_data}
-        es_isbns = {hit['_source']['ISBN'] for hit in es_data}
-        if mssql_isbns == es_isbns:
-            print("Data in MSSQL and Elasticsearch match.")
+        with engine.connect() as connection:
+            update_query = events_table.update().where(events_table.c.Event_ID == event_id).values(**event_data)
+            result = connection.execute(update_query)
+            if result.rowcount == 0:
+                return False
+
+        # Update event in Elasticsearch
+        update_event_in_elasticsearch(event_id, event_data)
+        return True
+    except Exception as e:
+        logger.error(f"Error updating event: {e}")
+        return False
+
+# Function to update an event in Elasticsearch
+def update_event_in_elasticsearch(event_id, event_data):
+    try:
+        es.update(index="lab2", id=event_id, body={"doc": event_data})
+        es.indices.refresh(index="lab2")  # Refresh index after update
+        logger.info(f"Updated event with ID {event_id} in Elasticsearch.")
+    except Exception as e:
+        logger.error(f"Error updating event in Elasticsearch: {e}")
+
+# Function to delete an event from MSSQL and Elasticsearch
+def delete_event(event_id):
+    try:
+        with engine.connect() as connection:
+            delete_query = events_table.delete().where(events_table.c.Event_ID == event_id)
+            result = connection.execute(delete_query)
+            if result.rowcount == 0:
+                return False
+
+        # Delete event from Elasticsearch
+        delete_event_from_elasticsearch(event_id)
+        return True
+    except Exception as e:
+        logger.error(f"Error deleting event: {e}")
+        return False
+
+# Function to delete an event from Elasticsearch
+def delete_event_from_elasticsearch(event_id):
+    try:
+        es.delete(index="lab2", id=event_id)
+        es.indices.refresh(index="lab2")  # Refresh index after deletion
+        logger.info(f"Deleted event with ID {event_id} from Elasticsearch.")
+    except Exception as e:
+        logger.error(f"Error deleting event from Elasticsearch: {e}")
+
+# Endpoint to handle event updates from MSSQL
+@app.route('/update_event_from_mssql', methods=['POST'])
+def update_event_from_mssql():
+    try:
+        event_data = request.json
+        event_id = event_data['Event_ID']
+
+        if update_event(event_id, event_data):
+            return jsonify({'success': True})
         else:
-            print("Data in MSSQL and Elasticsearch do not match.")
+            return jsonify({'error': f'Event with ID {event_id} not found or update failed.'}), 404
     except Exception as e:
-        logging.error(f"Error comparing data: {e}")
+        logger.error(f"Error updating event from MSSQL: {e}")
+        return jsonify({'error': str(e)}), 500
 
-# Function to fetch data from Elasticsearch
-def fetch_data_from_elasticsearch():
+# Function to fetch events from Elasticsearch by title prefix and/or date
+def fetch_events(query, date_filter):
     try:
-        res = es.search(index="lab2", body={"query": {"match_all": {}}})
-        return res['hits']['hits']
+        es_query = {
+            'size': 1000,  # Adjust based on your maximum expected results
+            'query': {
+                'bool': {
+                    'must': []
+                }
+            }
+        }
+
+        if query:
+            es_query['query']['bool']['must'].append({'prefix': {'Event_title': query}})
+        
+        if date_filter:
+            es_query['query']['bool']['must'].append({'term': {'Event_date': date_filter}})
+
+        res = es.search(index="lab2", body=es_query)
+        data = res['hits']['hits']
+        events = [{'Event_ID': hit['_id'], **hit['_source']} for hit in data]
+        unique_events = {event['Event_ID']: event for event in events}.values()
+        
+        logger.info(f"Fetched {len(unique_events)} unique events from Elasticsearch with query '{query}' and date '{date_filter}'.")
+        return list(unique_events)
+    
     except Exception as e:
-        logging.error(f"Error fetching data from Elasticsearch: {e}")
+        logger.error(f"Error fetching events from Elasticsearch: {e}")
         return []
 
-# Main function to perform indexing and comparison
-def main():
+# Search endpoint to handle title and date search
+@search_bp.route('/events', methods=['GET'])
+def search_events():
+    query = request.args.get('query', '').strip().lower()
+    date_filter = request.args.get('date', '').strip()
+
     try:
-        data = fetch_data_from_mssql()
-        index_data_to_elasticsearch(data)
-        compare_data()
-        print("Indexing and comparison completed.")
+        events = fetch_events(query, date_filter)
+        return jsonify(events)
+    
     except Exception as e:
-        logging.error(f"Error processing request: {e}")
+        logger.error(f"Error processing search request: {e}")
+        return jsonify({'error': str(e)}), 500
 
-fetch_data_from_mssql() 
-index_data_to_elasticsearch() 
-compare_data() 
-fetch_data_from_elasticsearch() 
-compare_data() 
-main()
-fetch_data_from_elasticsearch() 
+# Detailed event endpoint
+@search_bp.route('/event/<int:event_id>', methods=['GET'])
+def get_event_details(event_id):
+    try:
+        event = fetch_event_details(event_id)
 
+        if not event:
+            return jsonify({'error': 'Event not found'}), 404
 
+        return jsonify(event)
+
+    except Exception as e:
+        logger.error(f"Error fetching event details: {e}")
+        return jsonify({'error': str(e)}), 500
+
+# Endpoint to handle event deletion from MSSQL and Elasticsearch
+@app.route('/delete_event_from_mssql', methods=['POST'])
+def delete_event_from_mssql():
+    try:
+        event_data = request.json
+        event_id = event_data['Event_ID']
+
+        if delete_event(event_id):
+            return jsonify({'success': True})
+        else:
+            return jsonify({'error': f'Event with ID {event_id} not found or deletion failed.'}), 404
+    except Exception as e:
+        logger.error(f"Error deleting event from MSSQL: {e}")
+        return jsonify({'error': str(e)}), 500
+
+# Register Blueprint with Flask application
+app.register_blueprint(search_bp, url_prefix='/search')
+
+if __name__ == "__main__":
+    app.run(debug=True)
+delete_event(9)
