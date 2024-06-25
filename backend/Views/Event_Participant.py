@@ -5,6 +5,7 @@ from Models.Users import Users
 
 eventp_bp = Blueprint('eventp', __name__)
 
+
 @eventp_bp.route('/admin/event_participant/create', methods=['POST'])
 def add_event_participant():
     try:
@@ -33,14 +34,28 @@ def add_event_participant():
     except Exception as e:
         print('Error:', e)
         return jsonify({'error': str(e)}), 500 
+from flask import jsonify
+
 @eventp_bp.route('/admin/event_participant/update/<string:Event_ID>/<int:User_ID>', methods=['PUT'])
 def update_event_participant(Event_ID, User_ID):
     try:
-        participant = Event_Participants.query.filter_by(Event_ID=Event_ID).first()
+        data = request.get_json()
+        new_name = data.get('Name')
+
+        if not new_name:
+            return jsonify({'error': 'Name is required'}), 400
+
+        # Find the participant by Event_ID and User_ID
+        participant = Event_Participants.query.filter_by(Event_ID=Event_ID, User_ID=User_ID).first()
         if not participant:
             return jsonify({'error': 'Participant not found'}), 404
 
-        participant.User_ID = User_ID
+        # Update participant's user ID if name is changed
+        user = Users.query.filter_by(Name=new_name).first()
+        if not user:
+            return jsonify({'error': 'User with provided Name not found'}), 404
+
+        participant.User_ID = user.User_ID
         db.session.commit()
 
         return jsonify({'message': 'Participant updated successfully'}), 200
@@ -48,6 +63,11 @@ def update_event_participant(Event_ID, User_ID):
     except Exception as e:
         print("Error:", e)
         return jsonify({"error": str(e)}), 500
+
+
+
+
+
 
 @eventp_bp.route('/admin/event_participant/delete/<string:Event_ID>/<int:User_ID>', methods=['DELETE'])
 def delete_event_participant(Event_ID, User_ID):
@@ -88,7 +108,7 @@ def get_event_participant(Event_ID, User_ID):
 
     except Exception as e:
         print("Error:", e)
-        return jsonify({'error': str(e)}), 500  
+        return jsonify({'error': str(e)}), 500
     
 
 @eventp_bp.route('/admin/events/user/<int:User_ID>', methods=['GET'])
@@ -191,6 +211,95 @@ def check_event_participant(Event_ID, User_ID):
         is_enrolled = participant is not None
         return jsonify({'isEnrolled': is_enrolled}), 200
 
+    except Exception as e:
+        print("Error:", e)
+        return jsonify({'error': str(e)}), 500 
+    
+@eventp_bp.route('/admin/user/search', methods=['GET'])
+def search_user_by_name():
+    try:
+        name = request.args.get('name')
+        if not name:
+            return jsonify({'error': 'Name is required'}), 400
+        
+        users = Users.query.filter(Users.Name.ilike(f"%{name}%")).all()
+        if not users:
+            return jsonify({'error': 'No users found'}), 404
+
+        users_data = [{'User_ID': user.User_ID, 'Name': user.Name} for user in users]
+        return jsonify(users_data), 200
+    except Exception as e:
+        print("Error:", e)
+        return jsonify({'error': str(e)}), 500
+
+
+
+@eventp_bp.route('/admin/event_participants/create', methods=['POST'])
+def add_event_participants():
+    try:
+        data = request.get_json()
+        event_id = data.get('Event_ID')
+        name = data.get('Name')
+
+        if not event_id or not name:
+            return jsonify({'error': 'Event_ID and Name are required fields.'}), 400
+
+        # Find user by name
+        user = Users.query.filter_by(Name=name).first()
+        if not user:
+            return jsonify({'error': 'User with provided Name does not exist.'}), 404
+
+        # Find event by ID
+        event = Events.query.get(event_id)
+        if not event:
+            return jsonify({'error': 'Event with provided Event_ID does not exist.'}), 404
+
+        # Create new participant entry
+        new_participant = Event_Participants(Event_ID=event_id, User_ID=user.User_ID)
+        db.session.add(new_participant)
+        db.session.commit()
+
+        return jsonify({'message': 'Enrolled'}), 201
+
+    except Exception as e:
+        print('Error:', e)
+        return jsonify({'error': str(e)}), 500
+    
+
+
+@eventp_bp.route('/admin/users', methods=['GET'])
+def get_users():
+    try:
+        # Query to fetch users
+        users = Users.query.all()
+        users_data = [{'User_ID': user.User_ID, 'Name': user.Name} for user in users]
+        return jsonify(users_data), 200
+    except Exception as e:
+        print("Error:", e)
+        return jsonify({'error': str(e)}), 500
+
+    
+
+
+@eventp_bp.route('/admin/user/names', methods=['GET'])
+def get_user_names():
+    try:
+        users = Users.query.all()
+        if not users:
+            return jsonify({'error': 'No users found'}), 404
+
+        user_data = [{'User_ID': user.User_ID, 'Name': user.Name} for user in users]
+        return jsonify(user_data), 200
+
+    except Exception as e:
+        print("Error:", e)
+        return jsonify({'error': str(e)}), 500
+def get_users():
+    try:
+        # Query to fetch users
+        users = Users.query.all()
+        users_data = [{'User_ID': user.User_ID, 'Name': user.Name} for user in users]
+        return jsonify(users_data), 200
     except Exception as e:
         print("Error:", e)
         return jsonify({'error': str(e)}), 500

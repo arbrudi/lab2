@@ -138,7 +138,7 @@ function App() {
           <Route path="/admin/event/create" element={<Create_Event />} />  
           <Route path="/admin/event/update/:id" element={<Edit_Events />} /> 
           <Route path="/admin/event_participant/create" element={<Create_participant />} /> 
-          <Route path="/admin/event_participant/update/:Event_ID" element={<Edit_participant />} />   
+          <Route path="/admin/event_participant/update/:Event_ID/:User_ID" element={<Edit_participant />} />  
            <Route path="/admin/feature" element={<Feature/>} /> 
            <Route path="/admin/feature/create" element={<Create_Feature />} />  
           <Route path="/admin/feature/update/:id" element={<Edit_Feature />} /> 

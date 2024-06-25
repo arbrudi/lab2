@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import AdminBar from '../../components/AdminBar';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import './css/Events_.css'; // Importing CSS file for styling
+import './css/Events_.css'; 
 
 const Event = () => {
   const [events, setEvents] = useState([]);
   const [participants, setParticipants] = useState([]);
+  const [users, setUsers] = useState({});
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -26,8 +27,20 @@ const Event = () => {
       try {
         const response = await axios.get("/admin/event_participant");
         setParticipants(response.data);
+
+        
+        const userIds = [...new Set(response.data.map(participant => participant.User_ID))];
+        
+        
+        const usersResponse = await axios.get("/admin/users", { params: { user_ids: userIds.join(',') } });
+        const usersData = usersResponse.data.reduce((acc, user) => {
+          acc[user.User_ID] = user.Name;
+          return acc;
+        }, {});
+
+        setUsers(usersData);
       } catch (error) {
-        console.error("Error fetching participants:", error);
+        console.error("Error fetching participants or users:", error);
       }
     };
 
@@ -46,12 +59,11 @@ const Event = () => {
   const handleDeleteParticipant = async (Event_ID, User_ID) => {
     try {
       await axios.delete(`/admin/event_participant/delete/${Event_ID}/${User_ID}`);
-      setParticipants(participants.filter(participant => participant.Event_ID !== Event_ID || participant.User_ID !== User_ID));
+      setParticipants(participants.filter(participant => !(participant.Event_ID === Event_ID && participant.User_ID === User_ID)));
     } catch (error) {
       console.error("Error deleting participant:", error);
     }
   };
-  
 
   return (
     <div className='container'>
@@ -105,20 +117,20 @@ const Event = () => {
             <thead>
               <tr>
                 <th>Event ID</th>
-                <th>User ID</th>
+                <th>User Name</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
               {participants.map((participant) => (
-                <tr key={participant.Event_ID}>
+                <tr key={`${participant.Event_ID}-${participant.User_ID}`}>
                   <td>{participant.Event_ID}</td>
-                  <td>{participant.User_ID}</td>
+                  <td>{users[participant.User_ID] || "Loading..."}</td>
                   <td>
-                    <Link to={`/admin/event_participant/update/${participant.Event_ID}`}>
+                    <Link to={`/admin/event_participant/update/${participant.Event_ID}/${participant.User_ID}`}>
                       <button className='edit-bttn'>Edit</button>
                     </Link>
-                    <button className='del-bttn' onClick={() => handleDeleteParticipant(participant.Event_ID, participant.User_ID)}>Delete </button>
+                    <button className='del-bttn' onClick={() => handleDeleteParticipant(participant.Event_ID, participant.User_ID)}>Delete</button>
                   </td>
                 </tr>
               ))}
