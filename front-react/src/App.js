@@ -31,18 +31,25 @@ import Comic_list_page from './pages/Comic_list_page';
 import User from './pages/admin/User';
 import Create_User from './pages/admin/User/Create_User';
 import Edit_User from './pages/admin/User/Edit_User';
-import Feature from './pages/admin/Feature' 
 import Books from './pages/user/Book'; 
 import Comic from './pages/user/Comics' 
 import Events from './pages/user/Events'; 
 import EventBook from './pages/user/EventBook'; 
 import UserDashboard from './pages/UserDashboard';
-import Comic_rating from './pages/user/Comic_rating';
+
+import Feature from './pages/admin/Feature' 
 import Edit_Feature from './pages/admin/Feature/Edit_feature'; 
 import Create_Feature from './pages/admin/Feature/Create_feature'
+
 import Sponsors from './pages/admin/Sponsors';
 import Create_Sponsor from './pages/admin/Sponsors/Create_Sponsor';
 import Edit_Sponsor from './pages/admin/Sponsors/Edit_Sponsor';
+
+import Developer from './pages/admin/Developer';
+import Create_Developer from './pages/admin/Developers/Create_Developer';
+import Edit_Developer from './pages/admin/Developers/Edit_Developer';
+
+
 function App() {
 
   const user = localStorage.getItem("userToken");
@@ -84,7 +91,6 @@ function App() {
           <Route path="/user/comics" element={<Comic />} /> 
           <Route path="/user/event" element={<Events />} />  
           <Route path="/user/eventbooks" element={<EventBook />} /> 
-          <Route path="/user/comics_rating" element={<Comic_rating />} /> 
           </>
           }
 
@@ -138,6 +144,12 @@ function App() {
           <Route path="/admin/sponsors" element={<Sponsors/>} /> 
           <Route path="/admin/sponsors/create" element={<Create_Sponsor/>} /> 
           <Route path="/admin/sponsors/update/:id" element={<Edit_Sponsor/>} /> 
+
+          {/* Developer */}
+          <Route path="/admin/Developer" element={<Developer/>} /> 
+          <Route path="/admin/Developer/create" element={<Create_Developer />} />  
+          <Route path="/admin/Developer/update/:id" element={<Edit_Developer />} /> 
+
           </>
            }
         </Routes>

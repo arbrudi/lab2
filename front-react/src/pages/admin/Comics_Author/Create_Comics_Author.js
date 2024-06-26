@@ -8,28 +8,12 @@ const Create_Comics_Author = () => {
 
 
 
-    const [Comics, setComics] = useState([]);
-
-
-    useEffect(() => {
-        const fetchComics = async () => {
-          try {
-            const response = await axios.get("/admin/comics");
-            setComics(response.data);
-          } catch (error) {
-            console.error("Error fetching Comics:", error);
-          }
-        };
-    
-        fetchComics();
-      }, []);
+ 
 
     
     const [formData, setFormData] = useState({
         Comics_Author_ID: "",
-        Comic_ID: "",
         Author_Name: "",
-        Publisher: "",
         Author_notes: ""
     });
 
@@ -67,25 +51,9 @@ return (
                </label>
 
                
-            <label>
-                
-            Comic ID:
-            <select className='form-control' name="Comic_ID" value={formData.Comic_ID} onChange={handleChange}>
-             <option value="">Select Comic ID</option>
-             {Comics.map(comic => (
-              <option key={comic.Comic_ID} value={comic.Comic_ID}>{comic.Comic_title}</option>
-                     ))}
-                 </select>
-               </label>
-
-
                <label>
                Author Name:
                    <input type="text" name="Author_Name" value={formData.Author_Name} onChange={handleChange} />
-               </label>
-               <label>
-               Publisher:
-                   <input type="text" name="Publisher" value={formData.Publisher} onChange={handleChange} />
                </label>
 
                <label>

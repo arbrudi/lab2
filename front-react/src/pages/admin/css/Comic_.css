@@ -1,3 +1,10 @@
+.main-body{
+
+  margin-left: 200px; 
+  padding: 20px;
+}
+
+
 .container {
   display: flex;
   flex-direction: column;

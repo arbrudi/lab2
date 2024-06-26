@@ -1,0 +1,44 @@
+.userbar-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #333;
+    padding-top: 150px;
+  }
+  
+  .userbar-sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .userbar-sidebar ul li {
+    padding: 10px;
+  }
+  
+  .userbar-sidebar ul li a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .userbar-sidebar ul li a:hover {
+    color: #ffd700;
+  }
+  
+  .userbar-button {
+    position: static;
+    width: 100%;
+    top: 125px;
+    left: 220px; 
+    background-color: #d98405;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .userbar-button:hover {
+    background-color: #d26906;
+  }
+  

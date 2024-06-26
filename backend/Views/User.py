@@ -2,11 +2,24 @@ from flask import Blueprint, request, jsonify
 from Models.Users import Users
 from extensions import db
 from flask_bcrypt import Bcrypt
-
+from cryptography.fernet import Fernet
+import base64
 
 bcrypt = Bcrypt()
 Users_bp = Blueprint('Users', __name__)
 
+key = b'_WbwgpS1PDrgCmPcFr557lIHWk3iQYUY5Y7uLWj6NYI=' 
+
+cipher_suite = Fernet(key)
+
+def decrypt_password(encrypted_password):
+    encrypted_password = base64.urlsafe_b64decode(encrypted_password)
+    decrypted_password = cipher_suite.decrypt(encrypted_password).decode('utf-8')
+    return decrypted_password
+
+def encrypt_password(password):
+    encrypted_password = cipher_suite.encrypt(password.encode('utf-8'))
+    return base64.urlsafe_b64encode(encrypted_password).decode('utf-8')
 
 @Users_bp.route('/admin/user', methods=['GET'])
 def get_users():
@@ -15,8 +28,8 @@ def get_users():
         Users_data = []
         for User in all_Users:
             _data = {
-                'User_ID':User.User_ID,
-                'Name':User.Name,
+                'User_ID': User.User_ID,
+                'Name': User.Name,
                 'Surname': User.Surname,
                 'User_Role': User.User_Role,
                 'Email': User.Email,
@@ -29,14 +42,15 @@ def get_users():
     except Exception as e:
         print("Error: ", e)
         return jsonify({"error": str(e)}), 500
-    
-    
+
 @Users_bp.route('/admin/user/<int:User_ID>', methods=['GET'])
 def get_user_data(User_ID):
     try:
         user = Users.query.get(User_ID)
         if user is None:
             return jsonify({'error': 'User not found'}), 404
+
+        decrypted_password = decrypt_password(user.Password)
 
         user_data = {
             'User_ID': user.User_ID,
@@ -45,7 +59,7 @@ def get_user_data(User_ID):
             'User_Role': user.User_Role,
             'Email': user.Email,
             'Username': user.Username,
-            'Password': user.Password 
+            'Password': decrypted_password 
         }
 
         return jsonify(user_data), 200
@@ -53,11 +67,6 @@ def get_user_data(User_ID):
         print("Error:", e)
         return jsonify({"error": str(e)}), 500
 
-
-
-
-
-       
 @Users_bp.route('/admin/user/create', methods=['POST'])
 def register():
     data = request.get_json()
@@ -66,21 +75,19 @@ def register():
     missing_attr = [attr for attr in required_attr if attr not in data or not data[attr]]
 
     if missing_attr:
-        return jsonify({'message': 'Username and password are required'}), 400
+        return jsonify({'message': 'Required fields are missing'}), 400
 
     if Users.query.filter_by(Username=data['Username']).first():
         return jsonify({'message': 'Username is already taken'}), 409
 
-    hashed_password = bcrypt.generate_password_hash(data['Password']).decode('utf-8')
-   
+    encrypted_password = encrypt_password(data['Password'])
+
     new_user = Users(Name=data['Name'], Surname=data['Surname'], User_Role=data['User_Role'],
-                    Email=data['Email'], Username=data['Username'], Password=hashed_password)
+                     Email=data['Email'], Username=data['Username'], Password=encrypted_password)
     db.session.add(new_user)
     db.session.commit()
 
-    return jsonify({'message': 'User registered successfully'})
-
-
+    return jsonify({'message': 'User registered successfully'}), 201
 
 @Users_bp.route('/admin/user/update/<int:User_ID>', methods=['PUT'])
 def update_User(User_ID):
@@ -91,8 +98,8 @@ def update_User(User_ID):
         
         data = request.json
         if 'Password' in data:
-            hashed_password = bcrypt.generate_password_hash(data['Password']).decode('utf-8')
-            data['Password'] = hashed_password
+            encrypted_password = encrypt_password(data['Password'])
+            data['Password'] = encrypted_password
         
         for key, value in data.items():
             setattr(user, key, value)
@@ -102,7 +109,7 @@ def update_User(User_ID):
     except Exception as e:
         print("Error:", e)
         return jsonify({"error": str(e)}), 500
-
+    
 
 
 
@@ -120,4 +127,3 @@ def delete_user(User_ID):
     except Exception as e:
         print("Error:", e)
         return jsonify({"error": str(e)}), 500
-

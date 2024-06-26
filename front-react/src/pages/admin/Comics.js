@@ -8,6 +8,7 @@ const Comics = () => {
 
   const [Comics, setComics] = useState([]);
   const [authors, setAuthors] = useState([]);
+  const [authorsMap, setAuthorsMap] = useState({});
 
   useEffect(() => {
     const fetchComics = async () => {
@@ -34,7 +35,16 @@ const Comics = () => {
     const fetchAuthors = async () => {
       try {
         const response = await axios.get("/admin/Comics_Author");
-        setAuthors(response.data);
+        const authorsData = response.data;
+        setAuthors(authorsData);
+
+        // Create a map for easy lookup
+        const authorsMap = {};
+        authorsData.forEach(author => {
+          authorsMap[author.Comics_Author_ID] = author.Author_Name;
+        });
+        setAuthorsMap(authorsMap);
+
       } catch (error) {
         console.error("Error fetching Authors:", error);
       }
@@ -52,10 +62,11 @@ const Comics = () => {
   };
 
   return (
+    <div className="main-body">
     <div className='container'>
       <AdminBar />
       <div>
-        <h1 className='clist' >Comic List</h1>
+        <h1 className='clist'>Comic List</h1>
         <div className='add-link'>
           <Link to={'/admin/comics/create'} className='add-button'>+</Link>
         </div>
@@ -65,6 +76,7 @@ const Comics = () => {
               <th>Comic ID</th>
               <th>Title</th>
               <th>Type</th>
+              <th>Author name</th>
               <th>Description</th>
               <th>Action</th>
             </tr>
@@ -75,6 +87,7 @@ const Comics = () => {
                 <td>{comic.Comic_ID}</td>
                 <td>{comic.Comic_title}</td>
                 <td>{comic.Comic_type}</td>
+                <td>{authorsMap[comic.Comics_Author_ID]}</td>
                 <td className='truncate'>{comic.Comic_Description}</td>
                 <td>
                   <Link to={`/admin/comics/update/${comic.Comic_ID}`}>
@@ -97,9 +110,7 @@ const Comics = () => {
             <tr>
               <th>Author ID</th>
               <th>Author Name</th>
-              <th>Publisher</th>
               <th>Author Notes</th>
-              <th>Comic ID</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -108,9 +119,7 @@ const Comics = () => {
               <tr key={author.Comics_Author_ID}>
                 <td>{author.Comics_Author_ID}</td>
                 <td>{author.Author_Name}</td>
-                <td>{author.Publisher}</td>
                 <td className='truncate'>{author.Author_notes}</td>
-                <td>{author.Comic_ID}</td>
                 <td>
                   <Link to={`/admin/comics_Author/update/${author.Comics_Author_ID}`}>
                     <button className='edit-bttn'>Edit</button>
@@ -123,6 +132,7 @@ const Comics = () => {
         </table>
       </div>
     </div>
+  </div>
   );
 }
 

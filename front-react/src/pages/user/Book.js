@@ -170,7 +170,7 @@ const Book = () => {
     };
 
     return (
-        <div>
+        <div className="main-body"> 
             <UserBar />
             <div className="book-user-dash">
                 <div className="book-rating-container">

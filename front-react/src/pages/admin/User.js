@@ -1,39 +1,58 @@
 import React, { useState, useEffect } from "react";
-import AdminBar from '../../components/AdminBar'
+import AdminBar from '../../components/AdminBar';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import './css/Books_.css';
+import './css/User_.css';
 
 const User = () => {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
         const fetchUsers = async () => {
-          try {
-            const response = await axios.get("/admin/user");
-            setUsers(response.data);
-          } catch (error) {   
-            console.error("Error fetching users:", error);
-          }
+            try {
+                const response = await axios.get("/admin/user");
+                setUsers(response.data);
+            } catch (error) {   
+                console.error("Error fetching users:", error);
+            }
         };
-    
+
         fetchUsers();
     }, []);
 
-    const handleDelete = async (User_ID) => {
+    const fetchUsers = async () => {
         try {
-          await axios.delete(`/admin/user/delete/${User_ID}`);
-          setUsers(users.filter(user => user.User_ID !== User_ID));
-        } catch (error) {
-          console.error("Error deleting user:", error);
+            const response = await axios.get("/admin/user");
+            setUsers(response.data);
+        } catch (error) {   
+            console.error("Error fetching users:", error);
         }
     };
 
+
+    
+
+    const handleDelete = async (User_ID) => {
+        try {
+            await axios.delete(`/admin/user/delete/${User_ID}`);
+            setUsers(users.filter(user => user.User_ID !== User_ID));
+        } catch (error) {
+            console.error("Error deleting user:", error);
+        }
+    };
+
+    const renderPassword = (password) => {
+        if (password.length <= 4) {
+            return password; 
+        }
+        return `${password.slice(0, 3)}****`;
+    };
+
     return (
-        <div className='container'>
+        <div className="main-body">
             <AdminBar />
-            <div>
-                <h1 className='list'>User List</h1>
+            <h1 className='list'>User List</h1>
+            <div className='container'>
                 <div className='add-link'>
                     <Link to={'/admin/user/create'}>Add User</Link>
                 </div>
@@ -59,7 +78,7 @@ const User = () => {
                                 <td>{user.User_Role}</td>
                                 <td>{user.Email}</td>
                                 <td>{user.Username}</td>
-                                <td>{user.Password}</td>
+                                <td>{renderPassword(user.Password)}</td>
                                 <td>
                                     <Link to={`/admin/user/update/${user.User_ID}`}>
                                         <button className='edit-bttn'>Edit</button>

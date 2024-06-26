@@ -2,17 +2,11 @@ import React, { useState } from 'react';
 import '../assets/css/AdminNav.css';
 
 const AdminBar = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  const toggleNavbar = () => {
-    setIsVisible(!isVisible);
-  };
 
   return (
     <div>
-      <button class= 'bttn'onClick={toggleNavbar}>Control</button>
-      {isVisible && (
-        <div className="sidebar">
+    
+        <div className="Navbar-sidebar">
           <ul>
 
           <li>
@@ -27,18 +21,23 @@ const AdminBar = () => {
             <li>
               <a href="/admin/event">Event</a>
             </li>
-            <li>
+            {/* <li>
               <a href="/admin/event_books">Event books</a>
-            </li> 
+            </li>  */}
             <li>
               <a href="/admin/feature">Feature</a>
             </li>
             <li>
               <a href="/admin/sponsors">Sponsors</a>
             </li>
+            <li>
+              <a href="/admin/Developer">Developers</a>
+            </li>
+
+            
           </ul>
         </div>
-      )}
+
     </div>
   );
 };

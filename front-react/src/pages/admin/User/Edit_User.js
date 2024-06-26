@@ -13,7 +13,6 @@ const Edit_User = () => {
         Username: "",
         Password: ""
     });
-   
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -25,12 +24,10 @@ const Edit_User = () => {
                     User_Role: response.data.User_Role || "",
                     Email: response.data.Email || "",
                     Username: response.data.Username || "",
-                    Password: "" 
+                    Password: response.data.Password || ""
                 });
-          
             } catch (error) {
                 console.error("Error fetching User:", error);
-              
             }
         };
 
@@ -50,9 +47,6 @@ const Edit_User = () => {
             console.error("Error updating user:", error);
         }
     };
-
- 
-
 
     return (
         <div className="container_c">

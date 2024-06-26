@@ -19,7 +19,9 @@ from Views.ML_model import recommendation_bp
 from Views.Comic_rating import cRating_bp
 from Views.Book_ratings import bRating_bp
 from Views.Favorite_Books import favbook_bp
-from Views.ListOfSponsors import sponsors_bp, add_sponsors
+from Views.ListOfSponsors import sponsors_bp
+from Views.ListOfDevelopers import Developers_bp
+from Views.Favorite_Comics import fComic_bp
 
 def create_app():
     app = Flask(__name__)
@@ -28,7 +30,7 @@ def create_app():
 
     conn = 'mssql+pyodbc:///?odbc_connect=' + \
            'DRIVER={ODBC Driver 17 for SQL Server};' + \
-           'SERVER=LAPTOP-TQGV5751;' + \
+           'SERVER=ERIS;' + \
            'DATABASE=lab2;' + \
            'Trusted_Connection=yes;'
     app.config['SQLALCHEMY_DATABASE_URI'] = conn
@@ -44,6 +46,7 @@ def create_app():
     mongo = PyMongo(app)
 
     db.init_app(app)
+    app.register_blueprint(fComic_bp)
     app.register_blueprint(cRating_bp)
     app.register_blueprint(Users_bp)
     app.register_blueprint(views_bp)
@@ -60,6 +63,8 @@ def create_app():
     app.register_blueprint(bRating_bp)
     app.register_blueprint(favbook_bp)
     app.register_blueprint(sponsors_bp)
+    app.register_blueprint(Developers_bp)
+
 
     with app.app_context():
         try:

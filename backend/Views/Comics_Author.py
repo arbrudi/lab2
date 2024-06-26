@@ -31,9 +31,7 @@ def get_Comics_Author():
         for Authors in all_Authors:
             _data = {
                 'Comics_Author_ID':Authors.Comics_Author_ID,
-                'Comic_ID':Authors.Comic_ID,
                 'Author_Name':Authors.Author_Name,
-                'Publisher':Authors.Publisher,
                 'Author_notes':Authors.Author_notes
             }
             Authors_data.append(_data)
@@ -52,9 +50,7 @@ def get_comic_ID(id):
         
         comic_data = {    
                'Comics_Author_ID':comic.Comics_Author_ID,
-               'Comic_ID':comic.Comic_ID,
                 'Author_Name': comic.Author_Name,
-                'Publisher': comic.Publisher,
                 'Author_notes': comic.Author_notes
         }
 
