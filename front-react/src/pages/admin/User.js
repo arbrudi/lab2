@@ -9,26 +9,37 @@ const User = () => {
 
     useEffect(() => {
         const fetchUsers = async () => {
-          try {
-            const response = await axios.get("/admin/user");
-            setUsers(response.data);
-          } catch (error) {   
-            console.error("Error fetching users:", error);
-          }
+            try {
+                const response = await axios.get("/admin/user");
+                setUsers(response.data);
+            } catch (error) {   
+                console.error("Error fetching users:", error);
+            }
         };
-    
+
         fetchUsers();
     }, []);
 
-    const handleDelete = async (User_ID) => {
+    const fetchUsers = async () => {
         try {
-          await axios.delete(`/admin/user/delete/${User_ID}`);
-          setUsers(users.filter(user => user.User_ID !== User_ID));
-        } catch (error) {
-          console.error("Error deleting user:", error);
+            const response = await axios.get("/admin/user");
+            setUsers(response.data);
+        } catch (error) {   
+            console.error("Error fetching users:", error);
         }
     };
 
+
+    
+
+    const handleDelete = async (User_ID) => {
+        try {
+            await axios.delete(`/admin/user/delete/${User_ID}`);
+            setUsers(users.filter(user => user.User_ID !== User_ID));
+        } catch (error) {
+            console.error("Error deleting user:", error);
+        }
+    };
 
     const renderPassword = (password) => {
         if (password.length <= 4) {
@@ -42,7 +53,6 @@ const User = () => {
             <AdminBar />
             <h1 className='list'>User List</h1>
             <div className='container'>
-                
                 <div className='add-link'>
                     <Link to={'/admin/user/create'}>Add User</Link>
                 </div>
