@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AdminBar from '../../components/AdminBar';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import './../../assets/css/Event.css'; 
+import './css/Developers_.css'; 
 
 const Developer = () => {
   const [developers, setDevelopers] = useState([]);
@@ -40,10 +40,11 @@ const Developer = () => {
     <div className="main-body">
       <div className='container'>
         <AdminBar />
+        <div className="flex-book-contt">
         <div>
-          <h1 className='list'>Developer List</h1>
+          <h1 className='clist'>Developer List</h1>
           <div className='add-link'>
-            <Link to={'/admin/Developer/create'}>Add a new Developer</Link>
+            <Link to={'/admin/Developer/create'} className="add-button">+</Link>
           </div>
           <table className='table'>
             <thead>
@@ -59,7 +60,7 @@ const Developer = () => {
                 <tr key={developer._id}>
                   <td>{renderIcon(developer.icon)}</td>
                   <td>{developer.name}</td>
-                  <td>{developer.description}</td>
+                  <td className='truncate'>{developer.description}</td>
                   <td>
                     <Link to={`/admin/Developer/update/${developer._id}`}>
                       <button className='edit-bttn'>Edit</button>
@@ -70,6 +71,7 @@ const Developer = () => {
               ))}
             </tbody>
           </table>
+        </div>
         </div>
       </div>
     </div>

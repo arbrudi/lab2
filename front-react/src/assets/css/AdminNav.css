@@ -1,33 +1,34 @@
-.userbar-sidebar {
+.Navbar-sidebar {
   position: fixed;
   top: 0;
   left: 0;
   width: 200px;
   height: 100%;
   background-color: #333;
-  padding-top: 50px;
-  z-index: 1000; /* Ensures the sidebar stays on top */
+  padding-top: 150px; 
+  overflow: hidden;
+
 }
 
-.userbar-sidebar ul {
+.Navbar-sidebar ul {
   list-style-type: none;
   padding: 0;
 }
 
-.userbar-sidebar ul li {
+.Navbar-sidebar ul li {
   padding: 10px;
 }
 
-.userbar-sidebar ul li a {
+.Navbar-sidebar ul li a {
   color: white;
   text-decoration: none;
 }
 
-.userbar-sidebar ul li a:hover {
+.Navbar-sidebar ul li a:hover {
   color: #ffd700;
 }
 
-.userbar-button {
+.Navbar-button {
   position: static;
   width: 100%;
   top: 125px;
@@ -39,7 +40,7 @@
   cursor: pointer;
 }
 
-.userbar-button:hover {
+.Navbar-button:hover {
   background-color: #d26906;
 }
 

@@ -6,7 +6,12 @@
     display: flex;
     justify-content:center; 
     font-family: 'Poppins';
-    z-index: 10003;
+    z-index: 15000;
+    width: 100%;
+    border: 1px solid black;
+    position: relative;
+    opacity: 100%; 
+    
   }
  
   .nav-1 ul {
@@ -28,8 +33,3 @@
     padding: 24px 32px;
     font-weight: 400;
   }
-/*   
-  .nav-1 a:hover {
-    background-color: rgba(206, 206, 201, 0.742);
-    color: #6280b9;
-  } */

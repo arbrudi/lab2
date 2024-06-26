@@ -6,7 +6,7 @@ const AdminBar = () => {
   return (
     <div>
     
-        <div className="userbar-sidebar">
+        <div className="Navbar-sidebar">
           <ul>
 
           <li>
