@@ -376,6 +376,42 @@ padding-bottom: 3px;
     justify-content: space-between; 
 }
 
+.fourth-section{
+    background-color: #089498d5;
+    width: auto;
+    padding: 20px;
+    padding-left:200px;
+    text-align: left;
+    margin-top: 20px; 
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between; 
+}
+
+
+.Developer-item{
+    margin-top: 3%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    width: auto;
+    margin-right: 50px;
+    box-sizing: border-box;
+}
+
+.dev-title{
+    width: 100%; 
+    color:  #afe6ecd5;
+    font-size: 30px;
+    margin-bottom: 25px; 
+}
+
+
+
+
+
 .feature-item {
     display: flex;
     flex-direction: column;

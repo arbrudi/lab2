@@ -151,11 +151,12 @@ const AboutPage = () => {
           ))}
         </div> 
 
-        <div className="third-section"> 
-          <div className="title">Developer.</div>
+        
+        <div className="fourth-section"> 
+          <div className="dev-title">Developer.</div>
           {developer.map((developers) => (
-            <div key={developers._id} className="feature-item">
-              <img className="icon-placeholder" src={developers.icon} alt="developers Icon" />
+            <div key={developers._id} className="Developer-item">
+              <img className="logo-placeholder" src={developers.icon} alt="developers Icon" />
               <div className="name-placeholder"><p>{developers.name}</p></div>
               <div className="description-placeholder"><p>{developers.description}</p></div>
               

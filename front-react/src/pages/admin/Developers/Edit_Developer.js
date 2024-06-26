@@ -13,9 +13,9 @@ const Edit_Developer = () => {
     });
 
     useEffect(() => {
-        const fetchFeature = async () => {
+        const fetchDevelopers = async () => {
             try {
-                const response = await axios.get(`/admin/Developer${id}`);
+                const response = await axios.get(`/admin/Developer/${id}`);
                 setDeveloper(response.data);
                 setFormData({ 
                     icon: response.data.icon,
@@ -27,7 +27,7 @@ const Edit_Developer = () => {
             }
         };
 
-        fetchFeature();
+        fetchDevelopers();
     }, [id]);
 
     const handleChange = (e) => {
@@ -46,7 +46,7 @@ const Edit_Developer = () => {
 
     return (
         <div className="container_c">
-            <h1>Edit Feature</h1>
+            <h1>Edit Developer</h1>
             <form onSubmit={handleSubmit}> 
                 <div>
                     <label>Icon:</label>
