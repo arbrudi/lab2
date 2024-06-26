@@ -115,10 +115,8 @@ def update_User(User_ID):
 
 @Users_bp.route('/admin/user/delete/<int:User_ID>', methods=['DELETE'])
 def delete_user(User_ID):
-    print('userid',User_ID)
     try:
         user = Users.query.get(User_ID)
-        print('user i vogel',user)
         if user is None:
             return jsonify({'error': 'User not found'}), 404
 
