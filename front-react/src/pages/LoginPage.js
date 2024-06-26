@@ -29,7 +29,7 @@ const LoginPage = () => {
       
       if (response.data.role === 'admin') {
         // Redirect to user dashboard
-        navigate('/admin',{replace:true})
+        navigate('/admin/user',{replace:true})
 
         localStorage.setItem("adminToken", JSON.stringify({
           role : "admin",
@@ -41,7 +41,7 @@ const LoginPage = () => {
       
      }else if (response.data.role === 'client'){
               
-              navigate('/UserDashboard',{replace:true})
+              navigate('/user/book',{replace:true})
 
               localStorage.setItem("userToken", JSON.stringify({
                 role : "client",

@@ -8,9 +8,7 @@
     font-family: 'Poppins';
     z-index: 15000;
     width: 100%;
-    border: 1px solid black;
-    position: relative;
-    opacity: 100%; 
+    position:relative; 
     
   }
  
