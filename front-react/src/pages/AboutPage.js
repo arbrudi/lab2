@@ -8,7 +8,6 @@ const AboutPage = () => {
     const [sponsors, setSponsors] = useState([]);
     const [developer, setDevelopers] = useState([]);
 
-
     const user = localStorage.getItem("userToken");
     const admin = localStorage.getItem("adminToken");
 
@@ -40,17 +39,10 @@ const AboutPage = () => {
           console.error("Error fetching Devolper:", error);
         }
       };
-
-
-
-
       fetchDevelopers();
       fetchFeatures();
       fetchSponsors();
     }, []);
-
-
-
 
     return (
         <div className="about-page-container">
@@ -63,10 +55,11 @@ const AboutPage = () => {
                 {(!user  && !admin) && <a href="./register" class="registerbtn">Sign-up</a> }
                 {(user || admin)&& <button className="link-to-books"><Link to="/books">Discover our library!</Link></button>}
                 
-                </div>
+                </div> 
+               
             </div>
             <div className="right-section">
-                <img src='https://www.thestorygraph.com/assets/hero-image-9daf4eae0b6f8e9beb51f83fd4a99631698ca1c8c68ef07a1aae37ef8a477dd1.jpg'/>
+                <img  className="story-image" src='https://www.thestorygraph.com/assets/hero-image-9daf4eae0b6f8e9beb51f83fd4a99631698ca1c8c68ef07a1aae37ef8a477dd1.jpg'/>
             </div>  
         </div>  
         <div className="second-section">
@@ -135,12 +128,10 @@ const AboutPage = () => {
             <div key={feature._id} className="feature-item">
               <img className="icon-placeholder" src={feature.icon} alt="Feature Icon" />
               <div className="name-placeholder"><p>{feature.name}</p></div>
-              <div className="description-placeholder"><p>{feature.description}</p></div>
-              
+              <div className="description-placeholder"><p>{feature.description}</p></div>  
             </div>
           ))}
         </div> 
-
         <div className="sponsor-title">Meet our sponsors</div>
         <div className="sponsor-section"> 
           {sponsors.map((sponsor) => (
@@ -150,8 +141,6 @@ const AboutPage = () => {
             </div>
           ))}
         </div> 
-
-        
         <div className="fourth-section"> 
           <div className="dev-title">Developer.</div>
           {developer.map((developers) => (
@@ -163,17 +152,7 @@ const AboutPage = () => {
             </div>
           ))}
         </div> 
-
-
-
       </div>
-
-
-
-
-
-
-
     );
 }
 

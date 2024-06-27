@@ -1,9 +1,7 @@
-
-
 .about-page {
-    display: flex;
-    max-height: 100vh; 
-    max-width: 200vh;
+    display: flex; 
+    min-height:100vh; 
+    max-width: 1000vh;
     font-family: Arial, sans-serif; 
     display: flex; 
     flex-direction: row;
@@ -17,7 +15,6 @@
     align-items: flex-start;
     flex-direction: column;
     padding: 20px;
-    max-width: 100vh;
 }
 .left-section p:nth-child(1) {
     color: white;
@@ -32,7 +29,11 @@
     text-align: left; 
     margin-left: 40px; 
 }
+.story-image{ 
 
+    min-height:100vh; 
+    min-width:110vh;
+}
 
 .buttons {
     padding-top: 60px;
@@ -203,14 +204,13 @@
 }
 
 .secondr {
-    margin-left: 20px;
+    padding-left: 120px;
     width: 50%; /* Adjust the width as needed */ 
     height: auto;
-    padding: 20px; /* Add padding as needed */  
 }
 
 .secondr-container {
-    width: 70%; 
+    width: 120%; 
     height: 100%;
 }
 
@@ -235,7 +235,7 @@ padding-bottom: 3px;
     white-space: pre-wrap; /* This ensures that the text will wrap correctly */
     word-break: break-word; /* This ensures that long words will break to fit the container */ 
     line-height: 2; /* Increase line height for more space between lines */
-    max-width: 500px; /* Limit the width to encourage wrapping */ 
+    max-width: 600px; /* Limit the width to encourage wrapping */ 
 } 
 
 .rec {
