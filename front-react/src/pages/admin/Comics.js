@@ -63,14 +63,14 @@ const Comics = () => {
 
   return (
     <div className="main-body">
-    <div className='container'>
+    <div className='container-c'>
       <AdminBar />
       <div>
         <h1 className='clist'>Comic List</h1>
-        <div className='add-link'>
-          <Link to={'/admin/comics/create'} className='add-button'>+</Link>
+        <div className='add-link-c'>
+          <Link to={'/admin/comics/create'} className='add-button-c'>+</Link>
         </div>
-        <table className='table'>
+        <table className='table-c'>
           <thead>
             <tr>
               <th>Comic ID</th>
@@ -88,12 +88,12 @@ const Comics = () => {
                 <td>{comic.Comic_title}</td>
                 <td>{comic.Comic_type}</td>
                 <td>{authorsMap[comic.Comics_Author_ID]}</td>
-                <td className='truncate'>{comic.Comic_Description}</td>
+                <td className='truncate-c'>{comic.Comic_Description}</td>
                 <td>
                   <Link to={`/admin/comics/update/${comic.Comic_ID}`}>
-                    <button className='edit-bttn'>Edit</button>
+                    <button className='edit-bttn-c'>Edit</button>
                   </Link>
-                  <button className='del-bttn' onClick={() => handleDelete(comic.Comic_ID)}>Delete</button>
+                  <button className='del-bttn-c' onClick={() => handleDelete(comic.Comic_ID)}>Delete</button>
                 </td>
               </tr>
             ))}
@@ -102,10 +102,10 @@ const Comics = () => {
       </div>
       <div>
         <h1 className='clist'>Author List</h1>
-        <div className='add-link'>
-          <Link to={'/admin/comics_Author/create'} className='add-button'>+</Link>
+        <div className='add-link-c'>
+          <Link to={'/admin/comics_Author/create'} className='add-button-c'>+</Link>
         </div>
-        <table className='table'>
+        <table className='table-c'>
           <thead>
             <tr>
               <th>Author ID</th>
@@ -119,12 +119,12 @@ const Comics = () => {
               <tr key={author.Comics_Author_ID}>
                 <td>{author.Comics_Author_ID}</td>
                 <td>{author.Author_Name}</td>
-                <td className='truncate'>{author.Author_notes}</td>
+                <td className='truncate-c'>{author.Author_notes}</td>
                 <td>
                   <Link to={`/admin/comics_Author/update/${author.Comics_Author_ID}`}>
-                    <button className='edit-bttn'>Edit</button>
+                    <button className='edit-bttn-c'>Edit</button>
                   </Link>
-                  <button className='del-bttn' onClick={() => handleAuthorDelete(author.Comics_Author_ID)}>Delete</button>
+                  <button className='del-bttn-c' onClick={() => handleAuthorDelete(author.Comics_Author_ID)}>Delete</button>
                 </td>
               </tr>
             ))}
