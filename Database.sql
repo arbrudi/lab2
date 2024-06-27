@@ -3,7 +3,28 @@ create database lab2
 use lab2
 
 DROP DATABASE lab2
+
+TRUNCATE TABLE Users
+
+/*-------------------------------Users-------------------------------*/
+CREATE TABLE Users (
+  User_ID INT NOT NULL PRIMARY KEY IDENTITY(100, 1),
+  Name VARCHAR(255) NOT NULL,
+  Surname VARCHAR(255) NOT NULL,
+  User_Role VARCHAR(255) NOT NULL,
+  Email VARCHAR(255) NOT NULL,
+  Username VARCHAR(255) NOT NULL,
+  Password VARCHAR(255) NOT NULL
+);
+
 /*-------------------------------Comics-------------------------------*/
+
+CREATE TABLE Comics_Author(
+Comics_Author_ID int NOT NULL PRIMARY KEY,
+Author_Name varchar(50) NOT NULL,
+Author_notes varchar(255),
+);
+
 CREATE TABLE Comics (
   Comic_ID VARCHAR(50) NOT NULL PRIMARY KEY,
   Comic_image TEXT,
@@ -14,13 +35,6 @@ CREATE TABLE Comics (
   FOREIGN KEY (Comics_Author_ID) REFERENCES Comics_Author(Comics_Author_ID)
 );
 
-CREATE TABLE Comics_Author(
-Comics_Author_ID int NOT NULL PRIMARY KEY,
-Author_Name varchar(50) NOT NULL,
-Author_notes varchar(255),
-)
-
-
 CREATE TABLE Comic_ratings (
   Comic_rating_ID int Primary key Identity (1,1),
   User_ID INT NOT NULL,
@@ -30,10 +44,6 @@ CREATE TABLE Comic_ratings (
   FOREIGN KEY (User_ID) REFERENCES Users(User_ID) 
 );
 
-Select * from Comic_ratings
-drop table favorite_comic
-
-
 CREATE TABLE favorite_comics(
   Favorite_Comic_Id int Primary key Identity (1,1),
   User_ID INT NOT NULL,
@@ -42,10 +52,13 @@ CREATE TABLE favorite_comics(
   FOREIGN KEY (User_ID) REFERENCES Users(User_ID) 
 );
 
-
-
-
 /*-------------------------------Books-------------------------------*/
+
+CREATE TABLE Book_Genre(
+Book_Genre_ID int NOT NULL PRIMARY KEY,
+Genre_Name varchar(50) NOT NULL,
+);
+
 CREATE TABLE Books (
   ISBN INT NOT NULL PRIMARY KEY,
   Book_image TEXT,
@@ -54,11 +67,6 @@ CREATE TABLE Books (
   Book_genre INT,
   FOREIGN KEY(Book_genre) REFERENCES Book_Genre(Book_Genre_ID),
   Book_description TEXT NOT NULL
-);
-
-CREATE TABLE Book_Genre(
-Book_Genre_ID int NOT NULL PRIMARY KEY,
-Genre_Name varchar(50) NOT NULL,
 );
 
 CREATE TABLE Book_Status(
@@ -103,25 +111,6 @@ CREATE TABLE Favorite_books (
   FOREIGN KEY (ISBN) REFERENCES Books(ISBN)
 );
 
-/*-------------------------------Users-------------------------------*/
-CREATE TABLE Users (
-  User_ID INT NOT NULL PRIMARY KEY IDENTITY(100, 1),
-  Name VARCHAR(255) NOT NULL,
-  Surname VARCHAR(255) NOT NULL,
-  User_Role VARCHAR(255) NOT NULL,
-  Email VARCHAR(255) NOT NULL,
-  Username VARCHAR(255) NOT NULL,
-  Password VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE contact_us (
-  Contact_ID INT NOT NULL PRIMARY KEY,
-  Contact_email VARCHAR(255),
-  Contact_number INT,
-  Contact_address VARCHAR(255),
-  Contact_city VARCHAR(50),
-  Contact_postal_code INT
-);
 /*-------------------------------Events-------------------------------*/
 CREATE TABLE Events (
   Event_ID VARCHAR(255) NOT NULL PRIMARY KEY,
@@ -135,32 +124,6 @@ CREATE TABLE Event_participants (
   User_ID INT NOT NULL,
   PRIMARY KEY (Event_ID, User_ID)
 );
- 
-CREATE TABLE news (
-  News_ID INT PRIMARY KEY IDENTITY(1,1),
-  News_title NVARCHAR(255) NOT NULL,
-  News_description NVARCHAR(2000) NOT NULL,
-  News_tags NVARCHAR(100) NOT NULL,
-  Publishing_date DATE NOT NULL,
-  News_image NVARCHAR(MAX) NOT NULL
-);
-
-CREATE TABLE partners (
-  Partner_ID INT PRIMARY KEY,
-  Partner_image NVARCHAR(MAX),
-  Partner_name NVARCHAR(255),
-  Partner_description NVARCHAR(600)
-);
-
-CREATE TABLE reviews (
-  Reviews_ID INT PRIMARY KEY,
-  Reviewer_Name NVARCHAR(255),
-  Reviewer_Surname NVARCHAR(255),
-  Reviews_Comment NVARCHAR(600)
-);
-
-
-
 
 /*-------------------------------Queries-------------------------------*/
 
