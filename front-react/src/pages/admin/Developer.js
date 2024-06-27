@@ -38,40 +38,40 @@ const Developer = () => {
 
   return (
     <div className="main-body">
-      <div className='container'>
+      <div className='container-unique'>
         <AdminBar />
-        <div className="flex-book-contt">
-        <div>
-          <h1 className='clist'>Developer List</h1>
-          <div className='add-link'>
-            <Link to={'/admin/Developer/create'} className="add-button">+</Link>
-          </div>
-          <table className='table'>
-            <thead>
-              <tr>
-                <th>Icon</th> 
-                <th>Name</th>
-                <th>Description</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {developers.map((developer) => (
-                <tr key={developer._id}>
-                  <td>{renderIcon(developer.icon)}</td>
-                  <td>{developer.name}</td>
-                  <td className='truncate'>{developer.description}</td>
-                  <td>
-                    <Link to={`/admin/Developer/update/${developer._id}`}>
-                      <button className='edit-bttn'>Edit</button>
-                    </Link>
-                    <button className='del-bttn' onClick={() => handleDeleteDeveloper(developer._id)}>Delete</button>
-                  </td>
+        <div className="flex-book-conttt-unique">
+          <div>
+            <h1 className='clist-unique'>Developer List</h1>
+            <div className='add-link-unique'>
+              <Link to={'/admin/Developer/create'} className="add-button-unique">+</Link>
+            </div>
+            <table className='table-unique'>
+              <thead>
+                <tr>
+                  <th>Icon</th> 
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Action</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {developers.map((developer) => (
+                  <tr key={developer._id}>
+                    <td>{renderIcon(developer.icon)}</td>
+                    <td>{developer.name}</td>
+                    <td className='truncate'>{developer.description}</td>
+                    <td>
+                      <Link to={`/admin/Developer/update/${developer._id}`}>
+                        <button className='edit-bttn-unique'>Edit</button>
+                      </Link>
+                      <button className='del-bttn-unique' onClick={() => handleDeleteDeveloper(developer._id)}>Delete</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

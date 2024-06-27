@@ -1,11 +1,11 @@
-.main-body{
+/* .main-body{
 
   margin-left: 200px; 
   padding: 20px;
-}
+} */
 
 
-.container {
+.container-c {
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -23,13 +23,13 @@
   position: relative;
 }
 
-.add-link {
+.add-link-c {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
 }
 
-.add-button {
+.add-button-c {
   display: inline-block;
   width: 40px;
   height: 40px;
@@ -44,40 +44,40 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.add-button:hover {
+.add-button-c:hover {
   background-color: #218838;
 }
 
-.table {
+.table-c {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 40px;
   background-color: #f8f9fa;
 }
 
-.table th, .table td {
+.table-c th, .table td {
   padding: 12px;
   border: 1px solid #dee2e6;
 }
 
-.table th {
+.table-c th {
   background-color: #343a40;
   color: #fff;
   text-align: left;
 }
 
-.table td {
+.table-c td {
   color: #495057;
 }
 
-.table td.truncate {
+.table-c td.truncate-c {
   max-width: 350px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.edit-bttn, .del-bttn {
+.edit-bttn-c, .del-bttn-c {
   padding: 8px 12px;
   margin-right: 5px;
   border: none;
@@ -88,18 +88,18 @@
   font-size: 14px;
 }
 
-.edit-bttn {
+.edit-bttn-c {
   background-color: #007bff;
 }
 
-.edit-bttn:hover {
+.edit-bttn-c:hover {
   background-color: #0056b3;
 }
 
-.del-bttn {
+.del-bttn-c {
   background-color: #dc3545;
 }
 
-.del-bttn:hover {
+.del-bttn-c:hover {
   background-color: #c82333;
 }

@@ -10,17 +10,9 @@ const Edit_Comics_Author = () => {
  const [comic, setcomic] = useState({});
  const [formData, setFormData] = useState({
     Author_Name:"",
-
-
     Author_notes: "",
-     
+
  });
-
-
-
-
-
-
 
  useEffect(() => {
     
