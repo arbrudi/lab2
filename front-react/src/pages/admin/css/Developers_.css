@@ -1,11 +1,5 @@
-/* .main-body{
 
-  margin-left: 200px; 
-  padding: 20px;
-} */
-
-
-.container-c {
+.container-unique {
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -14,7 +8,7 @@
   font-family: Arial, sans-serif;
 }
 
-.clist {
+.clist-unique {
   text-align: center;
   margin-left: 0%;
   margin-bottom: 40px;
@@ -23,13 +17,13 @@
   position: relative;
 }
 
-.add-link-c {
+.add-link-unique {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
 }
 
-.add-button-c {
+.add-button-unique {
   display: inline-block;
   width: 40px;
   height: 40px;
@@ -44,40 +38,40 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.add-button-c:hover {
+.add-button-unique:hover {
   background-color: #218838;
 }
 
-.table-c {
+.table-unique {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 40px;
   background-color: #f8f9fa;
 }
 
-.table-c th, .table td {
+.table-unique th, .table-unique td {
   padding: 12px;
   border: 1px solid #dee2e6;
 }
 
-.table-c th {
+.table-unique th {
   background-color: #343a40;
   color: #fff;
   text-align: left;
 }
 
-.table-c td {
+.table-unique td {
   color: #495057;
 }
 
-.table-c td.truncate-c {
+.table-unique td.truncate {
   max-width: 350px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.edit-bttn-c, .del-bttn-c {
+.edit-bttn-unique, .del-bttn-unique {
   padding: 8px 12px;
   margin-right: 5px;
   border: none;
@@ -88,18 +82,18 @@
   font-size: 14px;
 }
 
-.edit-bttn-c {
+.edit-bttn-unique {
   background-color: #007bff;
 }
 
-.edit-bttn-c:hover {
+.edit-bttn-unique:hover {
   background-color: #0056b3;
 }
 
-.del-bttn-c {
+.del-bttn-unique {
   background-color: #dc3545;
 }
 
-.del-bttn-c:hover {
+.del-bttn-unique:hover {
   background-color: #c82333;
 }

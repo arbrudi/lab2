@@ -33,6 +33,7 @@ def get_comics():
                 'Comic_image':Comic.Comic_image,
                 'Comic_title': Comic.Comic_title,
                 'Comic_type': Comic.Comic_type,
+                'Comics_Author_ID': Comic.Comics_Author_ID,
                 'Comic_Description': Comic.Comic_Description
             }
             Comics_data.append(_data)

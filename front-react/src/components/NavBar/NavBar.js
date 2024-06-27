@@ -19,14 +19,13 @@ const NavBar = () => {
         <nav className='nav-1'>
             <ul>
                 <li><Link to="/">Home</Link></li>
-                <li><Link to="/about">About</Link></li>
                 <li><Link to="/books">Books</Link></li>
                 <li><Link to="/comics">Comics</Link></li>
                 <li><Link to="/events">Events</Link></li>
                 { !userToken && !adminToken && <li><Link to="/login">Login</Link></li> }
-                { userToken && <li><Link to="/UserDashboard">Dashboard</Link></li> }
-                { adminToken && <li><Link to="/admin">Dashboard</Link></li> }
-                { (userToken || adminToken) && <li onClick={logoutFunction} style={{ cursor: 'pointer', color: 'red', fontWeight: 'bold' }}>Log out</li> }
+                { userToken && <li><Link to="/user/book">Dashboard</Link></li> }
+                { adminToken && <li><Link to="/admin/user">Dashboard</Link></li> }
+                { (userToken || adminToken) && <li onClick={logoutFunction} style={{ cursor: 'pointer', color: 'black', fontWeight: 'bold' }}>Log out</li> }
             </ul>
         </nav>
     );

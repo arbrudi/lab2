@@ -3,9 +3,9 @@ import axios from 'axios';
 import { Link, useParams } from "react-router-dom";
 import "../css/Create.css";
 
-const Edit_Feature = () => {
+const Edit_Developer = () => {
     const { id } = useParams();
-    const [feature, setFeature] = useState({});
+    const [Developer, setDeveloper] = useState({});
     const [formData, setFormData] = useState({ 
         icon: "",
         name: "", 
@@ -13,21 +13,21 @@ const Edit_Feature = () => {
     });
 
     useEffect(() => {
-        const fetchFeature = async () => {
+        const fetchDevelopers = async () => {
             try {
-                const response = await axios.get(`/admin/feature/${id}`);
-                setFeature(response.data);
+                const response = await axios.get(`/admin/Developer/${id}`);
+                setDeveloper(response.data);
                 setFormData({ 
                     icon: response.data.icon,
                     name: response.data.name,
                     description: response.data.description
                 });
             } catch (error) {
-                console.error("Error fetching feature:", error);
+                console.error("Error fetching Developer:", error);
             }
         };
 
-        fetchFeature();
+        fetchDevelopers();
     }, [id]);
 
     const handleChange = (e) => {
@@ -37,8 +37,8 @@ const Edit_Feature = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`/admin/feature/update/${id}`, formData);
-            window.location.href = "/admin/features";
+            await axios.put(`/admin/Developer/update/${id}`, formData);
+            window.location.href = "/admin/Developer";
         } catch (error) {
             console.error("Error updating feature:", error);
         }
@@ -46,7 +46,7 @@ const Edit_Feature = () => {
 
     return (
         <div className="container_c">
-            <h1>Edit Feature</h1>
+            <h1>Edit Developer</h1>
             <form onSubmit={handleSubmit}> 
                 <div>
                     <label>Icon:</label>
@@ -60,11 +60,11 @@ const Edit_Feature = () => {
                     <label>Description:</label>
                     <textarea name="description" value={formData.description} onChange={handleChange} />
                 </div>
-                <button type="submit">Update Feature</button>
+                <button type="submit">Update Developer</button>
             </form>
-            <Link to={'/admin/features'}>Cancel</Link>
+            <Link to={'/admin/Developer'}>Cancel</Link>
         </div>
     );
 };
 
-export default Edit_Feature;
+export default Edit_Developer;

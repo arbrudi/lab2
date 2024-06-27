@@ -1,16 +1,15 @@
-.main-body{
-    margin-left: 220px;
+.conetet{
+    margin-left: 220px; 
     padding: 20px;
 }
 
-.book-user-dash {
+.user-dash {
     display: flex;
     flex-direction: row;
 }
 
-.book-rating-container,
-.fav-books-container,
-.books-with-status-container {
+.rating-container,
+.fav-comics-container {
     margin: 40px;
     width: auto;
     background-color: #f9f9f9;
@@ -19,50 +18,48 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.book-rating-list,
-.fav-books-user h1,
-.books-with-status-container h1 {
+.rating-list,
+.fav-comics-user h1,
+h1 {
     font-size: 40px;
     color: #333;
     margin-bottom: 20px;
     margin-left: 10px;
 }
 
-.book-rating-table,
-.fav-book-tb,
+.rating-table,
+.fav-comic-tb,
 .books-with-status-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
 }
 
-.book-rating-table th,
-.fav-book-tb th,
-.books-with-status-table th,
-.book-rating-table td,
-.fav-book-tb td,
+.rating-table th,
+.fav-comic-tb th,
+.rating-table td,
+.fav-comic-tb td,
 .books-with-status-table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
 
-.book-rating-table th,
-.fav-book-tb th,
+.rating-table th,
+.fav-comic-tb th,
 .books-with-status-table th {
     background-color: #464545;
     color: white;
     font-weight: bold;
 }
 
-.book-rating-table tbody tr:nth-child(even),
-.fav-book-tb tbody tr:nth-child(even),
-.books-with-status-table tbody tr:nth-child(even) {
+.rating-table tbody tr:nth-child(even),
+.fav-comic-tb tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-.book-rating-table tbody tr:hover,
-.fav-book-tb tbody tr:hover,
+.rating-table tbody tr:hover,
+.fav-comic-tb tbody tr:hover,
 .books-with-status-table tbody tr:hover {
     background-color: #f1f1f1;
 }
@@ -79,12 +76,12 @@
     object-fit: cover;
 }
 
-.book-rating-button,
-.fav-book-button,
-.book-favorite-button,
-.book-rating-button-delete,
-.fav-book-button-delete,
-.book-favorite-button-delete {
+.rating-button,
+.fav-comic-button,
+.comic-favorite-button,
+.rating-button-delete,
+.fav-comic-button-delete,
+.comic-favorite-button-delete {
     padding: 8px 12px;
     font-size: 14px;
     cursor: pointer;
@@ -93,39 +90,39 @@
     transition: background-color 0.3s;
 }
 
-.book-rating-button-delete,
-.fav-book-button-delete,
-.book-favorite-button {
+.rating-button-delete,
+.fav-comic-button-delete,
+.comic-favorite-button {
     background-color: #ff4d4d;
     color: white;
 }
 
-.book-rating-button-delete:hover,
-.fav-book-button-delete:hover,
-.book-favorite-button:hover {
+.rating-button-delete:hover,
+.fav-comic-button-delete:hover,
+.comic-favorite-button:hover {
     background-color: #cc0000;
 }
 
-.no-favorite-books {
+.no-favorite-comics {
     text-align: center;
     margin-top: 20px;
 }
 
-.no-favorite-books p {
+.no-favorite-comics p {
     margin-bottom: 10px;
 }
 
-.no-favorite-books button {
+.no-favorite-comics .browse-comics-button{
     padding: 10px 20px;
+    text-decoration: none;
     font-size: 16px;
     background-color: #ff8800;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
-.no-favorite-books button:hover {
-    background-color: #fca500;
+.no-favorite-comics .browse-comics-button:hover {
+    background-color: #cc7000;
 }

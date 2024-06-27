@@ -1,9 +1,7 @@
-
-
 .about-page {
-    display: flex;
-    max-height: 100vh; 
-    max-width: 200vh;
+    display: flex; 
+    min-height:100vh; 
+    max-width: 1000vh;
     font-family: Arial, sans-serif; 
     display: flex; 
     flex-direction: row;
@@ -17,34 +15,31 @@
     align-items: flex-start;
     flex-direction: column;
     padding: 20px;
-    max-width: 100vh;
+}
+.left-section p:nth-child(1) {
+    color: white;
+    font-size: 46px;
+    text-align: left; 
+    margin-left: 40px; 
 }
 
 .left-section p {
     color: white;
-    margin-top: 1rem;
-    font-size: xx-large;
-    max-width: 80%;
-    text-align: left; /* Align text to the left */
-    padding-left: 20px; /* Same left padding */
+    font-size: 24px;
+    text-align: left; 
+    margin-left: 40px; 
 }
+.story-image{ 
 
-.left-section h1 {
-    color: white;
-    font-size: 1.5rem;
-    text-align: left; /* Align text to the left */
-    white-space: pre-wrap;
-    word-break: break-word;
-    max-width: 80%;
-    margin-bottom: 20px;
-    padding-left: 20px; /* Same left padding */
+    min-height:100vh; 
+    min-width:110vh;
 }
 
 .buttons {
     padding-top: 60px;
     font-size: 30px;
     align-items: flex-start;
-    padding-left: 20px; /* Same left padding */
+    margin-left: 40px; 
 }
 
 .login-button {
@@ -209,13 +204,13 @@
 }
 
 .secondr {
+    padding-left: 120px;
     width: 50%; /* Adjust the width as needed */ 
     height: auto;
-    padding: 20px; /* Add padding as needed */  
 }
 
 .secondr-container {
-    width: 70%; 
+    width: 120%; 
     height: 100%;
 }
 
@@ -240,7 +235,7 @@ padding-bottom: 3px;
     white-space: pre-wrap; /* This ensures that the text will wrap correctly */
     word-break: break-word; /* This ensures that long words will break to fit the container */ 
     line-height: 2; /* Increase line height for more space between lines */
-    max-width: 500px; /* Limit the width to encourage wrapping */ 
+    max-width: 600px; /* Limit the width to encourage wrapping */ 
 } 
 
 .rec {
@@ -381,6 +376,42 @@ padding-bottom: 3px;
     justify-content: space-between; 
 }
 
+.fourth-section{
+    background-color: #089498d5;
+    width: auto;
+    padding: 20px;
+    padding-left:200px;
+    text-align: left;
+    margin-top: 20px; 
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between; 
+}
+
+
+.Developer-item{
+    margin-top: 3%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    width: auto;
+    margin-right: 50px;
+    box-sizing: border-box;
+}
+
+.dev-title{
+    width: 100%; 
+    color:  #afe6ecd5;
+    font-size: 30px;
+    margin-bottom: 25px; 
+}
+
+
+
+
+
 .feature-item {
     display: flex;
     flex-direction: column;
@@ -430,3 +461,62 @@ padding-bottom: 3px;
     font-size: 30px;
     margin-bottom: 100px; 
 } 
+.link-to-books{
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition-duration: 0.4s;
+}
+.sponsor-title {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    margin-left: 14%;
+}
+.sponsor-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    margin-left: 13%;
+    margin-right: 13%;
+    width: auto;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+.sponsor-item {
+    margin-top: 3%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    width: auto;
+    margin-right: 140px;
+    box-sizing: border-box;
+}
+
+.logo-placeholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.sponsor-name-placeholder {
+    font-size: 24px;
+    color: #089498;
+}
+
+.date-placeholder {
+    font-size: 12px;
+    color: #666;
+}

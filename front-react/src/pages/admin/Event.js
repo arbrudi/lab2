@@ -66,6 +66,7 @@ const Event = () => {
   };
 
   return (
+    <div className="main-body">
     <div className='container'>
       <AdminBar />
       <div className='flex-book-contt'>
@@ -138,6 +139,7 @@ const Event = () => {
           </table>
         </div>
       </div>
+    </div>
     </div>
   );
 };

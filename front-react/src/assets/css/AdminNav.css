@@ -1,33 +1,35 @@
-.sidebar {
+.Navbar-sidebar {
   position: fixed;
   top: 0;
   left: 0;
   width: 200px;
   height: 100%;
   background-color: #333;
-  padding-top: 50px;
+  padding-top: 150px; 
+  
+
 }
 
-.sidebar ul {
+.Navbar-sidebar ul {
   list-style-type: none;
   padding: 0;
 }
 
-.sidebar ul li {
+.Navbar-sidebar ul li {
   padding: 10px;
 }
 
-.sidebar ul li a {
+.Navbar-sidebar ul li a {
   color: white;
   text-decoration: none;
 }
 
-.sidebar ul li a:hover {
+.Navbar-sidebar ul li a:hover {
   color: #ffd700;
 }
 
-.bttn {
-  position:static;
+.Navbar-button {
+  position: static;
   width: 100%;
   top: 125px;
   left: 220px; 
@@ -38,6 +40,7 @@
   cursor: pointer;
 }
 
-.bttn:hover {
+.Navbar-button:hover {
   background-color: #d26906;
 }
+

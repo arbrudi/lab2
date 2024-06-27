@@ -79,6 +79,29 @@ const ComicsPage = () => {
         setTimeout(() => setMessage(""), 3000);
     };
 
+
+
+    // add to favorite part
+
+
+    const user_id = localStorage.getItem('user_id');
+
+    const addToFavorites = async (comic_id) => {
+        try {
+            const response = await axios.post(`/comic/favorite`, { user_id, comic_id });
+            console.log('Response from add to favorites:', response);
+            if (response.status === 200) {
+                alert('Comic added to favorites');
+            }
+        } catch (error) {
+            console.error("Error adding comic to favorites:", error);
+        }
+    };
+    
+
+
+
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -90,6 +113,11 @@ const ComicsPage = () => {
                     <div className="comic-img-container">
                         <img src={comic.Comic_image} alt={comic.Comic_title} />
                         <div className="comic-status">
+
+                        <div className="Add-FavoriteComics">
+                         <button onClick={() => addToFavorites(comic.Comic_ID)}>+</button>
+                             </div>
+
                             <label>Comic Rating:</label>
                             <div className="stars">
                                 {[1, 2, 3, 4, 5].map((rating) => (

@@ -10,6 +10,7 @@ const Edit_Comics = () => {
         Comic_image:"",
         Comic_title: "",
         Comic_type: "",
+
         Comic_Description: ""
     });
 
@@ -23,7 +24,8 @@ const Edit_Comics = () => {
                     Comic_image:response.data.Comic_image,
                     Comic_title: response.data.Comic_title,
                     Comic_type: response.data.Comic_type,
-                    Comic_Description: response.data.Comic_Description
+                    Comic_Description: response.data.Comic_Description,
+                    Comics_Author_ID:response.data.Comics_Author_ID
                 });
             } catch (error) {
                 console.error("Error fetching book:", error);
@@ -32,6 +34,30 @@ const Edit_Comics = () => {
 
         fetchBook();
     }, [id]);
+
+    const [Author_list, setAuthor_list] = useState([]);
+
+    useEffect(() => {
+        const fetchAuthors = async () => {
+            try {
+                const response = await axios.get("/admin/Comics_Author");
+                setAuthor_list(response.data);
+            } catch (error) {
+                console.error("Error fetching Authors:", error);
+            }
+        };
+        fetchAuthors();
+    }, []);
+
+
+    const handleAuthorChange = (e) => {
+        setFormData({ ...formData, Comics_Author_ID: e.target.value });
+    };
+
+
+
+
+
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -63,13 +89,31 @@ const Edit_Comics = () => {
                     <label>Type:</label>
                     <input type="text" name="Comic_type" value={formData.Comic_type} onChange={handleChange} />
                 </div>
+                           <label>
+                    Author:
+                    <select
+                        name="Comics_Author_ID"
+                        value={formData.Comics_Author_ID}
+                        onChange={handleAuthorChange}
+                        required
+                    >
+                        <option value="">Select an author</option>
+                        {Author_list.map((author) => (
+                            <option key={author.Comics_Author_ID} value={author.Comics_Author_ID}>
+                                {author.Author_Name}
+                            </option>
+                        ))}
+                    </select>
+                </label>
+
+
                 <div>
                     <label>Description:</label>
                     <textarea name="Comic_Description" value={formData.Comic_Description} onChange={handleChange} />
                 </div>
                 <button type="submit">Update Comic</button>
             </form>
-            <Link to={'/admin/Comic'}>Back</Link>
+            <Link to={'/admin/comics'}>Back</Link>
         </div>
     );
 };

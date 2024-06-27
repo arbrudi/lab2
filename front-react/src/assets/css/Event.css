@@ -1,13 +1,14 @@
+.main-body{
+
+  margin-left: 200px; 
+  padding: 20px;
+}
 .container {
     display:contents;
     flex-direction: column;
 
   }
 
-  .list {
-    margin-bottom: 40px;
-    margin-left: 45%;
-  }
 
   .table {
     width: 100%;
