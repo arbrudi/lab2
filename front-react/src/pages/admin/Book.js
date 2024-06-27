@@ -129,9 +129,8 @@ const Book = () => {
       </div>
       <div className="flex-book-conttt"> {/* change here */}
          <div className="bg-list_">  {/* change here */}
-        <h1>Books by genre</h1>
+        <h1>Coming soon...</h1>
         </div>
-        <p>pychart</p>
         </div>
     </div>
     </div>
