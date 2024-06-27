@@ -134,3 +134,19 @@ SELECT * FROM Book_ratings
 SELECT COLUMN_NAME, DATA_TYPE
 FROM INFORMATION_SCHEMA.COLUMNS
 /* WHERE TABLE_NAME = 'Book_ratings';*/
+
+/*-------------------------------Mbrojtja-------------------------------*/
+
+CREATE TABLE Team(
+TeamID INT PRIMARY KEY IDENTITY(1,1),
+Name varchar(50) NOT NULL
+);
+
+CREATE TABLE Player(
+PlayerId int PRIMARY KEY IDENTITY(1,1),
+Name varchar(25) NOT NULL,
+Number int NOT NULL,
+BirthYear int NOT NULL,
+TeamID int NOT NULL,
+Foreign key(TeamID) REFERENCES Team(TeamID)
+);

@@ -48,6 +48,9 @@ import Edit_Sponsor from './pages/admin/Sponsors/Edit_Sponsor';
 import Developer from './pages/admin/Developer';
 import Create_Developer from './pages/admin/Developers/Create_Developer';
 import Edit_Developer from './pages/admin/Developers/Edit_Developer';
+import Footballer from './pages/admin/Footballer';
+import Create_footballer from './pages/admin/Footballer/Create_footballer';
+import Edit_footballer from './pages/admin/Footballer/Edit_footballer';
 
 
 function App() {
@@ -102,6 +105,9 @@ function App() {
           <Route path="/events" element={<EventsPage />} /> 
           <Route path="/login" element={<LoginPage />} /> 
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/footballer" element={<Footballer />} />
+          <Route path='/create_footballer' element={<Create_footballer />} />
+          <Route path='/edit_footballer/:id' element={<Edit_footballer />} />
 
           {/* Users */}
       
