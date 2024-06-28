@@ -35,6 +35,9 @@ pip install numpy
 pip install pandas
 pip install scikit-learn
 
+------Elasticsearch--------
+pip install elasticsearch 
+
 
 ------MSSQL CONN SERVERS------
 Arbi -> LAPTOP-TQGV5751

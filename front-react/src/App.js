@@ -36,11 +36,9 @@ import Comic from './pages/user/Comics'
 import Events from './pages/user/Events'; 
 import EventBook from './pages/user/EventBook'; 
 import UserDashboard from './pages/UserDashboard';
-
 import Feature from './pages/admin/Feature' 
 import Edit_Feature from './pages/admin/Feature/Edit_feature'; 
 import Create_Feature from './pages/admin/Feature/Create_feature'
-
 import Sponsors from './pages/admin/Sponsors';
 import Create_Sponsor from './pages/admin/Sponsors/Create_Sponsor';
 import Edit_Sponsor from './pages/admin/Sponsors/Edit_Sponsor';
@@ -91,6 +89,9 @@ function App() {
           <Route path="/user/comics" element={<Comic />} /> 
           <Route path="/user/event" element={<Events />} />  
           <Route path="/user/eventbooks" element={<EventBook />} /> 
+          
+    
+
           </>
           }
 
@@ -133,7 +134,7 @@ function App() {
           <Route path="/admin/event/create" element={<Create_Event />} />  
           <Route path="/admin/event/update/:id" element={<Edit_Events />} /> 
           <Route path="/admin/event_participant/create" element={<Create_participant />} /> 
-          <Route path="/admin/event_participant/update/:Event_ID" element={<Edit_participant />} />   
+          <Route path="/admin/event_participant/update/:Event_ID/:User_ID" element={<Edit_participant />} />  
 
           {/* Features */}
           <Route path="/admin/feature" element={<Feature/>} /> 

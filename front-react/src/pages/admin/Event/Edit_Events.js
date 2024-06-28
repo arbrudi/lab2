@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Link, useParams } from "react-router-dom";
+import '../css/Events_.css';
 
 const Edit_Events = () => {
     const { id } = useParams();
@@ -39,17 +40,17 @@ const Edit_Events = () => {
         e.preventDefault();
         try {
             await axios.put(`/admin/event/update/${id}`, formData);
-            window.location.href = "/admin/events";
+            window.location.href = "/admin/event";
         } catch (error) {
             console.error("Error updating event:", error);
         }
     };
 
     return (
-        <div>
+        <div className="container_e">
             <h1>Edit Event</h1>
-            <form onSubmit={handleSubmit}> 
-            <div>
+            <form onSubmit={handleSubmit}>
+                <div>
                     <label>Event Title:</label>
                     <input type="text" name="Event_title" value={formData.Event_title} onChange={handleChange} />
                 </div>
@@ -67,7 +68,7 @@ const Edit_Events = () => {
                 </div>
                 <button type="submit">Update Event</button>
             </form>
-            <Link to={'/admin/events'}>Cancel</Link>
+            <Link className="cancel" to={'/admin/event'}>Cancel</Link>
         </div>
     );
 };
