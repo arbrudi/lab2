@@ -30,15 +30,14 @@ const EventsPage = () => {
   useEffect(() => {
     if (query || date) {
       const filtered = events.filter(event =>
-        (query ? event.Event_title.toLowerCase().includes(query.toLowerCase()) : true) &&
-        (date ? event.Event_date === date : true)
+        (query ? event.Event_title.toLowerCase().includes(query.toLowerCase()) : true) 
       );
       setFilteredEvents(filtered);
       setSelectedEvent(null);
     } else {
       setFilteredEvents(events);
     }
-  }, [query, date, events]);
+  }, [query, events]);
 
   const handleInputChange = (event) => {
     const inputValue = event.target.value;
@@ -57,7 +56,6 @@ const EventsPage = () => {
   };
 
   const clearFilters = () => {
-    setDate('');
     setQuery('');
     setFilteredEvents(events);
     setShowEventDropdown(false); 
@@ -76,13 +74,8 @@ const EventsPage = () => {
         onChange={handleInputChange}
         className="search-input"
       />
-      <input
-        type="date"
-        value={date}
-        onChange={handleDateChange}
-        className="date-input"
-      />
-      <button onClick={clearFilters} className="clear-filters-button">Clear Filters</button>
+     
+      <button onClick={clearFilters} className="clear-filters-button">Clear </button>
       {error && <p className="error-message">{error}</p>}
       {showEventDropdown && (
         <div className='search-dropdown'>

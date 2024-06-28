@@ -62,7 +62,7 @@ const Events = () => {
   };
 
   return (
-    <div className='container'>
+    <div className='event-container'>
       <UserBar />
       <div className='flex-book-contt'>
         <div className='b-list_'>
@@ -89,16 +89,7 @@ const Events = () => {
           </tbody>
         </table>
       </div>
-      <div className='user-list'>
-        <h2>User List</h2>
-        <ul>
-          {users.map((user) => (
-            <li key={user.User_ID} onClick={() => handleSelectUser(user)}>
-              {user.Name}
-            </li>
-          ))}
-        </ul>
-      </div>
+    
       {selectedUser && (
         <div className='update-form'>
           <h2>Update User Name</h2>
