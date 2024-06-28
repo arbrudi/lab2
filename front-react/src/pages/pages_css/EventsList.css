@@ -94,7 +94,8 @@
 }
 
 .clear-filters-button {
-  background-color: #007bff;
+  background-color: #007bff; 
+  width: 100px;
   color: white;
   border: none;
   cursor: pointer;

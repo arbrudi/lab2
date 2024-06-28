@@ -1,13 +1,19 @@
+.about-page-container{
+    overflow: hidden; 
+}
 .about-page {
-    display: flex; 
-    min-height:100vh; 
-    max-width: 1000vh;
-    font-family: Arial, sans-serif; 
-    display: flex; 
+    display: flex;
+    min-height: 10vh;
+    width: 100vw;
+    overflow: hidden; 
+    font-family: Arial, sans-serif;
     flex-direction: row;
+    box-sizing: border-box; 
 }
 
-.left-section {
+
+.left-section { 
+    overflow: hidden; 
     flex: 1;
     background-color: #089498d5;
     display: flex;
