@@ -7,9 +7,8 @@ import '../../../assets/css/Create.css';
 const Create_footballer = () => {
     const [formData, setFormData] = useState({
         Name: "",
-        Number: "",
-        BirthYear: "",
-        TeamID: ""
+        Role: "",
+        GroupID: "",
     });
 
     const handleChangeplayer = (e) => {
@@ -17,7 +16,8 @@ const Create_footballer = () => {
     };
 
     const [formTeam, setFormTeam] = useState({
-        Name: ""
+        GroupName: "",
+        Description:""
     });
     const [error, setError] = useState(null);
     const navigate = useNavigate();
@@ -29,9 +29,9 @@ const Create_footballer = () => {
     const handleSubmitTeam = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('/team/add', formTeam);
+            await axios.post('/group/add', formTeam);
             alert("Team registered successfully!");
-            setFormTeam({ Name: "" });
+            navigate('/footballer');
         } catch (error) {
             setError(error.message);
         }
@@ -40,7 +40,7 @@ const Create_footballer = () => {
     const handleSubmitPlayer = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('/player/add', formData);
+            await axios.post('/member/add', formData);
             alert("Player registered successfully!");
             navigate('/footballer');
         } catch (error) {
@@ -53,7 +53,7 @@ const Create_footballer = () => {
     useEffect(() => {
         const fetchTeams = async () => {
             try {
-                const response = await axios.get("/player/team_get");
+                const response = await axios.get("/player/group_get");
                 setTeamList(response.data);
             } catch (error) {
                 console.error("Error fetching teams:", error);
@@ -63,28 +63,38 @@ const Create_footballer = () => {
     }, []);
 
     const handleSelectTeam = (e) => {
-        setFormData({ ...formData, TeamID: e.target.value });
+        setFormData({ ...formData, GroupID: e.target.value });
     };
 
     return (
         <div className="container_c">
-            <h1>Add a New Team</h1>
+            <h1>Add a New Group</h1>
             {error && <p className="error-message">{error}</p>}
             <form onSubmit={handleSubmitTeam}>
                 <label>
                     Name:
                     <input 
                         type="text" 
-                        name="Name" 
-                        value={formTeam.Name} 
+                        name="GroupName" 
+                        value={formTeam.GroupName} 
                         onChange={handleChangeTeam} 
                         required 
                     />
                 </label>
-                <button type="submit">Create TEAM</button>
+                <label>
+                Description:
+                    <input 
+                        type="text" 
+                        name="Description" 
+                        value={formTeam.Description} 
+                        onChange={handleChangeTeam} 
+                        required 
+                    />
+                </label>
+                <button type="submit">Create Group</button>
             </form>
-
-            <h1>Add a New Player</h1>
+            <div className="container_c"></div>
+            <h1>Add a New Member</h1>
             <form onSubmit={handleSubmitPlayer}>
                 <label>
                     Name:
@@ -97,37 +107,27 @@ const Create_footballer = () => {
                     />
                 </label>
                 <label>
-                    Number:
+                Role:
                     <input 
-                        type="number" 
-                        name="Number" 
-                        value={formData.Number} 
+                        type="text" 
+                        name="Role" 
+                        value={formData.Role} 
                         onChange={handleChangeplayer} 
                         required 
                     />
                 </label>
                 <label>
-                    Birth Year:
-                    <input 
-                        type="number" 
-                        name="BirthYear" 
-                        value={formData.BirthYear} 
-                        onChange={handleChangeplayer} 
-                        required 
-                    />
-                </label>
-                <label>
-                    Team:
+                GroupID:
                     <select
-                        name="TeamID"
-                        value={formData.TeamID}
+                        name="GroupID"
+                        value={formData.GroupID}
                         onChange={handleSelectTeam}
                         required
                     >
-                        <option value="">Select a team</option>
+                        <option value="">Select a group</option>
                         {teamList.map((team) => (
-                            <option key={team.TeamID} value={team.TeamID}>
-                                {team.Name}
+                            <option key={team.GroupID} value={team.GroupID}>
+                                {team.GroupName}
                             </option>
                         ))}
                     </select>

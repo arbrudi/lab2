@@ -22,7 +22,7 @@ from Views.Favorite_Books import favbook_bp
 from Views.ListOfSponsors import sponsors_bp
 from Views.ListOfDevelopers import Developers_bp
 from Views.Favorite_Comics import fComic_bp
-from Views.Football import foot_bp
+from Views.Group import foot_bp
 
 def create_app():
     app = Flask(__name__)

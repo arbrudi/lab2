@@ -4,7 +4,6 @@ use lab2
 
 DROP DATABASE lab2
 
-TRUNCATE TABLE Users
 
 /*-------------------------------Users-------------------------------*/
 CREATE TABLE Users (
@@ -137,16 +136,21 @@ FROM INFORMATION_SCHEMA.COLUMNS
 
 /*-------------------------------Mbrojtja-------------------------------*/
 
-CREATE TABLE Team(
-TeamID INT PRIMARY KEY IDENTITY(1,1),
-Name varchar(50) NOT NULL
+CREATE TABLE Groupi(
+GroupID INT PRIMARY KEY IDENTITY(1,1),
+GroupName varchar(50) NOT NULL,
+Description varchar(255) NOT NULL
 );
 
-CREATE TABLE Player(
-PlayerId int PRIMARY KEY IDENTITY(1,1),
+CREATE TABLE Member(
+MemberID int PRIMARY KEY IDENTITY(1,1),
 Name varchar(25) NOT NULL,
-Number int NOT NULL,
-BirthYear int NOT NULL,
-TeamID int NOT NULL,
-Foreign key(TeamID) REFERENCES Team(TeamID)
+Role varchar(25) NOT NULL,
+GroupID int NOT NULL,
+Foreign key(GroupID) REFERENCES Groupi(GroupID)
 );
+
+
+
+SELECT * FROM Groupi
+SELECT * FROM Member

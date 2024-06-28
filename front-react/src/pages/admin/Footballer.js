@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from "react";
 import AdminBar from '../../components/AdminBar';
+import { Link, useParams, useNavigate } from "react-router-dom";
+
 import axios from 'axios';
-import { Link } from "react-router-dom";
 import './css/Books_.css';
 
 const Footballer = () => {
   const [teams, setTeams] = useState([]);
   const [year, setYear] = useState('');
   const [players, setPlayers] = useState([]);
+  const [playerT, setPlayerT] = useState([]);
   const [error, setError] = useState('');
   const [team, setTeam] = useState('');
+  const [members, setMembers] = useState([]);
+  const navigate = useNavigate();
+
+  
 
   useEffect(() => {
     const fetchTeams = async () => {
       try {
-        const response = await axios.get("/player/team_get"); 
+        const response = await axios.get("/player/group_get");
         setTeams(response.data);
       } catch (error) {
         console.error("Error fetching teams:", error);
@@ -22,6 +28,19 @@ const Footballer = () => {
     };
 
     fetchTeams();
+  }, []);
+
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        const response = await axios.get("/player/group_members");
+        setMembers(response.data);
+      } catch (error) {
+        console.error("Error fetching members:", error);
+      }
+    };
+
+    fetchMembers();
   }, []);
 
   const handleYearChange = (e) => {
@@ -46,11 +65,21 @@ const Footballer = () => {
   const handleSearchTeam = async () => {
     try {
       const response = await axios.get(`/player/team_name/${team}`);
-      setPlayers(response.data);
+      setPlayerT(response.data);
       setError('');
     } catch (err) {
       setError(err.response ? err.response.data.message : 'An error occurred');
-      setPlayers([]);
+      setPlayerT([]);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`/delete/${id}`);
+      setMembers(members.filter(member => member.MemberID !== id));
+      navigate("/footballer");
+    } catch (error) {
+      console.error("Error deleting member:", error);
     }
   };
 
@@ -60,81 +89,64 @@ const Footballer = () => {
         <AdminBar />
         <div className="flex-book-contt">
           <div className="b-list_">
-            <h1>Team List</h1>
+            <h1>Group List</h1>
             <div className='cb_list'>
-              <Link to={'/create_footballer'} className="link">Add a footballer and team</Link>
+              <Link to={'/create_footballer'} className="link">Add a member and group</Link>
             </div>
           </div>
           <table className='table'>
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Name</th>
+                <th>GroupID</th>
+                <th>GroupName</th>
+                <th>Description</th>
                 <th>ACTIONS</th>
               </tr>
             </thead>
             <tbody>
               {teams.map((team) => (
-                <tr key={team.TeamID}>
-                  <td>{team.TeamID}</td>
-                  <td>{team.Name}</td>
+                <tr key={team.GroupID}>
+                  <td>{team.GroupID}</td>
+                  <td>{team.GroupName}</td>
+                  <td>{team.Description}</td>
                   <td>
-                    <Link to={`/edit_footballer/${team.TeamID}`}>
+                    <Link to={`/edit_footballer/${team.GroupID}`}>
                       <button className='edit-bttn'>Edit</button>
                     </Link>
-                    {/* Uncomment the following line if you add handleDelete back */}
-                    {/* <button className='del-bttn' onClick={() => handleDelete(team.TeamID)}>Delete</button> */}
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-          <div className="container">
-            <h1>Player Birth Year Display</h1>
-            <div className="input-group">
-              <input 
-                type="number" 
-                value={year} 
-                onChange={handleYearChange} 
-                placeholder="Enter birth year" 
-              />
-              <button onClick={handleSearchYear}>Search</button>
-            </div>
-            {error && <div className="error">{error}</div>}
-            <div className="player-list">
-              {players.map(player => (
-                <div key={player.PlayerId} className="player">
-                  <p><strong>Name:</strong> {player.Name}</p>
-                  <p><strong>Number:</strong> {player.Number}</p>
-                  <p><strong>Birth Year:</strong> {player.BirthYear}</p>
-                  <p><strong>Team ID:</strong> {player.TeamID}</p>
-                </div>
+          <h1>Member List</h1>
+          <table className='table'>
+              
+            <thead>
+              <tr>
+                <th>MemberID</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th>GroupID</th>
+                <th>ACTIONS</th>
+              </tr>
+            </thead>
+            <tbody>
+              {members.map((member) => (
+                <tr key={member.MemberID}>
+                  <td>{member.MemberID}</td>
+                  <td>{member.Name}</td>
+                  <td>{member.Role}</td>
+                  <td>{member.GroupID}</td>
+                  <td>
+                    <Link to={`/edit_footballer/${member.MemberID}`}>
+                      <button className='edit-bttn'>Edit</button>
+                    </Link>
+                    <button className='del-bttn' onClick={() => handleDelete(member.MemberID)}>Delete</button>
+                  </td>
+                </tr>
               ))}
-            </div>
-          </div>
-          <div className="container">
-            <h1>Player TEAM Display</h1>
-            <div className="input-group">
-              <input 
-                type="text" 
-                value={team} 
-                onChange={handleTeamChange} 
-                placeholder="Enter team name" 
-              />
-              <button onClick={handleSearchTeam}>Search</button>
-            </div>
-            {error && <div className="error">{error}</div>}
-            <div className="player-list">
-              {players.map(player => (
-                <div key={player.PlayerId} className="player">
-                  <p><strong>Name:</strong> {player.Name}</p>
-                  <p><strong>Number:</strong> {player.Number}</p>
-                  <p><strong>Birth Year:</strong> {player.BirthYear}</p>
-                  <p><strong>Team ID:</strong> {player.TeamID}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

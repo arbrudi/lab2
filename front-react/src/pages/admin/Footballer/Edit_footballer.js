@@ -6,17 +6,20 @@ import "../css/Create.css";
 const Edit_footballer = () => {
     const { id } = useParams();
     const [sponsor, setSponsor] = useState({});
+
     const [formData, setFormData] = useState({ 
-        Name: "",
+        GroupName: "",
+        Description:""
     });
 
     useEffect(() => {
         const fetchSponsor = async () => {
             try {
-                const response = await axios.get(`/team/${id}`);
+                const response = await axios.get(`/group/${id}`);
                 setSponsor(response.data);
                 setFormData({ 
-                    Name: response.data.Name,
+                    GroupName: response.data.GroupName,
+                    Description: response.data.Description
                 });
             } catch (error) {
                 console.error("Error fetching team:", error);
@@ -42,11 +45,14 @@ const Edit_footballer = () => {
 
     return (
         <div className="container_c">
-            <h1>Edit Team</h1>
+            <h1>Edit Group</h1>
             <form onSubmit={handleSubmit}> 
                 <div>
-                    <label>Name:</label>
-                    <input type="text" name="Name" value={formData.Name} onChange={handleChange} />
+                    <label>GroupName:</label>
+                    <input type="text" name="GroupName" value={formData.GroupName} onChange={handleChange} />
+                    <label>Description:</label>
+                    <input type="text" name="Description" value={formData.Description} onChange={handleChange} />
+                
                 </div>
                 <button type="submit">Update Name</button>
             </form>
