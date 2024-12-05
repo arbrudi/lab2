@@ -4,7 +4,6 @@ use lab2
 
 DROP DATABASE lab2
 
-TRUNCATE TABLE Users
 
 /*-------------------------------Users-------------------------------*/
 CREATE TABLE Users (
@@ -134,3 +133,24 @@ SELECT * FROM Book_ratings
 SELECT COLUMN_NAME, DATA_TYPE
 FROM INFORMATION_SCHEMA.COLUMNS
 /* WHERE TABLE_NAME = 'Book_ratings';*/
+
+/*-------------------------------Mbrojtja-------------------------------*/
+
+CREATE TABLE Groupi(
+GroupID INT PRIMARY KEY IDENTITY(1,1),
+GroupName varchar(50) NOT NULL,
+Description varchar(255) NOT NULL
+);
+
+CREATE TABLE Member(
+MemberID int PRIMARY KEY IDENTITY(1,1),
+Name varchar(25) NOT NULL,
+Role varchar(25) NOT NULL,
+GroupID int NOT NULL,
+Foreign key(GroupID) REFERENCES Groupi(GroupID)
+);
+
+
+
+SELECT * FROM Groupi
+SELECT * FROM Member
